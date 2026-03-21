@@ -39,3 +39,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# claude / dev tooling
+.claude/
+.mcp.json
+.playwright-mcp/
+
+# debug screenshots (root level only, keep public/)
+/*.png
+/*.jpg
+/*.jpeg
