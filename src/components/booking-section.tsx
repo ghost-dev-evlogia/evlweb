@@ -1,38 +1,28 @@
 "use client";
 
-import Cal, { getCalApi } from "@calcom/embed-react";
 import { useEffect } from "react";
 
 export function BookingSection() {
   useEffect(() => {
-    (async () => {
-      const cal = await getCalApi({ namespace: "evlogia-booking" });
-      cal("ui", {
-        theme: "dark",
-        hideEventTypeDetails: false,
-        layout: "month_view",
-        cssVarsPerTheme: {
-          dark: {
-            "cal-brand": "#ffffff",
-            "cal-brand-emphasis": "rgba(255,255,255,0.8)",
-            "cal-brand-text": "#020b1a",
-            "cal-bg": "rgba(2, 11, 26, 0)",
-            "cal-bg-emphasis": "rgba(255, 255, 255, 0.04)",
-            "cal-bg-muted": "rgba(255, 255, 255, 0.03)",
-            "cal-border": "rgba(255, 255, 255, 0.07)",
-            "cal-border-emphasis": "rgba(255, 255, 255, 0.12)",
-            "cal-border-booker": "rgba(255, 255, 255, 0.07)",
-            "cal-text": "rgba(255, 255, 255, 0.85)",
-            "cal-text-emphasis": "#ffffff",
-            "cal-text-muted": "rgba(255, 255, 255, 0.35)",
-          },
-          light: {
-            "cal-brand": "#020b1a",
-            "cal-brand-text": "#ffffff",
-          },
-        },
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.innerHTML = `
+      (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+      Cal("init", "strategy", {origin:"https://app.cal.com"});
+      Cal.ns.strategy("inline", {
+        elementOrSelector:"#my-cal-inline-strategy",
+        config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"light"},
+        calLink: "ethankd/strategy",
       });
-    })();
+      Cal.ns.strategy("ui", {"theme":"light","hideEventTypeDetails":false,"layout":"month_view"});
+    `;
+    document.head.appendChild(script);
+
+    return () => {
+      if (document.head.contains(script)) {
+        document.head.removeChild(script);
+      }
+    };
   }, []);
 
   return (
@@ -55,7 +45,7 @@ export function BookingSection() {
             <em className="text-gradient">your problem.</em>
           </h2>
           <p className="font-sans text-black/40 text-sm max-w-sm mx-auto leading-relaxed">
-            Book a 30-minute discovery call. No pitch — just a focused
+            Book a 30-minute strategy call. No pitch — just a focused
             conversation about your AI challenge and whether we&apos;re the
             right fit.
           </p>
@@ -78,18 +68,13 @@ export function BookingSection() {
             }}
           />
 
-          <Cal
-            namespace="evlogia-booking"
-            calLink="ethankd"
+          <div
+            id="my-cal-inline-strategy"
             style={{
               width: "100%",
-              height: "auto",
+              height: "100%",
+              overflow: "scroll",
               minHeight: "700px",
-              overflow: "hidden",
-            }}
-            config={{
-              layout: "month_view",
-              theme: "light",
             }}
           />
         </div>
