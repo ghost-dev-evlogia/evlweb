@@ -59,17 +59,17 @@ export function BookingSection() {
   }, []);
 
   return (
-    <section id="book" className="px-6 py-28">
+    <section id="book" className="px-6 py-14 md:py-28">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-14">
+        <div className="text-center mb-8 md:mb-14">
           <p className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-4">
             Schedule a Call
           </p>
           <h2
             className="font-serif text-black/90 leading-[1.07] mb-5"
             style={{
-              fontSize: "clamp(2.4rem, 5vw, 4rem)",
+              fontSize: "clamp(1.9rem, 5vw, 4rem)",
               letterSpacing: "-0.01em",
             }}
           >
@@ -87,7 +87,7 @@ export function BookingSection() {
         <div className="w-full rounded-3xl overflow-hidden border border-black/[0.07] bg-white/40">
           <div
             id="my-cal-inline-strategy"
-            style={{ width: "100%", minHeight: "700px" }}
+            className="min-h-[520px] md:min-h-[700px] w-full"
           />
         </div>
       </div>

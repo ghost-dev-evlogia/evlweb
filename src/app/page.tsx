@@ -45,13 +45,13 @@ export default function Home() {
           className="p-0 w-full"
         >
           <nav
-            className="liquid-glass rounded-full relative z-40 px-5 py-2.5 flex items-center justify-between gap-6"
+            className="liquid-glass rounded-full px-5 py-2.5 flex items-center justify-between gap-6"
             style={{ boxShadow: "0 8px 40px rgba(0,0,0,0.15)" }}
           >
             {/* Logo — crop square canvas to just the combination mark */}
             <div
               className="shrink-0 overflow-hidden relative"
-              style={{ width: "140px", height: "30px" }}
+              style={{ width: "120px", height: "26px" }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -59,8 +59,8 @@ export default function Home() {
                 alt="Evlogia"
                 style={{
                   position: "absolute",
-                  width: "150px",
-                  height: "150px",
+                  width: "130px",
+                  height: "130px",
                   top: "50%",
                   left: "50%",
                   transform: "translate(-50%, -50%)",
@@ -124,7 +124,7 @@ export default function Home() {
         </div>
 
         {/* ─── Stats ─── */}
-        <section className="px-6 py-14 md:py-20">
+        <section className="px-6 py-10 md:py-20">
           <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
               { target: 40, suffix: "+", label: "R&D Projects" },
@@ -159,9 +159,9 @@ export default function Home() {
         </div>
 
         {/* ─── Services ─── */}
-        <section id="services" className="px-6 py-16 md:py-28">
+        <section id="services" className="px-6 py-12 md:py-28">
           <div className="max-w-5xl mx-auto">
-            <ScrollReveal className="text-center mb-12 md:mb-16">
+            <ScrollReveal className="text-center mb-10 md:mb-16">
               <p className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-3">
                 What We Do
               </p>
@@ -202,7 +202,7 @@ export default function Home() {
                 },
               ].map(({ num, title, desc }, i) => (
                 <ScrollReveal key={title} delay={i * 80} className="h-full">
-                  <div className="glass-card card-hover rounded-2xl p-7 md:p-9 relative overflow-hidden h-full">
+                  <div className="glass-card card-hover rounded-2xl p-6 md:p-9 relative overflow-hidden h-full">
                     <div className="font-sans text-black/18 text-[10px] tracking-widest mb-5">
                       {num}
                     </div>
@@ -230,10 +230,10 @@ export default function Home() {
         </div>
 
         {/* ─── Why Evlogia ─── */}
-        <section id="about" className="px-6 py-16 md:py-28">
+        <section id="about" className="px-6 py-12 md:py-28">
           <div className="max-w-5xl mx-auto">
             <ScrollReveal variant="scale">
-              <div className="glass-card rounded-3xl p-8 md:p-16 relative overflow-hidden">
+              <div className="glass-card rounded-3xl p-7 md:p-16 relative overflow-hidden">
                 <div className="relative">
                   <p className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-4">
                     Why Evlogia
@@ -241,7 +241,7 @@ export default function Home() {
                   <h2
                     className="font-serif text-black/90 mb-5 leading-[1.07] max-w-2xl"
                     style={{
-                      fontSize: "clamp(1.8rem, 4.5vw, 3.5rem)",
+                      fontSize: "clamp(1.4rem, 4.5vw, 3.5rem)",
                       letterSpacing: "-0.01em",
                     }}
                   >
@@ -249,14 +249,14 @@ export default function Home() {
                     <br />
                     <em>We build, file, and publish.</em>
                   </h2>
-                  <p className="font-sans text-black/40 text-sm leading-relaxed max-w-lg mb-12 md:mb-16">
+                  <p className="font-sans text-black/40 text-sm leading-relaxed max-w-lg mb-8 md:mb-16">
                     The gap between AI research and production is where most
                     firms fail. We operate across the full spectrum — from
                     whiteboard to weight file to patent to paper — so nothing
                     gets lost in translation.
                   </p>
 
-                  <div className="grid md:grid-cols-3 gap-8 md:gap-10">
+                  <div className="grid md:grid-cols-3 gap-6 md:gap-10">
                     {[
                       {
                         step: "01",
@@ -313,9 +313,9 @@ export default function Home() {
         </div>
 
         {/* ─── Research & IP ─── */}
-        <section id="research" className="px-6 py-16 md:py-28">
+        <section id="research" className="px-6 py-12 md:py-28">
           <div className="max-w-5xl mx-auto">
-            <ScrollReveal className="text-center mb-12 md:mb-16">
+            <ScrollReveal className="text-center mb-10 md:mb-16">
               <p className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-3">
                 Research & IP
               </p>
@@ -384,7 +384,7 @@ export default function Home() {
         <section id="contact" className="px-6 pb-20 md:pb-28 pt-6 md:pt-8">
           <div className="max-w-3xl mx-auto">
             <ScrollReveal variant="scale">
-              <div className="glass-card rounded-3xl p-10 md:p-20 text-center relative overflow-hidden">
+              <div className="glass-card rounded-3xl p-6 md:p-20 text-center relative overflow-hidden">
                 <div
                   className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-48 rounded-full pointer-events-none"
                   style={{
@@ -399,7 +399,7 @@ export default function Home() {
                   <h2
                     className="font-serif text-black/90 leading-[1.07] mb-5"
                     style={{
-                      fontSize: "clamp(1.9rem, 5vw, 3.8rem)",
+                      fontSize: "clamp(1.4rem, 5vw, 3.8rem)",
                       letterSpacing: "-0.01em",
                     }}
                   >
@@ -427,44 +427,68 @@ export default function Home() {
 
       {/* ─── Footer ─── */}
       <footer
-        className="border-t px-6 py-8"
+        className="border-t px-6 pt-12 pb-10 md:pt-16 md:pb-14"
         style={{ borderColor: "rgba(0,0,0,0.08)" }}
       >
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div
-              className="overflow-hidden relative shrink-0"
-              style={{ width: "20px", height: "20px" }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/evlogia-logomark-.png"
-                alt="Evlogia"
-                style={{
-                  position: "absolute",
-                  width: "100px",
-                  height: "100px",
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)",
-                  filter: "invert(1)",
-                  opacity: 0.4,
-                }}
-              />
+        <div className="max-w-5xl mx-auto">
+          {/* Brand + nav row */}
+          <div className="flex flex-col md:flex-row md:items-start justify-between gap-8 md:gap-6 mb-10 md:mb-12">
+            {/* Brand */}
+            <div>
+              <div
+                className="shrink-0 overflow-hidden relative mb-3"
+                style={{ width: "120px", height: "26px" }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/evlogia-combination-mark.png"
+                  alt="Evlogia"
+                  style={{
+                    position: "absolute",
+                    width: "130px",
+                    height: "130px",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    filter: "invert(1)",
+                    opacity: 0.7,
+                  }}
+                />
+              </div>
+              <p className="font-sans text-black/30 text-[11px] tracking-wide">
+                Applied AI Research
+              </p>
             </div>
-            <span className="font-sans text-black/25 text-xs">
-              · Applied AI Research
-            </span>
+
+            {/* Nav links */}
+            <nav className="grid grid-cols-2 sm:flex sm:flex-row gap-y-3 gap-x-8 sm:gap-10">
+              {[
+                { label: "Services", href: "#services" },
+                { label: "Research", href: "#research" },
+                { label: "About", href: "#about" },
+                { label: "Book a Call", href: "#book" },
+                { label: "hello@evlogia.ai", href: "mailto:hello@evlogia.ai" },
+              ].map(({ label, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  className="font-sans text-black/40 text-xs hover:text-black/70 transition-colors duration-200"
+                >
+                  {label}
+                </a>
+              ))}
+            </nav>
           </div>
-          <div className="flex items-center gap-6 font-sans text-black/30 text-xs">
-            <span>© 2026</span>
-            <a
-              href="mailto:hello@evlogia.ai"
-              className="hover:text-black/55 transition-colors duration-200"
-            >
-              hello@evlogia.ai
-            </a>
-            <span>evlogia.ai</span>
+
+          {/* Divider */}
+          <div className="divider mb-6" />
+
+          {/* Copyright row */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+            <p className="font-sans text-black/25 text-[11px]">
+              © 2026 Evlogia. All rights reserved.
+            </p>
+            <p className="font-sans text-black/20 text-[11px]">Built by us.</p>
           </div>
         </div>
       </footer>

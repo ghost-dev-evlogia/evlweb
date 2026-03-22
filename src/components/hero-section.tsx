@@ -5,7 +5,7 @@ import { LiquidGlassCard } from "./liquid-glass";
 
 export function HeroSection() {
   return (
-    <section className="relative flex min-h-screen flex-col items-center justify-center px-6 pt-28 pb-24 text-center overflow-hidden">
+    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-28 pb-24 text-center overflow-hidden">
       {/* Video background */}
       {/* <video
           src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260228_065522_522e2295-ba22-457e-8fdb-fbcd68109c73.mp4"
@@ -48,7 +48,7 @@ export function HeroSection() {
         <h1
           className="anim-fade-up font-serif text-white leading-[1.05] mb-6 md:mb-7 text-center w-full"
           style={{
-            fontSize: "clamp(2.4rem, 8vw, 7rem)",
+            fontSize: "clamp(1.5rem, 7.5vw, 7rem)",
             animationDelay: "200ms",
             textShadow: "0 4px 80px rgba(0,0,0,0.5)",
             letterSpacing: "-0.01em",
@@ -63,7 +63,7 @@ export function HeroSection() {
         <p
           className="anim-fade-up font-sans text-neutral-200 leading-relaxed mb-10 md:mb-12 max-w-md md:max-w-lg text-center"
           style={{
-            fontSize: "clamp(0.875rem, 1.6vw, 1.05rem)",
+            fontSize: "clamp(0.9rem, 1.6vw, 1.05rem)",
             animationDelay: "360ms",
           }}
         >
