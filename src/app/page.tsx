@@ -426,33 +426,77 @@ export default function Home() {
       </main>
 
       {/* ─── Footer ─── */}
-      <footer
-        className="border-t px-6 py-8"
-        style={{ borderColor: "rgba(0,0,0,0.08)" }}
-      >
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/evlogia-logomark-.png"
-              alt="Evlogia"
-              style={{
-                width: "18px",
-                height: "18px",
-                objectFit: "contain",
-                filter: "invert(1)",
-                opacity: 0.35,
-              }}
-            />
-            <span className="font-sans text-black/25 text-xs tracking-wide">Evlogia</span>
+      <footer className="px-4 pb-4 pt-0">
+        <div
+          className="rounded-3xl px-8 md:px-12 pt-10 pb-8"
+          style={{ background: "rgba(232, 228, 222, 0.75)", border: "1px solid rgba(0,0,0,0.06)" }}
+        >
+          {/* Top row */}
+          <div className="flex flex-col md:flex-row md:items-start justify-between gap-10 md:gap-6 mb-12 md:mb-16">
+            {/* Logo + tagline */}
+            <div className="flex flex-col gap-3">
+              <div className="overflow-hidden relative shrink-0" style={{ width: "120px", height: "26px" }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/evlogia-combination-mark.png"
+                  alt="Evlogia"
+                  style={{
+                    position: "absolute",
+                    width: "130px",
+                    height: "130px",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    opacity: 0.75,
+                  }}
+                />
+              </div>
+              <p className="font-sans text-black/35 text-[11px] leading-relaxed max-w-[180px]">
+                Applied AI Research.<br />We build, file, and publish.
+              </p>
+            </div>
+
+            {/* Nav columns */}
+            <div className="flex gap-12 md:gap-16">
+              <div className="flex flex-col gap-3">
+                <p className="font-sans text-black/30 text-[9px] tracking-[0.25em] uppercase mb-1">Explore</p>
+                {[
+                  { label: "Services",  href: "#services" },
+                  { label: "Research",  href: "#research" },
+                  { label: "About",     href: "#about"    },
+                  { label: "Book a Call", href: "#book"   },
+                ].map(({ label, href }) => (
+                  <a key={label} href={href} className="font-sans text-black/55 text-xs hover:text-black/85 transition-colors duration-200">
+                    {label}
+                  </a>
+                ))}
+              </div>
+              <div className="flex flex-col gap-3">
+                <p className="font-sans text-black/30 text-[9px] tracking-[0.25em] uppercase mb-1">Connect</p>
+                {[
+                  { label: "hello@evlogia.ai", href: "mailto:hello@evlogia.ai" },
+                  { label: "LinkedIn",         href: "https://linkedin.com"    },
+                  { label: "X",                href: "https://x.com"           },
+                ].map(({ label, href }) => (
+                  <a key={label} href={href} className="font-sans text-black/55 text-xs hover:text-black/85 transition-colors duration-200">
+                    {label}
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
-          <div className="flex items-center gap-4 md:gap-6 font-sans text-black/25 text-xs">
-            <span>Built by us. © 2026 · All rights reserved.</span>
+
+          {/* Bottom row */}
+          <div
+            className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3"
+            style={{ borderTop: "1px solid rgba(0,0,0,0.07)", paddingTop: "1.25rem" }}
+          >
+            <p className="font-sans text-black/30 text-[11px]">© 2026 Evlogia. Built by us. All rights reserved.</p>
             <a
               href="mailto:hello@evlogia.ai"
-              className="text-black/30 hover:text-black/55 transition-colors duration-200"
+              className="font-sans text-black/30 text-[11px] hover:text-black/55 transition-colors duration-200"
             >
-              hello@evlogia.ai
+              evlogia.ai
             </a>
           </div>
         </div>
