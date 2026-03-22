@@ -100,6 +100,9 @@ export function HeroSection() {
       <p className="scroll-bounce absolute bottom-7 left-1/2 text-white/20 text-[9px] tracking-[0.3em] uppercase font-sans whitespace-nowrap pointer-events-none">
         Scroll to Explore
       </p>
+
+      {/* Gradient fade into next section */}
+      <div className="absolute h-96 scale-110 w-full left-0 bottom-0 bg-linear-to-t from-[#f5f4f0] from-30% to-transparent pointer-events-none" />
     </section>
   );
 }
