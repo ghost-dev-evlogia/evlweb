@@ -1,23 +1,66 @@
 "use client";
 
-import Cal, { getCalApi } from "@calcom/embed-react";
 import { useEffect } from "react";
 
 export function BookingSection() {
   useEffect(() => {
-    (async function () {
-      const cal = await getCalApi({ namespace: "strategy" });
-      cal("ui", {
-        theme: "light",
-        hideEventTypeDetails: false,
-        layout: "month_view",
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.innerHTML = `
+      (function (C, A, L) {
+        let p = function (a, ar) { a.q.push(ar); };
+        let d = C.document;
+        C.Cal = C.Cal || function () {
+          let cal = C.Cal;
+          let ar = arguments;
+          if (!cal.loaded) {
+            cal.ns = {};
+            cal.q = cal.q || [];
+            d.head.appendChild(d.createElement("script")).src = A;
+            cal.loaded = true;
+          }
+          if (ar[0] === L) {
+            const api = function () { p(api, arguments); };
+            const namespace = ar[1];
+            api.q = api.q || [];
+            if (typeof namespace === "string") {
+              cal.ns[namespace] = cal.ns[namespace] || api;
+              p(cal.ns[namespace], ar);
+              p(cal, ["initNamespace", namespace]);
+            } else {
+              p(cal, ar);
+            }
+            return;
+          }
+          p(cal, ar);
+        };
+      })(window, "https://app.cal.com/embed/embed.js", "init");
+
+      Cal("init", "strategy", { origin: "https://app.cal.com" });
+
+      Cal.ns.strategy("inline", {
+        elementOrSelector: "#my-cal-inline-strategy",
+        calLink: "ethankd/strategy",
+        config: {
+          layout: "month_view",
+          useSlotsViewOnSmallScreen: true
+        }
       });
-    })();
+
+      Cal.ns.strategy("ui", {
+        hideEventTypeDetails: false,
+        layout: "month_view"
+      });
+    `;
+    document.head.appendChild(script);
+    return () => {
+      if (document.head.contains(script)) document.head.removeChild(script);
+    };
   }, []);
 
   return (
-    <section id="book" className="px-6 py-28 overflow-x-hidden">
-      <div className="max-w-5xl mx-auto">
+    <section id="book" className="px-6 py-28">
+      <div className="max-w-5xl mx-auto min-w-0">
         {/* Header */}
         <div className="text-center mb-14">
           <p className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-4">
@@ -41,12 +84,15 @@ export function BookingSection() {
           </p>
         </div>
 
-        <Cal
-          namespace="strategy"
-          calLink="ethankd/strategy"
-          style={{ width: "100%", height: "100%", overflow: "scroll" }}
-          config={{ layout: "month_view", useSlotsViewOnSmallScreen: "true", theme: "light" }}
-        />
+        {/* Embed — exact structure from provided code */}
+        <div style={{ width: "100%", maxWidth: "100%", overflowX: "hidden" }}>
+          <div style={{ width: "100%", maxWidth: "100%", overflow: "hidden", borderRadius: "20px" }}>
+            <div
+              id="my-cal-inline-strategy"
+              style={{ width: "100%", maxWidth: "100%", minWidth: 0, minHeight: "700px" }}
+            />
+          </div>
+        </div>
       </div>
     </section>
   );
