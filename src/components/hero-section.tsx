@@ -1,8 +1,8 @@
 "use client";
 
+import { LiquidGlassCard } from "./liquid-glass";
 
 export function HeroSection() {
-
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-28 pb-24 text-center overflow-hidden">
       {/* Video background */}
@@ -63,16 +63,21 @@ export function HeroSection() {
           className="anim-fade-up flex flex-col sm:flex-row items-center gap-3 md:gap-4"
           style={{ animationDelay: "480ms" }}
         >
-          <a
-            href="#book"
-            className="liquid-glass rounded-full px-7 md:px-8 py-3 md:py-3.5 text-white font-sans font-medium text-sm hover:bg-white/10 hover:scale-[1.03] transition-all duration-300 whitespace-nowrap"
-            style={{ boxShadow: "0 4px 32px rgba(0,0,0,0.4)" }}
-          >
-            Start a Project →
+          <a href="#book" className="cursor-pointer">
+            <LiquidGlassCard
+              glowIntensity="lg"
+              shadowIntensity="md"
+              borderRadius="100px"
+              blurIntensity="sm"
+              draggable={false}
+              className="p-3 w-full bg-black/20 text-white font-sans text-sm"
+            >
+              <span className="relative z-2">Start a Project →</span>
+            </LiquidGlassCard>
           </a>
           <a
             href="#research"
-            className="text-white/40 font-sans text-sm hover:text-white/65 transition-colors duration-300 flex items-center gap-1.5"
+            className="text-white font-sans text-sm hover:text-white/65 transition-colors duration-300 flex items-center gap-1.5"
           >
             View Research
             <span className="text-xs opacity-60">↓</span>
@@ -84,7 +89,6 @@ export function HeroSection() {
       <p className="scroll-bounce absolute bottom-7 left-1/2 text-white/20 text-[9px] tracking-[0.3em] uppercase font-sans whitespace-nowrap pointer-events-none">
         Scroll to Explore
       </p>
-
     </section>
   );
 }
