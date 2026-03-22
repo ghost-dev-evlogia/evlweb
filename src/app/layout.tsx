@@ -27,11 +27,20 @@ export const metadata: Metadata = {
     siteName: "Evlogia",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Evlogia — The Applied AI Lab That Ships.",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Evlogia | Applied AI Research",
     description: "Applied AI Research — R&D consulting, products, patents, and research.",
+    images: ["/og-image.png"],
   },
 };
 
