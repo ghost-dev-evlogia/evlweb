@@ -23,7 +23,7 @@ export default function Home() {
           <div className="shrink-0 overflow-hidden relative" style={{ width: "140px", height: "30px" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/evlogia combination mark (white).png"
+              src="/evlogia-combination-mark.png"
               alt="Evlogia"
               style={{
                 position: "absolute",
@@ -330,7 +330,7 @@ export default function Home() {
             <div className="overflow-hidden relative shrink-0" style={{ width: "20px", height: "20px" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/evlogia logomark (white).png"
+                src="/evlogia-logomark-.png"
                 alt="Evlogia"
                 style={{
                   position: "absolute",
