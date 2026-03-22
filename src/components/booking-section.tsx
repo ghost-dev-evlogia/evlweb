@@ -60,7 +60,7 @@ export function BookingSection() {
 
   return (
     <section id="book" className="px-6 py-28">
-      <div className="max-w-5xl mx-auto min-w-0">
+      <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center mb-14">
           <p className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-4">
@@ -84,14 +84,11 @@ export function BookingSection() {
           </p>
         </div>
 
-        {/* Embed — exact structure from provided code */}
-        <div style={{ width: "100%", maxWidth: "100%", overflowX: "hidden" }}>
-          <div style={{ width: "100%", maxWidth: "100%", overflow: "hidden", borderRadius: "20px" }}>
-            <div
-              id="my-cal-inline-strategy"
-              style={{ width: "100%", maxWidth: "100%", minWidth: 0, minHeight: "700px" }}
-            />
-          </div>
+        <div className="w-full rounded-3xl overflow-hidden border border-black/[0.07] bg-white/40">
+          <div
+            id="my-cal-inline-strategy"
+            style={{ width: "100%", minHeight: "700px" }}
+          />
         </div>
       </div>
     </section>

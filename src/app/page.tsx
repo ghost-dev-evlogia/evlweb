@@ -66,7 +66,7 @@ export default function Home() {
         </nav>
       </header>
 
-      <main className="min-w-0 w-full overflow-x-hidden">
+      <main>
         {/* ─── Hero ─── */}
         <HeroSection />
 
@@ -275,7 +275,7 @@ export default function Home() {
         </section>
 
         {/* ─── Booking ─── */}
-        <ScrollReveal className="min-w-0 w-full overflow-x-hidden">
+        <ScrollReveal>
           <BookingSection />
         </ScrollReveal>
 
