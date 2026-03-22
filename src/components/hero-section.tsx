@@ -5,12 +5,14 @@ import { LiquidGlassCard } from "./liquid-glass";
 export function HeroSection() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-28 pb-16 md:pb-24 text-center overflow-hidden">
-      {/* Image background */}
+      {/* Video background */}
       <div className="absolute inset-0">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/ainature.jpeg"
-          alt=""
+        <video
+          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260228_065522_522e2295-ba22-457e-8fdb-fbcd68109c73.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
           className="absolute inset-0 w-full h-full object-cover object-center"
         />
       </div>
