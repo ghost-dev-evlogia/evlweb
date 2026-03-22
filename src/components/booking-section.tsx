@@ -51,33 +51,15 @@ export function BookingSection() {
           </p>
         </div>
 
-        {/* Cal embed wrapped in glass card */}
         <div
-          className="glass-card rounded-3xl overflow-hidden relative"
+          id="my-cal-inline-strategy"
           style={{
-            boxShadow:
-              "0 32px 80px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.6)",
+            width: "100%",
+            height: "100%",
+            overflow: "scroll",
+            minHeight: "700px",
           }}
-        >
-          {/* Top accent glow */}
-          <div
-            className="absolute inset-x-0 top-0 h-px"
-            style={{
-              background:
-                "linear-gradient(90deg, transparent, rgba(0,0,0,0.08), transparent)",
-            }}
-          />
-
-          <div
-            id="my-cal-inline-strategy"
-            style={{
-              width: "100%",
-              height: "100%",
-              overflow: "scroll",
-              minHeight: "700px",
-            }}
-          />
-        </div>
+        />
       </div>
     </section>
   );
