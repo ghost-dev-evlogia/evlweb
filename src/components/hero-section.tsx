@@ -9,7 +9,7 @@ export function HeroSection() {
       <div className="absolute inset-0">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/Gemini_Generated_Image_seo7f9seo7f9seo7.png"
+          src="/ainature.jpeg"
           alt=""
           className="absolute inset-0 w-full h-full object-cover object-center"
         />
