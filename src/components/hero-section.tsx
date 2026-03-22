@@ -102,7 +102,7 @@ export function HeroSection() {
       </p>
 
       {/* Gradient fade into next section */}
-      <div className="absolute h-96 scale-110 w-full left-0 bottom-0 bg-linear-to-t from-[#f5f4f0] from-30% to-transparent pointer-events-none" />
+      <div className="absolute h-96 w-full left-0 bottom-0 bg-linear-to-t from-[#f5f4f0] to-transparent pointer-events-none" />
     </section>
   );
 }
