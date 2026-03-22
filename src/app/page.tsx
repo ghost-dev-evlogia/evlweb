@@ -45,13 +45,13 @@ export default function Home() {
           className="p-0 w-full"
         >
           <nav
-            className="liquid-glass rounded-full px-5 py-2.5 flex items-center justify-between gap-6"
+            className="liquid-glass rounded-full px-4 md:px-5 py-2.5 flex items-center justify-between gap-4 md:gap-6"
             style={{ boxShadow: "0 8px 40px rgba(0,0,0,0.15)" }}
           >
             {/* Logo — crop square canvas to just the combination mark */}
             <div
               className="shrink-0 overflow-hidden relative"
-              style={{ width: "140px", height: "30px" }}
+              style={{ width: "120px", height: "26px" }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -59,8 +59,8 @@ export default function Home() {
                 alt="Evlogia"
                 style={{
                   position: "absolute",
-                  width: "150px",
-                  height: "150px",
+                  width: "130px",
+                  height: "130px",
                   top: "50%",
                   left: "50%",
                   transform: "translate(-50%, -50%)",
@@ -124,7 +124,7 @@ export default function Home() {
         </div>
 
         {/* ─── Stats ─── */}
-        <section className="px-6 py-14 md:py-20">
+        <section className="px-6 py-10 md:py-20">
           <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
               { target: 40, suffix: "+", label: "R&D Projects" },
@@ -161,7 +161,7 @@ export default function Home() {
         {/* ─── Services ─── */}
         <section id="services" className="px-6 py-16 md:py-28">
           <div className="max-w-5xl mx-auto">
-            <ScrollReveal className="text-center mb-12 md:mb-16">
+            <ScrollReveal className="text-center mb-10 md:mb-16">
               <p className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-3">
                 What We Do
               </p>
@@ -202,7 +202,7 @@ export default function Home() {
                 },
               ].map(({ num, title, desc }, i) => (
                 <ScrollReveal key={title} delay={i * 80} className="h-full">
-                  <div className="glass-card card-hover rounded-2xl p-7 md:p-9 relative overflow-hidden h-full">
+                  <div className="glass-card card-hover rounded-2xl p-6 md:p-9 relative overflow-hidden h-full">
                     <div className="font-sans text-black/18 text-[10px] tracking-widest mb-5">
                       {num}
                     </div>
@@ -233,7 +233,7 @@ export default function Home() {
         <section id="about" className="px-6 py-16 md:py-28">
           <div className="max-w-5xl mx-auto">
             <ScrollReveal variant="scale">
-              <div className="glass-card rounded-3xl p-8 md:p-16 relative overflow-hidden">
+              <div className="glass-card rounded-3xl p-7 md:p-16 relative overflow-hidden">
                 <div className="relative">
                   <p className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-4">
                     Why Evlogia
@@ -249,14 +249,14 @@ export default function Home() {
                     <br />
                     <em>We build, file, and publish.</em>
                   </h2>
-                  <p className="font-sans text-black/40 text-sm leading-relaxed max-w-lg mb-12 md:mb-16">
+                  <p className="font-sans text-black/40 text-sm leading-relaxed max-w-lg mb-8 md:mb-16">
                     The gap between AI research and production is where most
                     firms fail. We operate across the full spectrum — from
                     whiteboard to weight file to patent to paper — so nothing
                     gets lost in translation.
                   </p>
 
-                  <div className="grid md:grid-cols-3 gap-8 md:gap-10">
+                  <div className="grid md:grid-cols-3 gap-6 md:gap-10">
                     {[
                       {
                         step: "01",
@@ -315,7 +315,7 @@ export default function Home() {
         {/* ─── Research & IP ─── */}
         <section id="research" className="px-6 py-16 md:py-28">
           <div className="max-w-5xl mx-auto">
-            <ScrollReveal className="text-center mb-12 md:mb-16">
+            <ScrollReveal className="text-center mb-10 md:mb-16">
               <p className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-3">
                 Research & IP
               </p>
@@ -384,7 +384,7 @@ export default function Home() {
         <section id="contact" className="px-6 pb-20 md:pb-28 pt-6 md:pt-8">
           <div className="max-w-3xl mx-auto">
             <ScrollReveal variant="scale">
-              <div className="glass-card rounded-3xl p-10 md:p-20 text-center relative overflow-hidden">
+              <div className="glass-card rounded-3xl p-8 md:p-20 text-center relative overflow-hidden">
                 <div
                   className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-48 rounded-full pointer-events-none"
                   style={{
@@ -456,7 +456,7 @@ export default function Home() {
               · Applied AI Research
             </span>
           </div>
-          <div className="flex items-center gap-6 font-sans text-black/30 text-xs">
+          <div className="flex items-center gap-4 md:gap-6 font-sans text-black/30 text-xs">
             <span>© 2026</span>
             <a
               href="mailto:hello@evlogia.ai"

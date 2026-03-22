@@ -4,7 +4,7 @@ import { LiquidGlassCard } from "./liquid-glass";
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-28 pb-24 text-center overflow-hidden">
+    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-28 pb-16 md:pb-24 text-center overflow-hidden">
       {/* Video background */}
       <div className="absolute inset-0">
         <video
@@ -49,7 +49,7 @@ export function HeroSection() {
         <p
           className="anim-fade-up font-sans text-white/50 leading-relaxed mb-10 md:mb-12 max-w-md md:max-w-lg text-center"
           style={{
-            fontSize: "clamp(0.875rem, 1.6vw, 1.05rem)",
+            fontSize: "clamp(0.9rem, 1.6vw, 1.05rem)",
             animationDelay: "360ms",
           }}
         >
