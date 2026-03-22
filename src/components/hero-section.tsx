@@ -1,34 +1,48 @@
 "use client";
 
+import Image from "next/image";
 import { LiquidGlassCard } from "./liquid-glass";
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-28 pb-24 text-center overflow-hidden">
+    <section className="relative flex min-h-screen flex-col items-center justify-center px-6 pt-28 pb-24 text-center overflow-hidden">
       {/* Video background */}
-      <div className="absolute inset-0">
-        <video
+      {/* <video
           src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260228_065522_522e2295-ba22-457e-8fdb-fbcd68109c73.mp4"
           autoPlay
           muted
           loop
           playsInline
           className="absolute inset-0 w-full h-full object-cover object-center"
-        />
-      </div>
+        /> */}
+      <Image
+        src="/bg.png"
+        alt="Evlogia"
+        width={1920}
+        height={1080}
+        className="absolute inset-0 w-full h-full object-cover object-bottom"
+      />
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center w-full max-w-3xl">
         {/* Badge */}
-        <div
-          className="anim-fade-up glass rounded-full px-5 py-2 inline-flex items-center gap-2.5 mb-8 md:mb-10"
-          style={{ animationDelay: "100ms" }}
+
+        <LiquidGlassCard
+          glowIntensity="none"
+          shadowIntensity="md"
+          borderRadius="100px"
+          blurIntensity="sm"
+          draggable={false}
+          className="rounded-full px-1 pr-3 py-1 relative z-2 text-white inline-flex items-center gap-2.5 mb-8 md:mb-10 text-xs"
+          // style={{ animationDelay: "100ms" }}
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-white/60 shrink-0" />
-          <span className="text-white/50 text-[10px] md:text-xs tracking-[0.25em] uppercase font-sans">
+          <span className="w-10 py-1 relative z-1 rounded-full bg-white text-black">
+            New
+          </span>
+          <span className="relative z-1 uppercase font-sans">
             Applied AI Research
           </span>
-        </div>
+        </LiquidGlassCard>
 
         {/* Headline */}
         <h1
@@ -42,12 +56,12 @@ export function HeroSection() {
         >
           The Applied AI Lab
           <br />
-          <em className="text-gradient">That Ships.</em>
+          <em className="text-white">That Ships.</em>
         </h1>
 
         {/* Sub */}
         <p
-          className="anim-fade-up font-sans text-white/50 leading-relaxed mb-10 md:mb-12 max-w-md md:max-w-lg text-center"
+          className="anim-fade-up font-sans text-neutral-200 leading-relaxed mb-10 md:mb-12 max-w-md md:max-w-lg text-center"
           style={{
             fontSize: "clamp(0.875rem, 1.6vw, 1.05rem)",
             animationDelay: "360ms",
@@ -59,18 +73,15 @@ export function HeroSection() {
         </p>
 
         {/* CTAs */}
-        <div
-          className="anim-fade-up flex flex-col sm:flex-row items-center gap-3 md:gap-4"
-          style={{ animationDelay: "480ms" }}
-        >
-          <a href="#book" className="cursor-pointer">
+        <div className="flex flex-col sm:flex-row items-center gap-3 md:gap-4">
+          <a href="#">
             <LiquidGlassCard
-              glowIntensity="lg"
-              shadowIntensity="md"
+              glowIntensity="none"
+              shadowIntensity="sm"
               borderRadius="100px"
               blurIntensity="sm"
               draggable={false}
-              className="p-3 w-full bg-black/20 text-white font-sans text-sm"
+              className="rounded-full p-2 px-3 text-white inline-flex items-center gap-2.5"
             >
               <span className="relative z-2">Start a Project →</span>
             </LiquidGlassCard>

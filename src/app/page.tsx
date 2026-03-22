@@ -45,7 +45,7 @@ export default function Home() {
           className="p-0 w-full"
         >
           <nav
-            className="liquid-glass rounded-full px-5 py-2.5 flex items-center justify-between gap-6"
+            className="liquid-glass rounded-full relative z-40 px-5 py-2.5 flex items-center justify-between gap-6"
             style={{ boxShadow: "0 8px 40px rgba(0,0,0,0.15)" }}
           >
             {/* Logo — crop square canvas to just the combination mark */}
