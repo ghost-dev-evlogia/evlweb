@@ -19,14 +19,23 @@ export default function Home() {
           className="liquid-glass rounded-full px-5 py-2.5 flex items-center justify-between gap-6"
           style={{ boxShadow: "0 8px 40px rgba(0,0,0,0.15)" }}
         >
-          {/* Logo */}
-          <div className="flex items-center gap-2.5 shrink-0">
-            <div className="w-6 h-6 rounded-full glass border border-black/10 flex items-center justify-center">
-              <div className="w-2 h-2 rounded-full bg-black/50" />
-            </div>
-            <span className="font-serif text-black/80 text-sm tracking-tight italic">
-              Evlogia
-            </span>
+          {/* Logo — crop square canvas to just the combination mark */}
+          <div className="shrink-0 overflow-hidden relative" style={{ width: "140px", height: "30px" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/evlogia combination mark (white).png"
+              alt="Evlogia"
+              style={{
+                position: "absolute",
+                width: "150px",
+                height: "150px",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                filter: "invert(1)",
+                opacity: 0.85,
+              }}
+            />
           </div>
 
           {/* Links */}
@@ -317,11 +326,24 @@ export default function Home() {
       {/* ─── Footer ─── */}
       <footer className="border-t px-6 py-8" style={{ borderColor: "rgba(0,0,0,0.08)" }}>
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5">
-            <div className="w-5 h-5 rounded-full glass border border-black/10 flex items-center justify-center">
-              <div className="w-1.5 h-1.5 rounded-full bg-black/45" />
+          <div className="flex items-center gap-3">
+            <div className="overflow-hidden relative shrink-0" style={{ width: "20px", height: "20px" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/evlogia logomark (white).png"
+                alt="Evlogia"
+                style={{
+                  position: "absolute",
+                  width: "100px",
+                  height: "100px",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  filter: "invert(1)",
+                  opacity: 0.4,
+                }}
+              />
             </div>
-            <span className="font-serif italic text-black/40 text-xs">Evlogia</span>
             <span className="font-sans text-black/25 text-xs">· Applied AI Research</span>
           </div>
           <div className="flex items-center gap-6 font-sans text-black/30 text-xs">
