@@ -431,40 +431,29 @@ export default function Home() {
         style={{ borderColor: "rgba(0,0,0,0.08)" }}
       >
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div
-              className="overflow-hidden relative shrink-0"
-              style={{ width: "20px", height: "20px" }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/evlogia-logomark-.png"
-                alt="Evlogia"
-                style={{
-                  position: "absolute",
-                  width: "100px",
-                  height: "100px",
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)",
-                  filter: "invert(1)",
-                  opacity: 0.4,
-                }}
-              />
-            </div>
-            <span className="font-sans text-black/25 text-xs">
-              · Applied AI Research
-            </span>
+          <div className="flex items-center gap-2.5">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/evlogia-logomark-.png"
+              alt="Evlogia"
+              style={{
+                width: "18px",
+                height: "18px",
+                objectFit: "contain",
+                filter: "invert(1)",
+                opacity: 0.35,
+              }}
+            />
+            <span className="font-sans text-black/25 text-xs tracking-wide">Evlogia</span>
           </div>
-          <div className="flex items-center gap-4 md:gap-6 font-sans text-black/30 text-xs">
-            <span>© 2026</span>
+          <div className="flex items-center gap-4 md:gap-6 font-sans text-black/25 text-xs">
+            <span>Built by us. © 2026 · All rights reserved.</span>
             <a
               href="mailto:hello@evlogia.ai"
-              className="hover:text-black/55 transition-colors duration-200"
+              className="text-black/30 hover:text-black/55 transition-colors duration-200"
             >
               hello@evlogia.ai
             </a>
-            <span>evlogia.ai</span>
           </div>
         </div>
       </footer>
