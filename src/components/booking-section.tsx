@@ -26,7 +26,7 @@ export function BookingSection() {
   }, []);
 
   return (
-    <section id="book" className="px-6 py-28">
+    <section id="book" className="px-6 py-28 overflow-x-hidden">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center mb-14">
@@ -55,8 +55,8 @@ export function BookingSection() {
           id="my-cal-inline-strategy"
           style={{
             width: "100%",
-            height: "100%",
-            overflow: "scroll",
+            overflowX: "hidden",
+            overflowY: "auto",
             minHeight: "700px",
           }}
         />
