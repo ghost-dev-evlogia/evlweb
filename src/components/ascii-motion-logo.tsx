@@ -2,102 +2,108 @@
 
 import { useEffect, useRef } from 'react'
 
-// Character ramp: sparse → dense (maps to 0 → 1 brightness)
-const CHARS = ' .·:!|/+*=&#@'
+// Restrained ramp: 8 levels, sparse → dense
+// Chosen to feel organic without being too loud
+const CHARS = ' ·.:+*=#'
 
-const COLS = 88
-const ROWS = 14
-
-// Canvas scale factor — render at high-res, sample down for quality letterforms
-const SX = 10
-const SY = 16
+// Grid dimensions — COLS:ROWS ≈ 1.82:1 so monospace chars (~0.55 w/h) render ~square
+const COLS = 40
+const ROWS = 22
 
 export function AsciiMotionLogo() {
   const preRef = useRef<HTMLPreElement>(null)
 
   useEffect(() => {
-    const W = COLS * SX
-    const H = ROWS * SY
-
-    const canvas = document.createElement('canvas')
-    canvas.width = W
-    canvas.height = H
-    const ctx = canvas.getContext('2d')!
-
-    // White bg, black text — we'll invert so text = bright
-    ctx.fillStyle = '#ffffff'
-    ctx.fillRect(0, 0, W, H)
-    ctx.fillStyle = '#000000'
-    ctx.font = `900 ${Math.round(H * 0.74)}px "Arial Black", "Helvetica Neue", Arial, sans-serif`
-    ctx.textAlign = 'center'
-    ctx.textBaseline = 'middle'
-    ctx.fillText('EVLOGIA', W / 2, H / 2)
-
-    const pixels = ctx.getImageData(0, 0, W, H).data
-
-    // Build brightness map: 0 = background, 1 = letter interior
-    const base: number[][] = Array.from({ length: ROWS }, (_, r) =>
-      Array.from({ length: COLS }, (_, c) => {
-        let sum = 0
-        const x0 = c * SX, x1 = Math.min(x0 + SX, W)
-        const y0 = r * SY, y1 = Math.min(y0 + SY, H)
-        let n = 0
-        for (let py = y0; py < y1; py++) {
-          for (let px = x0; px < x1; px++) {
-            sum += pixels[(py * W + px) * 4] / 255
-            n++
-          }
-        }
-        return 1 - sum / n  // invert: text → 1, bg → 0
-      })
-    )
-
-    let t = 0
     let raf: number
+    const img = new Image()
+    img.crossOrigin = 'anonymous'
 
-    function frame() {
-      t += 0.038
+    img.onload = () => {
+      // Square canvas — logo is 1:1, clear to transparent so alpha channel is clean
+      const SIZE = 400
+      const canvas = document.createElement('canvas')
+      canvas.width = SIZE
+      canvas.height = SIZE
+      const ctx = canvas.getContext('2d')!
+      ctx.clearRect(0, 0, SIZE, SIZE)
+      ctx.drawImage(img, 0, 0, SIZE, SIZE)
 
-      const lines: string[] = []
-      for (let y = 0; y < ROWS; y++) {
-        let row = ''
-        for (let x = 0; x < COLS; x++) {
-          const b = base[y][x]
+      const pixels = ctx.getImageData(0, 0, SIZE, SIZE).data
 
-          if (b < 0.05) {
-            row += ' '
-            continue
+      // Build mask by averaging alpha per cell
+      // alpha=0 → transparent background, alpha=255 → logo stroke
+      const CW = SIZE / COLS
+      const CH = SIZE / ROWS
+      const mask: number[][] = Array.from({ length: ROWS }, (_, r) =>
+        Array.from({ length: COLS }, (_, c) => {
+          let sum = 0, n = 0
+          const x0 = Math.floor(c * CW), x1 = Math.min(Math.ceil((c + 1) * CW), SIZE)
+          const y0 = Math.floor(r * CH), y1 = Math.min(Math.ceil((r + 1) * CH), SIZE)
+          for (let py = y0; py < y1; py++) {
+            for (let px = x0; px < x1; px++) {
+              sum += pixels[(py * SIZE + px) * 4 + 3] / 255  // alpha channel
+              n++
+            }
           }
+          return n > 0 ? sum / n : 0
+        })
+      )
 
-          // Multi-octave wave: horizontal sweep + vertical pulse + diagonal drift
-          const wave =
-            Math.sin(x * 0.28 - t * 2.1) * 0.42 +
-            Math.sin(y * 0.55 + t * 1.5) * 0.26 +
-            Math.sin((x - y) * 0.19 + t * 0.9) * 0.18 +
-            Math.sin(x * 0.08 + y * 0.12 - t * 0.6) * 0.14
+      let t = 0
 
-          const v = Math.max(0, Math.min(1, b + wave * b * 1.1))
-          row += CHARS[Math.round(v * (CHARS.length - 1))]
+      function frame() {
+        t += 0.036
+
+        const lines: string[] = []
+        for (let y = 0; y < ROWS; y++) {
+          let row = ''
+          for (let x = 0; x < COLS; x++) {
+            const b = mask[y][x]
+
+            if (b < 0.07) {
+              row += ' '
+              continue
+            }
+
+            // Multi-frequency wave — only modulates within the logo silhouette
+            const wave =
+              Math.sin(x * 0.30 - t * 2.0) * 0.40 +
+              Math.sin(y * 0.52 + t * 1.4) * 0.28 +
+              Math.sin((x + y) * 0.18 - t * 0.8) * 0.18 +
+              Math.sin(x * 0.09 - y * 0.13 + t * 0.55) * 0.14
+
+            const v = Math.max(0, Math.min(1, b + wave * b))
+            row += CHARS[Math.round(v * (CHARS.length - 1))]
+          }
+          lines.push(row)
         }
-        lines.push(row)
+
+        if (preRef.current) preRef.current.textContent = lines.join('\n')
+        raf = requestAnimationFrame(frame)
       }
 
-      if (preRef.current) preRef.current.textContent = lines.join('\n')
       raf = requestAnimationFrame(frame)
     }
 
-    raf = requestAnimationFrame(frame)
-    return () => cancelAnimationFrame(raf)
+    img.src = '/evlogia-logomark-.png'
+
+    return () => {
+      cancelAnimationFrame(raf)
+      img.onload = null
+    }
   }, [])
 
   return (
     <pre
       ref={preRef}
       aria-hidden="true"
-      className="font-mono leading-[1.18] select-none pointer-events-none text-black/[0.22] overflow-hidden w-full"
+      className="font-mono leading-[1.0] select-none pointer-events-none text-black/[0.28]"
       style={{
-        fontSize: 'clamp(6.5px, calc(100vw / 105), 11px)',
-        letterSpacing: '0.04em',
+        fontSize: '5.8px',
+        letterSpacing: '0.03em',
+        // Constrain to roughly the same visual footprint as the original logo block
+        width: '148px',
+        overflow: 'hidden',
       }}
     />
   )

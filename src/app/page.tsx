@@ -434,31 +434,9 @@ export default function Home() {
         <div className="max-w-5xl mx-auto">
           {/* Brand + nav row */}
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-8 md:gap-6 mb-10 md:mb-12">
-            {/* Brand */}
+            {/* Brand — ASCII motion logomark */}
             <div>
-              <div
-                className="shrink-0 overflow-hidden relative mb-3"
-                style={{ width: "120px", height: "26px" }}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/evlogia-combination-mark.png"
-                  alt="Evlogia"
-                  style={{
-                    position: "absolute",
-                    width: "130px",
-                    height: "130px",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                    filter: "invert(1)",
-                    opacity: 0.7,
-                  }}
-                />
-              </div>
-              <p className="font-sans text-black/30 text-[11px] tracking-wide">
-                Applied AI Research
-              </p>
+              <AsciiMotionLogo />
             </div>
 
             {/* Nav links */}
@@ -482,12 +460,7 @@ export default function Home() {
           </div>
 
           {/* Divider */}
-          <div className="divider mb-8" />
-
-          {/* ASCII Motion Logo */}
-          <div className="mb-8 -mx-1">
-            <AsciiMotionLogo />
-          </div>
+          <div className="divider mb-6" />
 
           {/* Copyright row */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
