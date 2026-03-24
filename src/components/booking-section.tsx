@@ -43,13 +43,15 @@ export function BookingSection() {
         calLink: "ethankd/strategy",
         config: {
           layout: "month_view",
+          theme: "light",
           useSlotsViewOnSmallScreen: true
         }
       });
 
       Cal.ns.strategy("ui", {
         hideEventTypeDetails: false,
-        layout: "month_view"
+        layout: "month_view",
+        theme: "light"
       });
     `;
     document.head.appendChild(script);
