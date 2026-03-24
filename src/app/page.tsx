@@ -3,6 +3,7 @@ import { ScrollReveal } from "@/components/scroll-reveal";
 import { AnimatedCounter } from "@/components/animated-counter";
 import { BookingSection } from "@/components/booking-section";
 import { LiquidGlassCard } from "@/components/liquid-glass";
+import { AsciiMotionLogo } from "@/components/ascii-motion-logo";
 
 const marqueeItems = [
   "NeurIPS",
@@ -481,7 +482,12 @@ export default function Home() {
           </div>
 
           {/* Divider */}
-          <div className="divider mb-6" />
+          <div className="divider mb-8" />
+
+          {/* ASCII Motion Logo */}
+          <div className="mb-8 -mx-1">
+            <AsciiMotionLogo />
+          </div>
 
           {/* Copyright row */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
