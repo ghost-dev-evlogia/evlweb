@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { RevealLabel } from "@/components/reveal-label";
 
 export function BookingSection() {
   useEffect(() => {
@@ -65,9 +66,9 @@ export function BookingSection() {
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8 md:mb-14">
-          <p className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-4">
+          <RevealLabel className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-4">
             Schedule a Call
-          </p>
+          </RevealLabel>
           <h2
             className="font-serif text-black/90 leading-[1.07] mb-5"
             style={{

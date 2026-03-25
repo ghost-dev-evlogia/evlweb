@@ -1,10 +1,20 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { motion } from "motion/react";
 import { LiquidGlassCard } from "@/components/liquid-glass";
 
 export function SiteNav() {
+  const pathname = usePathname();
+
+  const handleLogoClick = (e: React.MouseEvent) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   useEffect(() => {
     const script = document.createElement("script");
     script.type = "text/javascript";
@@ -71,7 +81,7 @@ export function SiteNav() {
           className="liquid-glass rounded-full relative z-40 px-5 py-2.5 flex items-center justify-between gap-6"
         >
           {/* Logo */}
-          <a href="/" className="shrink-0 overflow-hidden relative block" style={{ width: "120px", height: "26px" }}>
+          <a href="/" onClick={handleLogoClick} className="shrink-0 overflow-hidden relative block" style={{ width: "120px", height: "26px" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/evlogia-combination-mark.png"

@@ -7,6 +7,7 @@ import { SplitHeading } from "@/components/split-heading";
 import { StaggerGrid, StaggerItem } from "@/components/stagger-grid";
 import { MotionDivider } from "@/components/motion-divider";
 import { ScrollReveal } from "@/components/scroll-reveal";
+import { RevealLabel } from "@/components/reveal-label";
 
 const marqueeItems = [
   "NeurIPS",
@@ -96,11 +97,9 @@ export default function Home() {
         <section id="services" className="scroll-mt-20 px-6 py-12 md:py-28">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-10 md:mb-16">
-              <ScrollReveal>
-                <p className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-3">
-                  What We Do
-                </p>
-              </ScrollReveal>
+              <RevealLabel className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-3">
+                What We Do
+              </RevealLabel>
               <SplitHeading
                 lines={[
                   { text: "Four pillars." },
@@ -248,11 +247,9 @@ export default function Home() {
         <section id="research" className="scroll-mt-20 px-6 py-12 md:py-28">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-10 md:mb-16">
-              <ScrollReveal>
-                <p className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-3">
-                  Research & IP
-                </p>
-              </ScrollReveal>
+              <RevealLabel className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-3">
+                Research &amp; IP
+              </RevealLabel>
               <SplitHeading
                 lines={[
                   { text: "Science is" },
@@ -379,9 +376,9 @@ export default function Home() {
                   }}
                 />
                 <div className="relative">
-                  <p className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-4">
+                  <RevealLabel className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-4">
                     Ready to Begin
-                  </p>
+                  </RevealLabel>
                   <SplitHeading
                     lines={[
                       { text: "Let's solve something" },

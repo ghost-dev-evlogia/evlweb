@@ -38,30 +38,26 @@ export function SplitHeading({
         const wordEls = words.map((word, wIdx) => {
           const i = globalWordIndex++;
           return (
-            <span
+            <motion.span
               key={wIdx}
               style={{
                 display: "inline-block",
-                overflow: "hidden",
-                verticalAlign: "bottom",
                 marginRight: wIdx < words.length - 1 ? "0.28em" : 0,
               }}
+              initial={{ y: 8, opacity: 0, filter: "blur(5px)" }}
+              animate={
+                inView
+                  ? { y: 0, opacity: 1, filter: "blur(0px)" }
+                  : { y: 8, opacity: 0, filter: "blur(5px)" }
+              }
+              transition={{
+                delay: delay + i * 0.052,
+                duration: 0.68,
+                ease: [0.16, 1, 0.3, 1],
+              }}
             >
-              <motion.span
-                style={{ display: "inline-block" }}
-                initial={{ y: "110%", opacity: 0 }}
-                animate={
-                  inView ? { y: 0, opacity: 1 } : { y: "110%", opacity: 0 }
-                }
-                transition={{
-                  delay: delay + i * 0.048,
-                  duration: 0.62,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-              >
-                {word}
-              </motion.span>
-            </span>
+              {word}
+            </motion.span>
           );
         });
 

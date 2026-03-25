@@ -33,14 +33,6 @@ export function HeroSection() {
         />
       </motion.div>
 
-      {/* Subtle radial darkening behind text content */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(0,0,0,0.28) 0%, transparent 75%)",
-        }}
-      />
-
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center w-full max-w-3xl">
         {/* Badge */}
@@ -67,46 +59,38 @@ export function HeroSection() {
           </LiquidGlassCard>
         </motion.div>
 
-        {/* Headline — staggered words */}
+        {/* Headline — word-by-word with blur-to-sharp */}
         <h1
           className="font-serif text-white leading-[1.05] mb-6 md:mb-7 text-center w-full"
           style={{
             fontSize: "clamp(1.5rem, 7.5vw, 7rem)",
-            textShadow: "0 4px 80px rgba(0,0,0,0.5)",
+            textShadow: "0 2px 40px rgba(0,0,0,0.45), 0 1px 8px rgba(0,0,0,0.3)",
             letterSpacing: "-0.01em",
           }}
         >
           {["The", "Applied", "AI", "Lab"].map((word, i) => (
-            <span
+            <motion.span
               key={word + i}
-              style={{ display: "inline-block", overflow: "hidden", verticalAlign: "bottom", marginRight: "0.25em" }}
+              style={{ display: "inline-block", marginRight: "0.25em" }}
+              initial={{ opacity: 0, y: 10, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ delay: 0.5 + i * 0.07, duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
             >
-              <motion.span
-                style={{ display: "inline-block" }}
-                initial={{ y: "110%", opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.55 + i * 0.06, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-              >
-                {word}
-              </motion.span>
-            </span>
+              {word}
+            </motion.span>
           ))}
           <br />
           <em className="text-white">
             {["That", "Ships."].map((word, i) => (
-              <span
+              <motion.span
                 key={word + i}
-                style={{ display: "inline-block", overflow: "hidden", verticalAlign: "bottom", marginRight: i === 0 ? "0.25em" : 0 }}
+                style={{ display: "inline-block", marginRight: i === 0 ? "0.25em" : 0 }}
+                initial={{ opacity: 0, y: 10, filter: "blur(8px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ delay: 0.5 + (4 + i) * 0.07, duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
               >
-                <motion.span
-                  style={{ display: "inline-block" }}
-                  initial={{ y: "110%", opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.55 + (4 + i) * 0.06, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  {word}
-                </motion.span>
-              </span>
+                {word}
+              </motion.span>
             ))}
           </em>
         </h1>
@@ -116,11 +100,11 @@ export function HeroSection() {
           className="font-sans text-neutral-200 leading-relaxed mb-10 md:mb-12 max-w-md md:max-w-lg text-center"
           style={{
             fontSize: "clamp(0.9rem, 1.6vw, 1.05rem)",
-            textShadow: "0 1px 12px rgba(0,0,0,0.55), 0 2px 32px rgba(0,0,0,0.35)",
+            textShadow: "0 1px 12px rgba(0,0,0,0.5), 0 2px 28px rgba(0,0,0,0.3)",
           }}
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ delay: 0.95, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
         >
           We partner with enterprises and research institutions to turn hard AI
           problems into production systems, filed patents, and published
@@ -132,9 +116,9 @@ export function HeroSection() {
           className="flex flex-col sm:flex-row items-center gap-3 md:gap-4"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.05, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ delay: 1.1, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
         >
-          <a href="#">
+          <a href="/#book">
             <LiquidGlassCard
               glowIntensity="none"
               shadowIntensity="sm"
