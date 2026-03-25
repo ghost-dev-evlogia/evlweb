@@ -273,37 +273,80 @@ export default function Home() {
             </div>
 
             <StaggerGrid className="grid md:grid-cols-3 gap-3 md:gap-4">
-              {[
-                {
-                  label: "Publication Venues",
-                  value: "NeurIPS · ICML · ICLR · AAAI · CVPR",
-                  sub: "Peer-reviewed conference papers",
-                },
-                {
-                  label: "Patent Portfolio",
-                  value: "US · EU · International",
-                  sub: "Filed, pending & granted",
-                },
-                {
-                  label: "Research Domains",
-                  value: "LLMs · Vision · Multimodal · Agents",
-                  sub: "Active research areas",
-                },
-              ].map(({ label, value, sub }) => (
-                <StaggerItem key={label} className="h-full">
-                  <div className="glass-card card-hover rounded-2xl p-6 md:p-8 text-center h-full flex flex-col items-center justify-center gap-2.5">
-                    <div className="font-sans text-black/30 text-[10px] tracking-[0.25em] uppercase">
-                      {label}
-                    </div>
-                    <div className="font-serif text-black/80 text-sm md:text-base leading-snug">
-                      {value}
-                    </div>
-                    <div className="font-sans text-black/30 text-[10px] tracking-wide">
-                      {sub}
-                    </div>
+              {/* Publications card */}
+              <StaggerItem className="h-full">
+                <div className="glass-card card-hover rounded-2xl p-6 md:p-8 h-full flex flex-col gap-4">
+                  <div className="font-sans text-black/30 text-[10px] tracking-[0.25em] uppercase">
+                    Publication Venues
                   </div>
-                </StaggerItem>
-              ))}
+                  <div className="font-serif text-black/85 text-4xl md:text-5xl leading-none">
+                    20+
+                  </div>
+                  <div className="flex flex-wrap gap-1.5 mt-auto">
+                    {["NeurIPS", "ICML", "ICLR", "AAAI", "CVPR"].map((v) => (
+                      <span
+                        key={v}
+                        className="font-sans text-[10px] tracking-wide text-black/50 border border-black/10 rounded-full px-2.5 py-0.5"
+                      >
+                        {v}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="font-sans text-black/30 text-[10px] tracking-wide">
+                    Peer-reviewed conference papers
+                  </div>
+                </div>
+              </StaggerItem>
+
+              {/* Patents card */}
+              <StaggerItem className="h-full">
+                <div className="glass-card card-hover rounded-2xl p-6 md:p-8 h-full flex flex-col gap-4">
+                  <div className="font-sans text-black/30 text-[10px] tracking-[0.25em] uppercase">
+                    Patent Portfolio
+                  </div>
+                  <div className="font-serif text-black/85 text-4xl md:text-5xl leading-none">
+                    12+
+                  </div>
+                  <div className="flex flex-wrap gap-1.5 mt-auto">
+                    {["US", "EU", "International"].map((v) => (
+                      <span
+                        key={v}
+                        className="font-sans text-[10px] tracking-wide text-black/50 border border-black/10 rounded-full px-2.5 py-0.5"
+                      >
+                        {v}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="font-sans text-black/30 text-[10px] tracking-wide">
+                    Filed, pending &amp; granted
+                  </div>
+                </div>
+              </StaggerItem>
+
+              {/* Domains card */}
+              <StaggerItem className="h-full">
+                <div className="glass-card card-hover rounded-2xl p-6 md:p-8 h-full flex flex-col gap-4">
+                  <div className="font-sans text-black/30 text-[10px] tracking-[0.25em] uppercase">
+                    Research Domains
+                  </div>
+                  <div className="font-serif text-black/85 text-4xl md:text-5xl leading-none">
+                    8
+                  </div>
+                  <div className="flex flex-wrap gap-1.5 mt-auto">
+                    {["LLMs", "Vision", "Multimodal", "Agents"].map((v) => (
+                      <span
+                        key={v}
+                        className="font-sans text-[10px] tracking-wide text-black/50 border border-black/10 rounded-full px-2.5 py-0.5"
+                      >
+                        {v}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="font-sans text-black/30 text-[10px] tracking-wide">
+                    Active research areas
+                  </div>
+                </div>
+              </StaggerItem>
             </StaggerGrid>
           </div>
         </section>
@@ -344,7 +387,8 @@ export default function Home() {
                       { text: "Let's solve something" },
                       { text: "worth publishing.", italic: true },
                     ]}
-                    className="font-serif text-black/90 leading-[1.07] mb-5 text-gradient-wrap"
+                    className="font-serif text-black/90 leading-[1.07] mb-5"
+                    italicClassName="text-gradient"
                     style={{
                       fontSize: "clamp(1.4rem, 5vw, 3.8rem)",
                       letterSpacing: "-0.01em",

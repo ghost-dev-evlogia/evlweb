@@ -12,6 +12,7 @@ interface Props {
   lines: Line[];
   as?: "h1" | "h2" | "h3" | "h4";
   className?: string;
+  italicClassName?: string;
   style?: React.CSSProperties;
   delay?: number;
 }
@@ -20,6 +21,7 @@ export function SplitHeading({
   lines,
   as: Tag = "h2",
   className,
+  italicClassName,
   style,
   delay = 0,
 }: Props) {
@@ -64,7 +66,7 @@ export function SplitHeading({
         });
 
         return line.italic ? (
-          <em key={lineIdx} style={{ display: "block", fontStyle: "italic" }}>
+          <em key={lineIdx} className={italicClassName} style={{ display: "block", fontStyle: "italic" }}>
             {wordEls}
           </em>
         ) : (

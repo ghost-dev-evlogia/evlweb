@@ -33,6 +33,14 @@ export function HeroSection() {
         />
       </motion.div>
 
+      {/* Subtle radial darkening behind text content */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(0,0,0,0.28) 0%, transparent 75%)",
+        }}
+      />
+
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center w-full max-w-3xl">
         {/* Badge */}
@@ -47,13 +55,14 @@ export function HeroSection() {
             borderRadius="100px"
             blurIntensity="sm"
             draggable={false}
-            className="rounded-full px-1 pr-3 py-1 relative z-2 text-white inline-flex items-center gap-2.5 mb-8 md:mb-10 text-xs"
+            className="rounded-full px-4 py-2 relative z-2 text-white inline-flex items-center gap-2.5 mb-8 md:mb-10"
           >
-            <span className="w-10 py-1 relative z-1 rounded-full bg-white text-black">
-              New
-            </span>
-            <span className="relative z-1 uppercase font-sans">
-              Applied AI Research
+            <span
+              className="relative z-1 shrink-0 w-1.5 h-1.5 rounded-full bg-emerald-400"
+              style={{ boxShadow: "0 0 6px 2px rgba(52,211,153,0.55)" }}
+            />
+            <span className="relative z-1 font-sans text-[11px] tracking-[0.12em] uppercase text-white/90 whitespace-nowrap">
+              Now accepting Q3 engagements
             </span>
           </LiquidGlassCard>
         </motion.div>
@@ -105,7 +114,10 @@ export function HeroSection() {
         {/* Sub */}
         <motion.p
           className="font-sans text-neutral-200 leading-relaxed mb-10 md:mb-12 max-w-md md:max-w-lg text-center"
-          style={{ fontSize: "clamp(0.9rem, 1.6vw, 1.05rem)" }}
+          style={{
+            fontSize: "clamp(0.9rem, 1.6vw, 1.05rem)",
+            textShadow: "0 1px 12px rgba(0,0,0,0.55), 0 2px 32px rgba(0,0,0,0.35)",
+          }}
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}

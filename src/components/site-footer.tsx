@@ -108,7 +108,7 @@ export function SiteFooter() {
               </a>
             </div>
 
-            <p className="font-sans text-black/20 text-[11px]">Built by us.</p>
+            <p className="font-sans text-black/20 text-[11px]">Evlogia Labs Private Limited</p>
           </div>
 
         </motion.div>

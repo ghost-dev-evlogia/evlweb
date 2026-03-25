@@ -7,8 +7,8 @@ import { useEffect, useRef } from 'react'
 const CHARS = ' ·.:+*=#'
 
 // Grid dimensions — COLS:ROWS ≈ 1.82:1 so monospace chars (~0.55 w/h) render ~square
-const COLS = 40
-const ROWS = 22
+const COLS = 55
+const ROWS = 30
 
 export function AsciiMotionLogo() {
   const preRef = useRef<HTMLPreElement>(null)
@@ -106,10 +106,9 @@ export function AsciiMotionLogo() {
       aria-hidden="true"
       className="font-mono leading-[1.0] select-none pointer-events-none text-black/[0.28]"
       style={{
-        fontSize: '5.8px',
+        fontSize: '7px',
         letterSpacing: '0.03em',
-        // Constrain to roughly the same visual footprint as the original logo block
-        width: '148px',
+        width: '204px',
         overflow: 'hidden',
       }}
     />
