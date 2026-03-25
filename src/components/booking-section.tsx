@@ -89,7 +89,7 @@ export function BookingSection() {
         <div className="w-full rounded-3xl overflow-hidden border border-black/[0.07] bg-white/40">
           <div
             id="my-cal-inline-strategy"
-            className="w-full [&>iframe]:!min-h-0"
+            className="min-h-[520px] md:min-h-[700px] w-full"
           />
         </div>
       </div>
