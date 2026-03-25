@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { motion } from "motion/react";
 import { LiquidGlassCard } from "@/components/liquid-glass";
 
 export function SiteNav() {
@@ -52,7 +53,12 @@ export function SiteNav() {
   }, []);
 
   return (
-    <header className="fixed top-5 left-1/2 -translate-x-1/2 z-50 w-full max-w-2xl px-4">
+    <motion.header
+      className="fixed top-5 left-1/2 -translate-x-1/2 z-50 w-full max-w-2xl px-4"
+      initial={{ y: -20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+    >
       <LiquidGlassCard
         glowIntensity="none"
         shadowIntensity="none"
@@ -112,6 +118,6 @@ export function SiteNav() {
           </button>
         </nav>
       </LiquidGlassCard>
-    </header>
+    </motion.header>
   );
 }

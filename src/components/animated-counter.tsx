@@ -1,55 +1,28 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import { useInView, useMotionValue, useSpring, useTransform, motion } from "motion/react";
 
 interface Props {
   target: number;
   suffix?: string;
-  duration?: number;
 }
 
-export function AnimatedCounter({ target, suffix = "", duration = 1800 }: Props) {
-  const [count, setCount] = useState(0);
+export function AnimatedCounter({ target, suffix = "" }: Props) {
   const ref = useRef<HTMLSpanElement>(null);
-  const started = useRef(false);
+  const inView = useInView(ref, { once: true, margin: "-10% 0px" });
+
+  const raw = useMotionValue(0);
+  const spring = useSpring(raw, { stiffness: 60, damping: 18, mass: 0.8 });
+  const display = useTransform(spring, (v) => Math.round(v));
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !started.current) {
-          started.current = true;
-          let startTime: number | null = null;
-
-          const step = (timestamp: number) => {
-            if (!startTime) startTime = timestamp;
-            const progress = Math.min((timestamp - startTime) / duration, 1);
-            // Ease out cubic
-            const eased = 1 - Math.pow(1 - progress, 3);
-            setCount(Math.floor(eased * target));
-            if (progress < 1) {
-              requestAnimationFrame(step);
-            } else {
-              setCount(target);
-            }
-          };
-
-          requestAnimationFrame(step);
-          observer.unobserve(el);
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [target, duration]);
+    if (inView) raw.set(target);
+  }, [inView, target, raw]);
 
   return (
     <span ref={ref}>
-      {count}
+      <motion.span>{display}</motion.span>
       {suffix}
     </span>
   );

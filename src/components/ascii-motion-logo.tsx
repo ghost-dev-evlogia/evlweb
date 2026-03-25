@@ -50,15 +50,22 @@ export function AsciiMotionLogo() {
       )
 
       let t = 0
+      const startTime = performance.now()
+      const INTRO_DURATION = 2000 // ms
 
       function frame() {
         t += 0.036
+
+        const elapsed = performance.now() - startTime
+        const introProgress = Math.min(elapsed / INTRO_DURATION, 1)
+        // ease-out-cubic for intro
+        const ease = 1 - Math.pow(1 - introProgress, 3)
 
         const lines: string[] = []
         for (let y = 0; y < ROWS; y++) {
           let row = ''
           for (let x = 0; x < COLS; x++) {
-            const b = mask[y][x]
+            const b = mask[y][x] * ease
 
             if (b < 0.07) {
               row += ' '

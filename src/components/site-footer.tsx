@@ -1,6 +1,12 @@
+"use client";
+
+import { useRef } from "react";
+import { motion, useInView } from "motion/react";
 import { AsciiMotionLogo } from "@/components/ascii-motion-logo";
 
 export function SiteFooter() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "0px 0px -5% 0px" });
   const siteLinks = [
     { label: "Services", href: "/#services" },
     { label: "Research", href: "/#research" },
@@ -20,8 +26,13 @@ export function SiteFooter() {
 
   return (
     <footer className="px-4 pb-6 pt-2 md:px-6 md:pb-8">
-      <div className="max-w-5xl mx-auto">
-        <div className="glass-card rounded-3xl px-7 py-8 md:px-10 md:py-10">
+      <div className="max-w-5xl mx-auto" ref={ref}>
+        <motion.div
+          className="glass-card rounded-3xl px-7 py-8 md:px-10 md:py-10"
+          initial={{ opacity: 0, y: 32 }}
+          animate={inView ? { opacity: 1, y: 0 } : undefined}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
 
           {/* Top row: ASCII logo + nav */}
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-8 md:gap-6 mb-8 md:mb-10">
@@ -100,7 +111,7 @@ export function SiteFooter() {
             <p className="font-sans text-black/20 text-[11px]">Built by us.</p>
           </div>
 
-        </div>
+        </motion.div>
       </div>
     </footer>
   );

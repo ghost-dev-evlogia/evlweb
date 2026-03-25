@@ -1,9 +1,12 @@
 import { HeroSection } from "@/components/hero-section";
-import { ScrollReveal } from "@/components/scroll-reveal";
 import { AnimatedCounter } from "@/components/animated-counter";
 import { BookingSection } from "@/components/booking-section";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
+import { SplitHeading } from "@/components/split-heading";
+import { StaggerGrid, StaggerItem } from "@/components/stagger-grid";
+import { MotionDivider } from "@/components/motion-divider";
+import { ScrollReveal } from "@/components/scroll-reveal";
 
 const marqueeItems = [
   "NeurIPS",
@@ -63,19 +66,14 @@ export default function Home() {
 
         {/* ─── Stats ─── */}
         <section className="px-6 py-10 md:py-20">
-          <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3">
+          <StaggerGrid className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
               { target: 40, suffix: "+", label: "R&D Projects" },
               { target: 12, suffix: "+", label: "Patents Filed" },
               { target: 20, suffix: "+", label: "Papers Published" },
               { target: 8, suffix: "", label: "Industries Served" },
-            ].map(({ target, suffix, label }, i) => (
-              <ScrollReveal
-                key={label}
-                delay={i * 80}
-                variant="scale"
-                className="h-full"
-              >
+            ].map(({ target, suffix, label }) => (
+              <StaggerItem key={label} className="h-full">
                 <div className="glass-card card-hover rounded-2xl p-5 md:p-6 text-center h-full flex flex-col items-center justify-center min-h-[110px]">
                   <div className="font-serif text-black/90 text-3xl md:text-4xl mb-1.5 leading-none">
                     <AnimatedCounter target={target} suffix={suffix} />
@@ -84,39 +82,39 @@ export default function Home() {
                     {label}
                   </div>
                 </div>
-              </ScrollReveal>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGrid>
         </section>
 
         {/* ─── Divider ─── */}
         <div className="max-w-5xl mx-auto px-6">
-          <ScrollReveal>
-            <div className="divider" />
-          </ScrollReveal>
+          <MotionDivider />
         </div>
 
         {/* ─── Services ─── */}
         <section id="services" className="scroll-mt-20 px-6 py-12 md:py-28">
           <div className="max-w-5xl mx-auto">
-            <ScrollReveal className="text-center mb-10 md:mb-16">
-              <p className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-3">
-                What We Do
-              </p>
-              <h2
+            <div className="text-center mb-10 md:mb-16">
+              <ScrollReveal>
+                <p className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-3">
+                  What We Do
+                </p>
+              </ScrollReveal>
+              <SplitHeading
+                lines={[
+                  { text: "Four pillars." },
+                  { text: "One partner.", italic: true },
+                ]}
                 className="font-serif text-black/90 leading-[1.07]"
                 style={{
                   fontSize: "clamp(2rem, 5vw, 4rem)",
                   letterSpacing: "-0.01em",
                 }}
-              >
-                Four pillars.
-                <br />
-                <em>One partner.</em>
-              </h2>
-            </ScrollReveal>
+              />
+            </div>
 
-            <div className="grid md:grid-cols-2 gap-3 md:gap-4">
+            <StaggerGrid className="grid md:grid-cols-2 gap-3 md:gap-4">
               {[
                 {
                   num: "01",
@@ -138,8 +136,8 @@ export default function Home() {
                   title: "Research Publications",
                   desc: "We publish. Peer-reviewed papers, white papers, and technical reports — building scientific credibility alongside your commercial capability.",
                 },
-              ].map(({ num, title, desc }, i) => (
-                <ScrollReveal key={title} delay={i * 80} className="h-full">
+              ].map(({ num, title, desc }) => (
+                <StaggerItem key={title} className="h-full">
                   <div className="glass-card card-hover rounded-2xl p-6 md:p-9 relative overflow-hidden h-full">
                     <div className="font-sans text-black/18 text-[10px] tracking-widest mb-5">
                       {num}
@@ -154,17 +152,15 @@ export default function Home() {
                       {desc}
                     </p>
                   </div>
-                </ScrollReveal>
+                </StaggerItem>
               ))}
-            </div>
+            </StaggerGrid>
           </div>
         </section>
 
         {/* ─── Divider ─── */}
         <div className="max-w-5xl mx-auto px-6">
-          <ScrollReveal>
-            <div className="divider" />
-          </ScrollReveal>
+          <MotionDivider />
         </div>
 
         {/* ─── Why Evlogia ─── */}
@@ -176,17 +172,17 @@ export default function Home() {
                   <p className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-4">
                     Why Evlogia
                   </p>
-                  <h2
+                  <SplitHeading
+                    lines={[
+                      { text: "Most consultants advise." },
+                      { text: "We build, file, and publish.", italic: true },
+                    ]}
                     className="font-serif text-black/90 mb-5 leading-[1.07] max-w-2xl"
                     style={{
                       fontSize: "clamp(1.4rem, 4.5vw, 3.5rem)",
                       letterSpacing: "-0.01em",
                     }}
-                  >
-                    Most consultants advise.
-                    <br />
-                    <em>We build, file, and publish.</em>
-                  </h2>
+                  />
                   <p className="font-sans text-black/40 text-sm leading-relaxed max-w-lg mb-8 md:mb-16">
                     The gap between AI research and production is where most
                     firms fail. We operate across the full spectrum — from
@@ -245,34 +241,38 @@ export default function Home() {
 
         {/* ─── Divider ─── */}
         <div className="max-w-5xl mx-auto px-6">
-          <ScrollReveal>
-            <div className="divider" />
-          </ScrollReveal>
+          <MotionDivider />
         </div>
 
         {/* ─── Research & IP ─── */}
         <section id="research" className="scroll-mt-20 px-6 py-12 md:py-28">
           <div className="max-w-5xl mx-auto">
-            <ScrollReveal className="text-center mb-10 md:mb-16">
-              <p className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-3">
-                Research & IP
-              </p>
-              <h2
+            <div className="text-center mb-10 md:mb-16">
+              <ScrollReveal>
+                <p className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-3">
+                  Research & IP
+                </p>
+              </ScrollReveal>
+              <SplitHeading
+                lines={[
+                  { text: "Science is" },
+                  { text: "our product.", italic: true },
+                ]}
                 className="font-serif text-black/90 leading-[1.07] mb-4"
                 style={{
                   fontSize: "clamp(2rem, 5vw, 4rem)",
                   letterSpacing: "-0.01em",
                 }}
-              >
-                Science is <em>our product.</em>
-              </h2>
-              <p className="font-sans text-black/40 text-sm max-w-sm mx-auto leading-relaxed">
-                We contribute to the global AI research canon while protecting
-                your competitive advantage through strategic IP filings.
-              </p>
-            </ScrollReveal>
+              />
+              <ScrollReveal>
+                <p className="font-sans text-black/40 text-sm max-w-sm mx-auto leading-relaxed">
+                  We contribute to the global AI research canon while protecting
+                  your competitive advantage through strategic IP filings.
+                </p>
+              </ScrollReveal>
+            </div>
 
-            <div className="grid md:grid-cols-3 gap-3 md:gap-4">
+            <StaggerGrid className="grid md:grid-cols-3 gap-3 md:gap-4">
               {[
                 {
                   label: "Publication Venues",
@@ -289,8 +289,8 @@ export default function Home() {
                   value: "LLMs · Vision · Multimodal · Agents",
                   sub: "Active research areas",
                 },
-              ].map(({ label, value, sub }, i) => (
-                <ScrollReveal key={label} delay={i * 80} className="h-full">
+              ].map(({ label, value, sub }) => (
+                <StaggerItem key={label} className="h-full">
                   <div className="glass-card card-hover rounded-2xl p-6 md:p-8 text-center h-full flex flex-col items-center justify-center gap-2.5">
                     <div className="font-sans text-black/30 text-[10px] tracking-[0.25em] uppercase">
                       {label}
@@ -302,17 +302,15 @@ export default function Home() {
                       {sub}
                     </div>
                   </div>
-                </ScrollReveal>
+                </StaggerItem>
               ))}
-            </div>
+            </StaggerGrid>
           </div>
         </section>
 
         {/* ─── Divider ─── */}
         <div className="max-w-5xl mx-auto px-6">
-          <ScrollReveal>
-            <div className="divider" />
-          </ScrollReveal>
+          <MotionDivider />
         </div>
 
         {/* ─── Booking ─── */}
@@ -341,17 +339,17 @@ export default function Home() {
                   <p className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-4">
                     Ready to Begin
                   </p>
-                  <h2
-                    className="font-serif text-black/90 leading-[1.07] mb-5"
+                  <SplitHeading
+                    lines={[
+                      { text: "Let's solve something" },
+                      { text: "worth publishing.", italic: true },
+                    ]}
+                    className="font-serif text-black/90 leading-[1.07] mb-5 text-gradient-wrap"
                     style={{
                       fontSize: "clamp(1.4rem, 5vw, 3.8rem)",
                       letterSpacing: "-0.01em",
                     }}
-                  >
-                    Let&apos;s solve something
-                    <br />
-                    <em className="text-gradient">worth publishing.</em>
-                  </h2>
+                  />
                   <p className="font-sans text-black/40 text-sm leading-relaxed mb-10 max-w-sm mx-auto">
                     Bring us your hardest AI problem. We&apos;ll scope it, build
                     it, patent it — and if the science warrants it, publish it.
