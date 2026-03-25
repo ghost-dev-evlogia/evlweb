@@ -21,6 +21,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
@@ -94,9 +95,15 @@ body::after {
 .marquee-track {
   display: flex;
   align-items: center;
-  gap: 3.5rem;
+  gap: 1.5rem;
   animation: marquee 36s linear infinite;
   width: max-content;
+}
+
+@media (min-width: 640px) {
+  .marquee-track {
+    gap: 3.5rem;
+  }
 }
 
 .marquee-wrapper {

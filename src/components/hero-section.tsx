@@ -97,7 +97,7 @@ export function HeroSection() {
       </div>
 
       {/* Scroll hint — uses CSS animation that handles translate */}
-      <p className="scroll-bounce absolute bottom-7 left-1/2 text-white/20 text-[9px] tracking-[0.3em] uppercase font-sans whitespace-nowrap pointer-events-none">
+      <p className="scroll-bounce absolute bottom-7 left-1/2 text-white/20 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-sans whitespace-nowrap pointer-events-none">
         Scroll to Explore
       </p>
 

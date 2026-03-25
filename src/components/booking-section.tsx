@@ -61,7 +61,7 @@ export function BookingSection() {
   }, []);
 
   return (
-    <section id="book" className="px-6 py-14 md:py-28">
+    <section id="book" className="scroll-mt-20 px-6 py-14 md:py-28">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8 md:mb-14">
@@ -89,7 +89,7 @@ export function BookingSection() {
         <div className="w-full rounded-3xl overflow-hidden border border-black/[0.07] bg-white/40">
           <div
             id="my-cal-inline-strategy"
-            className="min-h-[520px] md:min-h-[700px] w-full"
+            className="w-full [&>iframe]:!min-h-0"
           />
         </div>
       </div>
