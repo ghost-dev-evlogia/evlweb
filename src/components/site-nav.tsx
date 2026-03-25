@@ -1,6 +1,56 @@
+"use client";
+
+import { useEffect } from "react";
 import { LiquidGlassCard } from "@/components/liquid-glass";
 
 export function SiteNav() {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.innerHTML = `
+      (function (C, A, L) {
+        let p = function (a, ar) { a.q.push(ar); };
+        let d = C.document;
+        C.Cal = C.Cal || function () {
+          let cal = C.Cal;
+          let ar = arguments;
+          if (!cal.loaded) {
+            cal.ns = {};
+            cal.q = cal.q || [];
+            d.head.appendChild(d.createElement("script")).src = A;
+            cal.loaded = true;
+          }
+          if (ar[0] === L) {
+            const api = function () { p(api, arguments); };
+            const namespace = ar[1];
+            api.q = api.q || [];
+            if (typeof namespace === "string") {
+              cal.ns[namespace] = cal.ns[namespace] || api;
+              p(cal.ns[namespace], ar);
+              p(cal, ["initNamespace", namespace]);
+            } else {
+              p(cal, ar);
+            }
+            return;
+          }
+          p(cal, ar);
+        };
+      })(window, "https://app.cal.com/embed/embed.js", "init");
+
+      Cal("init", "strategy", { origin: "https://app.cal.com" });
+
+      Cal.ns.strategy("ui", {
+        hideEventTypeDetails: false,
+        layout: "month_view",
+        theme: "light"
+      });
+    `;
+    document.head.appendChild(script);
+    return () => {
+      if (document.head.contains(script)) document.head.removeChild(script);
+    };
+  }, []);
+
   return (
     <header className="fixed top-5 left-1/2 -translate-x-1/2 z-50 w-full max-w-2xl px-4">
       <LiquidGlassCard
@@ -52,13 +102,15 @@ export function SiteNav() {
             ))}
           </div>
 
-          {/* CTA */}
-          <a
-            href="/#book"
-            className="liquid-glass rounded-full px-4 py-1.5 text-xs font-sans font-medium text-black/80 hover:bg-black/5 transition-all duration-200 whitespace-nowrap shrink-0"
+          {/* CTA — opens Cal.com popup */}
+          <button
+            data-cal-link="ethankd/strategy"
+            data-cal-namespace="strategy"
+            data-cal-config='{"layout":"month_view","theme":"light","useSlotsViewOnSmallScreen":"true"}'
+            className="liquid-glass rounded-full px-4 py-1.5 text-xs font-sans font-medium text-black/80 hover:bg-black/5 transition-all duration-200 whitespace-nowrap shrink-0 cursor-pointer"
           >
             Work With Us
-          </a>
+          </button>
         </nav>
       </LiquidGlassCard>
     </header>
