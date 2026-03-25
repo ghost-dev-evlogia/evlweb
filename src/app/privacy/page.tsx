@@ -55,7 +55,7 @@ export default function PrivacyPage() {
     <>
       <SiteNav />
 
-      <main className="pt-36 pb-24 px-6">
+      <main className="pt-24 md:pt-36 pb-24 px-6">
         <div className="max-w-3xl mx-auto">
 
           {/* Header */}

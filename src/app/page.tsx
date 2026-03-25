@@ -48,7 +48,7 @@ export default function Home() {
               {[...marqueeItems, ...marqueeItems].map((item, i) => (
                 <span
                   key={i}
-                  className="font-sans text-[11px] tracking-[0.2em] uppercase whitespace-nowrap"
+                  className="font-sans text-[11px] sm:text-xs tracking-[0.2em] uppercase whitespace-nowrap"
                   style={{
                     color:
                       item === "·" ? "rgba(0,0,0,0.18)" : "rgba(0,0,0,0.32)",
@@ -97,7 +97,7 @@ export default function Home() {
         </div>
 
         {/* ─── Services ─── */}
-        <section id="services" className="px-6 py-12 md:py-28">
+        <section id="services" className="scroll-mt-20 px-6 py-12 md:py-28">
           <div className="max-w-5xl mx-auto">
             <ScrollReveal className="text-center mb-10 md:mb-16">
               <p className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-3">
@@ -168,10 +168,10 @@ export default function Home() {
         </div>
 
         {/* ─── Why Evlogia ─── */}
-        <section id="about" className="px-6 py-12 md:py-28">
+        <section id="about" className="scroll-mt-20 px-6 py-12 md:py-28">
           <div className="max-w-5xl mx-auto">
             <ScrollReveal variant="scale">
-              <div className="glass-card rounded-3xl p-7 md:p-16 relative overflow-hidden">
+              <div className="glass-card rounded-3xl p-7 sm:p-10 md:p-16 relative overflow-hidden">
                 <div className="relative">
                   <p className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-4">
                     Why Evlogia
@@ -251,7 +251,7 @@ export default function Home() {
         </div>
 
         {/* ─── Research & IP ─── */}
-        <section id="research" className="px-6 py-12 md:py-28">
+        <section id="research" className="scroll-mt-20 px-6 py-12 md:py-28">
           <div className="max-w-5xl mx-auto">
             <ScrollReveal className="text-center mb-10 md:mb-16">
               <p className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-3">
@@ -329,7 +329,7 @@ export default function Home() {
         <section id="contact" className="px-6 pb-20 md:pb-28 pt-6 md:pt-8">
           <div className="max-w-3xl mx-auto">
             <ScrollReveal variant="scale">
-              <div className="glass-card rounded-3xl p-6 md:p-20 text-center relative overflow-hidden">
+              <div className="glass-card rounded-3xl p-6 sm:p-12 md:p-20 text-center relative overflow-hidden">
                 <div
                   className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-48 rounded-full pointer-events-none"
                   style={{
@@ -358,7 +358,7 @@ export default function Home() {
                   </p>
                   <a
                     href="mailto:hello@evlogia.ai"
-                    className="inline-flex items-center gap-3 glass rounded-full px-8 py-3.5 text-black/80 font-sans font-medium text-sm border border-black/10 hover:bg-black/5 hover:scale-[1.03] transition-all duration-300"
+                    className="inline-flex items-center gap-2 sm:gap-3 glass rounded-full px-5 sm:px-8 py-3 sm:py-3.5 text-black/80 font-sans font-medium text-xs sm:text-sm border border-black/10 hover:bg-black/5 hover:scale-[1.03] transition-all duration-300"
                   >
                     hello@evlogia.ai
                     <span className="text-black/35 text-xs">→</span>
