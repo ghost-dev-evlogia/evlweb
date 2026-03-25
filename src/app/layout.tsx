@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 
@@ -13,6 +13,11 @@ const instrumentSerif = Instrument_Serif({
   weight: "400",
   style: ["normal", "italic"],
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   title: "Evlogia | Applied AI Research",
