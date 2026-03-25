@@ -131,7 +131,7 @@ export function HeroSection() {
             </LiquidGlassCard>
           </a>
           <a
-            href="#research"
+            href="/#research"
             className="text-white font-sans text-sm hover:text-white/65 transition-colors duration-300 flex items-center gap-1.5"
           >
             View Research
