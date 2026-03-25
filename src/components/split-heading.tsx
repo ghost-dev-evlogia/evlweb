@@ -40,6 +40,7 @@ export function SplitHeading({
           return (
             <motion.span
               key={wIdx}
+              className={line.italic ? italicClassName : undefined}
               style={{
                 display: "inline-block",
                 marginRight: wIdx < words.length - 1 ? "0.28em" : 0,
@@ -62,7 +63,7 @@ export function SplitHeading({
         });
 
         return line.italic ? (
-          <em key={lineIdx} className={italicClassName} style={{ display: "block", fontStyle: "italic" }}>
+          <em key={lineIdx} style={{ display: "block", fontStyle: "italic" }}>
             {wordEls}
           </em>
         ) : (
