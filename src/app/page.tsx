@@ -10,7 +10,6 @@ import { ScrollReveal } from "@/components/scroll-reveal";
 import { RevealLabel } from "@/components/reveal-label";
 import { Testimonials } from "@/components/testimonials";
 import { FAQ } from "@/components/faq";
-import { WorldGlobe } from "@/components/world-globe";
 
 const marqueeItems = [
   "NeurIPS",
@@ -566,16 +565,6 @@ export default function Home() {
           <div className="max-w-3xl mx-auto">
             <ScrollReveal variant="scale">
               <div className="glass-card rounded-3xl p-6 sm:p-12 md:p-20 text-center relative overflow-hidden">
-                {/* Globe — atmospheric background element */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <WorldGlobe
-                    size={580}
-                    lineOpacity={0.055}
-                    dotOpacity={0.22}
-                    rotationSpeed={0.00035}
-                  />
-                </div>
-
                 <div className="relative">
                   <RevealLabel className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-4">
                     Get Started
