@@ -113,46 +113,100 @@ export default function Home() {
               />
             </div>
 
-            <StaggerGrid className="grid md:grid-cols-2 gap-3 md:gap-4">
-              {[
-                {
-                  num: "01",
-                  title: "Applied AI R&D",
-                  desc: "We embed with your research and engineering teams to work on problems that don't have known answers yet. Novel architectures, domain-specific models, training methodologies that don't exist in the literature. We run the experiments, validate the results, and hand you a system that works. Not a report about what might work.",
-                },
-                {
-                  num: "02",
-                  title: "Product Development",
-                  desc: "A paper without a product is a citation. We build the systems that put research findings in front of users. Inference pipelines, APIs, deployment infrastructure. The model works in a notebook. We make it run in production.",
-                },
-                {
-                  num: "03",
-                  title: "Patent Strategy & Filing",
-                  desc: "Most AI companies generate patentable IP without realizing it. We surface what's novel in your model design, training process, and application layer, then file before someone else does. [X] patents filed so far across US, EU, and international jurisdictions.",
-                },
-                {
-                  num: "04",
-                  title: "Research Publications",
-                  desc: "We publish at venues that matter. NeurIPS, ICML, ICLR, AAAI, CVPR. Peer-reviewed papers that build your institution's scientific credibility and attract the kind of talent that reads papers before job listings.",
-                },
-              ].map(({ num, title, desc }) => (
-                <StaggerItem key={title} className="h-full">
-                  <div className="glass-card card-hover rounded-2xl p-6 md:p-9 relative overflow-hidden h-full">
-                    <div className="font-sans text-black/18 text-[10px] tracking-widest mb-5">
-                      {num}
-                    </div>
+            <StaggerGrid className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
+              {/* 01 — Applied AI R&D — featured wide */}
+              <StaggerItem className="md:col-span-2 h-full">
+                <div className="glass-card card-hover rounded-2xl p-6 md:p-9 relative overflow-hidden h-full">
+                  {/* Watermark number */}
+                  <div
+                    className="absolute -right-4 -bottom-6 font-serif text-black/[0.04] leading-none select-none pointer-events-none"
+                    style={{ fontSize: "clamp(6rem, 12vw, 10rem)" }}
+                    aria-hidden
+                  >
+                    01
+                  </div>
+                  <div className="relative">
+                    <div className="font-sans text-black/18 text-[10px] tracking-widest mb-5">01</div>
                     <h3
-                      className="font-serif text-black/90 text-xl md:text-2xl mb-3 leading-snug"
+                      className="font-serif text-black/90 text-2xl md:text-3xl mb-4 leading-snug"
                       style={{ letterSpacing: "-0.01em" }}
                     >
-                      {title}
+                      Applied AI R&D
                     </h3>
-                    <p className="font-sans text-black/45 text-sm leading-relaxed">
-                      {desc}
+                    <p className="font-sans text-black/45 text-sm leading-relaxed max-w-lg">
+                      We embed with your research and engineering teams to work on problems that don&apos;t have known answers yet. Novel architectures, domain-specific models, training methodologies that don&apos;t exist in the literature. We run the experiments, validate the results, and hand you a system that works. Not a report about what might work.
                     </p>
                   </div>
-                </StaggerItem>
-              ))}
+                </div>
+              </StaggerItem>
+
+              {/* 02 — Product Development */}
+              <StaggerItem className="h-full">
+                <div className="glass-card card-hover rounded-2xl p-6 md:p-9 relative overflow-hidden h-full">
+                  <div className="font-sans text-black/18 text-[10px] tracking-widest mb-5">02</div>
+                  <h3
+                    className="font-serif text-black/90 text-xl md:text-2xl mb-3 leading-snug"
+                    style={{ letterSpacing: "-0.01em" }}
+                  >
+                    Product Development
+                  </h3>
+                  <p className="font-sans text-black/45 text-sm leading-relaxed">
+                    A paper without a product is a citation. We build the systems that put research findings in front of users. Inference pipelines, APIs, deployment infrastructure. The model works in a notebook. We make it run in production.
+                  </p>
+                </div>
+              </StaggerItem>
+
+              {/* 03 — Patent Strategy */}
+              <StaggerItem className="h-full">
+                <div className="glass-card card-hover rounded-2xl p-6 md:p-9 relative overflow-hidden h-full">
+                  <div className="font-sans text-black/18 text-[10px] tracking-widest mb-5">03</div>
+                  <h3
+                    className="font-serif text-black/90 text-xl md:text-2xl mb-3 leading-snug"
+                    style={{ letterSpacing: "-0.01em" }}
+                  >
+                    Patent Strategy &amp; Filing
+                  </h3>
+                  <p className="font-sans text-black/45 text-sm leading-relaxed">
+                    Most AI companies generate patentable IP without realizing it. We surface what&apos;s novel in your model design, training process, and application layer, then file before someone else does. Patents filed across US, EU, and international jurisdictions.
+                  </p>
+                </div>
+              </StaggerItem>
+
+              {/* 04 — Research Publications — featured wide */}
+              <StaggerItem className="md:col-span-2 h-full">
+                <div className="glass-card card-hover rounded-2xl p-6 md:p-9 relative overflow-hidden h-full">
+                  {/* Watermark number */}
+                  <div
+                    className="absolute -right-4 -bottom-6 font-serif text-black/[0.04] leading-none select-none pointer-events-none"
+                    style={{ fontSize: "clamp(6rem, 12vw, 10rem)" }}
+                    aria-hidden
+                  >
+                    04
+                  </div>
+                  <div className="relative">
+                    <div className="font-sans text-black/18 text-[10px] tracking-widest mb-5">04</div>
+                    <h3
+                      className="font-serif text-black/90 text-2xl md:text-3xl mb-4 leading-snug"
+                      style={{ letterSpacing: "-0.01em" }}
+                    >
+                      Research Publications
+                    </h3>
+                    <p className="font-sans text-black/45 text-sm leading-relaxed mb-6 max-w-lg">
+                      We publish at venues that matter. Peer-reviewed papers that build your institution&apos;s scientific credibility and attract the kind of talent that reads papers before job listings.
+                    </p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {["NeurIPS", "ICML", "ICLR", "AAAI", "CVPR", "ECCV"].map((v) => (
+                        <span
+                          key={v}
+                          className="font-sans text-[10px] tracking-wide text-black/50 border border-black/10 rounded-full px-2.5 py-0.5"
+                        >
+                          {v}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </StaggerItem>
             </StaggerGrid>
           </div>
         </section>
