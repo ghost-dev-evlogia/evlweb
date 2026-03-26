@@ -123,7 +123,7 @@ export default function Home() {
                 {
                   num: "02",
                   title: "Product Development",
-                  desc: "A paper without a product is a citation. We build the production systems that turn research outputs into things your customers actually use. Full-stack engineering, inference pipelines, APIs, deployment. The model works in a notebook. We make it work at scale.",
+                  desc: "A paper without a product is a citation. We build the systems that put research findings in front of users. Inference pipelines, APIs, deployment infrastructure. The model works in a notebook. We make it run in production.",
                 },
                 {
                   num: "03",
@@ -265,9 +265,10 @@ export default function Home() {
               />
               <ScrollReveal>
                 <p className="font-sans text-black/40 text-sm max-w-sm mx-auto leading-relaxed">
-                  We contribute to the global AI research body while protecting
-                  your competitive position through strategic IP filings. The
-                  science gets published. The implementation stays yours.
+                  The papers go to peer review. The architecture stays
+                  proprietary. We run IP filings in parallel with every
+                  research engagement so nothing goes public before it&apos;s
+                  protected.
                 </p>
               </ScrollReveal>
             </div>
@@ -452,9 +453,10 @@ export default function Home() {
                     }}
                   />
                   <p className="font-sans text-black/40 text-sm leading-relaxed max-w-lg mb-10 md:mb-14">
-                    Evlogia is an applied AI research lab. We exist to solve
-                    hard technical problems, protect the IP that comes out of
-                    that work, and publish the science that advances the field.
+                    Evlogia is an applied AI research lab. We solve AI problems
+                    that don&apos;t have published solutions yet, build the
+                    systems that act on what we find, and file the patents
+                    before the research goes public.
                   </p>
 
                   <div className="grid md:grid-cols-3 gap-6 md:gap-10">
@@ -465,7 +467,7 @@ export default function Home() {
                       },
                       {
                         title: "We protect what we build.",
-                        desc: "Every engagement includes an IP review. If the work produces something novel — and it usually does — we file. Most firms treat patents as an afterthought. We treat them as a deliverable.",
+                        desc: "Every engagement includes an IP review. If the work produces something novel, it gets filed. Most firms treat patents as an afterthought. We treat them as a deliverable.",
                       },
                       {
                         title: "We publish what we find.",
@@ -526,11 +528,11 @@ export default function Home() {
                   },
                   {
                     q: "What kinds of problems are a good fit?",
-                    a: "Problems where the answer doesn't already exist in the literature. If you can solve it with an off-the-shelf model and some fine-tuning, you probably don't need us. We're built for research-grade challenges that require novel approaches.",
+                    a: "Problems where the answer doesn't already exist in the literature. If you can solve it with an off-the-shelf model and some fine-tuning, you probably don't need us. We work on the problems where the existing literature doesn't have an answer yet and someone has to run the experiments to find one.",
                   },
                   {
                     q: "Do you work with startups or only enterprises?",
-                    a: "We work with organizations that have real technical problems and the resources to act on the results. That includes enterprises, research institutions, and well-funded startups with serious R&D needs.",
+                    a: "We work with enterprises, research institutions, and well-funded startups. What they have in common: a real research problem, a team that can evaluate the results, and the budget to act on them. If your team has already tried the standard approaches and hit a wall, we're probably the right fit.",
                   },
                   {
                     q: "How do you handle confidentiality?",

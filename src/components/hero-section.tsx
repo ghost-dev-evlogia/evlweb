@@ -106,10 +106,10 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.95, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
         >
-          We work with enterprises and research institutions to turn hard AI
-          problems into production systems, filed patents, and peer-reviewed
-          research. Not slide decks. Not prototypes. Working systems with
-          protected IP and published science behind them.
+          We take the AI problems your team can&apos;t solve with existing
+          methods and work them through to production. Every engagement produces
+          a deployed system, filed patents, and research papers submitted to
+          venues like NeurIPS and ICML. Not a deck about what might be possible.
         </motion.p>
 
         {/* CTAs */}
