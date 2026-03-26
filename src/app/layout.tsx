@@ -4,6 +4,8 @@ import "./globals.css";
 import { PageTransition } from "@/components/page-transition";
 import { AuthLoader } from "@/components/auth-loader";
 
+const SHOW_AUTH_LOADER = false;
+
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -73,7 +75,7 @@ export default function RootLayout({
       className={`${inter.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        <AuthLoader />
+        {SHOW_AUTH_LOADER && <AuthLoader />}
         <PageTransition>{children}</PageTransition>
       </body>
     </html>
