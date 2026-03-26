@@ -10,6 +10,7 @@ import { ScrollReveal } from "@/components/scroll-reveal";
 import { RevealLabel } from "@/components/reveal-label";
 import { Testimonials } from "@/components/testimonials";
 import { FAQ } from "@/components/faq";
+import { HowWeWork } from "@/components/how-we-work";
 
 const marqueeItems = [
   "NeurIPS",
@@ -238,76 +239,7 @@ export default function Home() {
         <section id="how-we-work" className="scroll-mt-20 px-6 py-12 md:py-28">
           <div className="max-w-5xl mx-auto">
             <ScrollReveal variant="scale">
-              <div className="glass-card rounded-3xl p-7 sm:p-10 md:p-16 relative overflow-hidden">
-                <div className="relative">
-                  <p className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-4">
-                    How We Work
-                  </p>
-                  <SplitHeading
-                    lines={[
-                      { text: "Most consultants advise." },
-                      { text: "We build, file, and publish.", italic: true },
-                    ]}
-                    className="font-serif text-black/90 mb-5 leading-[1.07] max-w-2xl"
-                    style={{
-                      fontSize: "clamp(1.4rem, 4.5vw, 3.5rem)",
-                      letterSpacing: "-0.01em",
-                    }}
-                  />
-                  <p className="font-sans text-black/40 text-sm leading-relaxed max-w-lg mb-8 md:mb-16">
-                    The gap between AI research and production is where most
-                    engagements stall. Someone writes a promising paper. Someone
-                    else tries to build it. Six months later, the prototype
-                    doesn&apos;t match the theory. We run research and engineering
-                    in parallel so the system you ship is the system the science
-                    describes.
-                  </p>
-
-                  <div className="grid md:grid-cols-3 gap-6 md:gap-10">
-                    {[
-                      {
-                        step: "01",
-                        title: "Discover & Define",
-                        desc: "We scope the problem with your domain experts and research leads before writing a line of code. The goal is to find the real constraint, not the assumed one. Most projects change direction in this phase. That's the point.",
-                      },
-                      {
-                        step: "02",
-                        title: "Research & Build",
-                        desc: "R&D and production engineering run on the same timeline, not sequentially. The researchers know what the engineers need. The engineers know what the researchers found. Nothing gets lost between a paper and a pull request.",
-                      },
-                      {
-                        step: "03",
-                        title: "Ship & Protect",
-                        desc: "Deploy the system. File the patents. Publish the research. Your IP stays yours. Your competitive advantage is documented, protected, and public in exactly the ways you choose.",
-                      },
-                    ].map(({ step, title, desc }, i) => (
-                      <div key={step} className="relative">
-                        <div
-                          className="font-serif text-black/[0.06] leading-none mb-2 select-none"
-                          style={{ fontSize: "clamp(3rem, 6vw, 5rem)" }}
-                        >
-                          {step}
-                        </div>
-                        <h4 className="font-serif text-black/90 text-base md:text-lg mb-2">
-                          {title}
-                        </h4>
-                        <p className="font-sans text-black/40 text-sm leading-relaxed">
-                          {desc}
-                        </p>
-                        {i < 2 && (
-                          <div
-                            className="hidden md:block absolute top-8 -right-5 w-10 h-px"
-                            style={{
-                              background:
-                                "linear-gradient(90deg, rgba(0,0,0,0.08), transparent)",
-                            }}
-                          />
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
+              <HowWeWork />
             </ScrollReveal>
           </div>
         </section>

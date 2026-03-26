@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
+import Image from "next/image";
 import { LiquidGlassCard } from "./liquid-glass";
 
 export function HeroSection() {
@@ -18,7 +18,7 @@ export function HeroSection() {
       ref={sectionRef}
       className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-28 pb-24 text-center overflow-hidden"
     >
-      {/* Parallax background */}
+      {/* Parallax video background */}
       <motion.div
         className="absolute inset-0 w-full h-full"
         style={{ y: bgY }}
