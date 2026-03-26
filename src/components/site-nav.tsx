@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { motion } from "motion/react";
 import { LiquidGlassCard } from "@/components/liquid-glass";
-import { LiquidButton } from "@/components/ui/button";
 
 export function SiteNav() {
   const pathname = usePathname();
@@ -119,14 +118,14 @@ export function SiteNav() {
           </div>
 
           {/* CTA — opens Cal.com popup */}
-          <LiquidButton
+          <button
             data-cal-link="ethankd/strategy"
             data-cal-namespace="strategy"
             data-cal-config='{"layout":"month_view","theme":"light","useSlotsViewOnSmallScreen":"true"}'
-            size="sm"
+            className="liquid-glass rounded-full px-4 py-1.5 text-xs font-sans font-medium text-black/80 hover:bg-black/5 transition-all duration-200 whitespace-nowrap shrink-0 cursor-pointer"
           >
             Work With Us
-          </LiquidButton>
+          </button>
         </nav>
       </LiquidGlassCard>
     </motion.header>

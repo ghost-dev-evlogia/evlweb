@@ -128,7 +128,7 @@ function LiquidButton({
   )
 }
 
-function GlassFilter() {
+export function GlassFilter() {
   return (
     <svg className="hidden">
       <defs>
