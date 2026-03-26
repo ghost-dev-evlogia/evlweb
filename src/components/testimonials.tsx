@@ -6,14 +6,14 @@ import { cn } from "@/lib/utils"
 const testimonials = [
   {
     id: 1,
-    quote: "Ethan and his team helped us execute the whole SMP website, from planning to MVP they were ensuring timely delivery. A reliable team of experts, strongly recommend Evlogia if you are planning your startup and need tech support.",
+    quote: "Ethan and his team helped us execute the whole SMP platform, from planning to MVP they were ensuring timely delivery. I strongly recommend Evlogia if you are planning your startup and need a technology partner.",
     author: "Trivikram Tiruvaipaati",
     role: "Founder, SellMyPlot",
     avatar: "/Trivikram.png",
   },
   {
     id: 2,
-    quote: "The team did an amazing job building a product website for my brand, which really elevated how we present ourselves to customers. Their support on the tech side made the whole process smooth and stress-free.",
+    quote: "The team did an amazing job building a product website for my brand, which really elevated how we present ourselves to customers. They made the whole process smooth and stress-free.",
     author: "Koyal Kiran",
     role: "CEO, Magniz",
     avatar: "/Koyal.jpg",
