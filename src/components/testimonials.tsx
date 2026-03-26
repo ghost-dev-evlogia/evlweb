@@ -6,24 +6,24 @@ import { cn } from "@/lib/utils"
 const testimonials = [
   {
     id: 1,
-    quote: "They didn't just advise — they ran the experiments, wrote the code, and filed the patents. We shipped something real.",
-    author: "David Kim",
-    role: "CTO, Series B Enterprise",
-    avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=256&auto=format&fit=crop",
+    quote: "Ethan and his team helped us execute the whole SMP website, from planning to MVP they were ensuring timely delivery. A reliable team of experts, strongly recommend Evlogia if you are planning your startup and need tech support.",
+    author: "Trivikram Tiruvaipaati",
+    role: "Founder, SellMyPlot",
+    avatar: "/Trivikram.png",
   },
   {
     id: 2,
-    quote: "Fastest path from research problem to peer-reviewed paper we've seen. NeurIPS acceptance on the first submission.",
-    author: "Prof. Sarah Okafor",
-    role: "Research Director, University Lab",
-    avatar: "https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?q=80&w=256&auto=format&fit=crop",
+    quote: "The team did an amazing job building a product website for my brand, which really elevated how we present ourselves to customers. Their support on the tech side made the whole process smooth and stress-free.",
+    author: "Koyal Kiran",
+    role: "CEO, Magniz",
+    avatar: "/Koyal.jpg",
   },
   {
     id: 3,
-    quote: "We'd been stuck on the same architecture problem for eighteen months. Evlogia cracked it in six weeks and filed three patents.",
-    author: "James Whitfield",
-    role: "Head of AI, Enterprise Technology",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=256&auto=format&fit=crop",
+    quote: "Whenever we need to deliver, there is no doubt that we can trust the Evlogia team to push as hard as they need to get results on time. They have all the expertise needed to give us the right recommendation for the development of the full stack.",
+    author: "Lionel Moh",
+    role: "Founder, OceanCharge",
+    avatar: "/lionel.png",
   },
 ]
 
