@@ -9,6 +9,8 @@ import { MotionDivider } from "@/components/motion-divider";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { RevealLabel } from "@/components/reveal-label";
 import { Testimonials } from "@/components/testimonials";
+import { FAQ } from "@/components/faq";
+import { WorldGlobe } from "@/components/world-globe";
 
 const marqueeItems = [
   "NeurIPS",
@@ -539,48 +541,7 @@ export default function Home() {
             </div>
 
             <ScrollReveal>
-              <div className="flex flex-col divide-y divide-black/[0.07]">
-                {[
-                  {
-                    q: "Who owns the IP from an engagement?",
-                    a: "You do. All intellectual property developed during a client engagement belongs to the client. We handle the patent filings and publication strategy, but the IP is yours. Our standard agreement makes this explicit.",
-                  },
-                  {
-                    q: "What does a typical engagement look like?",
-                    a: "Most engagements run [X] to [X] months. We start with a 2-to-4-week discovery phase to scope the problem and define success criteria. Then we move into parallel R&D and engineering sprints. You get weekly updates and access to all work in progress.",
-                  },
-                  {
-                    q: "What kinds of problems are a good fit?",
-                    a: "Problems where the answer doesn't already exist in the literature. If you can solve it with an off-the-shelf model and some fine-tuning, you probably don't need us. We work on the problems where the existing literature doesn't have an answer yet and someone has to run the experiments to find one.",
-                  },
-                  {
-                    q: "Do you work with startups or only enterprises?",
-                    a: "We work with enterprises, research institutions, and well-funded startups. What they have in common: a real research problem, a team that can evaluate the results, and the budget to act on them. If your team has already tried the standard approaches and hit a wall, we're probably the right fit.",
-                  },
-                  {
-                    q: "How do you handle confidentiality?",
-                    a: "Every engagement starts with a mutual NDA. We don't share client work, datasets, or results without explicit written permission. When we publish research from an engagement, the client approves what's disclosed.",
-                  },
-                  {
-                    q: "What does it cost?",
-                    a: "Pricing depends on scope, team size, and duration. We price engagements on a project basis, not hourly. Book a call and we'll scope it together.",
-                  },
-                  {
-                    q: "Can we start with a smaller pilot before a full engagement?",
-                    a: "Yes. Most clients start with a focused discovery phase or a single research question. If the results warrant a larger engagement, we expand. No pressure either way.",
-                  },
-                ].map(({ q, a }) => (
-                  <details key={q} className="group py-5">
-                    <summary className="font-serif text-black/80 text-base md:text-lg leading-snug cursor-pointer list-none flex items-start justify-between gap-4" style={{ letterSpacing: "-0.01em" }}>
-                      {q}
-                      <span className="shrink-0 font-sans text-black/25 text-lg mt-0.5 group-open:rotate-45 transition-transform duration-200">+</span>
-                    </summary>
-                    <p className="font-sans text-black/45 text-sm leading-relaxed mt-3 max-w-xl">
-                      {a}
-                    </p>
-                  </details>
-                ))}
-              </div>
+              <FAQ />
             </ScrollReveal>
           </div>
         </section>
@@ -605,13 +566,16 @@ export default function Home() {
           <div className="max-w-3xl mx-auto">
             <ScrollReveal variant="scale">
               <div className="glass-card rounded-3xl p-6 sm:p-12 md:p-20 text-center relative overflow-hidden">
-                <div
-                  className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-48 rounded-full pointer-events-none"
-                  style={{
-                    background:
-                      "radial-gradient(ellipse, rgba(0,0,0,0.03), transparent 70%)",
-                  }}
-                />
+                {/* Globe — atmospheric background element */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <WorldGlobe
+                    size={580}
+                    lineOpacity={0.055}
+                    dotOpacity={0.22}
+                    rotationSpeed={0.00035}
+                  />
+                </div>
+
                 <div className="relative">
                   <RevealLabel className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-4">
                     Get Started
@@ -634,19 +598,13 @@ export default function Home() {
                     Thirty minutes. No pitch. Just a focused conversation about
                     whether we&apos;re the right fit.
                   </p>
-                  <div className="flex flex-col sm:flex-row items-center gap-3">
+                  <div className="flex justify-center">
                     <a
                       href="/#book"
                       className="inline-flex items-center gap-2 sm:gap-3 glass rounded-full px-5 sm:px-8 py-3 sm:py-3.5 text-black/80 font-sans font-medium text-xs sm:text-sm border border-black/10 hover:bg-black/5 hover:scale-[1.03] transition-all duration-300"
                     >
                       Book a Strategy Call
                       <span className="text-black/35 text-xs">→</span>
-                    </a>
-                    <a
-                      href="mailto:hello@evlogia.ai"
-                      className="font-sans text-black/35 text-xs sm:text-sm hover:text-black/60 transition-colors duration-200"
-                    >
-                      hello@evlogia.ai
                     </a>
                   </div>
                 </div>
