@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { LiquidGlassCard } from "./liquid-glass";
-import { HeroOrbs } from "./hero-orbs";
 
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -33,9 +32,6 @@ export function HeroSection() {
           priority
         />
       </motion.div>
-
-      {/* Floating geometric orbs */}
-      <HeroOrbs />
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center w-full max-w-3xl">
