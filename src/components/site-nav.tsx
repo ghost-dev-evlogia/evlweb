@@ -102,9 +102,9 @@ export function SiteNav() {
           {/* Links */}
           <div className="hidden md:flex items-center gap-7">
             {[
-              { label: "About", href: "/#about" },
               { label: "Services", href: "/#services" },
               { label: "Research", href: "/#research" },
+              { label: "About", href: "/#about" },
               { label: "Book a Call", href: "/#book" },
             ].map(({ label, href }) => (
               <a

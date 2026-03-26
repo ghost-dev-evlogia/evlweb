@@ -8,6 +8,7 @@ import { StaggerGrid, StaggerItem } from "@/components/stagger-grid";
 import { MotionDivider } from "@/components/motion-divider";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { RevealLabel } from "@/components/reveal-label";
+import { Testimonials } from "@/components/testimonials";
 
 const marqueeItems = [
   "NeurIPS",
@@ -427,17 +428,17 @@ export default function Home() {
           <MotionDivider />
         </div>
 
-        {/* ─── Case Studies ─── */}
-        <section id="work" className="scroll-mt-20 px-6 py-12 md:py-28">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-10 md:mb-16">
+        {/* ─── Testimonials ─── */}
+        <section id="testimonials" className="scroll-mt-20 px-6 py-12 md:py-28">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-4">
               <RevealLabel className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-3">
-                Case Studies
+                What Clients Say
               </RevealLabel>
               <SplitHeading
                 lines={[
-                  { text: "What this looks like" },
-                  { text: "in practice.", italic: true },
+                  { text: "Trusted by teams" },
+                  { text: "that build seriously.", italic: true },
                 ]}
                 className="font-serif text-black/90 leading-[1.07]"
                 style={{
@@ -446,57 +447,9 @@ export default function Home() {
                 }}
               />
             </div>
-
-            <StaggerGrid className="grid md:grid-cols-3 gap-3 md:gap-4">
-              {[
-                {
-                  tag: "[Industry] Enterprise",
-                  problem:
-                    "[Client description] needed to [specific technical challenge]. Their existing approach [specific limitation].",
-                  work: "We [specific methodology/approach]. Over [X] weeks, we [specific research and engineering activities]. The work produced [specific technical output].",
-                  result:
-                    "[Specific measurable outcome]. [X] patent(s) filed on the novel [technique/architecture]. Paper accepted at [venue].",
-                },
-                {
-                  tag: "[Industry] Research Institution",
-                  problem:
-                    "[Institution description] had [specific research challenge] but lacked the engineering capacity to [specific gap].",
-                  work: "We embedded a team of [X] researchers and engineers for [X] months. We [specific technical work].",
-                  result:
-                    "[Specific measurable outcome]. The system is now [current status]. [X] publications resulted from the engagement.",
-                },
-                {
-                  tag: "[Industry] Company",
-                  problem:
-                    "[Company description] was generating [specific type of data/IP] but had no strategy for protecting or publishing it.",
-                  work: "We audited their [specific technical area], identified [X] patentable innovations, and [specific actions taken].",
-                  result:
-                    "[X] patents filed. [X] papers published. Their R&D team now has a repeatable process for identifying and protecting novel work.",
-                },
-              ].map(({ tag, problem, work, result }) => (
-                <StaggerItem key={tag} className="h-full">
-                  <div className="glass-card card-hover rounded-2xl p-6 md:p-8 h-full flex flex-col gap-5">
-                    <div className="font-sans text-black/30 text-[10px] tracking-[0.25em] uppercase">
-                      {tag}
-                    </div>
-                    <div className="flex flex-col gap-4 flex-1">
-                      <div>
-                        <p className="font-sans text-black/25 text-[10px] tracking-[0.2em] uppercase mb-1.5">The Problem</p>
-                        <p className="font-sans text-black/50 text-xs leading-relaxed">{problem}</p>
-                      </div>
-                      <div>
-                        <p className="font-sans text-black/25 text-[10px] tracking-[0.2em] uppercase mb-1.5">What We Did</p>
-                        <p className="font-sans text-black/50 text-xs leading-relaxed">{work}</p>
-                      </div>
-                      <div className="mt-auto pt-4 border-t border-black/[0.06]">
-                        <p className="font-sans text-black/25 text-[10px] tracking-[0.2em] uppercase mb-1.5">The Result</p>
-                        <p className="font-sans text-black/50 text-xs leading-relaxed">{result}</p>
-                      </div>
-                    </div>
-                  </div>
-                </StaggerItem>
-              ))}
-            </StaggerGrid>
+            <ScrollReveal>
+              <Testimonials />
+            </ScrollReveal>
           </div>
         </section>
 
