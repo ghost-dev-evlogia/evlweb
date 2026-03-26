@@ -143,6 +143,14 @@ export default function Home() {
               {/* 02 — Product Development */}
               <StaggerItem className="h-full">
                 <div className="glass-card card-hover rounded-2xl p-6 md:p-9 relative overflow-hidden h-full">
+                  {/* Watermark number */}
+                  <div
+                    className="absolute -right-3 -bottom-5 font-serif text-black/[0.04] leading-none select-none pointer-events-none"
+                    style={{ fontSize: "clamp(5rem, 9vw, 8rem)" }}
+                    aria-hidden
+                  >
+                    02
+                  </div>
                   <div className="font-sans text-black/18 text-[10px] tracking-widest mb-5">02</div>
                   <h3
                     className="font-serif text-black/90 text-xl md:text-2xl mb-3 leading-snug"
@@ -159,6 +167,14 @@ export default function Home() {
               {/* 03 — Patent Strategy */}
               <StaggerItem className="h-full">
                 <div className="glass-card card-hover rounded-2xl p-6 md:p-9 relative overflow-hidden h-full">
+                  {/* Watermark number */}
+                  <div
+                    className="absolute -right-3 -bottom-5 font-serif text-black/[0.04] leading-none select-none pointer-events-none"
+                    style={{ fontSize: "clamp(5rem, 9vw, 8rem)" }}
+                    aria-hidden
+                  >
+                    03
+                  </div>
                   <div className="font-sans text-black/18 text-[10px] tracking-widest mb-5">03</div>
                   <h3
                     className="font-serif text-black/90 text-xl md:text-2xl mb-3 leading-snug"
