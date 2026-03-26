@@ -106,9 +106,10 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.95, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
         >
-          We partner with enterprises and research institutions to turn hard AI
-          problems into production systems, filed patents, and published
-          research — end to end.
+          We work with enterprises and research institutions to turn hard AI
+          problems into production systems, filed patents, and peer-reviewed
+          research. Not slide decks. Not prototypes. Working systems with
+          protected IP and published science behind them.
         </motion.p>
 
         {/* CTAs */}
@@ -134,7 +135,7 @@ export function HeroSection() {
             href="/#research"
             className="text-white font-sans text-sm hover:text-white/65 transition-colors duration-300 flex items-center gap-1.5"
           >
-            View Research
+            View Our Research
             <span className="text-xs opacity-60">↓</span>
           </a>
         </motion.div>

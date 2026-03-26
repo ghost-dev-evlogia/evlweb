@@ -81,9 +81,8 @@ export function BookingSection() {
             <em className="text-gradient">your problem.</em>
           </h2>
           <p className="font-sans text-black/40 text-sm max-w-sm mx-auto leading-relaxed">
-            Book a 30-minute strategy call. No pitch — just a focused
-            conversation about your AI challenge and whether we&apos;re the
-            right fit.
+            Bring us your hardest AI problem. Thirty minutes. No pitch — just a
+            focused conversation about whether we&apos;re the right fit.
           </p>
         </div>
 
