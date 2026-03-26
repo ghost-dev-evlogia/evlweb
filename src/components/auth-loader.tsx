@@ -25,7 +25,7 @@ export function AuthLoader() {
       onComplete: () => {
         setRingColor("rgb(5,150,105)");
         setPhase("granted");
-        setTimeout(() => setPhase("fading"), 650);
+        setTimeout(() => setPhase("fading"), 1100);
       },
     });
   };
@@ -41,7 +41,7 @@ export function AuthLoader() {
     <motion.div
       className="fixed inset-0 z-[200] flex items-center justify-center bg-[#f5f4f0]"
       animate={{ opacity: isFading ? 0 : 1 }}
-      transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+      transition={{ duration: 0.65, ease: [0.4, 0, 0.2, 1] }}
       onAnimationComplete={() => { if (isFading) setPhase("done"); }}
       onClick={handlePress}
       style={{ cursor: isIdle ? "pointer" : "default" }}
