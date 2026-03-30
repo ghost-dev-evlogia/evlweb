@@ -17,6 +17,7 @@ const testimonials = [
     author: "Lionel Moh",
     role: "Founder, OceanCharge",
     avatar: "/lionel.png",
+    avatarPosition: "top",
   },
   {
     id: 4,
@@ -117,6 +118,7 @@ export function Testimonials() {
                       isActive ? "ring-2 ring-white/30" : "ring-0",
                       !isActive && "hover:scale-105",
                     )}
+                    style={{ objectPosition: testimonial.avatarPosition ?? "center" }}
                   />
                 </div>
 
