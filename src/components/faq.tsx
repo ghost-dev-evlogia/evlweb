@@ -5,32 +5,32 @@ import { motion, AnimatePresence } from "motion/react";
 
 const faqs = [
   {
-    q: "Who owns the IP from an engagement?",
-    a: "You do. All intellectual property developed during a client engagement belongs to the client. We handle the patent filings and publication strategy, but the IP is yours. Our standard agreement makes this explicit.",
+    q: "What kinds of work do you take on?",
+    a: "Product and platform builds, web and mobile apps, internal tools, cloud systems, admin dashboards, booking systems, and applied AI where it genuinely helps. We also do frontier R&D for clients with novel research problems that need real experiments, not just model integration.",
   },
   {
     q: "What does a typical engagement look like?",
-    a: "Most engagements run [X] to [X] months. We start with a 2-to-4-week discovery phase to scope the problem and define success criteria. Then we move into parallel R&D and engineering sprints. You get weekly updates and access to all work in progress.",
+    a: "Depends on scope. Smaller projects run 4–8 weeks. Full platforms run 3–6 months. Every engagement starts with a scoping session to define what's being built, the timeline, and what done looks like. You get weekly updates throughout.",
   },
   {
-    q: "What kinds of problems are a good fit?",
-    a: "Problems where the answer doesn't already exist in the literature. If you can solve it with an off-the-shelf model and some fine-tuning, you probably don't need us. We work on the problems where the existing literature doesn't have an answer yet and someone has to run the experiments to find one.",
+    q: "Do you work with startups or enterprises?",
+    a: "Both. We work with early-stage startups, growth-stage companies, enterprises, and research institutions. What matters: a clear problem and the budget to act on it.",
   },
   {
-    q: "Do you work with startups or only enterprises?",
-    a: "We work with enterprises, research institutions, and well-funded startups. What they have in common: a real research problem, a team that can evaluate the results, and the budget to act on them. If your team has already tried the standard approaches and hit a wall, we're probably the right fit.",
+    q: "Who owns the code and IP?",
+    a: "You do. All code, assets, and IP developed during an engagement belong to you. If the work produces something patentable, we handle the filing — but it's yours. Our standard agreement makes this explicit.",
   },
   {
     q: "How do you handle confidentiality?",
-    a: "Every engagement starts with a mutual NDA. We don't share client work, datasets, or results without explicit written permission. When we publish research from an engagement, the client approves what's disclosed.",
+    a: "Every engagement starts with a mutual NDA. We don't share client work, code, or data without explicit written permission. For research engagements, you approve everything before it goes public.",
   },
   {
     q: "What does it cost?",
-    a: "Pricing depends on scope, team size, and duration. We price engagements on a project basis, not hourly. Book a call and we'll scope it together.",
+    a: "We price on a project basis, not hourly — scope and timeline determine cost. Reach out and we'll put together a clear scope and estimate.",
   },
   {
-    q: "Can we start with a smaller pilot before a full engagement?",
-    a: "Yes. Most clients start with a focused discovery phase or a single research question. If the results warrant a larger engagement, we expand. No pressure either way.",
+    q: "Can we start small before committing to a full build?",
+    a: "Yes. Most clients start with a scoped discovery phase or a smaller initial deliverable. If the work warrants a larger engagement, we expand. No pressure either way.",
   },
 ];
 

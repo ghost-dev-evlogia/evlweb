@@ -68,7 +68,7 @@ export function HeroSection() {
             letterSpacing: "-0.01em",
           }}
         >
-          {["The", "Applied", "AI", "Lab"].map((word, i) => (
+          {["We", "build", "systems"].map((word, i) => (
             <motion.span
               key={word + i}
               style={{ display: "inline-block", marginRight: "0.25em" }}
@@ -81,13 +81,13 @@ export function HeroSection() {
           ))}
           <br />
           <em className="text-white">
-            {["That", "Ships."].map((word, i) => (
+            {["that", "get", "used."].map((word, i) => (
               <motion.span
                 key={word + i}
-                style={{ display: "inline-block", marginRight: i === 0 ? "0.25em" : 0 }}
+                style={{ display: "inline-block", marginRight: i < 2 ? "0.25em" : 0 }}
                 initial={{ opacity: 0, y: 10, filter: "blur(8px)" }}
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                transition={{ delay: 0.5 + (4 + i) * 0.07, duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ delay: 0.5 + (3 + i) * 0.07, duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
               >
                 {word}
               </motion.span>
@@ -106,7 +106,7 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.95, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
         >
-          Your unsolved AI problem → deployed system, filed patents, peer-reviewed research. No decks.
+          Products, platforms, internal tools, and applied AI — built properly and shipped.
         </motion.p>
 
         {/* CTAs */}

@@ -9,18 +9,18 @@ const STEP_DURATION = 5000
 const steps = [
   {
     id: "01",
-    title: "Discover & Define",
-    desc: "We scope the problem with your domain experts and research leads before writing a line of code. The goal is to find the real constraint, not the assumed one. Most projects change direction in this phase. That's the point.",
+    title: "Scope & Define",
+    desc: "We define what's being built before writing a line of code. What problem does it solve? Who uses it? What does done look like? Most projects change direction here. That's the point.",
   },
   {
     id: "02",
-    title: "Research & Build",
-    desc: "R&D and production engineering run on the same timeline, not sequentially. The researchers know what the engineers need. The engineers know what the researchers found. Nothing gets lost between a paper and a pull request.",
+    title: "Design & Build",
+    desc: "Design and engineering run in parallel. You see progress weekly. Nothing gets lost between a Figma file and a pull request — or between a research finding and a deployed system.",
   },
   {
     id: "03",
-    title: "Ship & Protect",
-    desc: "Deploy the system. File the patents. Publish the research. Your IP stays yours. Your competitive advantage is documented, protected, and public in exactly the ways you choose.",
+    title: "Ship & Hand Off",
+    desc: "We deploy the system and hand it off clean. If there's IP to protect, we file it. If there's research to publish, we submit it. You keep everything.",
   },
 ]
 
@@ -61,12 +61,12 @@ function DiscoverVisual() {
 function BuildVisual() {
   const lanes = [
     {
-      track: "Research",
+      track: "Design",
       color: "bg-black/15",
       segments: [
-        { label: "Literature", start: 0, width: 28 },
-        { label: "Architecture", start: 22, width: 35 },
-        { label: "Experiments", start: 50, width: 50 },
+        { label: "Wireframes", start: 0, width: 28 },
+        { label: "UI Design", start: 22, width: 35 },
+        { label: "Iteration", start: 50, width: 50 },
       ],
     },
     {
@@ -74,7 +74,7 @@ function BuildVisual() {
       color: "bg-black/10",
       segments: [
         { label: "Setup", start: 8, width: 18 },
-        { label: "API", start: 22, width: 32 },
+        { label: "Core Build", start: 22, width: 32 },
         { label: "Integration", start: 48, width: 52 },
       ],
     },
@@ -113,7 +113,7 @@ function BuildVisual() {
           ))}
         </div>
         <div className="mt-4 flex gap-2">
-          {["Paper draft", "PR merged", "Deployed"].map((tag) => (
+          {["Design approved", "PR merged", "Deployed"].map((tag) => (
             <span key={tag} className="font-sans text-[9px] tracking-[0.1em] text-black/30 border border-black/[0.08] rounded-full px-2.5 py-0.5">
               {tag}
             </span>
@@ -127,19 +127,19 @@ function BuildVisual() {
 function ShipVisual() {
   const outputs = [
     {
-      label: "Deploy",
+      label: "Ship",
       status: "System in production",
-      items: ["Inference pipeline", "API endpoints", "Monitoring"],
+      items: ["Deployed & tested", "Documented", "Handed off clean"],
     },
     {
-      label: "Patent",
-      status: "IP protected",
-      items: ["Novel architecture", "Training method", "US + EU filing"],
+      label: "Source",
+      status: "You own everything",
+      items: ["Full codebase", "Admin access", "No lock-in"],
     },
     {
-      label: "Publish",
-      status: "Research public",
-      items: ["Peer-reviewed paper", "Conference submission", "Client-approved scope"],
+      label: "Protect",
+      status: "IP secured (if applicable)",
+      items: ["Patent filed", "US + EU", "On your schedule"],
     },
   ]
   return (
@@ -217,12 +217,11 @@ export function HowWeWork() {
             maxWidth: "38ch",
           }}
         >
-          Most consultants advise.{" "}
-          <em className="not-italic text-black/90">We build, file, and publish.</em>
+          Most agencies pitch.{" "}
+          <em className="not-italic text-black/90">We build.</em>
         </h2>
         <p className="font-sans text-black/40 text-sm leading-relaxed max-w-lg">
-          The gap between AI research and production is where most engagements stall.
-          We run research and engineering in parallel so the system you ship is the system the science describes.
+          Scoped properly, built cleanly, shipped on time. No handoffs, no disappearing acts — just a team that owns the outcome.
         </p>
       </div>
 

@@ -12,29 +12,27 @@ import { FAQ } from "@/components/faq";
 import { HowWeWork } from "@/components/how-we-work";
 
 const marqueeItems = [
-  "NeurIPS",
+  "Product Engineering",
   "·",
-  "Applied AI Research",
+  "Web & Mobile Apps",
   "·",
-  "ICML",
+  "Internal Tools",
   "·",
-  "Patent Strategy",
+  "Cloud Dashboards",
   "·",
-  "ICLR",
+  "Admin Systems",
   "·",
-  "Foundation Models",
+  "Applied AI",
   "·",
-  "AAAI",
+  "Platforms",
   "·",
-  "R&D Consulting",
+  "Booking Systems",
   "·",
-  "CVPR",
+  "Research & IP",
   "·",
-  "AI Products",
+  "API Development",
   "·",
-  "ECCV",
-  "·",
-  "Research Publications",
+  "Full-Stack Builds",
   "·",
 ];
 
@@ -71,10 +69,10 @@ export default function Home() {
         <section className="px-6 py-10 md:py-20">
           <StaggerGrid className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
-              { target: 40, suffix: "+", label: "R&D Projects" },
+              { target: 50, suffix: "+", label: "Systems Shipped" },
+              { target: 20, suffix: "+", label: "Clients Served" },
               { target: 12, suffix: "+", label: "Patents Filed" },
-              { target: 20, suffix: "+", label: "Papers Published" },
-              { target: 8, suffix: "", label: "Industries Served" },
+              { target: 8, suffix: "", label: "Industries" },
             ].map(({ target, suffix, label }) => (
               <StaggerItem key={label} className="h-full">
                 <div className="glass-card card-hover rounded-2xl p-5 md:p-6 text-center h-full flex flex-col items-center justify-center min-h-[110px]">
@@ -104,8 +102,8 @@ export default function Home() {
               </RevealLabel>
               <SplitHeading
                 lines={[
-                  { text: "Four pillars." },
-                  { text: "One partner.", italic: true },
+                  { text: "Real systems." },
+                  { text: "Not just R&D.", italic: true },
                 ]}
                 className="font-serif text-black/90 leading-[1.07]"
                 style={{
@@ -116,10 +114,9 @@ export default function Home() {
             </div>
 
             <StaggerGrid className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
-              {/* 01 — Applied AI R&D — featured wide */}
+              {/* 01 — Product & Platform Engineering — featured wide */}
               <StaggerItem className="md:col-span-2 h-full">
                 <div className="glass-card card-hover rounded-2xl p-6 md:p-9 relative overflow-hidden h-full">
-                  {/* Watermark number */}
                   <div
                     className="absolute -right-4 -bottom-6 font-serif text-black/[0.04] leading-none select-none pointer-events-none"
                     style={{ fontSize: "clamp(6rem, 12vw, 10rem)" }}
@@ -133,19 +130,18 @@ export default function Home() {
                       className="font-serif text-black/90 text-2xl md:text-3xl mb-4 leading-snug"
                       style={{ letterSpacing: "-0.01em" }}
                     >
-                      Applied AI R&D
+                      Product & Platform Engineering
                     </h3>
                     <p className="font-sans text-black/45 text-sm leading-relaxed max-w-lg">
-                      Novel architectures. Unsolved problems. We run the experiments — you get a deployed system, not a slide deck.
+                      Websites, web apps, mobile apps, platforms. We scope it, design it, build it, and ship it — without you managing an in-house team.
                     </p>
                   </div>
                 </div>
               </StaggerItem>
 
-              {/* 02 — Product Development */}
+              {/* 02 — Internal Tools & Systems */}
               <StaggerItem className="h-full">
                 <div className="glass-card card-hover rounded-2xl p-6 md:p-9 relative overflow-hidden h-full">
-                  {/* Watermark number */}
                   <div
                     className="absolute -right-3 -bottom-5 font-serif text-black/[0.04] leading-none select-none pointer-events-none"
                     style={{ fontSize: "clamp(5rem, 9vw, 8rem)" }}
@@ -158,18 +154,17 @@ export default function Home() {
                     className="font-serif text-black/90 text-xl md:text-2xl mb-3 leading-snug"
                     style={{ letterSpacing: "-0.01em" }}
                   >
-                    Product Development
+                    Internal Tools & Systems
                   </h3>
                   <p className="font-sans text-black/45 text-sm leading-relaxed">
-                    Research that never ships is overhead. We move findings from notebook to production — inference pipelines, APIs, full deployment.
+                    Dashboards, admin panels, booking systems, workflow tools. The software your team actually depends on.
                   </p>
                 </div>
               </StaggerItem>
 
-              {/* 03 — Patent Strategy */}
+              {/* 03 — Applied AI */}
               <StaggerItem className="h-full">
                 <div className="glass-card card-hover rounded-2xl p-6 md:p-9 relative overflow-hidden h-full">
-                  {/* Watermark number */}
                   <div
                     className="absolute -right-3 -bottom-5 font-serif text-black/[0.04] leading-none select-none pointer-events-none"
                     style={{ fontSize: "clamp(5rem, 9vw, 8rem)" }}
@@ -182,18 +177,17 @@ export default function Home() {
                     className="font-serif text-black/90 text-xl md:text-2xl mb-3 leading-snug"
                     style={{ letterSpacing: "-0.01em" }}
                   >
-                    Patent Strategy &amp; Filing
+                    Applied AI
                   </h3>
                   <p className="font-sans text-black/45 text-sm leading-relaxed">
-                    You&apos;re generating IP you don&apos;t own yet. We surface what&apos;s novel and file before someone else does — US, EU, and international.
+                    AI where it actually solves something. We integrate models into real products and build custom solutions when off-the-shelf doesn&apos;t cut it.
                   </p>
                 </div>
               </StaggerItem>
 
-              {/* 04 — Research Publications — featured wide */}
+              {/* 04 — Research & IP — featured wide */}
               <StaggerItem className="md:col-span-2 h-full">
                 <div className="glass-card card-hover rounded-2xl p-6 md:p-9 relative overflow-hidden h-full">
-                  {/* Watermark number */}
                   <div
                     className="absolute -right-4 -bottom-6 font-serif text-black/[0.04] leading-none select-none pointer-events-none"
                     style={{ fontSize: "clamp(6rem, 12vw, 10rem)" }}
@@ -207,10 +201,10 @@ export default function Home() {
                       className="font-serif text-black/90 text-2xl md:text-3xl mb-4 leading-snug"
                       style={{ letterSpacing: "-0.01em" }}
                     >
-                      Research Publications
+                      Research & IP
                     </h3>
                     <p className="font-sans text-black/45 text-sm leading-relaxed mb-6 max-w-lg">
-                      Top-tier venues. Peer-reviewed. Builds credibility and attracts the talent that reads papers before job listings.
+                      For clients working on frontier problems — we run experiments, file patents, and submit to peer-reviewed venues.
                     </p>
                     <div className="flex flex-wrap gap-1.5">
                       {["NeurIPS", "ICML", "ICLR", "AAAI", "CVPR", "ECCV"].map((v) => (
@@ -257,8 +251,8 @@ export default function Home() {
               </RevealLabel>
               <SplitHeading
                 lines={[
-                  { text: "Science is" },
-                  { text: "our product.", italic: true },
+                  { text: "When you need to" },
+                  { text: "go deeper.", italic: true },
                 ]}
                 className="font-serif text-black/90 leading-[1.07] mb-4"
                 style={{
@@ -268,7 +262,7 @@ export default function Home() {
               />
               <ScrollReveal>
                 <p className="font-sans text-black/40 text-sm max-w-sm mx-auto leading-relaxed">
-                  Papers go to peer review. Architectures stay proprietary. IP filing runs in parallel — nothing goes public unprotected.
+                  For clients doing frontier work — we run the experiments, protect the IP, and publish what holds up.
                 </p>
               </ScrollReveal>
             </div>
@@ -405,22 +399,22 @@ export default function Home() {
                     }}
                   />
                   <p className="font-sans text-black/40 text-sm leading-relaxed max-w-lg mb-10 md:mb-14">
-                    We solve AI problems without published solutions, ship the systems that prove them, and file patents before the science goes public.
+                    We&apos;re a product and engineering team that builds real systems — products, platforms, internal tools, and applied AI. We&apos;ve shipped across industries and we own the outcome, not just the deliverable.
                   </p>
 
                   <div className="grid md:grid-cols-3 gap-6 md:gap-10">
                     {[
                       {
-                        title: "We do the work.",
-                        desc: "No strategy decks, no handoffs. We write the code, run the experiments, and ship the system.",
+                        title: "We build, not advise.",
+                        desc: "No strategy decks, no handoffs. We write the code and ship the system.",
                       },
                       {
-                        title: "We protect what we build.",
-                        desc: "IP review is built into every engagement. If it&apos;s novel, it gets filed — not later, now.",
+                        title: "We own the outcome.",
+                        desc: "Scope, build, ship. When something needs to change mid-engagement, we adapt — not disappear.",
                       },
                       {
-                        title: "We publish what we find.",
-                        desc: "Good science goes to peer review. It attracts better talent and forces rigor on every project.",
+                        title: "We protect what&apos;s novel.",
+                        desc: "When the work produces something genuinely new, we file the IP. It&apos;s a deliverable, not an afterthought.",
                       },
                     ].map(({ title, desc }) => (
                       <div key={title}>
@@ -486,8 +480,8 @@ export default function Home() {
                   </RevealLabel>
                   <SplitHeading
                     lines={[
-                      { text: "Let's solve something" },
-                      { text: "worth publishing.", italic: true },
+                      { text: "Let's build something" },
+                      { text: "worth using.", italic: true },
                     ]}
                     className="font-serif text-black/90 leading-[1.07] mb-5"
                     style={{
@@ -496,7 +490,7 @@ export default function Home() {
                     }}
                   />
                   <p className="font-sans text-black/40 text-sm leading-relaxed mb-10 max-w-sm mx-auto">
-                    Bring us your hardest AI problem. Thirty minutes. No pitch. We&apos;ll tell you if we&apos;re the right fit.
+                    Tell us what you need. We&apos;ll tell you if we&apos;re the right team for it.
                   </p>
                   <div className="flex justify-center">
                     <a
