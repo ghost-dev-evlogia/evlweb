@@ -25,6 +25,20 @@ const testimonials = [
     role: "Founder, OceanCharge",
     avatar: "/lionel.png",
   },
+  {
+    id: 4,
+    quote: "Codexscape brought a strong blend of technical expertise and practical execution, playing a key role in shaping the foundation of our LMS. What truly stood out was their ability to simplify complex requirements into an efficient, well-structured architecture. Their contributions have had a lasting impact on our product development.",
+    author: "Srikar HK",
+    role: "Head of Operations, 10 Seconds",
+    avatar: "/srikar.png",
+  },
+  {
+    id: 5,
+    quote: "Arjun demonstrated exceptional technical expertise in evaluating and enhancing our website strategy. His ability to quickly understand our business needs and translate them into practical, scalable solutions was impressive. Thanks to his guidance, we significantly refined our online platform and better positioned our services in the market.",
+    author: "Muhammed Fasil",
+    role: "Center Manager, Edoxi Training",
+    avatar: "/fasil.png",
+  },
 ]
 
 export function Testimonials() {
