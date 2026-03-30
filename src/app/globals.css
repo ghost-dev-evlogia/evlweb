@@ -164,15 +164,6 @@ body::after {
   animation: scroll-bounce 2.6s ease-in-out infinite;
 }
 
-/* ─── Gradient text — monochrome with visible range ─── */
-.text-gradient {
-  background-image: linear-gradient(135deg, #111111 0%, #909090 60%, #3a3a3a 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-}
-
 /* ─── Section divider ─── */
 .divider {
   height: 1px;

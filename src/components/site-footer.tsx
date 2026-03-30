@@ -14,7 +14,7 @@ export function SiteFooter() {
   ];
 
   const workLinks = [
-    { label: "Book a Call", href: "/#book" },
+    { label: "Contact Us", href: "/#contact" },
     { label: "Careers", href: "/careers" },
     { label: "hello@evlogia.ai", href: "mailto:hello@evlogia.ai" },
   ];

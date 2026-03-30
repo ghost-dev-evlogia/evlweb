@@ -218,7 +218,7 @@ export function HowWeWork() {
           }}
         >
           Most consultants advise.{" "}
-          <em className="text-gradient not-italic">We build, file, and publish.</em>
+          <em className="not-italic text-black/90">We build, file, and publish.</em>
         </h2>
         <p className="font-sans text-black/40 text-sm leading-relaxed max-w-lg">
           The gap between AI research and production is where most engagements stall.

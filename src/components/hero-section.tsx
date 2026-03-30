@@ -97,19 +97,16 @@ export function HeroSection() {
 
         {/* Sub */}
         <motion.p
-          className="font-sans text-neutral-200 leading-relaxed mb-10 md:mb-12 max-w-md md:max-w-lg text-center"
+          className="font-sans text-neutral-200 leading-relaxed mb-10 md:mb-12 max-w-md text-center"
           style={{
-            fontSize: "clamp(0.9rem, 1.6vw, 1.05rem)",
+            fontSize: "clamp(0.95rem, 1.6vw, 1.05rem)",
             textShadow: "0 1px 12px rgba(0,0,0,0.5), 0 2px 28px rgba(0,0,0,0.3)",
           }}
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.95, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
         >
-          We take the AI problems your team can&apos;t solve with existing
-          methods and work them through to production. Every engagement produces
-          a deployed system, filed patents, and research papers submitted to
-          venues like NeurIPS and ICML. Not a deck about what might be possible.
+          Your unsolved AI problem → deployed system, filed patents, peer-reviewed research. No decks.
         </motion.p>
 
         {/* CTAs */}
@@ -119,7 +116,7 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.1, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
         >
-          <a href="/#book">
+          <a href="/#contact">
             <LiquidGlassCard
               glowIntensity="none"
               shadowIntensity="sm"

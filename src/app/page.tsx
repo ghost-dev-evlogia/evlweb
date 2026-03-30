@@ -1,6 +1,5 @@
 import { HeroSection } from "@/components/hero-section";
 import { AnimatedCounter } from "@/components/animated-counter";
-import { BookingSection } from "@/components/booking-section";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { SplitHeading } from "@/components/split-heading";
@@ -137,7 +136,7 @@ export default function Home() {
                       Applied AI R&D
                     </h3>
                     <p className="font-sans text-black/45 text-sm leading-relaxed max-w-lg">
-                      We embed with your research and engineering teams to work on problems that don&apos;t have known answers yet. Novel architectures, domain-specific models, training methodologies that don&apos;t exist in the literature. We run the experiments, validate the results, and hand you a system that works. Not a report about what might work.
+                      Novel architectures. Unsolved problems. We run the experiments — you get a deployed system, not a slide deck.
                     </p>
                   </div>
                 </div>
@@ -162,7 +161,7 @@ export default function Home() {
                     Product Development
                   </h3>
                   <p className="font-sans text-black/45 text-sm leading-relaxed">
-                    A paper without a product is a citation. We build the systems that put research findings in front of users. Inference pipelines, APIs, deployment infrastructure. The model works in a notebook. We make it run in production.
+                    Research that never ships is overhead. We move findings from notebook to production — inference pipelines, APIs, full deployment.
                   </p>
                 </div>
               </StaggerItem>
@@ -186,7 +185,7 @@ export default function Home() {
                     Patent Strategy &amp; Filing
                   </h3>
                   <p className="font-sans text-black/45 text-sm leading-relaxed">
-                    Most AI companies generate patentable IP without realizing it. We surface what&apos;s novel in your model design, training process, and application layer, then file before someone else does. Patents filed across US, EU, and international jurisdictions.
+                    You&apos;re generating IP you don&apos;t own yet. We surface what&apos;s novel and file before someone else does — US, EU, and international.
                   </p>
                 </div>
               </StaggerItem>
@@ -211,7 +210,7 @@ export default function Home() {
                       Research Publications
                     </h3>
                     <p className="font-sans text-black/45 text-sm leading-relaxed mb-6 max-w-lg">
-                      We publish at venues that matter. Peer-reviewed papers that build your institution&apos;s scientific credibility and attract the kind of talent that reads papers before job listings.
+                      Top-tier venues. Peer-reviewed. Builds credibility and attracts the talent that reads papers before job listings.
                     </p>
                     <div className="flex flex-wrap gap-1.5">
                       {["NeurIPS", "ICML", "ICLR", "AAAI", "CVPR", "ECCV"].map((v) => (
@@ -269,10 +268,7 @@ export default function Home() {
               />
               <ScrollReveal>
                 <p className="font-sans text-black/40 text-sm max-w-sm mx-auto leading-relaxed">
-                  The papers go to peer review. The architecture stays
-                  proprietary. We run IP filings in parallel with every
-                  research engagement so nothing goes public before it&apos;s
-                  protected.
+                  Papers go to peer review. Architectures stay proprietary. IP filing runs in parallel — nothing goes public unprotected.
                 </p>
               </ScrollReveal>
             </div>
@@ -409,25 +405,22 @@ export default function Home() {
                     }}
                   />
                   <p className="font-sans text-black/40 text-sm leading-relaxed max-w-lg mb-10 md:mb-14">
-                    Evlogia is an applied AI research lab. We solve AI problems
-                    that don&apos;t have published solutions yet, build the
-                    systems that act on what we find, and file the patents
-                    before the research goes public.
+                    We solve AI problems without published solutions, ship the systems that prove them, and file patents before the science goes public.
                   </p>
 
                   <div className="grid md:grid-cols-3 gap-6 md:gap-10">
                     {[
                       {
                         title: "We do the work.",
-                        desc: "We don't advise on AI strategy and leave you to figure out the execution. We write the code, run the experiments, build the systems, and stand behind the results.",
+                        desc: "No strategy decks, no handoffs. We write the code, run the experiments, and ship the system.",
                       },
                       {
                         title: "We protect what we build.",
-                        desc: "Every engagement includes an IP review. If the work produces something novel, it gets filed. Most firms treat patents as an afterthought. We treat them as a deliverable.",
+                        desc: "IP review is built into every engagement. If it&apos;s novel, it gets filed — not later, now.",
                       },
                       {
                         title: "We publish what we find.",
-                        desc: "If the science is good enough, it goes to peer review. This isn't a marketing exercise. Published research attracts better talent, builds institutional credibility, and forces rigor on every project.",
+                        desc: "Good science goes to peer review. It attracts better talent and forces rigor on every project.",
                       },
                     ].map(({ title, desc }) => (
                       <div key={title}>
@@ -482,16 +475,6 @@ export default function Home() {
           <MotionDivider />
         </div>
 
-        {/* ─── Booking ─── */}
-        <ScrollReveal>
-          <BookingSection />
-        </ScrollReveal>
-
-        {/* ─── Divider ─── */}
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="divider" />
-        </div>
-
         {/* ─── CTA ─── */}
         <section id="contact" className="px-6 pb-20 md:pb-28 pt-6 md:pt-8">
           <div className="max-w-3xl mx-auto">
@@ -507,24 +490,20 @@ export default function Home() {
                       { text: "worth publishing.", italic: true },
                     ]}
                     className="font-serif text-black/90 leading-[1.07] mb-5"
-                    italicClassName="text-gradient"
                     style={{
                       fontSize: "clamp(1.4rem, 5vw, 3.8rem)",
                       letterSpacing: "-0.01em",
                     }}
                   />
                   <p className="font-sans text-black/40 text-sm leading-relaxed mb-10 max-w-sm mx-auto">
-                    Bring us your hardest AI problem. We&apos;ll scope it, build
-                    it, protect it, and if the science holds up, publish it.
-                    Thirty minutes. No pitch. Just a focused conversation about
-                    whether we&apos;re the right fit.
+                    Bring us your hardest AI problem. Thirty minutes. No pitch. We&apos;ll tell you if we&apos;re the right fit.
                   </p>
                   <div className="flex justify-center">
                     <a
-                      href="/#book"
+                      href="mailto:hello@evlogia.ai"
                       className="inline-flex items-center gap-2 sm:gap-3 glass rounded-full px-5 sm:px-8 py-3 sm:py-3.5 text-black/80 font-sans font-medium text-xs sm:text-sm border border-black/10 hover:bg-black/5 hover:scale-[1.03] transition-all duration-300"
                     >
-                      Book a Strategy Call
+                      Start a Conversation
                       <span className="text-black/35 text-xs">→</span>
                     </a>
                   </div>
