@@ -97,10 +97,10 @@ export function HeroSection() {
 
         {/* Sub */}
         <motion.p
-          className="font-sans text-neutral-200 leading-relaxed mb-10 md:mb-12 max-w-md text-center"
+          className="font-sans text-white/85 leading-relaxed mb-10 md:mb-12 max-w-md text-center"
           style={{
-            fontSize: "clamp(0.95rem, 1.6vw, 1.05rem)",
-            textShadow: "0 1px 12px rgba(0,0,0,0.5), 0 2px 28px rgba(0,0,0,0.3)",
+            fontSize: "clamp(1rem, 1.8vw, 1.15rem)",
+            textShadow: "0 1px 16px rgba(0,0,0,0.65), 0 2px 32px rgba(0,0,0,0.45)",
           }}
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}

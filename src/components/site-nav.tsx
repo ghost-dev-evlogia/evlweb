@@ -103,9 +103,8 @@ export function SiteNav() {
           <div className="hidden md:flex items-center gap-7">
             {[
               { label: "Services", href: "/#services" },
-              { label: "Research", href: "/#research" },
               { label: "About", href: "/#about" },
-              { label: "Book a Call", href: "/#book" },
+              { label: "FAQ", href: "/#faq" },
             ].map(({ label, href }) => (
               <a
                 key={label}

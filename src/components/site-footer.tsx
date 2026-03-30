@@ -7,16 +7,12 @@ import { AsciiMotionLogo } from "@/components/ascii-motion-logo";
 export function SiteFooter() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "0px 0px -5% 0px" });
+
   const siteLinks = [
     { label: "Services", href: "/#services" },
-    { label: "Research", href: "/#research" },
     { label: "About", href: "/#about" },
-  ];
-
-  const workLinks = [
-    { label: "Contact Us", href: "/#contact" },
+    { label: "FAQ", href: "/#faq" },
     { label: "Careers", href: "/careers" },
-    { label: "hello@evlogia.ai", href: "mailto:hello@evlogia.ai" },
   ];
 
   const legalLinks = [
@@ -33,39 +29,60 @@ export function SiteFooter() {
           animate={inView ? { opacity: 1, y: 0 } : undefined}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-
           {/* Top row: ASCII logo + nav */}
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-8 md:gap-6 mb-8 md:mb-10">
             {/* Brand */}
             <div className="shrink-0">
               <AsciiMotionLogo />
-              <p className="font-sans text-black/30 text-[10px] tracking-[0.18em] uppercase mt-3">
-                Applied AI Research
+              <p className="font-sans text-black/45 text-[10px] tracking-[0.18em] uppercase mt-3">
+                Product Engineering & AI
               </p>
             </div>
 
-            {/* Nav — three columns */}
+            {/* Nav + Contact */}
             <div className="flex flex-col sm:flex-row gap-8 sm:gap-12 md:gap-14">
+              {/* Site links */}
               <div className="flex flex-col gap-2.5">
                 <p className="font-sans text-black/25 text-[9px] tracking-[0.2em] uppercase mb-0.5">Site</p>
                 {siteLinks.map(({ label, href }) => (
-                  <a key={label} href={href} className="font-sans text-black/40 text-[12px] hover:text-black/70 transition-colors duration-200">
+                  <a
+                    key={label}
+                    href={href}
+                    className="font-sans text-black/40 text-[12px] hover:text-black/70 transition-colors duration-200"
+                  >
                     {label}
                   </a>
                 ))}
               </div>
+
+              {/* Contact */}
               <div className="flex flex-col gap-2.5">
-                <p className="font-sans text-black/25 text-[9px] tracking-[0.2em] uppercase mb-0.5">Work</p>
-                {workLinks.map(({ label, href }) => (
-                  <a key={label} href={href} className="font-sans text-black/40 text-[12px] hover:text-black/70 transition-colors duration-200">
-                    {label}
-                  </a>
-                ))}
+                <p className="font-sans text-black/25 text-[9px] tracking-[0.2em] uppercase mb-0.5">Contact</p>
+                <button
+                  data-cal-link="ethankd/strategy"
+                  data-cal-namespace="strategy"
+                  data-cal-config='{"layout":"month_view","theme":"light","useSlotsViewOnSmallScreen":"true"}'
+                  className="font-sans text-black/40 text-[12px] hover:text-black/70 transition-colors duration-200 text-left cursor-pointer"
+                >
+                  Work With Us
+                </button>
+                <a
+                  href="mailto:hello@evlogia.ai"
+                  className="font-sans text-black/40 text-[12px] hover:text-black/70 transition-colors duration-200"
+                >
+                  hello@evlogia.ai
+                </a>
               </div>
+
+              {/* Legal */}
               <div className="flex flex-col gap-2.5">
                 <p className="font-sans text-black/25 text-[9px] tracking-[0.2em] uppercase mb-0.5">Legal</p>
                 {legalLinks.map(({ label, href }) => (
-                  <a key={label} href={href} className="font-sans text-black/40 text-[12px] hover:text-black/70 transition-colors duration-200">
+                  <a
+                    key={label}
+                    href={href}
+                    className="font-sans text-black/40 text-[12px] hover:text-black/70 transition-colors duration-200"
+                  >
                     {label}
                   </a>
                 ))}
@@ -110,7 +127,6 @@ export function SiteFooter() {
 
             <p className="font-sans text-black/20 text-[11px]">Evlogia Labs Private Limited</p>
           </div>
-
         </motion.div>
       </div>
     </footer>

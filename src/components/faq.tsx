@@ -73,7 +73,7 @@ export function FAQ() {
                   }}
                   style={{ overflow: "hidden" }}
                 >
-                  <p className="font-sans text-black/45 text-sm leading-relaxed mt-3 pb-1 max-w-xl">
+                  <p className="font-sans text-black/55 text-sm md:text-[15px] leading-relaxed mt-3 pb-1 max-w-xl">
                     {a}
                   </p>
                 </motion.div>

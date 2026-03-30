@@ -220,7 +220,7 @@ export function HowWeWork() {
           Most agencies pitch.{" "}
           <em className="not-italic text-black/90">We build.</em>
         </h2>
-        <p className="font-sans text-black/40 text-sm leading-relaxed max-w-lg">
+        <p className="font-sans text-black/50 text-[15px] leading-relaxed max-w-xl">
           Scoped properly, built cleanly, shipped on time. No handoffs, no disappearing acts — just a team that owns the outcome.
         </p>
       </div>
@@ -257,7 +257,7 @@ export function HowWeWork() {
               >
                 {steps[activeIndex].title}
               </h3>
-              <p className="font-sans text-black/40 text-sm leading-relaxed max-w-xs">
+              <p className="font-sans text-black/50 text-sm md:text-[15px] leading-relaxed max-w-sm">
                 {steps[activeIndex].desc}
               </p>
             </motion.div>

@@ -132,7 +132,7 @@ export default function Home() {
                     >
                       Product & Platform Engineering
                     </h3>
-                    <p className="font-sans text-black/45 text-sm leading-relaxed max-w-lg">
+                    <p className="font-sans text-black/50 text-sm md:text-[15px] leading-relaxed max-w-lg">
                       Websites, web apps, mobile apps, platforms. We scope it, design it, build it, and ship it — without you managing an in-house team.
                     </p>
                   </div>
@@ -156,7 +156,7 @@ export default function Home() {
                   >
                     Internal Tools & Systems
                   </h3>
-                  <p className="font-sans text-black/45 text-sm leading-relaxed">
+                  <p className="font-sans text-black/50 text-sm md:text-[15px] leading-relaxed">
                     Dashboards, admin panels, booking systems, workflow tools. The software your team actually depends on.
                   </p>
                 </div>
@@ -179,7 +179,7 @@ export default function Home() {
                   >
                     Applied AI
                   </h3>
-                  <p className="font-sans text-black/45 text-sm leading-relaxed">
+                  <p className="font-sans text-black/50 text-sm md:text-[15px] leading-relaxed">
                     AI where it actually solves something. We integrate models into real products and build custom solutions when off-the-shelf doesn&apos;t cut it.
                   </p>
                 </div>
@@ -203,7 +203,7 @@ export default function Home() {
                     >
                       Research & IP
                     </h3>
-                    <p className="font-sans text-black/45 text-sm leading-relaxed mb-6 max-w-lg">
+                    <p className="font-sans text-black/50 text-sm md:text-[15px] leading-relaxed mb-6 max-w-lg">
                       For clients working on frontier problems — we run experiments, file patents, and submit to peer-reviewed venues.
                     </p>
                     <div className="flex flex-wrap gap-1.5">
@@ -261,7 +261,7 @@ export default function Home() {
                 }}
               />
               <ScrollReveal>
-                <p className="font-sans text-black/40 text-sm max-w-sm mx-auto leading-relaxed">
+                <p className="font-sans text-black/50 text-[15px] max-w-md mx-auto leading-relaxed">
                   For clients doing frontier work — we run the experiments, protect the IP, and publish what holds up.
                 </p>
               </ScrollReveal>
@@ -398,7 +398,7 @@ export default function Home() {
                       letterSpacing: "-0.01em",
                     }}
                   />
-                  <p className="font-sans text-black/40 text-sm leading-relaxed max-w-lg mb-10 md:mb-14">
+                  <p className="font-sans text-black/50 text-[15px] leading-relaxed max-w-xl mb-10 md:mb-14">
                     We&apos;re a product and engineering team that builds real systems — products, platforms, internal tools, and applied AI. We&apos;ve shipped across industries and we own the outcome, not just the deliverable.
                   </p>
 
@@ -413,15 +413,15 @@ export default function Home() {
                         desc: "Scope, build, ship. When something needs to change mid-engagement, we adapt — not disappear.",
                       },
                       {
-                        title: "We protect what&apos;s novel.",
-                        desc: "When the work produces something genuinely new, we file the IP. It&apos;s a deliverable, not an afterthought.",
+                        title: "We protect what's novel.",
+                        desc: "When the work produces something genuinely new, we file the IP. It's a deliverable, not an afterthought.",
                       },
                     ].map(({ title, desc }) => (
                       <div key={title}>
                         <h4 className="font-serif text-black/90 text-base md:text-lg mb-2">
                           {title}
                         </h4>
-                        <p className="font-sans text-black/40 text-sm leading-relaxed">
+                        <p className="font-sans text-black/50 text-sm md:text-[15px] leading-relaxed">
                           {desc}
                         </p>
                       </div>
@@ -489,17 +489,19 @@ export default function Home() {
                       letterSpacing: "-0.01em",
                     }}
                   />
-                  <p className="font-sans text-black/40 text-sm leading-relaxed mb-10 max-w-sm mx-auto">
+                  <p className="font-sans text-black/55 text-[15px] leading-relaxed mb-10 max-w-sm mx-auto">
                     Tell us what you need. We&apos;ll tell you if we&apos;re the right team for it.
                   </p>
                   <div className="flex justify-center">
-                    <a
-                      href="mailto:hello@evlogia.ai"
-                      className="inline-flex items-center gap-2 sm:gap-3 glass rounded-full px-5 sm:px-8 py-3 sm:py-3.5 text-black/80 font-sans font-medium text-xs sm:text-sm border border-black/10 hover:bg-black/5 hover:scale-[1.03] transition-all duration-300"
+                    <button
+                      data-cal-link="ethankd/strategy"
+                      data-cal-namespace="strategy"
+                      data-cal-config='{"layout":"month_view","theme":"light","useSlotsViewOnSmallScreen":"true"}'
+                      className="inline-flex items-center gap-2 sm:gap-3 glass rounded-full px-5 sm:px-8 py-3 sm:py-3.5 text-black/80 font-sans font-medium text-xs sm:text-sm border border-black/10 hover:bg-black/5 hover:scale-[1.03] transition-all duration-300 cursor-pointer"
                     >
                       Start a Conversation
                       <span className="text-black/35 text-xs">→</span>
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>
