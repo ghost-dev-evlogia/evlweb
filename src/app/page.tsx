@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { HeroSection } from "@/components/hero-section";
 import { AnimatedCounter } from "@/components/animated-counter";
 import { SiteNav } from "@/components/site-nav";
@@ -10,6 +11,18 @@ import { RevealLabel } from "@/components/reveal-label";
 import { Testimonials } from "@/components/testimonials";
 import { FAQ } from "@/components/faq";
 import { HowWeWork } from "@/components/how-we-work";
+
+const clientLogos = [
+  { src: "/10seconds.jpeg", name: "10 Seconds" },
+  { src: "/Edoxi.jpeg", name: "Edoxi" },
+  { src: "/Inspire.avif", name: "Inspire" },
+  { src: "/Nitte.svg", name: "Nitte" },
+  { src: "/aambianz.webp", name: "Aambianz" },
+  { src: "/magniz.avif", name: "Magniz" },
+  { src: "/oceancharge.webp", name: "Ocean Charge" },
+  { src: "/sellmyplot.webp", name: "Sell My Plot" },
+  { src: "/vanora.png", name: "Vanora" },
+];
 
 const marqueeItems = [
   "Product Engineering",
@@ -60,6 +73,40 @@ export default function Home() {
                 >
                   {item}
                 </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ─── Client logos ─── */}
+        <div className="border-b" style={{ borderColor: "rgba(0,0,0,0.06)" }}>
+          <div className="py-2 pt-3">
+            <p
+              className="text-center font-sans text-[9px] tracking-[0.28em] uppercase mb-4"
+              style={{ color: "rgba(0,0,0,0.22)" }}
+            >
+              Trusted by
+            </p>
+          </div>
+          <div className="marquee-wrapper pb-5">
+            <div
+              className="marquee-track"
+              style={{ animationDuration: "44s", gap: "3.5rem" }}
+            >
+              {[...clientLogos, ...clientLogos].map((logo, i) => (
+                <div
+                  key={i}
+                  className="relative h-7 w-24 shrink-0"
+                  style={{ filter: "grayscale(1) brightness(0.15) opacity(0.45)" }}
+                >
+                  <Image
+                    src={logo.src}
+                    alt={logo.name}
+                    fill
+                    className="object-contain"
+                    sizes="96px"
+                  />
+                </div>
               ))}
             </div>
           </div>
