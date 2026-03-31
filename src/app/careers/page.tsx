@@ -29,7 +29,7 @@ export default function CareersPage() {
               <em>doing.</em>
             </h1>
             <p className="font-sans text-black/50 text-base leading-relaxed max-w-xl">
-              Evlogia is a small, intentional team. We take on research-grade AI problems, build the systems that solve them, file the patents, and publish the science. The work is hard. The bar is high. That&apos;s the point.
+              Evlogia is a small, intentional team. We take on technically hard problems, build the systems that solve them, and ship work that holds up. The bar is high. That&apos;s the point.
             </p>
           </div>
 
@@ -42,7 +42,7 @@ export default function CareersPage() {
             <div>
               <h2 className="font-serif text-black/80 text-xl mb-4">Who we are</h2>
               <p className="font-sans text-black/50 text-sm leading-relaxed">
-                We&apos;re not a large company and we don&apos;t want to be. What we are is exacting: about the problems we take on, the solutions we build, and the people we work with. Our output is peer-reviewed research, production AI systems, and filed patents. We measure success by whether the work holds up under scrutiny, not by whether it ships fast.
+                We&apos;re not a large company and we don&apos;t want to be. What we are is exacting: about the problems we take on, the solutions we build, and the people we work with. Our output is production AI systems, IoT devices, and platforms that do something real. We measure success by whether the work holds up under scrutiny, not by whether it ships fast.
               </p>
             </div>
 
@@ -53,8 +53,8 @@ export default function CareersPage() {
                   "Deep technical ability in ML research, AI systems engineering, or both",
                   "Comfort operating at the frontier, where the problem isn't fully defined",
                   "The discipline to be rigorous without being slow",
-                  "A genuine interest in seeing research through to product and patent",
-                  "The kind of curiosity that makes you read the paper, not just the abstract",
+                  "A genuine interest in seeing hard problems through to working systems",
+                  "The kind of curiosity that makes you read the spec, not just the summary",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3 font-sans text-black/50 text-sm leading-relaxed">
                     <span className="text-black/20 mt-0.5 shrink-0">·</span>

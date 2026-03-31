@@ -26,7 +26,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Evlogia | Applied AI Research",
   description:
-    "Evlogia is an Applied AI Research company. We partner with enterprises and research institutions to solve complex AI problems, build production systems, file patents, and publish research.",
+    "Evlogia is a product and engineering company. We partner with businesses to solve hard technical problems, build production AI systems, IoT devices, and software platforms that get used.",
   metadataBase: new URL("https://evlogia.ai"),
   icons: {
     icon: [

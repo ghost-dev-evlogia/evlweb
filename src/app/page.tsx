@@ -73,7 +73,7 @@ export default function Home() {
             {[
               { target: 50, suffix: "+", label: "Systems Shipped" },
               { target: 20, suffix: "+", label: "Clients Served" },
-              { target: 12, suffix: "+", label: "Patents Filed" },
+              { target: 10, suffix: "+", label: "Tech Domains" },
               { target: 8, suffix: "", label: "Industries" },
             ].map(({ target, suffix, label }) => (
               <StaggerItem key={label} className="h-full">
@@ -187,7 +187,7 @@ export default function Home() {
                 </div>
               </StaggerItem>
 
-              {/* 04 — Research & IP — featured wide */}
+              {/* 04 — IoT & Connected Devices — featured wide */}
               <StaggerItem className="md:col-span-2 h-full">
                 <div className="glass-card card-hover rounded-2xl p-6 md:p-9 relative overflow-hidden h-full">
                   <div
@@ -203,13 +203,13 @@ export default function Home() {
                       className="font-serif text-black/90 text-2xl md:text-3xl mb-4 leading-snug"
                       style={{ letterSpacing: "-0.01em" }}
                     >
-                      Research & IP
+                      IoT & Connected Devices
                     </h3>
                     <p className="font-sans text-black/50 text-sm md:text-[15px] leading-relaxed mb-6 max-w-lg">
-                      For clients on frontier problems. We run the experiments, file the patents, and submit to peer-reviewed venues.
+                      Sensor pipelines, embedded firmware, connected hardware. We've shipped IoT products that required real engineering discipline, from prototype through production.
                     </p>
                     <div className="flex flex-wrap gap-1.5">
-                      {["NeurIPS", "ICML", "ICLR", "AAAI", "CVPR", "ECCV"].map((v) => (
+                      {["Embedded", "Firmware", "Sensors", "Edge AI", "Cloud Sync", "Protocols"].map((v) => (
                         <span
                           key={v}
                           className="font-sans text-[10px] tracking-wide text-black/50 border border-black/10 rounded-full px-2.5 py-0.5"
@@ -244,17 +244,17 @@ export default function Home() {
           <MotionDivider />
         </div>
 
-        {/* ─── Research & IP ─── */}
-        <section id="research" className="scroll-mt-20 px-6 py-12 md:py-28">
+        {/* ─── Technical Depth ─── */}
+        <section id="depth" className="scroll-mt-20 px-6 py-12 md:py-28">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-10 md:mb-16">
               <RevealLabel className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-3">
-                Research &amp; IP
+                Technical Depth
               </RevealLabel>
               <SplitHeading
                 lines={[
-                  { text: "When you need to" },
-                  { text: "go deeper.", italic: true },
+                  { text: "When the problem is" },
+                  { text: "genuinely hard.", italic: true },
                 ]}
                 className="font-serif text-black/90 leading-[1.07] mb-4"
                 style={{
@@ -264,23 +264,23 @@ export default function Home() {
               />
               <ScrollReveal>
                 <p className="font-sans text-black/50 text-[15px] max-w-md mx-auto leading-relaxed">
-                  For clients doing frontier work. We run the experiments, protect the IP, and publish what holds up.
+                  Some work requires more than a standard build. We've shipped AI systems, connected devices, and complex platforms where the technical bar was the whole point.
                 </p>
               </ScrollReveal>
             </div>
 
             <StaggerGrid className="grid md:grid-cols-3 gap-3 md:gap-4">
-              {/* Publications card */}
+              {/* Applied AI card */}
               <StaggerItem className="h-full">
                 <div className="glass-card card-hover rounded-2xl p-6 md:p-8 h-full flex flex-col gap-4">
                   <div className="font-sans text-black/30 text-[10px] tracking-[0.25em] uppercase">
-                    Publication Venues
+                    Applied AI
                   </div>
-                  <div className="font-serif text-black/85 text-4xl md:text-5xl leading-none">
-                    20+
-                  </div>
+                  <p className="font-sans text-black/55 text-sm leading-relaxed">
+                    Production AI systems, not prototypes. LLMs, computer vision, multimodal pipelines, and retrieval infrastructure. Built to run in the real world.
+                  </p>
                   <div className="flex flex-wrap gap-1.5 mt-auto">
-                    {["NeurIPS", "ICML", "ICLR", "AAAI", "CVPR"].map((v) => (
+                    {["LLMs", "Vision", "Multimodal", "Agents", "RAG"].map((v) => (
                       <span
                         key={v}
                         className="font-sans text-[10px] tracking-wide text-black/50 border border-black/10 rounded-full px-2.5 py-0.5"
@@ -288,24 +288,21 @@ export default function Home() {
                         {v}
                       </span>
                     ))}
-                  </div>
-                  <div className="font-sans text-black/30 text-[10px] tracking-wide">
-                    Peer-reviewed conference papers accepted at top-tier venues
                   </div>
                 </div>
               </StaggerItem>
 
-              {/* Patents card */}
+              {/* IoT card */}
               <StaggerItem className="h-full">
                 <div className="glass-card card-hover rounded-2xl p-6 md:p-8 h-full flex flex-col gap-4">
                   <div className="font-sans text-black/30 text-[10px] tracking-[0.25em] uppercase">
-                    Patent Portfolio
+                    IoT & Hardware
                   </div>
-                  <div className="font-serif text-black/85 text-4xl md:text-5xl leading-none">
-                    12+
-                  </div>
+                  <p className="font-sans text-black/55 text-sm leading-relaxed">
+                    Connected hardware that does what it's supposed to. Sensor pipelines, embedded firmware, cloud-connected devices. We've built things worth building properly.
+                  </p>
                   <div className="flex flex-wrap gap-1.5 mt-auto">
-                    {["US", "EU", "International"].map((v) => (
+                    {["Firmware", "Sensors", "Edge", "Protocols", "Cloud"].map((v) => (
                       <span
                         key={v}
                         className="font-sans text-[10px] tracking-wide text-black/50 border border-black/10 rounded-full px-2.5 py-0.5"
@@ -313,24 +310,21 @@ export default function Home() {
                         {v}
                       </span>
                     ))}
-                  </div>
-                  <div className="font-sans text-black/30 text-[10px] tracking-wide">
-                    Filed, pending &amp; granted
                   </div>
                 </div>
               </StaggerItem>
 
-              {/* Domains card */}
+              {/* Complex Platforms card */}
               <StaggerItem className="h-full">
                 <div className="glass-card card-hover rounded-2xl p-6 md:p-8 h-full flex flex-col gap-4">
                   <div className="font-sans text-black/30 text-[10px] tracking-[0.25em] uppercase">
-                    Research Domains
+                    Complex Platforms
                   </div>
-                  <div className="font-serif text-black/85 text-4xl md:text-5xl leading-none">
-                    8
-                  </div>
+                  <p className="font-sans text-black/55 text-sm leading-relaxed">
+                    Multi-tenant systems, high-stakes data flows, and platforms where getting the architecture wrong is expensive. We've built them and handed them off clean.
+                  </p>
                   <div className="flex flex-wrap gap-1.5 mt-auto">
-                    {["LLMs", "Vision", "Multimodal", "Agents"].map((v) => (
+                    {["Multi-tenant", "APIs", "Data pipelines", "Infrastructure"].map((v) => (
                       <span
                         key={v}
                         className="font-sans text-[10px] tracking-wide text-black/50 border border-black/10 rounded-full px-2.5 py-0.5"
@@ -338,9 +332,6 @@ export default function Home() {
                         {v}
                       </span>
                     ))}
-                  </div>
-                  <div className="font-sans text-black/30 text-[10px] tracking-wide">
-                    Active research areas
                   </div>
                 </div>
               </StaggerItem>
