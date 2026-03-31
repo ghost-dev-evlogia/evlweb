@@ -24,31 +24,6 @@ const clientLogos = [
   { src: "/vanora.png", name: "Vanora" },
 ];
 
-const marqueeItems = [
-  "Product Engineering",
-  "·",
-  "Web & Mobile Apps",
-  "·",
-  "Internal Tools",
-  "·",
-  "Cloud Dashboards",
-  "·",
-  "Admin Systems",
-  "·",
-  "Applied AI",
-  "·",
-  "Platforms",
-  "·",
-  "Booking Systems",
-  "·",
-  "Research & IP",
-  "·",
-  "API Development",
-  "·",
-  "Full-Stack Builds",
-  "·",
-];
-
 export default function Home() {
   return (
     <>
@@ -58,29 +33,9 @@ export default function Home() {
         {/* ─── Hero ─── */}
         <HeroSection />
 
-        {/* ─── Marquee band ─── */}
-        <div className="border-y" style={{ borderColor: "rgba(0,0,0,0.08)" }}>
-          <div className="marquee-wrapper py-5">
-            <div className="marquee-track">
-              {[...marqueeItems, ...marqueeItems].map((item, i) => (
-                <span
-                  key={i}
-                  className="font-sans text-[11px] sm:text-xs tracking-[0.2em] uppercase whitespace-nowrap"
-                  style={{
-                    color:
-                      item === "·" ? "rgba(0,0,0,0.18)" : "rgba(0,0,0,0.32)",
-                  }}
-                >
-                  {item}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-
         {/* ─── Client logos ─── */}
-        <div className="border-b" style={{ borderColor: "rgba(0,0,0,0.06)" }}>
-          <div className="py-2 pt-3">
+        <div className="border-y" style={{ borderColor: "rgba(0,0,0,0.07)" }}>
+          <div className="pt-5 pb-1">
             <p
               className="text-center font-sans text-[9px] tracking-[0.28em] uppercase mb-4"
               style={{ color: "rgba(0,0,0,0.22)" }}
