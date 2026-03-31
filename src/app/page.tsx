@@ -12,16 +12,21 @@ import { Testimonials } from "@/components/testimonials";
 import { FAQ } from "@/components/faq";
 import { HowWeWork } from "@/components/how-we-work";
 
+// t = filter treatment:
+//   "normal"    – transparent bg, dark/coloured marks  → plain grayscale
+//   "white-bg"  – white/light bg, dark marks           → multiply removes the bg
+//   "dark-bg"   – solid coloured bg, light marks       → invert + multiply
+//   "invert"    – transparent bg, white/light marks    → invert so marks go dark
 const clientLogos = [
-  { src: "/10seconds.jpeg", name: "10 Seconds" },
-  { src: "/Edoxi.jpeg", name: "Edoxi" },
-  { src: "/Inspire.avif", name: "Inspire" },
-  { src: "/Nitte.svg", name: "Nitte" },
-  { src: "/aambianz.webp", name: "Aambianz" },
-  { src: "/magniz.avif", name: "Magniz" },
-  { src: "/oceancharge.webp", name: "Ocean Charge" },
-  { src: "/sellmyplot.webp", name: "Sell My Plot" },
-  { src: "/vanora.png", name: "Vanora" },
+  { src: "/10seconds.jpeg", name: "10 Seconds",  t: "white-bg" },
+  { src: "/Edoxi.jpeg",     name: "Edoxi",       t: "dark-bg"  },
+  { src: "/Inspire.avif",   name: "Inspire",     t: "normal"   },
+  { src: "/Nitte.svg",      name: "Nitte",       t: "normal"   },
+  { src: "/aambianz.webp",  name: "Aambianz",    t: "normal"   },
+  { src: "/magniz.avif",    name: "Magniz",      t: "normal"   },
+  { src: "/oceancharge.webp", name: "Ocean Charge", t: "invert" },
+  { src: "/sellmyplot.webp",  name: "Sell My Plot", t: "invert" },
+  { src: "/vanora.png",     name: "Vanora",      t: "invert"   },
 ];
 
 export default function Home() {
@@ -52,14 +57,15 @@ export default function Home() {
                 <div
                   key={i}
                   className="relative h-7 w-24 shrink-0"
-                  style={{
-                    // multiply: white backgrounds vanish against the off-white site bg
-                    // Edoxi has white-on-blue logo → invert so it reads as dark-on-light
-                    mixBlendMode: "multiply",
-                    filter: logo.name === "Edoxi"
-                      ? "grayscale(1) invert(1) opacity(0.5)"
-                      : "grayscale(1) opacity(0.5)",
-                  }}
+                  style={
+                    logo.t === "white-bg"
+                      ? { filter: "grayscale(1) opacity(0.55)", mixBlendMode: "multiply" }
+                      : logo.t === "dark-bg"
+                      ? { filter: "grayscale(1) invert(1) opacity(0.5)", mixBlendMode: "multiply" }
+                      : logo.t === "invert"
+                      ? { filter: "grayscale(1) invert(1) opacity(0.45)" }
+                      : { filter: "grayscale(1) opacity(0.4)" }
+                  }
                 >
                   <Image
                     src={logo.src}
