@@ -26,7 +26,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Evlogia | Applied AI Research",
   description:
-    "Evlogia is an Applied AI Research company — we partner with enterprises and research institutions to solve complex AI problems, build production systems, file patents, and publish research.",
+    "Evlogia is an Applied AI Research company. We partner with enterprises and research institutions to solve complex AI problems, build production systems, file patents, and publish research.",
   metadataBase: new URL("https://evlogia.ai"),
   icons: {
     icon: [
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Evlogia | Applied AI Research",
     description:
-      "Applied AI Research — R&D consulting, proprietary products, patents, and research publications.",
+      "Applied AI Research: R&D consulting, proprietary products, patents, and research publications.",
     url: "https://evlogia.ai",
     siteName: "Evlogia",
     locale: "en_US",
@@ -52,14 +52,14 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Evlogia — The Applied AI Lab That Ships.",
+        alt: "Evlogia: The Applied AI Lab That Ships.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Evlogia | Applied AI Research",
-    description: "Applied AI Research — R&D consulting, products, patents, and research.",
+    description: "Applied AI Research: R&D consulting, products, patents, and research.",
     images: ["/og-image.jpg"],
   },
 };

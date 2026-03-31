@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/site-footer";
 
 export const metadata: Metadata = {
   title: "Careers | Evlogia",
-  description: "Join Evlogia — Applied AI Research. We're looking for researchers and engineers who want to do work worth publishing.",
+  description: "Join Evlogia. Applied AI Research. We're looking for researchers and engineers who want to do work worth publishing.",
 };
 
 export default function CareersPage() {
@@ -42,7 +42,7 @@ export default function CareersPage() {
             <div>
               <h2 className="font-serif text-black/80 text-xl mb-4">Who we are</h2>
               <p className="font-sans text-black/50 text-sm leading-relaxed">
-                We&apos;re not a large company and we don&apos;t want to be. What we are is exacting — about the problems we take on, the solutions we build, and the people we work with. Our output is peer-reviewed research, production AI systems, and filed patents. We measure success by whether the work holds up under scrutiny, not by whether it ships fast.
+                We&apos;re not a large company and we don&apos;t want to be. What we are is exacting: about the problems we take on, the solutions we build, and the people we work with. Our output is peer-reviewed research, production AI systems, and filed patents. We measure success by whether the work holds up under scrutiny, not by whether it ships fast.
               </p>
             </div>
 
@@ -51,13 +51,13 @@ export default function CareersPage() {
               <ul className="space-y-3">
                 {[
                   "Deep technical ability in ML research, AI systems engineering, or both",
-                  "Comfort operating at the frontier — where the problem isn't fully defined",
+                  "Comfort operating at the frontier, where the problem isn't fully defined",
                   "The discipline to be rigorous without being slow",
                   "A genuine interest in seeing research through to product and patent",
                   "The kind of curiosity that makes you read the paper, not just the abstract",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3 font-sans text-black/50 text-sm leading-relaxed">
-                    <span className="text-black/20 mt-0.5 shrink-0">—</span>
+                    <span className="text-black/20 mt-0.5 shrink-0">·</span>
                     {item}
                   </li>
                 ))}
@@ -67,7 +67,7 @@ export default function CareersPage() {
             <div>
               <h2 className="font-serif text-black/80 text-xl mb-4">How to apply</h2>
               <p className="font-sans text-black/50 text-sm leading-relaxed mb-6">
-                We don&apos;t post job listings. When we&apos;re looking, we&apos;re looking for a specific kind of person. If you think that&apos;s you, send us your CV, any relevant work — papers, code, patents, projects — and a short note on what you&apos;re working on and what you want to build.
+                We don&apos;t post job listings. When we&apos;re looking, we&apos;re looking for a specific kind of person. If you think that&apos;s you, send us your CV and any relevant work: papers, code, patents, projects. Include a short note on what you&apos;re working on and what you want to build.
               </p>
               <a
                 href="mailto:careers@evlogia.ai"

@@ -15,7 +15,7 @@ const steps = [
   {
     id: "02",
     title: "Design & Build",
-    desc: "Design and engineering run in parallel. You see progress weekly. Nothing gets lost between a Figma file and a pull request — or between a research finding and a deployed system.",
+    desc: "Design and engineering run in parallel. You see progress weekly. Nothing gets lost between a Figma file and a pull request, or between a research finding and a deployed system.",
   },
   {
     id: "03",
@@ -221,7 +221,7 @@ export function HowWeWork() {
           <em className="not-italic text-black/90">We build.</em>
         </h2>
         <p className="font-sans text-black/50 text-[15px] leading-relaxed max-w-xl">
-          Scoped properly, built cleanly, shipped on time. No handoffs, no disappearing acts — just a team that owns the outcome.
+          Scoped properly, built cleanly, shipped on time. No handoffs. No disappearing acts. A team that owns the outcome.
         </p>
       </div>
 

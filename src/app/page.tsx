@@ -135,7 +135,7 @@ export default function Home() {
                       Product & Platform Engineering
                     </h3>
                     <p className="font-sans text-black/50 text-sm md:text-[15px] leading-relaxed max-w-lg">
-                      Websites, web apps, mobile apps, platforms. We scope it, design it, build it, and ship it — without you managing an in-house team.
+                      Websites, web apps, mobile apps, platforms. We scope it, design it, build it, and ship it. No in-house team to manage.
                     </p>
                   </div>
                 </div>
@@ -206,7 +206,7 @@ export default function Home() {
                       Research & IP
                     </h3>
                     <p className="font-sans text-black/50 text-sm md:text-[15px] leading-relaxed mb-6 max-w-lg">
-                      For clients working on frontier problems — we run experiments, file patents, and submit to peer-reviewed venues.
+                      For clients on frontier problems. We run the experiments, file the patents, and submit to peer-reviewed venues.
                     </p>
                     <div className="flex flex-wrap gap-1.5">
                       {["NeurIPS", "ICML", "ICLR", "AAAI", "CVPR", "ECCV"].map((v) => (
@@ -264,7 +264,7 @@ export default function Home() {
               />
               <ScrollReveal>
                 <p className="font-sans text-black/50 text-[15px] max-w-md mx-auto leading-relaxed">
-                  For clients doing frontier work — we run the experiments, protect the IP, and publish what holds up.
+                  For clients doing frontier work. We run the experiments, protect the IP, and publish what holds up.
                 </p>
               </ScrollReveal>
             </div>
@@ -401,7 +401,7 @@ export default function Home() {
                     }}
                   />
                   <p className="font-sans text-black/50 text-[15px] leading-relaxed max-w-xl mb-10 md:mb-14">
-                    We&apos;re a product and engineering team that builds real systems — products, platforms, internal tools, and applied AI. We&apos;ve shipped across industries and we own the outcome, not just the deliverable.
+                    We&apos;re a product and engineering team. Products, platforms, internal tools, applied AI. Shipped across industries. We own the outcome, not just the deliverable.
                   </p>
 
                   <div className="grid md:grid-cols-3 gap-6 md:gap-10">
@@ -412,7 +412,7 @@ export default function Home() {
                       },
                       {
                         title: "We own the outcome.",
-                        desc: "Scope, build, ship. When something needs to change mid-engagement, we adapt — not disappear.",
+                        desc: "Scope, build, ship. When something needs to change mid-engagement, we adapt. We don't disappear.",
                       },
                       {
                         title: "We protect what's novel.",

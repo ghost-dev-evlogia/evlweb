@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 const sections = [
   {
     title: "1. Information We Collect",
-    body: `We collect information you provide directly — for example, when you fill out a contact form, send an email, or schedule a call through our booking tool. This may include your name, email address, company name, and the contents of your message. We also collect limited usage data automatically, such as pages visited and referral sources, through analytics tools.`,
+    body: `We collect information you provide directly: for example, when you fill out a contact form, send an email, or schedule a call through our booking tool. This may include your name, email address, company name, and the contents of your message. We also collect limited usage data automatically, such as pages visited and referral sources, through analytics tools.`,
   },
   {
     title: "2. How We Use Your Information",
@@ -18,7 +18,7 @@ const sections = [
   },
   {
     title: "3. Cookies and Analytics",
-    body: `This site may use cookies and similar tracking technologies to understand usage patterns. These are standard session and analytics cookies — they do not identify you personally. You can configure your browser to refuse cookies, though some functionality may be affected. We use privacy-conscious analytics and do not build individual profiles from this data.`,
+    body: `This site may use cookies and similar tracking technologies to understand usage patterns. These are standard session and analytics cookies. They do not identify you personally. You can configure your browser to refuse cookies, though some functionality may be affected. We use privacy-conscious analytics and do not build individual profiles from this data.`,
   },
   {
     title: "4. Third-Party Services",
@@ -30,7 +30,7 @@ const sections = [
   },
   {
     title: "6. Data Retention",
-    body: `We retain personal information only as long as necessary for the purposes described in this policy — typically the duration of a business relationship or inquiry, plus a reasonable period thereafter. You may request deletion of your data at any time.`,
+    body: `We retain personal information only as long as necessary for the purposes described in this policy: typically the duration of a business relationship or inquiry, plus a reasonable period thereafter. You may request deletion of your data at any time.`,
   },
   {
     title: "7. Security",

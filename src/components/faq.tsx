@@ -18,7 +18,7 @@ const faqs = [
   },
   {
     q: "Who owns the code and IP?",
-    a: "You do. All code, assets, and IP developed during an engagement belong to you. If the work produces something patentable, we handle the filing — but it's yours. Our standard agreement makes this explicit.",
+    a: "You do. All code, assets, and IP developed during an engagement belong to you. If the work produces something patentable, we handle the filing. It's yours. Our standard agreement makes this explicit.",
   },
   {
     q: "How do you handle confidentiality?",
@@ -26,7 +26,7 @@ const faqs = [
   },
   {
     q: "What does it cost?",
-    a: "We price on a project basis, not hourly — scope and timeline determine cost. Reach out and we'll put together a clear scope and estimate.",
+    a: "We price on a project basis, not hourly. Scope and timeline determine cost. Reach out and we'll put together a clear scope and estimate.",
   },
   {
     q: "Can we start small before committing to a full build?",

@@ -18,7 +18,7 @@ const sections = [
   },
   {
     title: "3. Intellectual Property",
-    body: `All content on this site — including text, design, graphics, logos, research summaries, and visual elements — is the property of Evlogia or its licensors and is protected by applicable copyright and intellectual property law. You may not reproduce, distribute, or create derivative works without explicit written permission.`,
+    body: `All content on this site, including text, design, graphics, logos, research summaries, and visual elements, is the property of Evlogia or its licensors and is protected by applicable copyright and intellectual property law. You may not reproduce, distribute, or create derivative works without explicit written permission.`,
   },
   {
     title: "4. Services and Engagements",
@@ -30,7 +30,7 @@ const sections = [
   },
   {
     title: "6. Limitation of Liability",
-    body: `To the maximum extent permitted by applicable law, Evlogia and its affiliates, officers, and employees shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of, or inability to use, this site or its content — even if we have been advised of the possibility of such damages.`,
+    body: `To the maximum extent permitted by applicable law, Evlogia and its affiliates, officers, and employees shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of, or inability to use, this site or its content, even if we have been advised of the possibility of such damages.`,
   },
   {
     title: "7. Third-Party Links and Services",
