@@ -52,7 +52,14 @@ export default function Home() {
                 <div
                   key={i}
                   className="relative h-7 w-24 shrink-0"
-                  style={{ filter: "grayscale(1) brightness(0.15) opacity(0.45)" }}
+                  style={{
+                    // multiply: white backgrounds vanish against the off-white site bg
+                    // Edoxi has white-on-blue logo → invert so it reads as dark-on-light
+                    mixBlendMode: "multiply",
+                    filter: logo.name === "Edoxi"
+                      ? "grayscale(1) invert(1) opacity(0.5)"
+                      : "grayscale(1) opacity(0.5)",
+                  }}
                 >
                   <Image
                     src={logo.src}
