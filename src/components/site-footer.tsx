@@ -24,10 +24,15 @@ export function SiteFooter() {
     <footer className="px-4 pb-6 pt-2 md:px-6 md:pb-8">
       <div className="max-w-5xl mx-auto" ref={ref}>
         <motion.div
-          className="glass-card rounded-3xl px-7 py-8 md:px-10 md:py-10"
+          className="doppelrand"
+          style={{ borderRadius: "2.5rem" }}
           initial={{ opacity: 0, y: 32 }}
           animate={inView ? { opacity: 1, y: 0 } : undefined}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
+        <div
+          className="doppelrand-inner px-7 py-8 md:px-10 md:py-10"
+          style={{ borderRadius: "calc(2.5rem - 6px)" }}
         >
           {/* Top row: ASCII logo + nav */}
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-8 md:gap-6 mb-8 md:mb-10">
@@ -127,6 +132,7 @@ export function SiteFooter() {
 
             <p className="font-sans text-black/20 text-[11px]">Evlogia Labs Private Limited</p>
           </div>
+        </div>
         </motion.div>
       </div>
     </footer>

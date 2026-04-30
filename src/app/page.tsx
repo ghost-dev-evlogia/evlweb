@@ -41,11 +41,10 @@ export default function Home() {
         {/* ─── Client logos ─── */}
         <div className="border-y" style={{ borderColor: "rgba(0,0,0,0.07)" }}>
           <div className="pt-5 pb-1">
-            <p
-              className="text-center font-sans text-[9px] tracking-[0.28em] uppercase mb-4"
-              style={{ color: "rgba(0,0,0,0.22)" }}
-            >
-              Trusted by
+            <p className="text-center">
+              <span className="inline-flex font-sans text-black/35 text-[9px] tracking-[0.2em] uppercase rounded-full bg-black/[0.03] px-3 py-1 border border-black/[0.05]">
+                Trusted by
+              </span>
             </p>
           </div>
           <div className="marquee-wrapper pb-5">
@@ -81,7 +80,7 @@ export default function Home() {
         </div>
 
         {/* ─── Stats ─── */}
-        <section className="px-6 py-10 md:py-20">
+        <section className="px-6 py-16 md:py-28">
           <StaggerGrid className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
               { target: 50, suffix: "+", label: "Systems Shipped" },
@@ -90,12 +89,14 @@ export default function Home() {
               { target: 8, suffix: "", label: "Industries" },
             ].map(({ target, suffix, label }) => (
               <StaggerItem key={label} className="h-full">
-                <div className="glass-card card-hover rounded-2xl p-5 md:p-6 text-center h-full flex flex-col items-center justify-center min-h-[110px]">
-                  <div className="font-serif text-black/90 text-3xl md:text-4xl mb-1.5 leading-none">
-                    <AnimatedCounter target={target} suffix={suffix} />
-                  </div>
-                  <div className="font-sans text-black/35 text-[9px] md:text-[10px] tracking-widest uppercase leading-tight">
-                    {label}
+                <div className="doppelrand h-full">
+                  <div className="doppelrand-inner card-hover p-5 md:p-6 text-center h-full flex flex-col items-center justify-center min-h-[110px]">
+                    <div className="font-serif text-black/90 text-3xl md:text-4xl mb-1.5 leading-none">
+                      <AnimatedCounter target={target} suffix={suffix} />
+                    </div>
+                    <div className="font-sans text-black/35 text-[9px] md:text-[10px] tracking-widest uppercase leading-tight">
+                      {label}
+                    </div>
                   </div>
                 </div>
               </StaggerItem>
@@ -109,10 +110,10 @@ export default function Home() {
         </div>
 
         {/* ─── Services ─── */}
-        <section id="services" className="scroll-mt-20 px-6 py-12 md:py-28">
+        <section id="services" className="scroll-mt-20 px-6 py-24 md:py-32">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-10 md:mb-16">
-              <RevealLabel className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-3">
+              <RevealLabel className="inline-flex font-sans text-black/40 text-[10px] tracking-[0.2em] uppercase mb-4 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
                 What We Do
               </RevealLabel>
               <SplitHeading
@@ -131,105 +132,113 @@ export default function Home() {
             <StaggerGrid className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
               {/* 01 — Product & Platform Engineering — featured wide */}
               <StaggerItem className="md:col-span-2 h-full">
-                <div className="glass-card card-hover rounded-2xl p-6 md:p-9 relative overflow-hidden h-full">
-                  <div
-                    className="absolute -right-4 -bottom-6 font-serif text-black/[0.04] leading-none select-none pointer-events-none"
-                    style={{ fontSize: "clamp(6rem, 12vw, 10rem)" }}
-                    aria-hidden
-                  >
-                    01
-                  </div>
-                  <div className="relative">
-                    <div className="font-sans text-black/18 text-[10px] tracking-widest mb-5">01</div>
-                    <h3
-                      className="font-serif text-black/90 text-2xl md:text-3xl mb-4 leading-snug"
-                      style={{ letterSpacing: "-0.01em" }}
+                <div className="doppelrand h-full">
+                  <div className="doppelrand-inner card-hover p-6 md:p-9 relative overflow-hidden h-full">
+                    <div
+                      className="absolute -right-4 -bottom-6 font-serif text-black/[0.04] leading-none select-none pointer-events-none"
+                      style={{ fontSize: "clamp(6rem, 12vw, 10rem)" }}
+                      aria-hidden
                     >
-                      Product & Platform Engineering
-                    </h3>
-                    <p className="font-sans text-black/50 text-sm md:text-[15px] leading-relaxed max-w-lg">
-                      Websites, web apps, mobile apps, platforms. We scope it, design it, build it, and ship it. No in-house team to manage.
-                    </p>
+                      01
+                    </div>
+                    <div className="relative">
+                      <div className="font-sans text-black/18 text-[10px] tracking-widest mb-5">01</div>
+                      <h3
+                        className="font-serif text-black/90 text-2xl md:text-3xl mb-4 leading-snug"
+                        style={{ letterSpacing: "-0.01em" }}
+                      >
+                        Product & Platform Engineering
+                      </h3>
+                      <p className="font-sans text-black/50 text-sm md:text-[15px] leading-relaxed max-w-lg">
+                        Websites, web apps, mobile apps, platforms. We scope it, design it, build it, and ship it. No in-house team to manage.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </StaggerItem>
 
               {/* 02 — Internal Tools & Systems */}
               <StaggerItem className="h-full">
-                <div className="glass-card card-hover rounded-2xl p-6 md:p-9 relative overflow-hidden h-full">
-                  <div
-                    className="absolute -right-3 -bottom-5 font-serif text-black/[0.04] leading-none select-none pointer-events-none"
-                    style={{ fontSize: "clamp(5rem, 9vw, 8rem)" }}
-                    aria-hidden
-                  >
-                    02
+                <div className="doppelrand h-full">
+                  <div className="doppelrand-inner card-hover p-6 md:p-9 relative overflow-hidden h-full">
+                    <div
+                      className="absolute -right-3 -bottom-5 font-serif text-black/[0.04] leading-none select-none pointer-events-none"
+                      style={{ fontSize: "clamp(5rem, 9vw, 8rem)" }}
+                      aria-hidden
+                    >
+                      02
+                    </div>
+                    <div className="font-sans text-black/18 text-[10px] tracking-widest mb-5">02</div>
+                    <h3
+                      className="font-serif text-black/90 text-xl md:text-2xl mb-3 leading-snug"
+                      style={{ letterSpacing: "-0.01em" }}
+                    >
+                      Internal Tools & Systems
+                    </h3>
+                    <p className="font-sans text-black/50 text-sm md:text-[15px] leading-relaxed">
+                      Dashboards, admin panels, booking systems, workflow tools. The software your team actually depends on.
+                    </p>
                   </div>
-                  <div className="font-sans text-black/18 text-[10px] tracking-widest mb-5">02</div>
-                  <h3
-                    className="font-serif text-black/90 text-xl md:text-2xl mb-3 leading-snug"
-                    style={{ letterSpacing: "-0.01em" }}
-                  >
-                    Internal Tools & Systems
-                  </h3>
-                  <p className="font-sans text-black/50 text-sm md:text-[15px] leading-relaxed">
-                    Dashboards, admin panels, booking systems, workflow tools. The software your team actually depends on.
-                  </p>
                 </div>
               </StaggerItem>
 
               {/* 03 — Applied AI */}
               <StaggerItem className="h-full">
-                <div className="glass-card card-hover rounded-2xl p-6 md:p-9 relative overflow-hidden h-full">
-                  <div
-                    className="absolute -right-3 -bottom-5 font-serif text-black/[0.04] leading-none select-none pointer-events-none"
-                    style={{ fontSize: "clamp(5rem, 9vw, 8rem)" }}
-                    aria-hidden
-                  >
-                    03
+                <div className="doppelrand h-full">
+                  <div className="doppelrand-inner card-hover p-6 md:p-9 relative overflow-hidden h-full">
+                    <div
+                      className="absolute -right-3 -bottom-5 font-serif text-black/[0.04] leading-none select-none pointer-events-none"
+                      style={{ fontSize: "clamp(5rem, 9vw, 8rem)" }}
+                      aria-hidden
+                    >
+                      03
+                    </div>
+                    <div className="font-sans text-black/18 text-[10px] tracking-widest mb-5">03</div>
+                    <h3
+                      className="font-serif text-black/90 text-xl md:text-2xl mb-3 leading-snug"
+                      style={{ letterSpacing: "-0.01em" }}
+                    >
+                      Applied AI
+                    </h3>
+                    <p className="font-sans text-black/50 text-sm md:text-[15px] leading-relaxed">
+                      AI where it actually solves something. We integrate models into real products and build custom solutions when off-the-shelf doesn&apos;t cut it.
+                    </p>
                   </div>
-                  <div className="font-sans text-black/18 text-[10px] tracking-widest mb-5">03</div>
-                  <h3
-                    className="font-serif text-black/90 text-xl md:text-2xl mb-3 leading-snug"
-                    style={{ letterSpacing: "-0.01em" }}
-                  >
-                    Applied AI
-                  </h3>
-                  <p className="font-sans text-black/50 text-sm md:text-[15px] leading-relaxed">
-                    AI where it actually solves something. We integrate models into real products and build custom solutions when off-the-shelf doesn&apos;t cut it.
-                  </p>
                 </div>
               </StaggerItem>
 
               {/* 04 — IoT & Connected Devices — featured wide */}
               <StaggerItem className="md:col-span-2 h-full">
-                <div className="glass-card card-hover rounded-2xl p-6 md:p-9 relative overflow-hidden h-full">
-                  <div
-                    className="absolute -right-4 -bottom-6 font-serif text-black/[0.04] leading-none select-none pointer-events-none"
-                    style={{ fontSize: "clamp(6rem, 12vw, 10rem)" }}
-                    aria-hidden
-                  >
-                    04
-                  </div>
-                  <div className="relative">
-                    <div className="font-sans text-black/18 text-[10px] tracking-widest mb-5">04</div>
-                    <h3
-                      className="font-serif text-black/90 text-2xl md:text-3xl mb-4 leading-snug"
-                      style={{ letterSpacing: "-0.01em" }}
+                <div className="doppelrand h-full">
+                  <div className="doppelrand-inner card-hover p-6 md:p-9 relative overflow-hidden h-full">
+                    <div
+                      className="absolute -right-4 -bottom-6 font-serif text-black/[0.04] leading-none select-none pointer-events-none"
+                      style={{ fontSize: "clamp(6rem, 12vw, 10rem)" }}
+                      aria-hidden
                     >
-                      IoT & Connected Devices
-                    </h3>
-                    <p className="font-sans text-black/50 text-sm md:text-[15px] leading-relaxed mb-6 max-w-lg">
-                      Sensor pipelines, embedded firmware, connected hardware. We've shipped IoT products that required real engineering discipline, from prototype through production.
-                    </p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {["Embedded", "Firmware", "Sensors", "Edge AI", "Cloud Sync", "Protocols"].map((v) => (
-                        <span
-                          key={v}
-                          className="font-sans text-[10px] tracking-wide text-black/50 border border-black/10 rounded-full px-2.5 py-0.5"
-                        >
-                          {v}
-                        </span>
-                      ))}
+                      04
+                    </div>
+                    <div className="relative">
+                      <div className="font-sans text-black/18 text-[10px] tracking-widest mb-5">04</div>
+                      <h3
+                        className="font-serif text-black/90 text-2xl md:text-3xl mb-4 leading-snug"
+                        style={{ letterSpacing: "-0.01em" }}
+                      >
+                        IoT & Connected Devices
+                      </h3>
+                      <p className="font-sans text-black/50 text-sm md:text-[15px] leading-relaxed mb-6 max-w-lg">
+                        Sensor pipelines, embedded firmware, connected hardware. We've shipped IoT products that required real engineering discipline, from prototype through production.
+                      </p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {["Embedded", "Firmware", "Sensors", "Edge AI", "Cloud Sync", "Protocols"].map((v) => (
+                          <span
+                            key={v}
+                            className="font-sans text-[10px] tracking-wide text-black/50 border border-black/10 rounded-full px-2.5 py-0.5"
+                          >
+                            {v}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -244,7 +253,7 @@ export default function Home() {
         </div>
 
         {/* ─── How We Work ─── */}
-        <section id="how-we-work" className="scroll-mt-20 px-6 py-12 md:py-28">
+        <section id="how-we-work" className="scroll-mt-20 px-6 py-24 md:py-32">
           <div className="max-w-5xl mx-auto">
             <ScrollReveal variant="scale">
               <HowWeWork />
@@ -258,10 +267,10 @@ export default function Home() {
         </div>
 
         {/* ─── Technical Depth ─── */}
-        <section id="depth" className="scroll-mt-20 px-6 py-12 md:py-28">
+        <section id="depth" className="scroll-mt-20 px-6 py-24 md:py-32">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-10 md:mb-16">
-              <RevealLabel className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-3">
+              <RevealLabel className="inline-flex font-sans text-black/40 text-[10px] tracking-[0.2em] uppercase mb-4 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
                 Technical Depth
               </RevealLabel>
               <SplitHeading
@@ -285,66 +294,72 @@ export default function Home() {
             <StaggerGrid className="grid md:grid-cols-3 gap-3 md:gap-4">
               {/* Applied AI card */}
               <StaggerItem className="h-full">
-                <div className="glass-card card-hover rounded-2xl p-6 md:p-8 h-full flex flex-col gap-4">
-                  <div className="font-sans text-black/30 text-[10px] tracking-[0.25em] uppercase">
-                    Applied AI
-                  </div>
-                  <p className="font-sans text-black/55 text-sm leading-relaxed">
-                    Production AI systems, not prototypes. LLMs, computer vision, multimodal pipelines, and retrieval infrastructure. Built to run in the real world.
-                  </p>
-                  <div className="flex flex-wrap gap-1.5 mt-auto">
-                    {["LLMs", "Vision", "Multimodal", "Agents", "RAG"].map((v) => (
-                      <span
-                        key={v}
-                        className="font-sans text-[10px] tracking-wide text-black/50 border border-black/10 rounded-full px-2.5 py-0.5"
-                      >
-                        {v}
-                      </span>
-                    ))}
+                <div className="doppelrand h-full">
+                  <div className="doppelrand-inner card-hover p-6 md:p-8 h-full flex flex-col gap-4">
+                    <div className="font-sans text-black/30 text-[10px] tracking-[0.25em] uppercase">
+                      Applied AI
+                    </div>
+                    <p className="font-sans text-black/55 text-sm leading-relaxed">
+                      Production AI systems, not prototypes. LLMs, computer vision, multimodal pipelines, and retrieval infrastructure. Built to run in the real world.
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 mt-auto">
+                      {["LLMs", "Vision", "Multimodal", "Agents", "RAG"].map((v) => (
+                        <span
+                          key={v}
+                          className="font-sans text-[10px] tracking-wide text-black/50 border border-black/10 rounded-full px-2.5 py-0.5"
+                        >
+                          {v}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </StaggerItem>
 
               {/* IoT card */}
               <StaggerItem className="h-full">
-                <div className="glass-card card-hover rounded-2xl p-6 md:p-8 h-full flex flex-col gap-4">
-                  <div className="font-sans text-black/30 text-[10px] tracking-[0.25em] uppercase">
-                    IoT & Hardware
-                  </div>
-                  <p className="font-sans text-black/55 text-sm leading-relaxed">
-                    Connected hardware that does what it's supposed to. Sensor pipelines, embedded firmware, cloud-connected devices. We've built things worth building properly.
-                  </p>
-                  <div className="flex flex-wrap gap-1.5 mt-auto">
-                    {["Firmware", "Sensors", "Edge", "Protocols", "Cloud"].map((v) => (
-                      <span
-                        key={v}
-                        className="font-sans text-[10px] tracking-wide text-black/50 border border-black/10 rounded-full px-2.5 py-0.5"
-                      >
-                        {v}
-                      </span>
-                    ))}
+                <div className="doppelrand h-full">
+                  <div className="doppelrand-inner card-hover p-6 md:p-8 h-full flex flex-col gap-4">
+                    <div className="font-sans text-black/30 text-[10px] tracking-[0.25em] uppercase">
+                      IoT & Hardware
+                    </div>
+                    <p className="font-sans text-black/55 text-sm leading-relaxed">
+                      Connected hardware that does what it's supposed to. Sensor pipelines, embedded firmware, cloud-connected devices. We've built things worth building properly.
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 mt-auto">
+                      {["Firmware", "Sensors", "Edge", "Protocols", "Cloud"].map((v) => (
+                        <span
+                          key={v}
+                          className="font-sans text-[10px] tracking-wide text-black/50 border border-black/10 rounded-full px-2.5 py-0.5"
+                        >
+                          {v}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </StaggerItem>
 
               {/* Complex Platforms card */}
               <StaggerItem className="h-full">
-                <div className="glass-card card-hover rounded-2xl p-6 md:p-8 h-full flex flex-col gap-4">
-                  <div className="font-sans text-black/30 text-[10px] tracking-[0.25em] uppercase">
-                    Complex Platforms
-                  </div>
-                  <p className="font-sans text-black/55 text-sm leading-relaxed">
-                    Multi-tenant systems, high-stakes data flows, and platforms where getting the architecture wrong is expensive. We've built them and handed them off clean.
-                  </p>
-                  <div className="flex flex-wrap gap-1.5 mt-auto">
-                    {["Multi-tenant", "APIs", "Data pipelines", "Infrastructure"].map((v) => (
-                      <span
-                        key={v}
-                        className="font-sans text-[10px] tracking-wide text-black/50 border border-black/10 rounded-full px-2.5 py-0.5"
-                      >
-                        {v}
-                      </span>
-                    ))}
+                <div className="doppelrand h-full">
+                  <div className="doppelrand-inner card-hover p-6 md:p-8 h-full flex flex-col gap-4">
+                    <div className="font-sans text-black/30 text-[10px] tracking-[0.25em] uppercase">
+                      Complex Platforms
+                    </div>
+                    <p className="font-sans text-black/55 text-sm leading-relaxed">
+                      Multi-tenant systems, high-stakes data flows, and platforms where getting the architecture wrong is expensive. We've built them and handed them off clean.
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 mt-auto">
+                      {["Multi-tenant", "APIs", "Data pipelines", "Infrastructure"].map((v) => (
+                        <span
+                          key={v}
+                          className="font-sans text-[10px] tracking-wide text-black/50 border border-black/10 rounded-full px-2.5 py-0.5"
+                        >
+                          {v}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </StaggerItem>
@@ -358,10 +373,10 @@ export default function Home() {
         </div>
 
         {/* ─── Testimonials ─── */}
-        <section id="testimonials" className="scroll-mt-20 px-6 py-12 md:py-28">
+        <section id="testimonials" className="scroll-mt-20 px-6 py-24 md:py-32">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-4">
-              <RevealLabel className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-3">
+              <RevealLabel className="inline-flex font-sans text-black/40 text-[10px] tracking-[0.2em] uppercase mb-4 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
                 What Clients Say
               </RevealLabel>
               <SplitHeading
@@ -388,12 +403,13 @@ export default function Home() {
         </div>
 
         {/* ─── About ─── */}
-        <section id="about" className="scroll-mt-20 px-6 py-12 md:py-28">
+        <section id="about" className="scroll-mt-20 px-6 py-24 md:py-32">
           <div className="max-w-5xl mx-auto">
             <ScrollReveal variant="scale">
-              <div className="glass-card rounded-3xl p-7 sm:p-10 md:p-16 relative overflow-hidden">
+              <div className="doppelrand" style={{ borderRadius: "2.5rem" }}>
+                <div className="doppelrand-inner p-7 sm:p-10 md:p-16 relative overflow-hidden" style={{ borderRadius: "calc(2.5rem - 6px)" }}>
                 <div className="relative">
-                  <p className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-4">
+                  <p className="inline-flex font-sans text-black/40 text-[10px] tracking-[0.2em] uppercase mb-5 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
                     Who We Are
                   </p>
                   <SplitHeading
@@ -435,6 +451,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+              </div>
             </ScrollReveal>
           </div>
         </section>
@@ -445,10 +462,10 @@ export default function Home() {
         </div>
 
         {/* ─── FAQ ─── */}
-        <section id="faq" className="scroll-mt-20 px-6 py-12 md:py-28">
+        <section id="faq" className="scroll-mt-20 px-6 py-24 md:py-32">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-10 md:mb-16">
-              <RevealLabel className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-3">
+              <RevealLabel className="inline-flex font-sans text-black/40 text-[10px] tracking-[0.2em] uppercase mb-4 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
                 FAQ
               </RevealLabel>
               <SplitHeading
@@ -476,12 +493,13 @@ export default function Home() {
         </div>
 
         {/* ─── CTA ─── */}
-        <section id="contact" className="px-6 pb-20 md:pb-28 pt-6 md:pt-8">
+        <section id="contact" className="px-6 pb-24 md:pb-32 pt-8 md:pt-12">
           <div className="max-w-3xl mx-auto">
             <ScrollReveal variant="scale">
-              <div className="glass-card rounded-3xl p-6 sm:p-12 md:p-20 text-center relative overflow-hidden">
+              <div className="doppelrand" style={{ borderRadius: "2.5rem" }}>
+              <div className="doppelrand-inner p-6 sm:p-12 md:p-20 text-center relative overflow-hidden" style={{ borderRadius: "calc(2.5rem - 6px)" }}>
                 <div className="relative">
-                  <RevealLabel className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-4">
+                  <RevealLabel className="inline-flex font-sans text-black/40 text-[10px] tracking-[0.2em] uppercase mb-5 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
                     Get Started
                   </RevealLabel>
                   <SplitHeading
@@ -503,13 +521,16 @@ export default function Home() {
                       data-cal-link="ethankd/strategy"
                       data-cal-namespace="strategy"
                       data-cal-config='{"layout":"month_view","theme":"light","useSlotsViewOnSmallScreen":"true"}'
-                      className="inline-flex items-center gap-2 sm:gap-3 glass rounded-full px-5 sm:px-8 py-3 sm:py-3.5 text-black/80 font-sans font-medium text-xs sm:text-sm border border-black/10 hover:bg-black/5 hover:scale-[1.03] transition-all duration-300 cursor-pointer"
+                      className="group inline-flex items-center gap-2 sm:gap-3 glass rounded-full pl-6 sm:pl-8 pr-2 sm:pr-2.5 py-2 sm:py-2.5 text-black/80 font-sans font-medium text-xs sm:text-sm border border-black/10 hover:bg-black/5 active:scale-[0.98] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] cursor-pointer"
                     >
                       Start a Conversation
-                      <span className="text-black/35 text-xs">→</span>
+                      <span className="flex items-center justify-center w-8 h-8 rounded-full bg-black/[0.06] transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5 group-hover:-translate-y-px group-hover:scale-105">
+                        <span className="text-black/50 text-xs">&#8599;</span>
+                      </span>
                     </button>
                   </div>
                 </div>
+              </div>
               </div>
             </ScrollReveal>
           </div>

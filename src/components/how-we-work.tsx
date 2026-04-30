@@ -202,11 +202,12 @@ export function HowWeWork() {
   const VisualComponent = visuals[activeIndex]
 
   return (
-    <div className="glass-card rounded-3xl overflow-hidden">
+    <div className="doppelrand" style={{ borderRadius: "2.5rem" }}>
+    <div className="doppelrand-inner overflow-hidden" style={{ borderRadius: "calc(2.5rem - 6px)" }}>
 
       {/* ── Card header ── */}
       <div className="px-7 sm:px-10 md:px-14 pt-10 md:pt-14 pb-8 md:pb-10">
-        <p className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-4">
+        <p className="inline-flex font-sans text-black/40 text-[10px] tracking-[0.2em] uppercase mb-5 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
           How We Work
         </p>
         <h2
@@ -270,7 +271,7 @@ export function HowWeWork() {
                 key={step.id}
                 onClick={() => handleSelect(i)}
                 className={cn(
-                  "font-sans text-[10px] tracking-[0.15em] uppercase rounded-full px-4 py-2 transition-all duration-300 cursor-pointer",
+                  "font-sans text-[10px] tracking-[0.15em] uppercase rounded-full px-4 py-2 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] cursor-pointer active:scale-[0.97]",
                   i === activeIndex
                     ? "bg-black/85 text-white"
                     : "bg-black/[0.04] text-black/45 hover:bg-black/[0.07] hover:text-black/60",
@@ -295,7 +296,7 @@ export function HowWeWork() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.35, ease: "easeInOut" }}
+              transition={{ duration: 0.35, ease: [0.32, 0.72, 0, 1] }}
             >
               <VisualComponent />
             </motion.div>
@@ -303,6 +304,7 @@ export function HowWeWork() {
         </div>
       </div>
 
+    </div>
     </div>
   )
 }

@@ -87,7 +87,7 @@ export function AuthLoader() {
                 style={{ border: "1px solid rgba(5,150,105,0.25)", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
                 initial={{ width: RING_BOX, height: RING_BOX, opacity: 0.5 }}
                 animate={{ width: RING_BOX + 36, height: RING_BOX + 36, opacity: 0 }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
+                transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
               />
             )}
           </AnimatePresence>

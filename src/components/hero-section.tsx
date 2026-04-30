@@ -123,14 +123,17 @@ export function HeroSection() {
               borderRadius="100px"
               blurIntensity="sm"
               draggable={false}
-              className="rounded-full p-2 px-3 text-white inline-flex items-center gap-2.5"
+              className="group rounded-full pl-5 pr-2 py-2 text-white inline-flex items-center gap-2.5 active:scale-[0.98] transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]"
             >
-              <span className="relative z-2">Start a Project →</span>
+              <span className="relative z-2 text-sm">Start a Project</span>
+              <span className="relative z-2 flex items-center justify-center w-7 h-7 rounded-full bg-white/10 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5 group-hover:-translate-y-px group-hover:scale-105">
+                <span className="text-white/80 text-xs">&#8599;</span>
+              </span>
             </LiquidGlassCard>
           </a>
           <a
             href="/#research"
-            className="text-white font-sans text-sm hover:text-white/65 transition-colors duration-300 flex items-center gap-1.5"
+            className="text-white font-sans text-sm hover:text-white/65 transition-colors duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] flex items-center gap-1.5 active:scale-[0.98]"
           >
             View Our Research
             <span className="text-xs opacity-60">↓</span>

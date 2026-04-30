@@ -63,7 +63,7 @@ export function Testimonials() {
 
         <p
           className={cn(
-            "text-2xl md:text-3xl font-serif font-light text-black/80 text-center max-w-2xl leading-relaxed transition-all duration-300 ease-out",
+            "text-2xl md:text-3xl font-serif font-light text-black/80 text-center max-w-2xl leading-relaxed transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]",
             isAnimating ? "opacity-0 blur-sm scale-[0.98]" : "opacity-100 blur-0 scale-100",
           )}
           style={{ letterSpacing: "-0.01em" }}
@@ -80,7 +80,7 @@ export function Testimonials() {
         {/* Role */}
         <p
           className={cn(
-            "font-sans text-[10px] text-black/35 tracking-[0.25em] uppercase transition-all duration-500 ease-out",
+            "font-sans text-[10px] text-black/35 tracking-[0.25em] uppercase transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]",
             isAnimating ? "opacity-0 translate-y-2" : "opacity-100 translate-y-0",
           )}
         >
