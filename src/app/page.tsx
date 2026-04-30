@@ -207,39 +207,52 @@ export default function Home() {
                 </div>
               </StaggerItem>
 
-              {/* 04 — IoT & Connected Devices — featured wide */}
-              <StaggerItem className="md:col-span-2 h-full">
+              {/* 04 — IoT & Connected Devices */}
+              <StaggerItem className="h-full">
                 <div className="doppelrand h-full">
                   <div className="doppelrand-inner card-hover p-6 md:p-9 relative overflow-hidden h-full">
                     <div
-                      className="absolute -right-4 -bottom-6 font-serif text-black/[0.04] leading-none select-none pointer-events-none"
-                      style={{ fontSize: "clamp(6rem, 12vw, 10rem)" }}
+                      className="absolute -right-3 -bottom-5 font-serif text-black/[0.04] leading-none select-none pointer-events-none"
+                      style={{ fontSize: "clamp(5rem, 9vw, 8rem)" }}
                       aria-hidden
                     >
                       04
                     </div>
-                    <div className="relative">
-                      <div className="font-sans text-black/18 text-[10px] tracking-widest mb-5">04</div>
-                      <h3
-                        className="font-serif text-black/90 text-2xl md:text-3xl mb-4 leading-snug"
-                        style={{ letterSpacing: "-0.01em" }}
-                      >
-                        IoT & Connected Devices
-                      </h3>
-                      <p className="font-sans text-black/50 text-sm md:text-[15px] leading-relaxed mb-6 max-w-lg">
-                        Sensor pipelines, embedded firmware, connected hardware. We've shipped IoT products that required real engineering discipline, from prototype through production.
-                      </p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {["Embedded", "Firmware", "Sensors", "Edge AI", "Cloud Sync", "Protocols"].map((v) => (
-                          <span
-                            key={v}
-                            className="font-sans text-[10px] tracking-wide text-black/50 border border-black/10 rounded-full px-2.5 py-0.5"
-                          >
-                            {v}
-                          </span>
-                        ))}
-                      </div>
+                    <div className="font-sans text-black/18 text-[10px] tracking-widest mb-5">04</div>
+                    <h3
+                      className="font-serif text-black/90 text-xl md:text-2xl mb-3 leading-snug"
+                      style={{ letterSpacing: "-0.01em" }}
+                    >
+                      IoT & Connected Devices
+                    </h3>
+                    <p className="font-sans text-black/50 text-sm md:text-[15px] leading-relaxed">
+                      Sensor pipelines, embedded firmware, connected hardware. From prototype through production.
+                    </p>
+                  </div>
+                </div>
+              </StaggerItem>
+
+              {/* 05 — Agentic AI Coaching */}
+              <StaggerItem className="h-full">
+                <div className="doppelrand h-full">
+                  <div className="doppelrand-inner card-hover p-6 md:p-9 relative overflow-hidden h-full">
+                    <div
+                      className="absolute -right-3 -bottom-5 font-serif text-black/[0.04] leading-none select-none pointer-events-none"
+                      style={{ fontSize: "clamp(5rem, 9vw, 8rem)" }}
+                      aria-hidden
+                    >
+                      05
                     </div>
+                    <div className="font-sans text-black/18 text-[10px] tracking-widest mb-5">05</div>
+                    <h3
+                      className="font-serif text-black/90 text-xl md:text-2xl mb-3 leading-snug"
+                      style={{ letterSpacing: "-0.01em" }}
+                    >
+                      Agentic AI Coaching
+                    </h3>
+                    <p className="font-sans text-black/50 text-sm md:text-[15px] leading-relaxed">
+                      We embed engineers inside your teams to coach AI-first practices across the full SDLC. Real delivery work, sustained behavior change.
+                    </p>
                   </div>
                 </div>
               </StaggerItem>
@@ -255,9 +268,7 @@ export default function Home() {
         {/* ─── How We Work ─── */}
         <section id="how-we-work" className="scroll-mt-20 px-6 py-24 md:py-32">
           <div className="max-w-5xl mx-auto">
-            <ScrollReveal variant="scale">
-              <HowWeWork />
-            </ScrollReveal>
+            <HowWeWork />
           </div>
         </section>
 

@@ -16,7 +16,7 @@ export function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-28 pb-24 text-center overflow-hidden"
+      className="relative min-h-[100dvh] flex flex-col items-center justify-center px-6 pt-28 pb-24 text-center overflow-hidden"
     >
       {/* Parallax video background */}
       <motion.div
@@ -61,7 +61,7 @@ export function HeroSection() {
 
         {/* Headline — word-by-word with blur-to-sharp */}
         <h1
-          className="font-serif text-white leading-[1.05] mb-6 md:mb-7 text-center w-full"
+          className="font-serif text-white leading-[1.05] mb-6 md:mb-7 text-center w-full [text-wrap:balance]"
           style={{
             fontSize: "clamp(1.5rem, 7.5vw, 7rem)",
             textShadow: "0 2px 40px rgba(0,0,0,0.45), 0 1px 8px rgba(0,0,0,0.3)",
@@ -97,7 +97,7 @@ export function HeroSection() {
 
         {/* Sub */}
         <motion.p
-          className="font-sans text-white/85 leading-relaxed mb-10 md:mb-12 max-w-md text-center"
+          className="font-sans text-white/85 leading-relaxed mb-10 md:mb-12 max-w-md text-center [text-wrap:pretty]"
           style={{
             fontSize: "clamp(1rem, 1.8vw, 1.15rem)",
             textShadow: "0 1px 16px rgba(0,0,0,0.65), 0 2px 32px rgba(0,0,0,0.45)",
