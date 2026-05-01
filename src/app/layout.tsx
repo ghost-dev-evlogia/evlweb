@@ -24,9 +24,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Evlogia | Applied AI Research",
+  title: "Evlogia | Product, Platform & Applied AI Engineering",
   description:
-    "Evlogia is a product and engineering company. We partner with businesses to solve hard technical problems, build production AI systems, IoT devices, and software platforms that get used.",
+    "Evlogia is a product and engineering team. We scope, design, build, and ship production AI systems, internal tools, IoT, and platforms for teams that need to ship in months — not just prototype in slides.",
   metadataBase: new URL("https://evlogia.ai"),
   icons: {
     icon: [
@@ -40,9 +40,9 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.json",
   openGraph: {
-    title: "Evlogia | Applied AI Research",
+    title: "Evlogia | The Applied AI Team That Ships",
     description:
-      "Applied AI Research: R&D consulting, proprietary products, patents, and research publications.",
+      "Production AI, internal tools, IoT, and platforms. Scoped properly, built cleanly, shipped on time.",
     url: "https://evlogia.ai",
     siteName: "Evlogia",
     locale: "en_US",
@@ -52,14 +52,14 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Evlogia: The Applied AI Lab That Ships.",
+        alt: "Evlogia: The Applied AI Team That Ships.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Evlogia | Applied AI Research",
-    description: "Applied AI Research: R&D consulting, products, patents, and research.",
+    title: "Evlogia | The Applied AI Team That Ships",
+    description: "Production AI, internal tools, IoT, and platforms — built and shipped, not pitched.",
     images: ["/og-image.jpg"],
   },
 };
@@ -72,9 +72,22 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geist.variable} ${instrumentSerif.variable} h-full antialiased`}
+      className={`${geist.variable} ${instrumentSerif.variable} h-full antialiased no-js`}
+      suppressHydrationWarning
     >
+      <head>
+        {/* Drop the no-js class as soon as JS runs, so reveal animations stay
+            opt-in for crawlers / no-JS users while normal visitors get the
+            choreographed entry. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');",
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
+        <a href="#main" className="skip-link">Skip to content</a>
         {SHOW_AUTH_LOADER && <AuthLoader />}
         <PageTransition>{children}</PageTransition>
       </body>

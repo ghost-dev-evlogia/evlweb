@@ -24,17 +24,37 @@ html {
   scroll-padding-top: 5rem;
 }
 
-/* ─── Focus ring (accessibility) ─── */
+/* ─── Focus ring (accessibility) ───
+   3:1+ on light surface; white variant on photographic/dark surfaces via
+   [data-on-image] scope. WCAG 2.2 AA 1.4.11 + 2.4.7. */
 :focus-visible {
-  outline: 2px solid rgba(0, 0, 0, 0.25);
-  outline-offset: 2px;
+  outline: 2px solid #0a0a0a;
+  outline-offset: 3px;
   border-radius: 4px;
 }
 
-button:focus-visible,
-a:focus-visible {
-  outline: 2px solid rgba(0, 0, 0, 0.3);
-  outline-offset: 2px;
+[data-on-image] :focus-visible,
+.on-image:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+/* ─── Skip link ─── */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.625rem 1rem;
+  background: #0a0a0a;
+  color: #ffffff;
+  font-family: var(--font-geist), system-ui, sans-serif;
+  font-size: 0.875rem;
+  border-radius: 999px;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 1rem;
 }
 
 body {
@@ -135,6 +155,11 @@ body::after {
     black 88%,
     transparent 100%
   );
+}
+
+.marquee-wrapper:hover .marquee-track,
+.marquee-wrapper:focus-within .marquee-track {
+  animation-play-state: paused;
 }
 
 /* ─── Animations ─── */
@@ -298,10 +323,48 @@ body::after {
   left: 0;
   right: 0;
   height: 1px;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.55);
   transform: scaleX(0);
   transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
 }
 .nav-link:hover::after {
   transform: scaleX(1);
+}
+
+/* ─── Crawler / no-JS fallback ───
+   When JS is disabled, IntersectionObserver-driven reveals never fire.
+   Force-show all reveal targets so SSR + no-JS + share-card crawlers
+   render the page complete. */
+.no-js .reveal,
+.no-js .reveal-scale {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* ─── Reduced motion ───
+   WCAG 2.3.3. Honor OS-level motion preference. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .reveal-scale {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .scroll-bounce,
+  .marquee-track {
+    animation: none !important;
+  }
 }

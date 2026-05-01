@@ -49,18 +49,25 @@ export function AnimatedCounter({ target, suffix = "" }: Props) {
   const digits = String(target).split("").map(Number);
 
   return (
-    <span ref={ref} className="inline-flex items-center tabular-nums">
-      {digits.map((digit, i) => (
-        <DigitRoller key={i} target={inView ? digit : 0} />
-      ))}
-      {suffix && (
-        <span
-          className="inline-block"
-          style={{ lineHeight: `${SLOT_EM}em` }}
-        >
-          {suffix}
-        </span>
-      )}
+    <span
+      ref={ref}
+      className="inline-flex items-center tabular-nums"
+      role="text"
+      aria-label={`${target}${suffix}`}
+    >
+      <span aria-hidden="true" className="inline-flex items-center">
+        {digits.map((digit, i) => (
+          <DigitRoller key={i} target={inView ? digit : 0} />
+        ))}
+        {suffix && (
+          <span
+            className="inline-block"
+            style={{ lineHeight: `${SLOT_EM}em` }}
+          >
+            {suffix}
+          </span>
+        )}
+      </span>
     </span>
   );
 }

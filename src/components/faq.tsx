@@ -26,7 +26,7 @@ const faqs = [
   },
   {
     q: "What does it cost?",
-    a: "We price on a project basis, not hourly. Scope and timeline determine cost. Reach out and we'll put together a clear scope and estimate.",
+    a: "We price by project, not by the hour. Pilots and smaller scoped builds typically run in the low five figures. Full platforms and production AI builds typically run mid-five to mid-six figures, depending on scope and timeline. Send us your problem and we'll come back with a clear scope and a real number.",
   },
   {
     q: "Can we start small before committing to a full build?",
@@ -73,7 +73,7 @@ export function FAQ() {
                   }}
                   style={{ overflow: "hidden" }}
                 >
-                  <p className="font-sans text-black/55 text-sm md:text-[15px] leading-relaxed mt-3 pb-1 max-w-xl">
+                  <p className="font-sans text-black/75 text-sm md:text-[15px] leading-relaxed mt-3 pb-1 max-w-xl">
                     {a}
                   </p>
                 </motion.div>

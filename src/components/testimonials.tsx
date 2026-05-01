@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { cn } from "@/lib/utils"
 
 const testimonials = [
@@ -80,7 +81,7 @@ export function Testimonials() {
         {/* Role */}
         <p
           className={cn(
-            "font-sans text-[10px] text-black/35 tracking-[0.25em] uppercase transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]",
+            "font-sans text-[10px] text-black/55 tracking-[0.25em] uppercase transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]",
             isAnimating ? "opacity-0 translate-y-2" : "opacity-100 translate-y-0",
           )}
         >
@@ -97,9 +98,12 @@ export function Testimonials() {
             return (
               <button
                 key={testimonial.id}
+                type="button"
                 onClick={() => handleSelect(index)}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
+                aria-pressed={isActive}
+                aria-label={`Show testimonial from ${testimonial.author}, ${testimonial.role}`}
                 className={cn(
                   "relative flex items-center gap-0 rounded-full cursor-pointer",
                   "transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]",
@@ -107,11 +111,13 @@ export function Testimonials() {
                   showName ? "pr-4 pl-2 py-2" : "p-0.5",
                 )}
               >
-                <div className="relative flex-shrink-0">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                <div className="relative flex-shrink-0 w-8 h-8">
+                  <Image
                     src={testimonial.avatar}
-                    alt={testimonial.author}
+                    alt=""
+                    width={64}
+                    height={64}
+                    sizes="32px"
                     className={cn(
                       "w-8 h-8 rounded-full object-cover",
                       "transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]",

@@ -242,6 +242,7 @@ const steps = [
 export function HowWeWork() {
   const [active, setActive] = useState(0)
   const [timerKey, setTimerKey] = useState(0)
+  const [paused, setPaused] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const inView = useInView(containerRef, { once: true, margin: "-5% 0px" })
 
@@ -251,12 +252,13 @@ export function HowWeWork() {
   }, [])
 
   useEffect(() => {
-    if (!inView) return
+    if (!inView || paused) return
     const id = setTimeout(advance, STEP_INTERVAL)
     return () => clearTimeout(id)
-  }, [timerKey, advance, inView])
+  }, [timerKey, advance, inView, paused])
 
   const handleSelect = (i: number) => {
+    setPaused(true)
     if (i === active) return
     setActive(i)
     setTimerKey((k) => k + 1)
@@ -270,7 +272,7 @@ export function HowWeWork() {
 
         {/* Header */}
         <div className="px-6 sm:px-8 md:px-10 pt-8 md:pt-10 pb-6">
-          <p className="inline-flex font-sans text-black/40 text-[10px] tracking-[0.2em] uppercase mb-4 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
+          <p className="inline-flex font-sans text-black/65 text-[10px] tracking-[0.2em] uppercase mb-4 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
             How We Work
           </p>
           <h2
@@ -282,7 +284,7 @@ export function HowWeWork() {
           >
             Most agencies pitch. <em>We build.</em>
           </h2>
-          <p className="font-sans text-black/45 text-sm leading-relaxed max-w-md [text-wrap:pretty]">
+          <p className="font-sans text-black/70 text-sm leading-relaxed max-w-md [text-wrap:pretty]">
             Scoped properly, built cleanly, shipped on time. A team that owns the outcome.
           </p>
         </div>
@@ -303,7 +305,7 @@ export function HowWeWork() {
                 )}
               >
                 {/* Progress bar (auto-advance indicator) */}
-                {i === active && (
+                {i === active && !paused && (
                   <motion.div
                     className="absolute bottom-0 left-0 h-[2px] bg-black/[0.12] rounded-full"
                     initial={{ width: "0%" }}
@@ -318,7 +320,7 @@ export function HowWeWork() {
                 </span>
                 <span className={cn(
                   "font-sans text-[12px] font-medium block transition-colors duration-300",
-                  i === active ? "text-black/75" : "text-black/40"
+                  i === active ? "text-black/85" : "text-black/55"
                 )}>
                   {step.title}
                 </span>
@@ -338,7 +340,7 @@ export function HowWeWork() {
                   exit={{ opacity: 0, y: -6 }}
                   transition={{ duration: 0.3, ease: EASE }}
                 >
-                  <p className="font-sans text-black/50 text-sm leading-relaxed [text-wrap:pretty]">
+                  <p className="font-sans text-black/70 text-sm leading-relaxed [text-wrap:pretty]">
                     {steps[active].desc}
                   </p>
                 </motion.div>

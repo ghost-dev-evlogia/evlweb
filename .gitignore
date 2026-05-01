@@ -49,3 +49,11 @@ next-env.d.ts
 /*.png
 /*.jpg
 /*.jpeg
+
+# Audit artifacts (large binaries / originals)
+.audit/originals/
+.audit/evlogia-visual-audit-*/
+.playwright-mcp/
+
+# Bundled skills (vendored locally)
+.agents/

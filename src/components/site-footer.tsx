@@ -39,7 +39,7 @@ export function SiteFooter() {
             {/* Brand */}
             <div className="shrink-0">
               <AsciiMotionLogo />
-              <p className="font-sans text-black/45 text-[10px] tracking-[0.18em] uppercase mt-3">
+              <p className="font-sans text-black/70 text-[10px] tracking-[0.18em] uppercase mt-3">
                 Product Engineering & AI
               </p>
             </div>
@@ -53,7 +53,7 @@ export function SiteFooter() {
                   <a
                     key={label}
                     href={href}
-                    className="font-sans text-black/40 text-[12px] hover:text-black/70 transition-colors duration-200"
+                    className="font-sans text-black/65 text-[12px] hover:text-black/70 transition-colors duration-200"
                   >
                     {label}
                   </a>
@@ -67,13 +67,13 @@ export function SiteFooter() {
                   data-cal-link="ethankd/strategy"
                   data-cal-namespace="strategy"
                   data-cal-config='{"layout":"month_view","theme":"light","useSlotsViewOnSmallScreen":"true"}'
-                  className="font-sans text-black/40 text-[12px] hover:text-black/70 transition-colors duration-200 text-left cursor-pointer"
+                  className="font-sans text-black/75 text-[12px] hover:text-black/80 transition-colors duration-200 text-left cursor-pointer"
                 >
-                  Work With Us
+                  Book a 30-min call
                 </button>
                 <a
                   href="mailto:hello@evlogia.ai"
-                  className="font-sans text-black/40 text-[12px] hover:text-black/70 transition-colors duration-200"
+                  className="font-sans text-black/65 text-[12px] hover:text-black/70 transition-colors duration-200"
                 >
                   hello@evlogia.ai
                 </a>
@@ -86,7 +86,7 @@ export function SiteFooter() {
                   <a
                     key={label}
                     href={href}
-                    className="font-sans text-black/40 text-[12px] hover:text-black/70 transition-colors duration-200"
+                    className="font-sans text-black/65 text-[12px] hover:text-black/70 transition-colors duration-200"
                   >
                     {label}
                   </a>

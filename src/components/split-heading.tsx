@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView } from "motion/react";
+import { motion, useInView, useReducedMotion } from "motion/react";
 import { useRef } from "react";
 
 interface Line {
@@ -27,12 +27,17 @@ export function SplitHeading({
 }: Props) {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref as React.RefObject<Element>, { once: true, margin: "-8% 0px" });
+  const prefersReducedMotion = useReducedMotion();
+
+  // Single accessible name; word spans are aria-hidden so screen readers
+  // and SEO crawlers receive the real sentence, not concatenated tokens.
+  const accessibleName = lines.map((l) => l.text).join(" ");
 
   let globalWordIndex = 0;
 
   return (
     // @ts-expect-error dynamic tag
-    <Tag ref={ref} className={className} style={style}>
+    <Tag ref={ref} className={className} style={style} aria-label={accessibleName}>
       {lines.map((line, lineIdx) => {
         const words = line.text.split(" ");
         const wordEls = words.map((word, wIdx) => {
@@ -40,20 +45,25 @@ export function SplitHeading({
           return (
             <motion.span
               key={wIdx}
+              aria-hidden="true"
               className={line.italic ? italicClassName : undefined}
               style={{
                 display: "inline-block",
                 marginRight: wIdx < words.length - 1 ? "0.28em" : 0,
               }}
-              initial={{ y: 8, opacity: 0, filter: "blur(5px)" }}
+              initial={
+                prefersReducedMotion
+                  ? { y: 0, opacity: 1, filter: "blur(0px)" }
+                  : { y: 8, opacity: 0, filter: "blur(5px)" }
+              }
               animate={
-                inView
+                inView || prefersReducedMotion
                   ? { y: 0, opacity: 1, filter: "blur(0px)" }
                   : { y: 8, opacity: 0, filter: "blur(5px)" }
               }
               transition={{
-                delay: delay + i * 0.052,
-                duration: 0.68,
+                delay: prefersReducedMotion ? 0 : delay + i * 0.052,
+                duration: prefersReducedMotion ? 0 : 0.68,
                 ease: [0.16, 1, 0.3, 1],
               }}
             >
@@ -63,11 +73,11 @@ export function SplitHeading({
         });
 
         return line.italic ? (
-          <em key={lineIdx} style={{ display: "block", fontStyle: "italic" }}>
+          <em key={lineIdx} aria-hidden="true" style={{ display: "block", fontStyle: "italic" }}>
             {wordEls}
           </em>
         ) : (
-          <span key={lineIdx} style={{ display: "block" }}>
+          <span key={lineIdx} aria-hidden="true" style={{ display: "block" }}>
             {wordEls}
           </span>
         );

@@ -2,12 +2,22 @@
 
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import { LiquidGlassCard } from "@/components/liquid-glass";
 
 const NAV_LINKS = [
   { label: "Services", href: "/#services" },
+  { label: "Process", href: "/#how-we-work" },
+  { label: "Work", href: "/#testimonials" },
   { label: "About", href: "/#about" },
+  { label: "Team", href: "/#team" },
+  { label: "FAQ", href: "/#faq" },
+];
+
+const DESKTOP_NAV_LINKS = [
+  { label: "Services", href: "/#services" },
+  { label: "Team", href: "/#team" },
   { label: "FAQ", href: "/#faq" },
 ];
 
@@ -99,11 +109,20 @@ export function SiteNav() {
             className="liquid-glass rounded-full relative z-40 px-5 py-2.5 flex items-center justify-between gap-6"
           >
             {/* Logo */}
-            <a href="/" onClick={handleLogoClick} className="shrink-0 overflow-hidden relative block" style={{ width: "120px", height: "26px" }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+            <a
+              href="/"
+              onClick={handleLogoClick}
+              aria-label="Evlogia — home"
+              className="shrink-0 overflow-hidden relative block"
+              style={{ width: "120px", height: "26px" }}
+            >
+              <Image
                 src="/evlogia-combination-mark.png"
                 alt="Evlogia"
+                width={260}
+                height={260}
+                priority
+                sizes="130px"
                 style={{
                   position: "absolute",
                   width: "130px",
@@ -119,11 +138,11 @@ export function SiteNav() {
 
             {/* Links — desktop */}
             <div className="hidden md:flex items-center gap-7">
-              {NAV_LINKS.map(({ label, href }) => (
+              {DESKTOP_NAV_LINKS.map(({ label, href }) => (
                 <a
                   key={label}
                   href={href}
-                  className="nav-link text-black/45 text-xs font-sans hover:text-black transition-colors duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] tracking-wide"
+                  className="nav-link text-black/65 text-xs font-sans hover:text-black transition-colors duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] tracking-wide"
                 >
                   {label}
                 </a>
@@ -137,7 +156,7 @@ export function SiteNav() {
               data-cal-config='{"layout":"month_view","theme":"light","useSlotsViewOnSmallScreen":"true"}'
               className="group liquid-glass rounded-full pl-4 pr-1.5 py-1 text-xs font-sans font-medium text-black/80 hover:bg-black/5 active:scale-[0.98] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] whitespace-nowrap shrink-0 cursor-pointer hidden md:inline-flex items-center gap-2"
             >
-              Work With Us
+              Book a call
               <span className="flex items-center justify-center w-6 h-6 rounded-full bg-black/[0.06] transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5 group-hover:-translate-y-px group-hover:scale-105">
                 <span className="text-black/50 text-[10px]">&#8599;</span>
               </span>
@@ -224,7 +243,7 @@ export function SiteNav() {
                   onClick={() => setMenuOpen(false)}
                   className="group inline-flex items-center gap-3 rounded-full pl-7 pr-2.5 py-2.5 bg-black/90 text-white font-sans text-sm font-medium active:scale-[0.98] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] cursor-pointer mt-4"
                 >
-                  Work With Us
+                  Book a 30-min call
                   <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white/10 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5 group-hover:-translate-y-px group-hover:scale-105">
                     <span className="text-white/70 text-xs">&#8599;</span>
                   </span>

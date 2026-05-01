@@ -34,7 +34,7 @@ export default function Home() {
     <>
       <SiteNav />
 
-      <main>
+      <main id="main">
         {/* ─── Hero ─── */}
         <HeroSection />
 
@@ -42,12 +42,16 @@ export default function Home() {
         <div className="border-y" style={{ borderColor: "rgba(0,0,0,0.07)" }}>
           <div className="pt-5 pb-1">
             <p className="text-center">
-              <span className="inline-flex font-sans text-black/35 text-[9px] tracking-[0.2em] uppercase rounded-full bg-black/[0.03] px-3 py-1 border border-black/[0.05]">
+              <span className="inline-flex font-sans text-black/65 text-[10px] tracking-[0.2em] uppercase rounded-full bg-black/[0.04] px-3 py-1 border border-black/[0.06]">
                 Trusted by
               </span>
             </p>
           </div>
-          <div className="marquee-wrapper pb-5">
+          <div
+            className="marquee-wrapper pb-5"
+            aria-hidden="true"
+            role="presentation"
+          >
             <div
               className="marquee-track"
               style={{ animationDuration: "44s", gap: "3.5rem" }}
@@ -85,8 +89,8 @@ export default function Home() {
             {[
               { target: 50, suffix: "+", label: "Systems Shipped" },
               { target: 20, suffix: "+", label: "Clients Served" },
-              { target: 10, suffix: "+", label: "Tech Domains" },
-              { target: 8, suffix: "", label: "Industries" },
+              { target: 10, suffix: "+", label: "Production AI Builds" },
+              { target: 8, suffix: "", label: "Industries Served" },
             ].map(({ target, suffix, label }) => (
               <StaggerItem key={label} className="h-full">
                 <div className="doppelrand h-full">
@@ -94,7 +98,7 @@ export default function Home() {
                     <div className="font-serif text-black/90 text-3xl md:text-4xl mb-1.5 leading-none">
                       <AnimatedCounter target={target} suffix={suffix} />
                     </div>
-                    <div className="font-sans text-black/35 text-[9px] md:text-[10px] tracking-widest uppercase leading-tight">
+                    <div className="font-sans text-black/75 text-[9px] md:text-[10px] tracking-widest uppercase leading-tight">
                       {label}
                     </div>
                   </div>
@@ -113,7 +117,7 @@ export default function Home() {
         <section id="services" className="scroll-mt-20 px-6 py-24 md:py-32">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-10 md:mb-16">
-              <RevealLabel className="inline-flex font-sans text-black/40 text-[10px] tracking-[0.2em] uppercase mb-4 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
+              <RevealLabel className="inline-flex font-sans text-black/65 text-[10px] tracking-[0.2em] uppercase mb-4 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
                 What We Do
               </RevealLabel>
               <SplitHeading
@@ -149,8 +153,11 @@ export default function Home() {
                       >
                         Product & Platform Engineering
                       </h3>
-                      <p className="font-sans text-black/50 text-sm md:text-[15px] leading-relaxed max-w-lg">
+                      <p className="font-sans text-black/75 text-sm md:text-[15px] leading-relaxed max-w-lg">
                         Websites, web apps, mobile apps, platforms. We scope it, design it, build it, and ship it. No in-house team to manage.
+                      </p>
+                      <p className="font-sans text-black/65 text-[11px] tracking-wide mt-4 pt-3 border-t border-black/[0.06] max-w-lg">
+                        Typical engagement · 8–24 weeks · fixed scope · shipped product + handoff
                       </p>
                     </div>
                   </div>
@@ -175,8 +182,11 @@ export default function Home() {
                     >
                       Internal Tools & Systems
                     </h3>
-                    <p className="font-sans text-black/50 text-sm md:text-[15px] leading-relaxed">
+                    <p className="font-sans text-black/75 text-sm md:text-[15px] leading-relaxed">
                       Dashboards, admin panels, booking systems, workflow tools. The software your team actually depends on.
+                    </p>
+                    <p className="font-sans text-black/65 text-[11px] tracking-wide mt-4 pt-3 border-t border-black/[0.06]">
+                      4–10 weeks · fixed scope
                     </p>
                   </div>
                 </div>
@@ -200,8 +210,11 @@ export default function Home() {
                     >
                       Applied AI
                     </h3>
-                    <p className="font-sans text-black/50 text-sm md:text-[15px] leading-relaxed">
+                    <p className="font-sans text-black/75 text-sm md:text-[15px] leading-relaxed">
                       AI where it actually solves something. We integrate models into real products and build custom solutions when off-the-shelf doesn&apos;t cut it.
+                    </p>
+                    <p className="font-sans text-black/65 text-[11px] tracking-wide mt-4 pt-3 border-t border-black/[0.06]">
+                      Pilots 4–6 weeks · production builds 3–6 months
                     </p>
                   </div>
                 </div>
@@ -225,8 +238,11 @@ export default function Home() {
                     >
                       IoT & Connected Devices
                     </h3>
-                    <p className="font-sans text-black/50 text-sm md:text-[15px] leading-relaxed">
+                    <p className="font-sans text-black/75 text-sm md:text-[15px] leading-relaxed">
                       Sensor pipelines, embedded firmware, connected hardware. From prototype through production.
+                    </p>
+                    <p className="font-sans text-black/65 text-[11px] tracking-wide mt-4 pt-3 border-t border-black/[0.06]">
+                      Prototype 6–10 weeks · production 4–8 months
                     </p>
                   </div>
                 </div>
@@ -250,8 +266,11 @@ export default function Home() {
                     >
                       Agentic AI Coaching
                     </h3>
-                    <p className="font-sans text-black/50 text-sm md:text-[15px] leading-relaxed">
+                    <p className="font-sans text-black/75 text-sm md:text-[15px] leading-relaxed">
                       We embed engineers inside your teams to coach AI-first practices across the full SDLC. Real delivery work, sustained behavior change.
+                    </p>
+                    <p className="font-sans text-black/65 text-[11px] tracking-wide mt-4 pt-3 border-t border-black/[0.06]">
+                      Embed 12–26 weeks · 1–3 engineers
                     </p>
                   </div>
                 </div>
@@ -281,7 +300,7 @@ export default function Home() {
         <section id="depth" className="scroll-mt-20 px-6 py-24 md:py-32">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-10 md:mb-16">
-              <RevealLabel className="inline-flex font-sans text-black/40 text-[10px] tracking-[0.2em] uppercase mb-4 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
+              <RevealLabel className="inline-flex font-sans text-black/65 text-[10px] tracking-[0.2em] uppercase mb-4 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
                 Technical Depth
               </RevealLabel>
               <SplitHeading
@@ -296,7 +315,7 @@ export default function Home() {
                 }}
               />
               <ScrollReveal>
-                <p className="font-sans text-black/50 text-[15px] max-w-md mx-auto leading-relaxed">
+                <p className="font-sans text-black/70 text-[15px] max-w-md mx-auto leading-relaxed">
                   Some work requires more than a standard build. We've shipped AI systems, connected devices, and complex platforms where the technical bar was the whole point.
                 </p>
               </ScrollReveal>
@@ -307,10 +326,10 @@ export default function Home() {
               <StaggerItem className="h-full">
                 <div className="doppelrand h-full">
                   <div className="doppelrand-inner card-hover p-6 md:p-8 h-full flex flex-col gap-4">
-                    <div className="font-sans text-black/30 text-[10px] tracking-[0.25em] uppercase">
+                    <div className="font-sans text-black/75 text-[10px] tracking-[0.25em] uppercase">
                       Applied AI
                     </div>
-                    <p className="font-sans text-black/55 text-sm leading-relaxed">
+                    <p className="font-sans text-black/75 text-sm leading-relaxed">
                       Production AI systems, not prototypes. LLMs, computer vision, multimodal pipelines, and retrieval infrastructure. Built to run in the real world.
                     </p>
                     <div className="flex flex-wrap gap-1.5 mt-auto">
@@ -331,10 +350,10 @@ export default function Home() {
               <StaggerItem className="h-full">
                 <div className="doppelrand h-full">
                   <div className="doppelrand-inner card-hover p-6 md:p-8 h-full flex flex-col gap-4">
-                    <div className="font-sans text-black/30 text-[10px] tracking-[0.25em] uppercase">
+                    <div className="font-sans text-black/75 text-[10px] tracking-[0.25em] uppercase">
                       IoT & Hardware
                     </div>
-                    <p className="font-sans text-black/55 text-sm leading-relaxed">
+                    <p className="font-sans text-black/75 text-sm leading-relaxed">
                       Connected hardware that does what it's supposed to. Sensor pipelines, embedded firmware, cloud-connected devices. We've built things worth building properly.
                     </p>
                     <div className="flex flex-wrap gap-1.5 mt-auto">
@@ -355,10 +374,10 @@ export default function Home() {
               <StaggerItem className="h-full">
                 <div className="doppelrand h-full">
                   <div className="doppelrand-inner card-hover p-6 md:p-8 h-full flex flex-col gap-4">
-                    <div className="font-sans text-black/30 text-[10px] tracking-[0.25em] uppercase">
+                    <div className="font-sans text-black/75 text-[10px] tracking-[0.25em] uppercase">
                       Complex Platforms
                     </div>
-                    <p className="font-sans text-black/55 text-sm leading-relaxed">
+                    <p className="font-sans text-black/75 text-sm leading-relaxed">
                       Multi-tenant systems, high-stakes data flows, and platforms where getting the architecture wrong is expensive. We've built them and handed them off clean.
                     </p>
                     <div className="flex flex-wrap gap-1.5 mt-auto">
@@ -387,7 +406,7 @@ export default function Home() {
         <section id="testimonials" className="scroll-mt-20 px-6 py-24 md:py-32">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-4">
-              <RevealLabel className="inline-flex font-sans text-black/40 text-[10px] tracking-[0.2em] uppercase mb-4 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
+              <RevealLabel className="inline-flex font-sans text-black/65 text-[10px] tracking-[0.2em] uppercase mb-4 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
                 What Clients Say
               </RevealLabel>
               <SplitHeading
@@ -420,7 +439,7 @@ export default function Home() {
               <div className="doppelrand" style={{ borderRadius: "2.5rem" }}>
                 <div className="doppelrand-inner p-7 sm:p-10 md:p-16 relative overflow-hidden" style={{ borderRadius: "calc(2.5rem - 6px)" }}>
                 <div className="relative">
-                  <p className="inline-flex font-sans text-black/40 text-[10px] tracking-[0.2em] uppercase mb-5 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
+                  <p className="inline-flex font-sans text-black/65 text-[10px] tracking-[0.2em] uppercase mb-5 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
                     Who We Are
                   </p>
                   <SplitHeading
@@ -431,7 +450,7 @@ export default function Home() {
                       letterSpacing: "-0.01em",
                     }}
                   />
-                  <p className="font-sans text-black/50 text-[15px] leading-relaxed max-w-xl mb-10 md:mb-14">
+                  <p className="font-sans text-black/70 text-[15px] leading-relaxed max-w-xl mb-10 md:mb-14">
                     We&apos;re a product and engineering team. Products, platforms, internal tools, applied AI. Shipped across industries. We own the outcome, not just the deliverable.
                   </p>
 
@@ -454,12 +473,13 @@ export default function Home() {
                         <h4 className="font-serif text-black/90 text-base md:text-lg mb-2">
                           {title}
                         </h4>
-                        <p className="font-sans text-black/50 text-sm md:text-[15px] leading-relaxed">
+                        <p className="font-sans text-black/75 text-sm md:text-[15px] leading-relaxed">
                           {desc}
                         </p>
                       </div>
                     ))}
                   </div>
+
                 </div>
               </div>
               </div>
@@ -472,11 +492,117 @@ export default function Home() {
           <MotionDivider />
         </div>
 
+        {/* ─── Team ─── */}
+        {/* TODO: replace placeholder bios, photos (/arjun.jpg, /aneesh.jpg, /karthik.jpg), and LinkedIn URLs with real values */}
+        <section id="team" className="scroll-mt-20 px-6 py-24 md:py-32">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12 md:mb-20">
+              <RevealLabel className="inline-flex font-sans text-black/65 text-[10px] tracking-[0.2em] uppercase mb-4 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
+                Team
+              </RevealLabel>
+              <SplitHeading
+                lines={[
+                  { text: "Built by people" },
+                  { text: "who ship.", italic: true },
+                ]}
+                className="font-serif text-black/90 leading-[1.07] mb-5"
+                style={{
+                  fontSize: "clamp(2rem, 5vw, 4rem)",
+                  letterSpacing: "-0.01em",
+                }}
+              />
+              <ScrollReveal>
+                <p className="font-sans text-black/75 text-[15px] max-w-md mx-auto leading-relaxed">
+                  You work directly with us on every engagement. No account managers between you and the people writing the code.
+                </p>
+              </ScrollReveal>
+            </div>
+
+            <StaggerGrid className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+              {[
+                {
+                  name: "Arjun",
+                  role: "Co-founder · Engineering",
+                  bio: "Background in distributed systems and platform architecture. Leads the heaviest infrastructure work — multi-tenant systems, data pipelines, and platforms where the architecture has to be right the first time.",
+                  photo: "/arjun.jpg",
+                  linkedin: "https://linkedin.com/in/arjun",
+                },
+                {
+                  name: "Aneesh",
+                  role: "Co-founder · Applied AI",
+                  bio: "Background in applied research and shipping production AI. Runs our applied-AI engagements end-to-end — from problem framing through deployment of LLM, vision, and retrieval systems.",
+                  photo: "/aneesh.jpg",
+                  linkedin: "https://linkedin.com/in/aneesh",
+                },
+                {
+                  name: "Ethan",
+                  role: "Co-founder · Product & Delivery",
+                  bio: "Background in product engineering across web, mobile, and IoT. Owns scoping and client delivery — turning ambiguous problems into shipped systems on a clear timeline.",
+                  photo: "/founder.JPG",
+                  linkedin: "https://linkedin.com/in/ethankd",
+                },
+                {
+                  name: "Karthik",
+                  role: "Co-founder · Hardware & Systems",
+                  bio: "Background in embedded firmware and IoT. Leads connected-device and sensor-pipeline builds, taking hardware projects from prototype through production.",
+                  photo: "/karthik.jpg",
+                  linkedin: "https://linkedin.com/in/karthik",
+                },
+              ].map(({ name, role, bio, photo, linkedin }) => (
+                <StaggerItem key={name} className="h-full">
+                  <div className="doppelrand h-full">
+                    <div className="doppelrand-inner card-hover p-6 md:p-8 h-full flex flex-col">
+                      <div className="flex items-start gap-4 md:gap-5 mb-5">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={photo}
+                          alt={`${name}, ${role} of Evlogia`}
+                          className="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover bg-black/[0.04] shrink-0"
+                        />
+                        <div className="flex-1 min-w-0">
+                          <h3
+                            className="font-serif text-black/90 text-xl md:text-2xl mb-1 leading-tight"
+                            style={{ letterSpacing: "-0.01em" }}
+                          >
+                            {name}
+                          </h3>
+                          <p className="font-sans text-black/70 text-[12px] md:text-[13px] tracking-wide">
+                            {role}
+                          </p>
+                        </div>
+                      </div>
+
+                      <p className="font-sans text-black/80 text-sm md:text-[15px] leading-relaxed flex-1">
+                        {bio}
+                      </p>
+
+                      <a
+                        href={linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-sans text-black/75 text-[12px] hover:text-black/80 transition-colors duration-200 inline-flex items-center gap-1.5 mt-5 pt-4 border-t border-black/[0.06] self-start"
+                      >
+                        LinkedIn
+                        <span className="text-[10px] opacity-60">↗</span>
+                      </a>
+                    </div>
+                  </div>
+                </StaggerItem>
+              ))}
+            </StaggerGrid>
+          </div>
+        </section>
+
+        {/* ─── Divider ─── */}
+        <div className="max-w-5xl mx-auto px-6">
+          <MotionDivider />
+        </div>
+
         {/* ─── FAQ ─── */}
         <section id="faq" className="scroll-mt-20 px-6 py-24 md:py-32">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-10 md:mb-16">
-              <RevealLabel className="inline-flex font-sans text-black/40 text-[10px] tracking-[0.2em] uppercase mb-4 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
+              <RevealLabel className="inline-flex font-sans text-black/65 text-[10px] tracking-[0.2em] uppercase mb-4 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
                 FAQ
               </RevealLabel>
               <SplitHeading
@@ -510,7 +636,7 @@ export default function Home() {
               <div className="doppelrand" style={{ borderRadius: "2.5rem" }}>
               <div className="doppelrand-inner p-6 sm:p-12 md:p-20 text-center relative overflow-hidden" style={{ borderRadius: "calc(2.5rem - 6px)" }}>
                 <div className="relative">
-                  <RevealLabel className="inline-flex font-sans text-black/40 text-[10px] tracking-[0.2em] uppercase mb-5 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
+                  <RevealLabel className="inline-flex font-sans text-black/65 text-[10px] tracking-[0.2em] uppercase mb-5 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
                     Get Started
                   </RevealLabel>
                   <SplitHeading
@@ -524,7 +650,7 @@ export default function Home() {
                       letterSpacing: "-0.01em",
                     }}
                   />
-                  <p className="font-sans text-black/55 text-[15px] leading-relaxed mb-10 max-w-sm mx-auto">
+                  <p className="font-sans text-black/75 text-[15px] leading-relaxed mb-10 max-w-sm mx-auto">
                     Tell us what you need. We&apos;ll tell you if we&apos;re the right team for it.
                   </p>
                   <div className="flex justify-center">
@@ -534,9 +660,9 @@ export default function Home() {
                       data-cal-config='{"layout":"month_view","theme":"light","useSlotsViewOnSmallScreen":"true"}'
                       className="group inline-flex items-center gap-2 sm:gap-3 glass rounded-full pl-6 sm:pl-8 pr-2 sm:pr-2.5 py-2 sm:py-2.5 text-black/80 font-sans font-medium text-xs sm:text-sm border border-black/10 hover:bg-black/5 active:scale-[0.98] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] cursor-pointer"
                     >
-                      Start a Conversation
+                      Book a 30-min call
                       <span className="flex items-center justify-center w-8 h-8 rounded-full bg-black/[0.06] transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5 group-hover:-translate-y-px group-hover:scale-105">
-                        <span className="text-black/50 text-xs">&#8599;</span>
+                        <span className="text-black/70 text-xs">&#8599;</span>
                       </span>
                     </button>
                   </div>
