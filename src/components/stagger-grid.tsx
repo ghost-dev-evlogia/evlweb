@@ -21,9 +21,11 @@ const item = {
 export function StaggerGrid({
   children,
   className,
+  style,
 }: {
   children: ReactNode;
   className?: string;
+  style?: React.CSSProperties;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-5% 0px" });
@@ -32,6 +34,7 @@ export function StaggerGrid({
     <motion.div
       ref={ref}
       className={className}
+      style={style}
       variants={container}
       initial="hidden"
       animate={inView ? "visible" : "hidden"}

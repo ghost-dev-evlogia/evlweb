@@ -7,8 +7,8 @@ import { SplitHeading } from "@/components/split-heading";
 import { StaggerGrid, StaggerItem } from "@/components/stagger-grid";
 import { MotionDivider } from "@/components/motion-divider";
 import { ScrollReveal } from "@/components/scroll-reveal";
-import { RevealLabel } from "@/components/reveal-label";
 import { Testimonials } from "@/components/testimonials";
+import { TeamPortrait } from "@/components/team-portrait";
 import { FAQ } from "@/components/faq";
 import { HowWeWork } from "@/components/how-we-work";
 
@@ -114,26 +114,36 @@ export default function Home() {
         </div>
 
         {/* ─── Services ─── */}
-        <section id="services" className="scroll-mt-20 px-6 py-24 md:py-32">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-10 md:mb-16">
-              <RevealLabel className="inline-flex font-sans text-black/65 text-[10px] tracking-[0.2em] uppercase mb-4 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
-                What We Do
-              </RevealLabel>
-              <SplitHeading
-                lines={[
-                  { text: "Real systems." },
-                  { text: "Not just R&D.", italic: true },
-                ]}
-                className="font-serif text-black/90 leading-[1.07]"
-                style={{
-                  fontSize: "clamp(2rem, 5vw, 4rem)",
-                  letterSpacing: "-0.01em",
-                }}
-              />
+        <section id="services" className="scroll-mt-20 px-6 py-32 md:py-48">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-12 items-end gap-8 mb-14 md:mb-20">
+              <div className="md:col-span-7">
+                <SplitHeading
+                  lines={[
+                    { text: "Real systems." },
+                    { text: "Not just R&D.", italic: true },
+                  ]}
+                  className="font-serif text-black/90 leading-[1.02]"
+                  style={{
+                    fontSize: "clamp(2.25rem, 6vw, 5rem)",
+                    letterSpacing: "-0.015em",
+                  }}
+                />
+              </div>
+              <div className="md:col-span-4 md:col-start-9 md:pb-3">
+                <ScrollReveal>
+                  <p className="font-sans text-black/80 text-[15px] leading-relaxed [text-wrap:pretty]">
+                    Five practices, one team. The work below is everything we
+                    actually ship — scoped, built, handed off.
+                  </p>
+                </ScrollReveal>
+              </div>
             </div>
 
-            <StaggerGrid className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
+            <StaggerGrid
+              className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4"
+              style={{ gridAutoFlow: "dense" }}
+            >
               {/* 01 — Product & Platform Engineering — featured wide */}
               <StaggerItem className="md:col-span-2 h-full">
                 <div className="doppelrand h-full">
@@ -297,28 +307,31 @@ export default function Home() {
         </div>
 
         {/* ─── Technical Depth ─── */}
-        <section id="depth" className="scroll-mt-20 px-6 py-24 md:py-32">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-10 md:mb-16">
-              <RevealLabel className="inline-flex font-sans text-black/65 text-[10px] tracking-[0.2em] uppercase mb-4 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
-                Technical Depth
-              </RevealLabel>
-              <SplitHeading
-                lines={[
-                  { text: "When the problem is" },
-                  { text: "genuinely hard.", italic: true },
-                ]}
-                className="font-serif text-black/90 leading-[1.07] mb-4"
-                style={{
-                  fontSize: "clamp(2rem, 5vw, 4rem)",
-                  letterSpacing: "-0.01em",
-                }}
-              />
-              <ScrollReveal>
-                <p className="font-sans text-black/70 text-[15px] max-w-md mx-auto leading-relaxed">
-                  Some work requires more than a standard build. We've shipped AI systems, connected devices, and complex platforms where the technical bar was the whole point.
-                </p>
-              </ScrollReveal>
+        <section id="depth" className="scroll-mt-20 px-6 py-32 md:py-48">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-12 items-end gap-8 mb-14 md:mb-20">
+              <div className="md:col-span-8">
+                <SplitHeading
+                  lines={[
+                    { text: "When the problem is" },
+                    { text: "genuinely hard.", italic: true },
+                  ]}
+                  className="font-serif text-black/90 leading-[1.02]"
+                  style={{
+                    fontSize: "clamp(2.25rem, 6vw, 5rem)",
+                    letterSpacing: "-0.015em",
+                  }}
+                />
+              </div>
+              <div className="md:col-span-4 md:pb-3">
+                <ScrollReveal>
+                  <p className="font-sans text-black/80 text-[15px] leading-relaxed [text-wrap:pretty]">
+                    Some work asks for more than a standard build. AI systems,
+                    connected hardware, multi-tenant platforms — where the
+                    technical bar <em className="font-serif italic text-black/90">is</em> the brief.
+                  </p>
+                </ScrollReveal>
+              </div>
             </div>
 
             <StaggerGrid className="grid md:grid-cols-3 gap-3 md:gap-4">
@@ -403,21 +416,18 @@ export default function Home() {
         </div>
 
         {/* ─── Testimonials ─── */}
-        <section id="testimonials" className="scroll-mt-20 px-6 py-24 md:py-32">
+        <section id="testimonials" className="scroll-mt-20 px-6 py-32 md:py-48">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-4">
-              <RevealLabel className="inline-flex font-sans text-black/65 text-[10px] tracking-[0.2em] uppercase mb-4 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
-                What Clients Say
-              </RevealLabel>
+            <div className="text-center mb-2">
               <SplitHeading
                 lines={[
                   { text: "Trusted by teams" },
                   { text: "that build seriously.", italic: true },
                 ]}
-                className="font-serif text-black/90 leading-[1.07]"
+                className="font-serif text-black/90 leading-[1.02]"
                 style={{
-                  fontSize: "clamp(2rem, 5vw, 4rem)",
-                  letterSpacing: "-0.01em",
+                  fontSize: "clamp(2.25rem, 6vw, 5rem)",
+                  letterSpacing: "-0.015em",
                 }}
               />
             </div>
@@ -432,164 +442,144 @@ export default function Home() {
           <MotionDivider />
         </div>
 
-        {/* ─── About ─── */}
-        <section id="about" className="scroll-mt-20 px-6 py-24 md:py-32">
-          <div className="max-w-5xl mx-auto">
-            <ScrollReveal variant="scale">
-              <div className="doppelrand" style={{ borderRadius: "2.5rem" }}>
-                <div className="doppelrand-inner p-7 sm:p-10 md:p-16 relative overflow-hidden" style={{ borderRadius: "calc(2.5rem - 6px)" }}>
-                <div className="relative">
-                  <p className="inline-flex font-sans text-black/65 text-[10px] tracking-[0.2em] uppercase mb-5 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
-                    Who We Are
+        {/* ─── About + Team (consolidated) ─── */}
+        {/* TODO: drop real photos at /arjun.jpg, /aneesh.jpg, /karthik.jpg — initials fall back automatically */}
+        <section id="about" className="scroll-mt-20 px-6 py-32 md:py-48">
+          <div className="max-w-6xl mx-auto">
+            {/* Editorial intro: headline left, manifesto right */}
+            <div className="grid md:grid-cols-12 gap-10 md:gap-16 mb-20 md:mb-28">
+              <div className="md:col-span-7">
+                <SplitHeading
+                  lines={[
+                    { text: "Built by people" },
+                    { text: "who ship.", italic: true },
+                  ]}
+                  className="font-serif text-black/90 leading-[1.02] mb-7"
+                  style={{
+                    fontSize: "clamp(2.25rem, 6.5vw, 5.5rem)",
+                    letterSpacing: "-0.02em",
+                  }}
+                />
+                <ScrollReveal>
+                  <p className="font-sans text-black/80 text-[17px] md:text-[18px] leading-relaxed max-w-xl [text-wrap:pretty]">
+                    A product and engineering team. We scope, build, and ship —
+                    web, mobile, internal platforms, applied AI, IoT.
+                    You work directly with the people writing the code,
+                    not an account manager between you and the work.
                   </p>
-                  <SplitHeading
-                    lines={[{ text: "Who we are." }]}
-                    className="font-serif text-black/90 mb-5 leading-[1.07] max-w-2xl"
-                    style={{
-                      fontSize: "clamp(1.4rem, 4.5vw, 3.5rem)",
-                      letterSpacing: "-0.01em",
-                    }}
-                  />
-                  <p className="font-sans text-black/70 text-[15px] leading-relaxed max-w-xl mb-10 md:mb-14">
-                    We&apos;re a product and engineering team. Products, platforms, internal tools, applied AI. Shipped across industries. We own the outcome, not just the deliverable.
-                  </p>
-
-                  <div className="grid md:grid-cols-3 gap-6 md:gap-10">
-                    {[
-                      {
-                        title: "We build, not advise.",
-                        desc: "No strategy decks, no handoffs. We write the code and ship the system.",
-                      },
-                      {
-                        title: "We own the outcome.",
-                        desc: "Scope, build, ship. When something needs to change mid-engagement, we adapt. We don't disappear.",
-                      },
-                      {
-                        title: "We protect what's novel.",
-                        desc: "When the work produces something genuinely new, we file the IP. It's a deliverable, not an afterthought.",
-                      },
-                    ].map(({ title, desc }) => (
-                      <div key={title}>
-                        <h4 className="font-serif text-black/90 text-base md:text-lg mb-2">
-                          {title}
-                        </h4>
-                        <p className="font-sans text-black/75 text-sm md:text-[15px] leading-relaxed">
-                          {desc}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-
-                </div>
+                </ScrollReveal>
               </div>
+
+              <div className="md:col-span-5 md:pt-3 grid sm:grid-cols-2 md:grid-cols-1 gap-7 md:gap-10">
+                {[
+                  {
+                    title: "We build, not advise.",
+                    desc: "No strategy decks, no handoffs to someone else. We write the code and ship the system.",
+                  },
+                  {
+                    title: "We own the outcome.",
+                    desc: "Scope shifts mid-engagement, we adapt. We don't disappear into a Jira backlog.",
+                  },
+                  {
+                    title: "We protect what's novel.",
+                    desc: "If the work produces something genuinely new, we file the IP. It's a deliverable, not an afterthought.",
+                  },
+                ].map(({ title, desc }) => (
+                  <ScrollReveal key={title}>
+                    <div className="border-t border-black/[0.08] pt-4">
+                      <h4 className="font-serif text-black/90 text-lg md:text-xl mb-2 leading-snug">
+                        {title}
+                      </h4>
+                      <p className="font-sans text-black/75 text-[14px] md:text-[15px] leading-relaxed">
+                        {desc}
+                      </p>
+                    </div>
+                  </ScrollReveal>
+                ))}
               </div>
-            </ScrollReveal>
-          </div>
-        </section>
-
-        {/* ─── Divider ─── */}
-        <div className="max-w-5xl mx-auto px-6">
-          <MotionDivider />
-        </div>
-
-        {/* ─── Team ─── */}
-        {/* TODO: replace placeholder bios, photos (/arjun.jpg, /aneesh.jpg, /karthik.jpg), and LinkedIn URLs with real values */}
-        <section id="team" className="scroll-mt-20 px-6 py-24 md:py-32">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-12 md:mb-20">
-              <RevealLabel className="inline-flex font-sans text-black/65 text-[10px] tracking-[0.2em] uppercase mb-4 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
-                Team
-              </RevealLabel>
-              <SplitHeading
-                lines={[
-                  { text: "Built by people" },
-                  { text: "who ship.", italic: true },
-                ]}
-                className="font-serif text-black/90 leading-[1.07] mb-5"
-                style={{
-                  fontSize: "clamp(2rem, 5vw, 4rem)",
-                  letterSpacing: "-0.01em",
-                }}
-              />
-              <ScrollReveal>
-                <p className="font-sans text-black/75 text-[15px] max-w-md mx-auto leading-relaxed">
-                  You work directly with us on every engagement. No account managers between you and the people writing the code.
-                </p>
-              </ScrollReveal>
             </div>
 
-            <StaggerGrid className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
-              {[
-                {
-                  name: "Arjun",
-                  role: "Co-founder · Engineering",
-                  bio: "Background in distributed systems and platform architecture. Leads the heaviest infrastructure work — multi-tenant systems, data pipelines, and platforms where the architecture has to be right the first time.",
-                  photo: "/arjun.jpg",
-                  linkedin: "https://linkedin.com/in/arjun",
-                },
-                {
-                  name: "Aneesh",
-                  role: "Co-founder · Applied AI",
-                  bio: "Background in applied research and shipping production AI. Runs our applied-AI engagements end-to-end — from problem framing through deployment of LLM, vision, and retrieval systems.",
-                  photo: "/aneesh.jpg",
-                  linkedin: "https://linkedin.com/in/aneesh",
-                },
-                {
-                  name: "Ethan",
-                  role: "Co-founder · Product & Delivery",
-                  bio: "Background in product engineering across web, mobile, and IoT. Owns scoping and client delivery — turning ambiguous problems into shipped systems on a clear timeline.",
-                  photo: "/founder.JPG",
-                  linkedin: "https://linkedin.com/in/ethankd",
-                },
-                {
-                  name: "Karthik",
-                  role: "Co-founder · Hardware & Systems",
-                  bio: "Background in embedded firmware and IoT. Leads connected-device and sensor-pipeline builds, taking hardware projects from prototype through production.",
-                  photo: "/karthik.jpg",
-                  linkedin: "https://linkedin.com/in/karthik",
-                },
-              ].map(({ name, role, bio, photo, linkedin }) => (
-                <StaggerItem key={name} className="h-full">
-                  <div className="doppelrand h-full">
-                    <div className="doppelrand-inner card-hover p-6 md:p-8 h-full flex flex-col">
-                      <div className="flex items-start gap-4 md:gap-5 mb-5">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={photo}
-                          alt={`${name}, ${role} of Evlogia`}
-                          className="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover bg-black/[0.04] shrink-0"
-                        />
-                        <div className="flex-1 min-w-0">
+            {/* Co-founder grid — bento with portrait + bio rows */}
+            <div id="team" className="scroll-mt-20">
+              <StaggerGrid
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4"
+                style={{ gridAutoFlow: "dense" }}
+              >
+                {[
+                  {
+                    name: "Arjun",
+                    initials: "A",
+                    role: "Engineering",
+                    bio: "Distributed systems, platform architecture. Owns the heaviest infrastructure work.",
+                    photo: "/arjun.jpg",
+                    linkedin: "https://linkedin.com/in/arjun",
+                  },
+                  {
+                    name: "Aneesh",
+                    initials: "An",
+                    role: "Applied AI",
+                    bio: "Production AI, end-to-end. LLM, vision, and retrieval systems from problem framing through deployment.",
+                    photo: "/aneesh.jpg",
+                    linkedin: "https://linkedin.com/in/aneesh",
+                  },
+                  {
+                    name: "Ethan",
+                    initials: "E",
+                    role: "Product & Delivery",
+                    bio: "Web, mobile, IoT. Turns ambiguous problems into shipped systems on a clear timeline.",
+                    photo: "/founder.JPG",
+                    linkedin: "https://linkedin.com/in/ethankd",
+                  },
+                  {
+                    name: "Karthik",
+                    initials: "K",
+                    role: "Hardware & Systems",
+                    bio: "Embedded firmware, IoT. Connected devices and sensor pipelines, prototype to production.",
+                    photo: "/karthik.jpg",
+                    linkedin: "https://linkedin.com/in/karthik",
+                  },
+                ].map(({ name, initials, role, bio, photo, linkedin }) => (
+                  <StaggerItem key={name} className="h-full">
+                    <a
+                      href={linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group block h-full"
+                      aria-label={`${name}, ${role} — open LinkedIn`}
+                    >
+                      <div className="doppelrand h-full">
+                        <div className="doppelrand-inner card-hover p-5 md:p-6 h-full flex flex-col">
+                          {/* Square portrait — graceful initials fallback if photo missing */}
+                          <TeamPortrait
+                            src={photo}
+                            alt={`${name}, ${role} co-founder of Evlogia`}
+                            initials={initials}
+                          />
+
                           <h3
-                            className="font-serif text-black/90 text-xl md:text-2xl mb-1 leading-tight"
+                            className="font-serif text-black/90 text-xl md:text-2xl leading-tight"
                             style={{ letterSpacing: "-0.01em" }}
                           >
                             {name}
                           </h3>
-                          <p className="font-sans text-black/70 text-[12px] md:text-[13px] tracking-wide">
+                          <p className="font-sans text-black/65 text-[11px] tracking-[0.16em] uppercase mt-1.5 mb-3">
                             {role}
                           </p>
+                          <p className="font-sans text-black/75 text-[13px] md:text-[14px] leading-relaxed flex-1">
+                            {bio}
+                          </p>
+
+                          <span className="font-sans text-black/55 text-[11px] inline-flex items-center gap-1.5 mt-4 pt-3 border-t border-black/[0.06] self-start group-hover:text-black/90 transition-colors duration-300">
+                            LinkedIn
+                            <span className="text-[10px] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-px">↗</span>
+                          </span>
                         </div>
                       </div>
-
-                      <p className="font-sans text-black/80 text-sm md:text-[15px] leading-relaxed flex-1">
-                        {bio}
-                      </p>
-
-                      <a
-                        href={linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-sans text-black/75 text-[12px] hover:text-black/80 transition-colors duration-200 inline-flex items-center gap-1.5 mt-5 pt-4 border-t border-black/[0.06] self-start"
-                      >
-                        LinkedIn
-                        <span className="text-[10px] opacity-60">↗</span>
-                      </a>
-                    </div>
-                  </div>
-                </StaggerItem>
-              ))}
-            </StaggerGrid>
+                    </a>
+                  </StaggerItem>
+                ))}
+              </StaggerGrid>
+            </div>
           </div>
         </section>
 
@@ -599,28 +589,34 @@ export default function Home() {
         </div>
 
         {/* ─── FAQ ─── */}
-        <section id="faq" className="scroll-mt-20 px-6 py-24 md:py-32">
-          <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-10 md:mb-16">
-              <RevealLabel className="inline-flex font-sans text-black/65 text-[10px] tracking-[0.2em] uppercase mb-4 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
-                FAQ
-              </RevealLabel>
-              <SplitHeading
-                lines={[
-                  { text: "Questions we" },
-                  { text: "get asked.", italic: true },
-                ]}
-                className="font-serif text-black/90 leading-[1.07]"
-                style={{
-                  fontSize: "clamp(2rem, 5vw, 4rem)",
-                  letterSpacing: "-0.01em",
-                }}
-              />
-            </div>
+        <section id="faq" className="scroll-mt-20 px-6 py-32 md:py-48">
+          <div className="max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-12 gap-8 md:gap-14 items-start">
+              <div className="md:col-span-5 md:sticky md:top-32">
+                <SplitHeading
+                  lines={[
+                    { text: "Questions we" },
+                    { text: "get asked.", italic: true },
+                  ]}
+                  className="font-serif text-black/90 leading-[1.02] mb-5"
+                  style={{
+                    fontSize: "clamp(2.25rem, 5.5vw, 4.5rem)",
+                    letterSpacing: "-0.015em",
+                  }}
+                />
+                <ScrollReveal>
+                  <p className="font-sans text-black/75 text-[15px] leading-relaxed max-w-sm">
+                    Don&apos;t see yours? <a href="mailto:hello@evlogia.ai" className="text-black/90 underline decoration-black/30 underline-offset-4 hover:decoration-black/90 transition-colors">Email us directly</a>.
+                  </p>
+                </ScrollReveal>
+              </div>
 
-            <ScrollReveal>
-              <FAQ />
-            </ScrollReveal>
+              <div className="md:col-span-7">
+                <ScrollReveal>
+                  <FAQ />
+                </ScrollReveal>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -629,45 +625,43 @@ export default function Home() {
           <MotionDivider />
         </div>
 
-        {/* ─── CTA ─── */}
-        <section id="contact" className="px-6 pb-24 md:pb-32 pt-8 md:pt-12">
-          <div className="max-w-3xl mx-auto">
-            <ScrollReveal variant="scale">
-              <div className="doppelrand" style={{ borderRadius: "2.5rem" }}>
-              <div className="doppelrand-inner p-6 sm:p-12 md:p-20 text-center relative overflow-hidden" style={{ borderRadius: "calc(2.5rem - 6px)" }}>
-                <div className="relative">
-                  <RevealLabel className="inline-flex font-sans text-black/65 text-[10px] tracking-[0.2em] uppercase mb-5 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
-                    Get Started
-                  </RevealLabel>
-                  <SplitHeading
-                    lines={[
-                      { text: "Let's build something" },
-                      { text: "worth using.", italic: true },
-                    ]}
-                    className="font-serif text-black/90 leading-[1.07] mb-5"
-                    style={{
-                      fontSize: "clamp(1.4rem, 5vw, 3.8rem)",
-                      letterSpacing: "-0.01em",
-                    }}
-                  />
-                  <p className="font-sans text-black/75 text-[15px] leading-relaxed mb-10 max-w-sm mx-auto">
-                    Tell us what you need. We&apos;ll tell you if we&apos;re the right team for it.
-                  </p>
-                  <div className="flex justify-center">
-                    <button
-                      data-cal-link="ethankd/strategy"
-                      data-cal-namespace="strategy"
-                      data-cal-config='{"layout":"month_view","theme":"light","useSlotsViewOnSmallScreen":"true"}'
-                      className="group inline-flex items-center gap-2 sm:gap-3 glass rounded-full pl-6 sm:pl-8 pr-2 sm:pr-2.5 py-2 sm:py-2.5 text-black/80 font-sans font-medium text-xs sm:text-sm border border-black/10 hover:bg-black/5 active:scale-[0.98] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] cursor-pointer"
-                    >
-                      Book a 30-min call
-                      <span className="flex items-center justify-center w-8 h-8 rounded-full bg-black/[0.06] transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5 group-hover:-translate-y-px group-hover:scale-105">
-                        <span className="text-black/70 text-xs">&#8599;</span>
-                      </span>
-                    </button>
-                  </div>
-                </div>
-              </div>
+        {/* ─── CTA — editorial close ─── */}
+        <section id="contact" className="px-6 pb-32 md:pb-48 pt-16 md:pt-24">
+          <div className="max-w-5xl mx-auto text-center">
+            <SplitHeading
+              lines={[
+                { text: "Let's build something" },
+                { text: "worth using.", italic: true },
+              ]}
+              className="font-serif text-black/90 leading-[1.0] mb-8 md:mb-10"
+              style={{
+                fontSize: "clamp(2.5rem, 9vw, 8rem)",
+                letterSpacing: "-0.025em",
+              }}
+            />
+            <ScrollReveal>
+              <p className="font-sans text-black/80 text-[16px] md:text-[18px] leading-relaxed mb-12 md:mb-14 max-w-md mx-auto [text-wrap:pretty]">
+                Tell us what you need. We&apos;ll tell you if we&apos;re the right
+                team to build it — and if not, we&apos;ll point you somewhere that is.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5">
+                <button
+                  data-cal-link="ethankd/strategy"
+                  data-cal-namespace="strategy"
+                  data-cal-config='{"layout":"month_view","theme":"light","useSlotsViewOnSmallScreen":"true"}'
+                  className="group inline-flex items-center gap-3 rounded-full pl-7 pr-2.5 py-2.5 bg-[#0a0a0a] text-white font-sans text-sm font-medium hover:bg-black active:scale-[0.98] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] cursor-pointer"
+                >
+                  Book a 30-min call
+                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white/10 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5 group-hover:-translate-y-px group-hover:scale-105">
+                    <span className="text-white/85 text-xs">&#8599;</span>
+                  </span>
+                </button>
+                <a
+                  href="mailto:hello@evlogia.ai"
+                  className="font-sans text-black/85 text-sm hover:text-black underline decoration-black/30 underline-offset-4 hover:decoration-black transition-colors"
+                >
+                  Or email hello@evlogia.ai
+                </a>
               </div>
             </ScrollReveal>
           </div>
