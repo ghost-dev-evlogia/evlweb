@@ -7,137 +7,136 @@ import { cn } from "@/lib/utils"
 const EASE = [0.16, 1, 0.3, 1] as const
 const STEP_INTERVAL = 6000
 
-// ── Animated visual panels (compact, premium) ───────────────────────────────
+// ── Editorial visual panels — match site brand: serif labels, sans meta,
+//    hairline dividers, 11px floor, /55+ contrast on all text. ────────────────
 
-function ScopeVisual({ active }: { active: boolean }) {
-  const artifacts = [
-    { label: "Problem", value: "Defined", progress: 100 },
-    { label: "Constraints", value: "Locked", progress: 100 },
-    { label: "Success metric", value: "Set", progress: 85 },
-    { label: "Assumptions", value: "3 flagged", progress: 60 },
-  ]
-
+function PanelShell({
+  eyebrow,
+  meta,
+  active,
+  children,
+  footer,
+}: {
+  eyebrow: string
+  meta: string
+  active: boolean
+  children: React.ReactNode
+  footer?: React.ReactNode
+}) {
   return (
-    <div className="p-4 md:p-5 h-full flex flex-col">
-      <div className="flex items-center justify-between mb-3">
-        <span className="font-sans text-[8px] tracking-[0.2em] uppercase text-black/25">
-          Discovery
+    <div className="p-5 md:p-6 h-full flex flex-col">
+      <div className="flex items-baseline justify-between mb-4">
+        <span className="font-sans text-[11px] tracking-[0.2em] uppercase text-black/65">
+          {eyebrow}
         </span>
         <motion.span
-          className="font-mono text-[9px] text-black/30"
+          className="font-sans text-[11px] tracking-wide text-black/55"
           initial={{ opacity: 0 }}
           animate={active ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.4, delay: 0.5, ease: EASE }}
         >
-          4 / 4
+          {meta}
         </motion.span>
       </div>
 
-      <div className="flex flex-col gap-2 flex-1">
-        {artifacts.map(({ label, value, progress }, i) => (
-          <motion.div
-            key={label}
-            className="flex items-center gap-3"
-            initial={{ opacity: 0, x: -8 }}
-            animate={active ? { opacity: 1, x: 0 } : { opacity: 0, x: -8 }}
-            transition={{ duration: 0.5, delay: 0.08 * i, ease: EASE }}
-          >
-            {/* Progress ring */}
-            <div className="relative w-6 h-6 shrink-0">
-              <svg width="24" height="24" viewBox="0 0 24 24" className="rotate-[-90deg]">
-                <circle cx="12" cy="12" r="10" fill="none" stroke="rgba(0,0,0,0.06)" strokeWidth="2" />
-                <motion.circle
-                  cx="12" cy="12" r="10" fill="none" stroke="rgba(0,0,0,0.2)" strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeDasharray={`${2 * Math.PI * 10}`}
-                  initial={{ strokeDashoffset: 2 * Math.PI * 10 }}
-                  animate={active ? { strokeDashoffset: 2 * Math.PI * 10 * (1 - progress / 100) } : { strokeDashoffset: 2 * Math.PI * 10 }}
-                  transition={{ duration: 0.8, delay: 0.15 + i * 0.1, ease: EASE }}
-                />
-              </svg>
-            </div>
+      <div className="flex flex-col gap-2.5 flex-1">{children}</div>
 
-            <div className="flex-1 min-w-0">
-              <div className="flex items-baseline justify-between">
-                <span className="font-sans text-[10px] text-black/55 font-medium">{label}</span>
-                <motion.span
-                  className="font-sans text-[9px] text-black/30"
-                  initial={{ opacity: 0 }}
-                  animate={active ? { opacity: 1 } : { opacity: 0 }}
-                  transition={{ duration: 0.3, delay: 0.3 + i * 0.08, ease: EASE }}
-                >
-                  {value}
-                </motion.span>
-              </div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
+      {footer && <div className="mt-3 pt-3 border-t border-black/[0.06]">{footer}</div>}
     </div>
+  )
+}
+
+function ScopeVisual({ active }: { active: boolean }) {
+  const rows = [
+    { label: "Problem", value: "Defined" },
+    { label: "Constraints", value: "Locked" },
+    { label: "Success metric", value: "Set" },
+    { label: "Assumptions", value: "3 flagged" },
+  ]
+
+  return (
+    <PanelShell
+      eyebrow="Discovery"
+      meta="4 / 4"
+      active={active}
+      footer={
+        <span className="font-sans text-[11px] text-black/55">
+          Scope locked before line one of code
+        </span>
+      }
+    >
+      {rows.map(({ label, value }, i) => (
+        <motion.div
+          key={label}
+          className="flex items-baseline justify-between border-b border-black/[0.05] pb-2 last:border-b-0 last:pb-0"
+          initial={{ opacity: 0, y: 4 }}
+          animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
+          transition={{ duration: 0.45, delay: 0.08 * i, ease: EASE }}
+        >
+          <span className="font-serif italic text-black/85 text-[13px]">{label}</span>
+          <span className="font-sans text-[11px] text-black/55">{value}</span>
+        </motion.div>
+      ))}
+    </PanelShell>
   )
 }
 
 function BuildVisual({ active }: { active: boolean }) {
   const tracks = [
     { label: "Design", segments: [{ w: 32 }, { w: 40 }, { w: 28 }] },
-    { label: "Eng", segments: [{ w: 20 }, { w: 45 }, { w: 35 }] },
+    { label: "Engineering", segments: [{ w: 20 }, { w: 45 }, { w: 35 }] },
   ]
 
   return (
-    <div className="p-4 md:p-5 h-full flex flex-col">
-      <div className="flex items-center justify-between mb-3">
-        <span className="font-sans text-[8px] tracking-[0.2em] uppercase text-black/25">
-          Workstreams
-        </span>
-        <motion.span
-          className="font-mono text-[9px] text-black/30"
+    <PanelShell
+      eyebrow="Workstreams"
+      meta="Wk 4 of 8"
+      active={active}
+      footer={
+        <motion.div
+          className="flex items-center gap-2"
           initial={{ opacity: 0 }}
           animate={active ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.4, delay: 0.5, ease: EASE }}
-        >
-          Wk 4 / 8
-        </motion.span>
-      </div>
-
-      <div className="flex flex-col gap-3 flex-1">
-        {tracks.map(({ label, segments }, ti) => (
-          <div key={label}>
-            <span className="font-sans text-[8px] tracking-[0.12em] uppercase text-black/30 mb-1 block">{label}</span>
-            <div className="flex gap-[2px] h-5 rounded-md overflow-hidden bg-black/[0.02]">
-              {segments.map((seg, si) => (
-                <motion.div
-                  key={si}
-                  className="h-full rounded-[3px]"
-                  style={{
-                    background: si === 1 ? "rgba(0,0,0,0.1)" : "rgba(0,0,0,0.05)",
-                    boxShadow: "inset 0 1px 0 rgba(255,255,255,0.25)",
-                  }}
-                  initial={{ width: 0, opacity: 0 }}
-                  animate={active ? { width: `${seg.w}%`, opacity: 1 } : { width: 0, opacity: 0 }}
-                  transition={{ duration: 0.7, delay: 0.1 + ti * 0.12 + si * 0.08, ease: EASE }}
-                />
-              ))}
-            </div>
-          </div>
-        ))}
-
-        {/* Active sprint indicator */}
-        <motion.div
-          className="mt-auto flex items-center gap-2"
-          initial={{ opacity: 0, y: 6 }}
-          animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: 6 }}
           transition={{ duration: 0.5, delay: 0.4, ease: EASE }}
         >
           <motion.span
-            className="w-1.5 h-1.5 rounded-full bg-emerald-500/60"
-            animate={active ? { scale: [1, 1.3, 1], opacity: [0.6, 1, 0.6] } : {}}
+            className="w-1.5 h-1.5 rounded-full bg-emerald-500/70"
+            animate={active ? { scale: [1, 1.3, 1], opacity: [0.7, 1, 0.7] } : {}}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           />
-          <span className="font-sans text-[9px] text-black/35">Sprint 4 active</span>
-          <span className="ml-auto font-sans text-[9px] text-black/25">12 PRs merged</span>
+          <span className="font-sans text-[11px] text-black/65">Sprint 4 active</span>
+          <span className="ml-auto font-sans text-[11px] text-black/55">12 PRs merged</span>
         </motion.div>
-      </div>
-    </div>
+      }
+    >
+      {tracks.map(({ label, segments }, ti) => (
+        <div key={label} className="flex flex-col gap-1.5">
+          <span className="font-serif italic text-black/85 text-[13px]">{label}</span>
+          <div className="flex gap-[3px] h-[6px] rounded-full overflow-hidden bg-black/[0.04]">
+            {segments.map((seg, si) => (
+              <motion.div
+                key={si}
+                className="h-full rounded-full"
+                style={{
+                  background: si === 1 ? "rgba(0,0,0,0.18)" : "rgba(0,0,0,0.10)",
+                }}
+                initial={{ width: 0, opacity: 0 }}
+                animate={
+                  active
+                    ? { width: `${seg.w}%`, opacity: 1 }
+                    : { width: 0, opacity: 0 }
+                }
+                transition={{
+                  duration: 0.7,
+                  delay: 0.1 + ti * 0.12 + si * 0.08,
+                  ease: EASE,
+                }}
+              />
+            ))}
+          </div>
+        </div>
+      ))}
+    </PanelShell>
   )
 }
 
@@ -150,67 +149,74 @@ function ShipVisual({ active }: { active: boolean }) {
   ]
 
   return (
-    <div className="p-4 md:p-5 h-full flex flex-col">
-      <div className="flex items-center justify-between mb-3">
-        <span className="font-sans text-[8px] tracking-[0.2em] uppercase text-black/25">
-          Handoff
-        </span>
-        <motion.span
-          className="font-mono text-[9px] text-black/30"
-          initial={{ opacity: 0 }}
-          animate={active ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.4, delay: 0.5, ease: EASE }}
-        >
-          3 / 4
-        </motion.span>
-      </div>
-
-      <div className="flex flex-col gap-2 flex-1">
-        {items.map(({ label, done }, i) => (
-          <motion.div
-            key={label}
-            className="flex items-center gap-2.5"
-            initial={{ opacity: 0, x: -6 }}
-            animate={active ? { opacity: 1, x: 0 } : { opacity: 0, x: -6 }}
-            transition={{ duration: 0.45, delay: 0.06 * i, ease: EASE }}
-          >
+    <PanelShell
+      eyebrow="Handoff"
+      meta="3 / 4"
+      active={active}
+      footer={
+        <div className="flex items-center gap-3">
+          <div className="flex-1 h-[3px] rounded-full bg-black/[0.05] overflow-hidden">
             <motion.div
-              className={cn(
-                "w-4 h-4 rounded-full flex items-center justify-center shrink-0",
-                done ? "bg-black/[0.08]" : "border border-black/10"
-              )}
-              initial={{ scale: 0 }}
-              animate={active ? { scale: 1 } : { scale: 0 }}
-              transition={{ duration: 0.35, delay: 0.15 + i * 0.08, ease: [0.34, 1.56, 0.64, 1] }}
-            >
-              {done && (
-                <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-black/35">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-              )}
-            </motion.div>
-            <span className={cn(
-              "font-sans text-[10px]",
-              done ? "text-black/50" : "text-black/30"
-            )}>
-              {label}
-            </span>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Completion bar */}
-      <div className="mt-auto">
-        <div className="h-1 rounded-full bg-black/[0.04] overflow-hidden">
-          <motion.div
-            className="h-full rounded-full bg-black/[0.12]"
-            initial={{ width: "0%" }}
-            animate={active ? { width: "75%" } : { width: "0%" }}
-            transition={{ duration: 1, delay: 0.2, ease: EASE }}
-          />
+              className="h-full rounded-full bg-black/[0.25]"
+              initial={{ width: "0%" }}
+              animate={active ? { width: "75%" } : { width: "0%" }}
+              transition={{ duration: 1, delay: 0.2, ease: EASE }}
+            />
+          </div>
+          <span className="font-sans text-[11px] text-black/65">75%</span>
         </div>
-      </div>
-    </div>
+      }
+    >
+      {items.map(({ label, done }, i) => (
+        <motion.div
+          key={label}
+          className="flex items-center gap-3"
+          initial={{ opacity: 0, x: -4 }}
+          animate={active ? { opacity: 1, x: 0 } : { opacity: 0, x: -4 }}
+          transition={{ duration: 0.45, delay: 0.06 * i, ease: EASE }}
+        >
+          <motion.div
+            className={cn(
+              "w-[14px] h-[14px] rounded-full flex items-center justify-center shrink-0",
+              done
+                ? "bg-black/[0.12] border border-black/[0.06]"
+                : "border border-black/15"
+            )}
+            initial={{ scale: 0 }}
+            animate={active ? { scale: 1 } : { scale: 0 }}
+            transition={{
+              duration: 0.35,
+              delay: 0.15 + i * 0.08,
+              ease: [0.34, 1.56, 0.64, 1],
+            }}
+          >
+            {done && (
+              <svg
+                width="8"
+                height="8"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="text-black/65"
+              >
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            )}
+          </motion.div>
+          <span
+            className={cn(
+              "font-sans text-[12px]",
+              done ? "text-black/75" : "text-black/55"
+            )}
+          >
+            {label}
+          </span>
+        </motion.div>
+      ))}
+    </PanelShell>
   )
 }
 
@@ -268,92 +274,108 @@ export function HowWeWork() {
 
   return (
     <div ref={containerRef} className="doppelrand" style={{ borderRadius: "2.5rem" }}>
-      <div className="doppelrand-inner overflow-hidden" style={{ borderRadius: "calc(2.5rem - 6px)" }}>
-
-        {/* Header */}
+      <div
+        className="doppelrand-inner overflow-hidden"
+        style={{ borderRadius: "calc(2.5rem - 6px)" }}
+      >
+        {/* Header — matches the standard "Trusted by" pill grammar */}
         <div className="px-6 sm:px-8 md:px-10 pt-8 md:pt-10 pb-6">
-          <p className="inline-flex font-sans text-black/65 text-[10px] tracking-[0.2em] uppercase mb-4 rounded-full bg-black/[0.04] px-3.5 py-1.5 border border-black/[0.06]">
+          <p className="inline-flex font-sans text-black/75 text-[11px] tracking-[0.2em] uppercase mb-5 rounded-full bg-black/[0.04] px-3 py-1 border border-black/[0.06]">
             How We Work
           </p>
           <h2
-            className="font-serif text-black/90 leading-[1.07] mb-3 [text-wrap:balance]"
+            className="font-serif text-black/90 leading-[1.05] mb-3 [text-wrap:balance]"
             style={{
-              fontSize: "clamp(1.4rem, 4vw, 2.8rem)",
+              fontSize: "clamp(1.5rem, 4vw, 2.8rem)",
               letterSpacing: "-0.02em",
             }}
           >
-            Most agencies pitch. <em>We build.</em>
+            Most agencies pitch.{" "}
+            <em className="italic">We build.</em>
           </h2>
-          <p className="font-sans text-black/70 text-sm leading-relaxed max-w-md [text-wrap:pretty]">
+          <p className="font-sans text-black/75 text-[15px] leading-relaxed max-w-md [text-wrap:pretty]">
             Scoped properly, built cleanly, shipped on time. A team that owns the outcome.
           </p>
         </div>
 
-        {/* Step selector + content */}
+        {/* Step selector — editorial, no fill chrome. Hairline progress bar
+            beneath the active tab matches the divider language elsewhere. */}
         <div className="px-6 sm:px-8 md:px-10 pb-8 md:pb-10">
-          {/* Step tabs */}
-          <div className="flex gap-1.5 mb-5">
-            {steps.map((step, i) => (
-              <button
-                key={step.id}
-                onClick={() => handleSelect(i)}
-                className={cn(
-                  "relative flex-1 text-left rounded-xl px-4 py-3 cursor-pointer transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] overflow-hidden",
-                  i === active
-                    ? "bg-black/[0.06]"
-                    : "bg-transparent hover:bg-black/[0.03]"
-                )}
-              >
-                {/* Progress bar (auto-advance indicator) */}
-                {i === active && !paused && (
-                  <motion.div
-                    className="absolute bottom-0 left-0 h-[2px] bg-black/[0.12] rounded-full"
-                    initial={{ width: "0%" }}
-                    animate={{ width: "100%" }}
-                    transition={{ duration: STEP_INTERVAL / 1000, ease: "linear" }}
-                    key={timerKey}
-                  />
-                )}
+          <div className="grid grid-cols-3 gap-2 md:gap-3 mb-6 border-t border-black/[0.06]">
+            {steps.map((step, i) => {
+              const isActive = i === active
+              return (
+                <button
+                  key={step.id}
+                  type="button"
+                  onClick={() => handleSelect(i)}
+                  className="relative text-left pt-4 pb-3 cursor-pointer transition-colors duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.99] group"
+                >
+                  {/* Top hairline progress (auto-advance) — sits over the
+                      shared border-t above so it reads as a fill, not an add */}
+                  {isActive && !paused && (
+                    <motion.div
+                      key={timerKey}
+                      className="absolute -top-px left-0 h-px bg-black/55"
+                      initial={{ width: "0%" }}
+                      animate={{ width: "100%" }}
+                      transition={{ duration: STEP_INTERVAL / 1000, ease: "linear" }}
+                    />
+                  )}
 
-                <span className="font-sans text-[9px] tracking-[0.15em] uppercase text-black/30 block mb-0.5">
-                  {step.id}
-                </span>
-                <span className={cn(
-                  "font-sans text-[12px] font-medium block transition-colors duration-300",
-                  i === active ? "text-black/85" : "text-black/55"
-                )}>
-                  {step.title}
-                </span>
-              </button>
-            ))}
+                  <div className="flex items-baseline gap-3">
+                    <span
+                      className={cn(
+                        "font-serif text-[15px] md:text-[16px] leading-none transition-colors duration-300",
+                        isActive ? "text-black/90" : "text-black/35 group-hover:text-black/55"
+                      )}
+                    >
+                      {step.id}
+                    </span>
+                    <span
+                      className={cn(
+                        "font-sans text-[12px] md:text-[13px] font-medium tracking-tight transition-colors duration-300",
+                        isActive
+                          ? "text-black/85"
+                          : "text-black/55 group-hover:text-black/75"
+                      )}
+                    >
+                      {step.title}
+                    </span>
+                  </div>
+                </button>
+              )
+            })}
           </div>
 
-          {/* Content: text + visual panel side by side */}
-          <div className="flex flex-col md:flex-row gap-4">
+          {/* Content: text + visual panel side by side. 5/7 grid matches the
+              site's editorial 12-col rhythm. */}
+          <div className="grid md:grid-cols-12 gap-5 md:gap-6">
             {/* Text */}
-            <div className="md:w-[42%] flex flex-col justify-center">
+            <div className="md:col-span-5 flex flex-col justify-center">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={active}
-                  initial={{ opacity: 0, y: 8 }}
+                  initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
+                  exit={{ opacity: 0, y: -4 }}
                   transition={{ duration: 0.3, ease: EASE }}
                 >
-                  <p className="font-sans text-black/70 text-sm leading-relaxed [text-wrap:pretty]">
+                  <p className="font-sans text-black/75 text-[14px] md:text-[15px] leading-relaxed [text-wrap:pretty]">
                     {steps[active].desc}
                   </p>
                 </motion.div>
               </AnimatePresence>
             </div>
 
-            {/* Visual panel */}
-            <div className="md:w-[58%]">
+            {/* Visual panel — fixed height preserved from prior version */}
+            <div className="md:col-span-7">
               <div
-                className="rounded-xl border border-black/[0.05] overflow-hidden h-[200px] md:h-[210px]"
+                className="rounded-2xl border border-black/[0.06] overflow-hidden h-[200px] md:h-[210px]"
                 style={{
                   background: "rgba(0,0,0,0.012)",
-                  boxShadow: "inset 0 1px 0 rgba(255,255,255,0.35), 0 1px 3px rgba(0,0,0,0.02)",
+                  boxShadow:
+                    "inset 0 1px 0 rgba(255,255,255,0.4), 0 1px 2px rgba(0,0,0,0.02)",
                 }}
               >
                 <AnimatePresence mode="wait">
@@ -372,7 +394,6 @@ export function HowWeWork() {
             </div>
           </div>
         </div>
-
       </div>
     </div>
   )

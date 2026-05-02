@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import { LiquidGlassCard } from "@/components/liquid-glass";
 
@@ -109,7 +110,7 @@ export function SiteNav() {
             className="liquid-glass rounded-full relative z-40 px-5 py-2.5 flex items-center justify-between gap-6"
           >
             {/* Logo */}
-            <a
+            <Link
               href="/"
               onClick={handleLogoClick}
               aria-label="Evlogia — home"
@@ -119,14 +120,14 @@ export function SiteNav() {
               <Image
                 src="/evlogia-combination-mark.png"
                 alt="Evlogia"
-                width={260}
-                height={260}
+                width={130}
+                height={130}
                 priority
                 sizes="130px"
                 style={{
                   position: "absolute",
                   width: "130px",
-                  height: "130px",
+                  height: "auto",
                   top: "50%",
                   left: "50%",
                   transform: "translate(-50%, -50%)",
@@ -134,18 +135,18 @@ export function SiteNav() {
                   opacity: 0.85,
                 }}
               />
-            </a>
+            </Link>
 
             {/* Links — desktop */}
             <div className="hidden md:flex items-center gap-7">
               {DESKTOP_NAV_LINKS.map(({ label, href }) => (
-                <a
+                <Link
                   key={label}
                   href={href}
                   className="nav-link text-black/65 text-xs font-sans hover:text-black transition-colors duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] tracking-wide"
                 >
                   {label}
-                </a>
+                </Link>
               ))}
             </div>
 
@@ -207,12 +208,8 @@ export function SiteNav() {
           >
             <nav className="flex flex-col items-center gap-8">
               {NAV_LINKS.map(({ label, href }, i) => (
-                <motion.a
+                <motion.div
                   key={label}
-                  href={href}
-                  onClick={() => setMenuOpen(false)}
-                  className="font-serif text-black/80 text-3xl tracking-tight"
-                  style={{ letterSpacing: "-0.01em" }}
                   initial={{ opacity: 0, y: 24 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -12 }}
@@ -222,8 +219,15 @@ export function SiteNav() {
                     ease: [0.16, 1, 0.3, 1],
                   }}
                 >
-                  {label}
-                </motion.a>
+                  <Link
+                    href={href}
+                    onClick={() => setMenuOpen(false)}
+                    className="font-serif text-black/80 text-3xl tracking-tight"
+                    style={{ letterSpacing: "-0.01em" }}
+                  >
+                    {label}
+                  </Link>
+                </motion.div>
               ))}
 
               <motion.div

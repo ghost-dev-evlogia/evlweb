@@ -1,7 +1,6 @@
 "use client";
 
 import React, {
-  useCallback,
   useRef,
   useState,
   forwardRef,

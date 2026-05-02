@@ -39,18 +39,30 @@ export default function Home() {
         <HeroSection />
 
         {/* ─── Client logos ─── */}
-        <div className="border-y" style={{ borderColor: "rgba(0,0,0,0.07)" }}>
-          <div className="pt-5 pb-1">
-            <p className="text-center">
-              <span className="inline-flex font-sans text-black/65 text-[10px] tracking-[0.2em] uppercase rounded-full bg-black/[0.04] px-3 py-1 border border-black/[0.06]">
-                Trusted by
-              </span>
-            </p>
+        <section
+          aria-label="Companies we've worked with"
+          className="border-y py-10 md:py-12"
+          style={{ borderColor: "rgba(0,0,0,0.07)" }}
+        >
+          {/* Eyebrow — centered pill above the marquee, separated by enough
+              vertical breathing room that it never overlaps the logos */}
+          <div className="text-center mb-7 md:mb-9">
+            <span className="inline-flex font-sans text-black/75 text-[11px] tracking-[0.22em] uppercase rounded-full bg-black/[0.04] px-3 py-1 border border-black/[0.06]">
+              Trusted by
+            </span>
           </div>
+          {/* Visual marquee — decorative duplicate, hidden from AT.
+              Edge-fade mask softens where logos enter / exit. */}
           <div
-            className="marquee-wrapper pb-5"
+            className="marquee-wrapper"
             aria-hidden="true"
             role="presentation"
+            style={{
+              maskImage:
+                "linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%)",
+              WebkitMaskImage:
+                "linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%)",
+            }}
           >
             <div
               className="marquee-track"
@@ -81,10 +93,19 @@ export default function Home() {
               ))}
             </div>
           </div>
-        </div>
+          {/* Accessible client list — visually hidden, surfaces names to AT/SEO */}
+          <ul className="sr-only">
+            {clientLogos.map((logo) => (
+              <li key={logo.name}>{logo.name}</li>
+            ))}
+          </ul>
+        </section>
 
         {/* ─── Stats ─── */}
         <section className="px-6 py-16 md:py-28">
+          <p className="max-w-4xl mx-auto text-center font-sans text-black/55 text-[11px] tracking-[0.18em] uppercase mb-6">
+            Track record · across 8 industries since 2021
+          </p>
           <StaggerGrid className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
               { target: 50, suffix: "+", label: "Systems Shipped" },
@@ -98,7 +119,7 @@ export default function Home() {
                     <div className="font-serif text-black/90 text-3xl md:text-4xl mb-1.5 leading-none">
                       <AnimatedCounter target={target} suffix={suffix} />
                     </div>
-                    <div className="font-sans text-black/75 text-[9px] md:text-[10px] tracking-widest uppercase leading-tight">
+                    <div className="font-sans text-black/75 text-[11px] md:text-[11px] tracking-widest uppercase leading-tight">
                       {label}
                     </div>
                   </div>
@@ -156,7 +177,7 @@ export default function Home() {
                       01
                     </div>
                     <div className="relative">
-                      <div className="font-sans text-black/18 text-[10px] tracking-widest mb-5">01</div>
+                      <div className="font-sans text-black/40 text-[11px] tracking-widest mb-5">01</div>
                       <h3
                         className="font-serif text-black/90 text-2xl md:text-3xl mb-4 leading-snug"
                         style={{ letterSpacing: "-0.01em" }}
@@ -185,7 +206,7 @@ export default function Home() {
                     >
                       02
                     </div>
-                    <div className="font-sans text-black/18 text-[10px] tracking-widest mb-5">02</div>
+                    <div className="font-sans text-black/40 text-[11px] tracking-widest mb-5">02</div>
                     <h3
                       className="font-serif text-black/90 text-xl md:text-2xl mb-3 leading-snug"
                       style={{ letterSpacing: "-0.01em" }}
@@ -213,7 +234,7 @@ export default function Home() {
                     >
                       03
                     </div>
-                    <div className="font-sans text-black/18 text-[10px] tracking-widest mb-5">03</div>
+                    <div className="font-sans text-black/40 text-[11px] tracking-widest mb-5">03</div>
                     <h3
                       className="font-serif text-black/90 text-xl md:text-2xl mb-3 leading-snug"
                       style={{ letterSpacing: "-0.01em" }}
@@ -241,7 +262,7 @@ export default function Home() {
                     >
                       04
                     </div>
-                    <div className="font-sans text-black/18 text-[10px] tracking-widest mb-5">04</div>
+                    <div className="font-sans text-black/40 text-[11px] tracking-widest mb-5">04</div>
                     <h3
                       className="font-serif text-black/90 text-xl md:text-2xl mb-3 leading-snug"
                       style={{ letterSpacing: "-0.01em" }}
@@ -269,7 +290,7 @@ export default function Home() {
                     >
                       05
                     </div>
-                    <div className="font-sans text-black/18 text-[10px] tracking-widest mb-5">05</div>
+                    <div className="font-sans text-black/40 text-[11px] tracking-widest mb-5">05</div>
                     <h3
                       className="font-serif text-black/90 text-xl md:text-2xl mb-3 leading-snug"
                       style={{ letterSpacing: "-0.01em" }}
@@ -306,10 +327,10 @@ export default function Home() {
           <MotionDivider />
         </div>
 
-        {/* ─── Technical Depth ─── */}
-        <section id="depth" className="scroll-mt-20 px-6 py-32 md:py-48">
+        {/* ─── Technical Depth ─── secondary section, lighter weight than Services ─── */}
+        <section id="depth" className="scroll-mt-20 px-6 py-24 md:py-32">
           <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-12 items-end gap-8 mb-14 md:mb-20">
+            <div className="grid md:grid-cols-12 items-end gap-8 mb-10 md:mb-14">
               <div className="md:col-span-8">
                 <SplitHeading
                   lines={[
@@ -318,7 +339,7 @@ export default function Home() {
                   ]}
                   className="font-serif text-black/90 leading-[1.02]"
                   style={{
-                    fontSize: "clamp(2.25rem, 6vw, 5rem)",
+                    fontSize: "clamp(1.75rem, 4.5vw, 3.5rem)",
                     letterSpacing: "-0.015em",
                   }}
                 />
@@ -339,7 +360,7 @@ export default function Home() {
               <StaggerItem className="h-full">
                 <div className="doppelrand h-full">
                   <div className="doppelrand-inner card-hover p-6 md:p-8 h-full flex flex-col gap-4">
-                    <div className="font-sans text-black/75 text-[10px] tracking-[0.25em] uppercase">
+                    <div className="font-sans text-black/85 text-[11px] tracking-[0.25em] uppercase">
                       Applied AI
                     </div>
                     <p className="font-sans text-black/75 text-sm leading-relaxed">
@@ -349,7 +370,7 @@ export default function Home() {
                       {["LLMs", "Vision", "Multimodal", "Agents", "RAG"].map((v) => (
                         <span
                           key={v}
-                          className="font-sans text-[10px] tracking-wide text-black/50 border border-black/10 rounded-full px-2.5 py-0.5"
+                          className="font-sans text-[11px] tracking-wide text-black/65 border border-black/10 rounded-full px-2.5 py-0.5"
                         >
                           {v}
                         </span>
@@ -363,17 +384,17 @@ export default function Home() {
               <StaggerItem className="h-full">
                 <div className="doppelrand h-full">
                   <div className="doppelrand-inner card-hover p-6 md:p-8 h-full flex flex-col gap-4">
-                    <div className="font-sans text-black/75 text-[10px] tracking-[0.25em] uppercase">
+                    <div className="font-sans text-black/85 text-[11px] tracking-[0.25em] uppercase">
                       IoT & Hardware
                     </div>
                     <p className="font-sans text-black/75 text-sm leading-relaxed">
-                      Connected hardware that does what it's supposed to. Sensor pipelines, embedded firmware, cloud-connected devices. We've built things worth building properly.
+                      Connected hardware that does what it&apos;s supposed to. Sensor pipelines, embedded firmware, cloud-connected devices. We&apos;ve built things worth building properly.
                     </p>
                     <div className="flex flex-wrap gap-1.5 mt-auto">
                       {["Firmware", "Sensors", "Edge", "Protocols", "Cloud"].map((v) => (
                         <span
                           key={v}
-                          className="font-sans text-[10px] tracking-wide text-black/50 border border-black/10 rounded-full px-2.5 py-0.5"
+                          className="font-sans text-[11px] tracking-wide text-black/65 border border-black/10 rounded-full px-2.5 py-0.5"
                         >
                           {v}
                         </span>
@@ -387,17 +408,17 @@ export default function Home() {
               <StaggerItem className="h-full">
                 <div className="doppelrand h-full">
                   <div className="doppelrand-inner card-hover p-6 md:p-8 h-full flex flex-col gap-4">
-                    <div className="font-sans text-black/75 text-[10px] tracking-[0.25em] uppercase">
+                    <div className="font-sans text-black/85 text-[11px] tracking-[0.25em] uppercase">
                       Complex Platforms
                     </div>
                     <p className="font-sans text-black/75 text-sm leading-relaxed">
-                      Multi-tenant systems, high-stakes data flows, and platforms where getting the architecture wrong is expensive. We've built them and handed them off clean.
+                      Multi-tenant systems, high-stakes data flows, and platforms where getting the architecture wrong is expensive. We&apos;ve built them and handed them off clean.
                     </p>
                     <div className="flex flex-wrap gap-1.5 mt-auto">
                       {["Multi-tenant", "APIs", "Data pipelines", "Infrastructure"].map((v) => (
                         <span
                           key={v}
-                          className="font-sans text-[10px] tracking-wide text-black/50 border border-black/10 rounded-full px-2.5 py-0.5"
+                          className="font-sans text-[11px] tracking-wide text-black/65 border border-black/10 rounded-full px-2.5 py-0.5"
                         >
                           {v}
                         </span>
