@@ -46,7 +46,7 @@ export function HeroSection() {
             The visually-hidden `<span className="sr-only">` is the canonical
             accessible name; the animated words are aria-hidden duplicates. */}
         <h1
-          className="font-serif text-black/90 leading-[1.02] mb-7 md:mb-9 text-center w-full [text-wrap:balance]"
+          className="font-display text-black/90 leading-[1.02] mb-7 md:mb-9 text-center w-full [text-wrap:balance]"
           style={{
             fontSize: "clamp(2rem, 8vw, 8rem)",
             letterSpacing: "-0.02em",
@@ -70,26 +70,24 @@ export function HeroSection() {
               </motion.span>
             ))}
             <br />
-            <em className="text-black/90 italic">
-              {["that", "get", "used."].map((word, i) => (
-                <motion.span
-                  key={word + i}
-                  style={{
-                    display: "inline-block",
-                    marginRight: i < 2 ? "0.22em" : 0,
-                  }}
-                  initial={{ opacity: 0, y: 10, filter: "blur(8px)" }}
-                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  transition={{
-                    delay: 0.35 + (3 + i) * 0.07,
-                    duration: 0.75,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                >
-                  {word}
-                </motion.span>
-              ))}
-            </em>
+            {["that", "get", "used."].map((word, i) => (
+              <motion.span
+                key={word + i}
+                style={{
+                  display: "inline-block",
+                  marginRight: i < 2 ? "0.22em" : 0,
+                }}
+                initial={{ opacity: 0, y: 10, filter: "blur(8px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{
+                  delay: 0.35 + (3 + i) * 0.07,
+                  duration: 0.75,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+              >
+                {word}
+              </motion.span>
+            ))}
           </span>
         </h1>
 
@@ -101,8 +99,8 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.85, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
         >
-          Production AI, internal tools, IoT, and platforms. Built for teams
-          that need to ship in months — not prototype in slides.
+          We don&apos;t have account managers. The person you talked to last
+          week is the person writing your code this week. We ship in months.
         </motion.p>
 
         {/* CTAs */}

@@ -144,7 +144,7 @@ export default function Home() {
                     { text: "Real systems." },
                     { text: "Not just R&D.", italic: true },
                   ]}
-                  className="font-serif text-black/90 leading-[1.02]"
+                  className="font-display text-black/90 leading-[1.02]"
                   style={{
                     fontSize: "clamp(2.25rem, 6vw, 5rem)",
                     letterSpacing: "-0.015em",
@@ -154,8 +154,8 @@ export default function Home() {
               <div className="md:col-span-4 md:col-start-9 md:pb-3">
                 <ScrollReveal>
                   <p className="font-sans text-black/80 text-[15px] leading-relaxed [text-wrap:pretty]">
-                    Five practices, one team. The work below is everything we
-                    actually ship — scoped, built, handed off.
+                    One team across the whole stack. The person who scoped it
+                    is the person who reviews the PR.
                   </p>
                 </ScrollReveal>
               </div>
@@ -185,7 +185,7 @@ export default function Home() {
                         Product & Platform Engineering
                       </h3>
                       <p className="font-sans text-black/75 text-sm md:text-[15px] leading-relaxed max-w-lg">
-                        Websites, web apps, mobile apps, platforms. We scope it, design it, build it, and ship it. No in-house team to manage.
+                        Websites, apps, platforms. We own the full build. You don't end up managing four vendors who don't talk to each other.
                       </p>
                       <p className="font-sans text-black/65 text-[11px] tracking-wide mt-4 pt-3 border-t border-black/[0.06] max-w-lg">
                         Typical engagement · 8–24 weeks · fixed scope · shipped product + handoff
@@ -298,7 +298,7 @@ export default function Home() {
                       Agentic AI Coaching
                     </h3>
                     <p className="font-sans text-black/75 text-sm md:text-[15px] leading-relaxed">
-                      We embed engineers inside your teams to coach AI-first practices across the full SDLC. Real delivery work, sustained behavior change.
+                      We sit inside your team, write real code, and ship alongside your engineers. Six months in, they just work differently. That&apos;s the point.
                     </p>
                     <p className="font-sans text-black/65 text-[11px] tracking-wide mt-4 pt-3 border-t border-black/[0.06]">
                       Embed 12–26 weeks · 1–3 engineers
@@ -337,7 +337,7 @@ export default function Home() {
                     { text: "When the problem is" },
                     { text: "genuinely hard.", italic: true },
                   ]}
-                  className="font-serif text-black/90 leading-[1.02]"
+                  className="font-display text-black/90 leading-[1.02]"
                   style={{
                     fontSize: "clamp(1.75rem, 4.5vw, 3.5rem)",
                     letterSpacing: "-0.015em",
@@ -347,9 +347,7 @@ export default function Home() {
               <div className="md:col-span-4 md:pb-3">
                 <ScrollReveal>
                   <p className="font-sans text-black/80 text-[15px] leading-relaxed [text-wrap:pretty]">
-                    Some work asks for more than a standard build. AI systems,
-                    connected hardware, multi-tenant platforms — where the
-                    technical bar <em className="font-serif italic text-black/90">is</em> the brief.
+                    A lot of what we do follows a known pattern. Some engagements don&apos;t. Novel AI architectures, hardware nobody&apos;s built before, platforms where the data model is itself the unsolved problem. We&apos;re good at those.
                   </p>
                 </ScrollReveal>
               </div>
@@ -445,7 +443,7 @@ export default function Home() {
                   { text: "Trusted by teams" },
                   { text: "that build seriously.", italic: true },
                 ]}
-                className="font-serif text-black/90 leading-[1.02]"
+                className="font-display text-black/90 leading-[1.02]"
                 style={{
                   fontSize: "clamp(2.25rem, 6vw, 5rem)",
                   letterSpacing: "-0.015em",
@@ -475,7 +473,7 @@ export default function Home() {
                     { text: "Built by people" },
                     { text: "who ship.", italic: true },
                   ]}
-                  className="font-serif text-black/90 leading-[1.02] mb-7"
+                  className="font-display text-black/90 leading-[1.02] mb-7"
                   style={{
                     fontSize: "clamp(2.25rem, 6.5vw, 5.5rem)",
                     letterSpacing: "-0.02em",
@@ -483,10 +481,10 @@ export default function Home() {
                 />
                 <ScrollReveal>
                   <p className="font-sans text-black/80 text-[17px] md:text-[18px] leading-relaxed max-w-xl [text-wrap:pretty]">
-                    A product and engineering team. We scope, build, and ship —
-                    web, mobile, internal platforms, applied AI, IoT.
-                    You work directly with the people writing the code,
-                    not an account manager between you and the work.
+                    Send us an email and you&apos;ll get an engineer. There&apos;s
+                    no account manager layer. The people you&apos;re talking to
+                    are writing the code, and when it&apos;s done, everything
+                    belongs to you.
                   </p>
                 </ScrollReveal>
               </div>
@@ -619,7 +617,7 @@ export default function Home() {
                     { text: "Questions we" },
                     { text: "get asked.", italic: true },
                   ]}
-                  className="font-serif text-black/90 leading-[1.02] mb-5"
+                  className="font-display text-black/90 leading-[1.02] mb-5"
                   style={{
                     fontSize: "clamp(2.25rem, 5.5vw, 4.5rem)",
                     letterSpacing: "-0.015em",
@@ -654,7 +652,7 @@ export default function Home() {
                 { text: "Let's build something" },
                 { text: "worth using.", italic: true },
               ]}
-              className="font-serif text-black/90 leading-[1.0] mb-8 md:mb-10"
+              className="font-display text-black/90 leading-[1.0] mb-8 md:mb-10"
               style={{
                 fontSize: "clamp(2.5rem, 9vw, 8rem)",
                 letterSpacing: "-0.025em",

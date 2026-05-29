@@ -73,7 +73,7 @@ function ScopeVisual({ active }: { active: boolean }) {
           animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
           transition={{ duration: 0.45, delay: 0.08 * i, ease: EASE }}
         >
-          <span className="font-serif italic text-black/85 text-[13px]">{label}</span>
+          <span className="font-serif text-black/85 text-[13px]">{label}</span>
           <span className="font-sans text-[11px] text-black/55">{value}</span>
         </motion.div>
       ))}
@@ -111,7 +111,7 @@ function BuildVisual({ active }: { active: boolean }) {
     >
       {tracks.map(({ label, segments }, ti) => (
         <div key={label} className="flex flex-col gap-1.5">
-          <span className="font-serif italic text-black/85 text-[13px]">{label}</span>
+          <span className="font-serif text-black/85 text-[13px]">{label}</span>
           <div className="flex gap-[3px] h-[6px] rounded-full overflow-hidden bg-black/[0.04]">
             {segments.map((seg, si) => (
               <motion.div
@@ -284,17 +284,16 @@ export function HowWeWork() {
             How We Work
           </p>
           <h2
-            className="font-serif text-black/90 leading-[1.05] mb-3 [text-wrap:balance]"
+            className="font-display text-black/90 leading-[1.05] mb-3 [text-wrap:balance]"
             style={{
               fontSize: "clamp(1.5rem, 4vw, 2.8rem)",
               letterSpacing: "-0.02em",
             }}
           >
-            Most agencies pitch.{" "}
-            <em className="italic">We build.</em>
+            Most agencies pitch. We build.
           </h2>
           <p className="font-sans text-black/75 text-[15px] leading-relaxed max-w-md [text-wrap:pretty]">
-            Scoped properly, built cleanly, shipped on time. A team that owns the outcome.
+            The reason most projects go sideways isn&apos;t bad engineering. It&apos;s that nobody agreed on what done looks like before anyone touched the keyboard. We spend real time on that upfront.
           </p>
         </div>
 

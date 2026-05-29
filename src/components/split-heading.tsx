@@ -73,9 +73,9 @@ export function SplitHeading({
         });
 
         return line.italic ? (
-          <em key={lineIdx} aria-hidden="true" style={{ display: "block", fontStyle: "italic" }}>
+          <span key={lineIdx} aria-hidden="true" style={{ display: "block" }}>
             {wordEls}
-          </em>
+          </span>
         ) : (
           <span key={lineIdx} aria-hidden="true" style={{ display: "block" }}>
             {wordEls}

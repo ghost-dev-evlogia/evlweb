@@ -64,7 +64,7 @@ export function Testimonials() {
 
         <p
           className={cn(
-            "text-2xl md:text-3xl font-serif font-light text-black/80 text-center max-w-2xl leading-relaxed transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]",
+            "text-2xl md:text-3xl font-serif font-medium text-black/85 text-center max-w-2xl leading-relaxed transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]",
             isAnimating ? "opacity-0 blur-sm scale-[0.98]" : "opacity-100 blur-0 scale-100",
           )}
           style={{ letterSpacing: "-0.01em" }}

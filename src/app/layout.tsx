@@ -1,21 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Instrument_Serif } from "next/font/google";
+import { Geist } from "next/font/google";
 import "./globals.css";
 import { PageTransition } from "@/components/page-transition";
 import { AuthLoader } from "@/components/auth-loader";
+import Animals from "@/components/ui/background";
 
 const SHOW_AUTH_LOADER = false;
 
 const geist = Geist({
   variable: "--font-geist",
   subsets: ["latin"],
-});
-
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument",
-  subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
 });
 
 export const viewport: Viewport = {
@@ -72,7 +66,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geist.variable} ${instrumentSerif.variable} h-full antialiased no-js`}
+      className={`${geist.variable} h-full antialiased no-js`}
       suppressHydrationWarning
     >
       <head>
@@ -89,6 +83,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <a href="#main" className="skip-link">Skip to content</a>
         {SHOW_AUTH_LOADER && <AuthLoader />}
+        <Animals animal="sheep" speed={3} scale={4} transparent={true} />
         <PageTransition>{children}</PageTransition>
       </body>
     </html>
