@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "motion/react"
 import { Dock, DockIcon } from "@/components/ui/dock"
+import { LiquidGlassCard } from "@/components/liquid-glass"
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -167,32 +168,41 @@ export function FloatingDock({ visible }: { visible: boolean }) {
           transition={{ duration: 0.55, ease: EASE }}
         >
           <div className="pointer-events-auto">
-            <Dock
-              iconSize={42}
-              iconMagnification={64}
-              iconDistance={120}
-              className="mt-0 bg-white/60 border-black/[0.07] shadow-[0_8px_32px_rgba(0,0,0,0.08),0_2px_6px_rgba(0,0,0,0.04)] backdrop-blur-xl rounded-full px-3"
+            <LiquidGlassCard
+              glowIntensity="none"
+              shadowIntensity="none"
+              borderRadius="100px"
+              blurIntensity="sm"
+              draggable={false}
+              className="p-0"
             >
-              {DOCK_ITEMS.map(({ label, href, Icon }) => (
-                <DockIcon key={label} className="hover:bg-black/[0.04] transition-colors">
-                  <DockTooltipIcon label={label} href={href}>
-                    <Icon />
+              <Dock
+                iconSize={42}
+                iconMagnification={64}
+                iconDistance={120}
+                className="liquid-glass !mt-0 !bg-transparent !border-transparent !backdrop-blur-none rounded-full px-3 gap-1.5 relative z-40"
+              >
+                {DOCK_ITEMS.map(({ label, href, Icon }) => (
+                  <DockIcon key={label} className="hover:bg-black/[0.05] transition-colors">
+                    <DockTooltipIcon label={label} href={href}>
+                      <Icon />
+                    </DockTooltipIcon>
+                  </DockIcon>
+                ))}
+
+                {/* Divider */}
+                <div className="w-px h-7 bg-black/10 mx-1" aria-hidden />
+
+                {/* Book a call — accent */}
+                <DockIcon className="bg-black/90 hover:bg-black transition-colors">
+                  <DockTooltipIcon label="Book a call" calBooking>
+                    <span className="text-white/95 flex items-center justify-center">
+                      <IconCalendar />
+                    </span>
                   </DockTooltipIcon>
                 </DockIcon>
-              ))}
-
-              {/* Divider */}
-              <div className="w-px h-7 bg-black/10 mx-1" aria-hidden />
-
-              {/* Book a call — accent */}
-              <DockIcon className="bg-black/90 hover:bg-black transition-colors">
-                <DockTooltipIcon label="Book a call" calBooking>
-                  <span className="text-white/95 flex items-center justify-center">
-                    <IconCalendar />
-                  </span>
-                </DockTooltipIcon>
-              </DockIcon>
-            </Dock>
+              </Dock>
+            </LiquidGlassCard>
           </div>
         </motion.div>
       )}
