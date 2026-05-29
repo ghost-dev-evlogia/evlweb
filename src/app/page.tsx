@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { HeroSection } from "@/components/hero-section";
 import { AnimatedCounter } from "@/components/animated-counter";
-import { SiteNav } from "@/components/site-nav";
+import { NavController } from "@/components/nav-controller";
 import { SiteFooter } from "@/components/site-footer";
 import { SplitHeading } from "@/components/split-heading";
 import { StaggerGrid, StaggerItem } from "@/components/stagger-grid";
@@ -32,7 +32,7 @@ const clientLogos = [
 export default function Home() {
   return (
     <>
-      <SiteNav />
+      <NavController />
 
       <main id="main">
         {/* ─── Hero ─── */}

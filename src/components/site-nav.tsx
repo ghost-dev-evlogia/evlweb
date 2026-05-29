@@ -22,7 +22,7 @@ const DESKTOP_NAV_LINKS = [
   { label: "FAQ", href: "/#faq" },
 ];
 
-export function SiteNav() {
+export function SiteNav({ visible = true }: { visible?: boolean } = {}) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -94,9 +94,13 @@ export function SiteNav() {
     <>
       <motion.header
         className="fixed top-5 left-1/2 -translate-x-1/2 z-50 w-full max-w-2xl px-4"
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+        initial={{ y: -20, opacity: 0, filter: "blur(0px)" }}
+        animate={
+          visible
+            ? { y: 0, opacity: 1, filter: "blur(0px)", pointerEvents: "auto" }
+            : { y: -32, opacity: 0, filter: "blur(6px)", pointerEvents: "none" }
+        }
+        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
       >
         <LiquidGlassCard
           glowIntensity="none"
