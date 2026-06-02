@@ -4,6 +4,7 @@ import "./globals.css";
 import { PageTransition } from "@/components/page-transition";
 import { AuthLoader } from "@/components/auth-loader";
 import Animals from "@/components/ui/background";
+import { PostHogProvider } from "@/components/posthog-provider";
 
 const SHOW_AUTH_LOADER = false;
 
@@ -82,9 +83,11 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <a href="#main" className="skip-link">Skip to content</a>
-        {SHOW_AUTH_LOADER && <AuthLoader />}
-        <Animals animal="sheep" speed={3} scale={4} transparent={true} />
-        <PageTransition>{children}</PageTransition>
+        <PostHogProvider>
+          {SHOW_AUTH_LOADER && <AuthLoader />}
+          <Animals animal="sheep" speed={3} scale={4} transparent={true} />
+          <PageTransition>{children}</PageTransition>
+        </PostHogProvider>
       </body>
     </html>
   );
