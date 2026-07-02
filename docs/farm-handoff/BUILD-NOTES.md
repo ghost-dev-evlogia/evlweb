@@ -76,3 +76,11 @@ One lesson per entry. Newest at the bottom. Written by the executing agent as it
   regression-tested; design critique P0s (ligature, team placeholders) + P1s (blurb tooltip, tap
   copy, sunflower chip height, avatar frames, CTA deserts, mobile nav Book) all fixed. Deferred:
   logo source-asset normalization (Edoxi gray plate, Vanora contrast) — needs owner-supplied marks.
+- **BUILD COMPLETE (2026-07-03).** feat/pixel-farm: 6 routes + 3 legal pages in one Sprout Lands
+  language; interactive hero passed its quality gates (crisp DPR-integer pixels, keyboard
+  traversal, reduced-motion still frame, no-JS static+links, StrictMode-clean, nav-loop
+  regression, 120fps, 0 console errors) — the static-scene fallback was NOT needed. Production
+  build: 11 static routes. Verifier P0/P1s all fixed. Remaining for the owner: real LinkedIn
+  URLs (arjun/aneesh/karthik are placeholders from the old site), logo source-asset cleanup
+  (Edoxi plate, Vanora contrast), and the decision whether to keep pixel farmhands or swap in
+  photos once all four exist.
