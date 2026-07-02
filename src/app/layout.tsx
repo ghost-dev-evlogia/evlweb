@@ -22,9 +22,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Evlogia | Product, Platform & Applied AI Engineering",
+  title: "Evlogia — we build hard things for fun",
   description:
-    "Evlogia is a product and engineering team. We scope, design, build, and ship production AI systems, internal tools, IoT, and platforms for teams that need to ship in months — not just prototype in slides.",
+    "A lean engineering team. Web, AI, hardware, firmware — whatever the problem needs. The difficult ones are the fun ones. That's the whole business model.",
   metadataBase: new URL("https://evlogia.ai"),
   icons: {
     icon: [
@@ -38,9 +38,9 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.json",
   openGraph: {
-    title: "Evlogia | The Applied AI Team That Ships",
+    title: "Evlogia — we build hard things for fun",
     description:
-      "Production AI, internal tools, IoT, and platforms. Scoped properly, built cleanly, shipped on time.",
+      "A lean engineering team. The difficult problems are the fun ones — that's the whole business model.",
     url: "https://evlogia.ai",
     siteName: "Evlogia",
     locale: "en_US",
@@ -50,15 +50,15 @@ export const metadata: Metadata = {
         url: "/og-farm.png",
         width: 1200,
         height: 630,
-        alt: "Pixel-art farm with the message: We build systems that get used — Evlogia, evlogia.ai",
+        alt: "Pixel-art farm with the message: We build hard things for fun — Evlogia, evlogia.ai",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Evlogia | The Applied AI Team That Ships",
+    title: "Evlogia — we build hard things for fun",
     description:
-      "Production AI, internal tools, IoT, and platforms — built and shipped, not pitched.",
+      "A lean engineering team. The difficult problems are the fun ones.",
     images: ["/og-farm.png"],
   },
 };

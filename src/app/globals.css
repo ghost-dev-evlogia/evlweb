@@ -479,6 +479,242 @@ body {
   transform: none !important;
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   THE JOURNEY — day-cycle world, critters, dialog, juice
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* night ramp (palette rows 7/12) */
+  --dusk: #766daa;
+  --dusk-deep: #583f83;
+  --indigo: #504086;
+  --night: #353738;
+}
+
+/* ─── Pixel cursors (Sprout UI pack cat-paw set) ─── */
+html {
+  cursor: url("/farm/cursors/arrow.png") 2 2, auto;
+}
+a, button, [role="button"], summary, .pixel-btn, .pixel-chip a {
+  cursor: url("/farm/cursors/paw.png") 6 2, pointer;
+}
+
+/* ─── World bands (CSS-tiled, pixelated) ─── */
+.band-grass {
+  background-image: url("/farm/tiles/grass-a.png");
+  background-size: calc(var(--px) * 16) calc(var(--px) * 16);
+  image-rendering: pixelated;
+}
+.band-dirt {
+  background-image: url("/farm/tiles/dirt.png");
+  background-size: calc(var(--px) * 16) calc(var(--px) * 16);
+  image-rendering: pixelated;
+}
+.band-water {
+  background-image: url("/farm/tiles/water-0.png");
+  background-size: calc(var(--px) * 16) calc(var(--px) * 16);
+  image-rendering: pixelated;
+  animation: water-cycle 1.8s steps(1, end) infinite;
+}
+@keyframes water-cycle {
+  0%   { background-image: url("/farm/tiles/water-0.png"); }
+  25%  { background-image: url("/farm/tiles/water-1.png"); }
+  50%  { background-image: url("/farm/tiles/water-2.png"); }
+  75%  { background-image: url("/farm/tiles/water-3.png"); }
+  100% { background-image: url("/farm/tiles/water-0.png"); }
+}
+.band-fence {
+  background-image: url("/farm/tiles/fence-h.png");
+  background-size: calc(var(--px) * 16) calc(var(--px) * 16);
+  background-repeat: repeat-x;
+  image-rendering: pixelated;
+}
+/* grass rounding into water (island edge tiles, flipped as needed) */
+.band-grass-edge-b {
+  background-image: url("/farm/tiles/grass-edge-b.png");
+  background-size: calc(var(--px) * 16) calc(var(--px) * 16);
+  background-repeat: repeat-x;
+  image-rendering: pixelated;
+}
+.band-grass-edge-t {
+  background-image: url("/farm/tiles/grass-edge-t.png");
+  background-size: calc(var(--px) * 16) calc(var(--px) * 16);
+  background-repeat: repeat-x;
+  image-rendering: pixelated;
+}
+
+/* ─── Cloud shadows drifting across grass ─── */
+@keyframes cloud-shadow-drift {
+  from { transform: translateX(-20%); }
+  to   { transform: translateX(120vw); }
+}
+.cloud-shadow {
+  position: absolute;
+  width: 180px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(53, 55, 56, 0.10);
+  animation: cloud-shadow-drift 70s linear infinite;
+  pointer-events: none;
+}
+
+/* ─── Sky clouds (fixed layer) ─── */
+@keyframes cloud-drift {
+  from { transform: translateX(-15vw); }
+  to   { transform: translateX(115vw); }
+}
+
+/* ─── Night: stars + fireflies ─── */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 0.25; }
+}
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: var(--paper);
+  animation: twinkle 2.4s steps(2, end) infinite;
+}
+@keyframes firefly {
+  0%, 100% { opacity: 0; transform: translate(0, 0); }
+  15% { opacity: 1; }
+  50% { opacity: 0.4; transform: translate(14px, -12px); }
+  70% { opacity: 1; }
+  85% { opacity: 0; transform: translate(24px, -18px); }
+}
+.firefly {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--harvest-pale);
+  box-shadow: 0 0 6px 1px rgba(242, 207, 140, 0.7);
+  animation: firefly 5.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ─── Critters ─── */
+.critter {
+  position: absolute;
+  image-rendering: pixelated;
+  background-repeat: no-repeat;
+  will-change: transform;
+}
+.critter-bubble {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  translate: -50% -4px;
+  font-family: var(--font-pixel), monospace;
+  font-size: 13px;
+  line-height: 1;
+  color: var(--ink);
+  background: var(--paper);
+  padding: 4px 7px;
+  box-shadow: inset 0 0 0 2px var(--ink-3), 3px 3px 0 rgba(53, 55, 56, 0.25);
+  white-space: nowrap;
+  animation: bubble-pop 0.25s var(--ease-snap);
+}
+@keyframes bubble-pop {
+  0% { transform: scale(0); }
+  70% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+@keyframes cow-shake {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(2px, 0); }
+  50% { transform: translate(-2px, 1px); }
+  75% { transform: translate(1px, -1px); }
+}
+.cow-shake {
+  animation: cow-shake 0.3s steps(4, end) 2;
+}
+
+/* ─── Tilled-row heading reveal — one hoe pass, left to right ─── */
+.till-row {
+  display: block;
+  width: var(--till-w, calc(var(--px) * 72));
+  height: calc(var(--px) * 4);
+  margin-top: calc(var(--px) * 3);
+  background-image: url("/farm/tiles/dirt.png");
+  background-size: calc(var(--px) * 8) calc(var(--px) * 8);
+  image-rendering: pixelated;
+  box-shadow: inset 0 0 0 1px rgba(117, 76, 96, 0.35);
+}
+.tilled .till-row {
+  animation: till-in 0.45s steps(9, end);
+}
+@keyframes till-in {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+/* ─── Self-revealing panels (wipe + settle) ───
+   Visible by default — the wipe only PLAYS when .revealed lands (IO), so
+   content can never be trapped hidden (headless renderers, missed IO). */
+.revealed.panel-reveal {
+  animation: panel-wipe 0.4s var(--ease-out);
+}
+@keyframes panel-wipe {
+  0% { clip-path: inset(0 100% 0 0); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+
+/* ─── Button juice: star pop particles ─── */
+.btn-star {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: var(--harvest-pale);
+  box-shadow: inset 0 0 0 1px var(--harvest-deep);
+  pointer-events: none;
+  z-index: 90;
+  animation: star-fly 0.45s steps(5, end) forwards;
+}
+@keyframes star-fly {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(var(--fly-x, 20px), var(--fly-y, -28px)) scale(0.4); opacity: 0; }
+}
+
+/* ─── PRESS START blink ─── */
+@keyframes press-start {
+  0%, 55% { opacity: 1; }
+  56%, 100% { opacity: 0.15; }
+}
+.press-start {
+  animation: press-start 1.2s steps(1, end) infinite;
+}
+
+/* ─── Dialog typewriter caret ─── */
+@keyframes caret-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+.dialog-caret {
+  display: inline-block;
+  width: 0.5em;
+  animation: caret-blink 0.8s steps(1, end) infinite;
+}
+
+/* ─── Sprite frame flip (two-frame idle for CSS-only critters) ─── */
+@keyframes sprite-flip {
+  0%, 49% { background-position: var(--frame-a); }
+  50%, 100% { background-position: var(--frame-b); }
+}
+
+/* ─── Harvest rain (easter egg) ─── */
+.harvest-drop {
+  position: fixed;
+  top: -32px;
+  image-rendering: pixelated;
+  pointer-events: none;
+  z-index: 95;
+  animation: harvest-fall 1.6s linear forwards;
+}
+@keyframes harvest-fall {
+  to { transform: translateY(110vh) rotate(200deg); }
+}
+
 /* ─── Reduced motion — WCAG 2.3.3 ─── */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -502,7 +738,23 @@ body {
 
   .sprite-bob,
   .sprite-hop,
-  .marquee-track {
+  .marquee-track,
+  .band-water,
+  .cloud-shadow,
+  .star,
+  .firefly,
+  .press-start,
+  .critter-bubble,
+  .btn-star,
+  .harvest-drop {
+    animation: none !important;
+  }
+
+  .till-row,
+  .panel-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
     animation: none !important;
   }
 }

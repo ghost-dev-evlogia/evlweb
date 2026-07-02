@@ -2,119 +2,125 @@ import Link from "next/link";
 import { PixelSprite } from "@/components/farm/pixel-sprite";
 import { T } from "@/farm/tiles.ts";
 
-const NAV = [
-  { label: "Services", href: "/services" },
-  { label: "Work", href: "/work" },
-  { label: "Research", href: "/research" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
-];
+/* Night has fallen. The footer is the farm after dark: silhouetted grass,
+   fireflies, and the fine print where the jokes live. */
 
 const LEGAL = [
   { label: "Careers", href: "/careers" },
-  { label: "Terms of Service", href: "/terms" },
-  { label: "Privacy Policy", href: "/privacy" },
+  { label: "Terms", href: "/terms" },
+  { label: "Privacy", href: "/privacy" },
 ];
+
+const FIREFLIES = [
+  { left: "12%", top: "30%", delay: 0 },
+  { left: "28%", top: "55%", delay: 1.4 },
+  { left: "47%", top: "38%", delay: 2.6 },
+  { left: "63%", top: "60%", delay: 0.8 },
+  { left: "78%", top: "34%", delay: 3.2 },
+  { left: "90%", top: "52%", delay: 1.9 },
+] as const;
 
 export function SiteFooter() {
   return (
-    <footer style={{ background: "var(--wood-paper)" }}>
-      {/* grass lip on top of the footer, like the edge of a field */}
+    <footer className="relative z-10">
+      {/* darkened grass edge — the field at night */}
+      <div className="relative" aria-hidden>
+        <div className="band-grass-edge-t" style={{ height: "calc(var(--px) * 16)", filter: "brightness(0.55) saturate(0.8)" }} />
+      </div>
       <div
+        className="relative band-grass"
+        style={{ filter: "brightness(0.55) saturate(0.8)" }}
         aria-hidden
-        style={{
-          height: "calc(var(--px) * 3)",
-          background: "var(--grass-soft)",
-          boxShadow: "0 var(--px) 0 var(--grass-deep)",
-        }}
-      />
-      <div className="max-w-6xl mx-auto px-6 pt-12 pb-8">
-        <div className="grid gap-10 md:grid-cols-12">
-          {/* Brand */}
-          <div className="md:col-span-5">
-            <Link href="/" className="flex items-center gap-2 font-display text-ink text-xl">
-              <PixelSprite tile={T.chicken.idle[0]} scale={2} className="translate-y-[-2px]" />
-              EVLOGIA
-            </Link>
-            <p className="font-sans text-ink-2 text-sm leading-relaxed max-w-xs mt-4">
-              A product and engineering team. We scope, design, build, and ship
-              production systems — then hand you the keys.
-            </p>
-            <a
-              href="mailto:hello@evlogia.ai"
-              className="inline-block font-display text-ink text-sm mt-4 underline decoration-[var(--harvest)] decoration-2 underline-offset-4 hover:decoration-[var(--ink)]"
-            >
-              hello@evlogia.ai
-            </a>
-          </div>
+      >
+        <div style={{ height: "calc(var(--px) * 10)" }} />
+      </div>
 
-          {/* Explore */}
-          <nav aria-label="Footer" className="md:col-span-3">
-            <p className="pixel-chip mb-4">Explore</p>
-            <ul className="flex flex-col gap-2.5">
-              {NAV.map(({ label, href }) => (
-                <li key={href}>
-                  <Link href={href} className="font-sans text-ink-2 text-sm hover:text-ink">
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          {/* Legal + social */}
-          <div className="md:col-span-4">
-            <p className="pixel-chip mb-4">The fine print</p>
-            <ul className="flex flex-col gap-2.5">
-              {LEGAL.map(({ label, href }) => (
-                <li key={href}>
-                  <Link href={href} className="font-sans text-ink-2 text-sm hover:text-ink">
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <div className="flex gap-4 mt-5">
-              <a
-                href="https://x.com/evlogia"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Evlogia on X"
-                className="font-display text-ink-2 text-sm hover:text-ink"
-              >
-                X / Twitter
-              </a>
-              <a
-                href="https://linkedin.com/company/evlogia"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Evlogia on LinkedIn"
-                className="font-display text-ink-2 text-sm hover:text-ink"
-              >
-                LinkedIn
-              </a>
-            </div>
-          </div>
+      <div className="relative" style={{ background: "var(--night)" }}>
+        {/* fireflies over the dark field */}
+        <div aria-hidden className="absolute inset-x-0 -top-14 h-24 pointer-events-none">
+          {FIREFLIES.map((f, i) => (
+            <span key={i} className="firefly" style={{ left: f.left, top: f.top, animationDelay: `${f.delay}s` }} />
+          ))}
         </div>
 
-        <div className="pixel-divider mt-10 mb-6" />
+        <div className="max-w-5xl mx-auto px-6 pt-10 pb-8">
+          <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-8">
+            <div className="text-center md:text-left">
+              <p className="flex items-center gap-2 font-display text-lg justify-center md:justify-start" style={{ color: "var(--paper)" }}>
+                <PixelSprite tile={T.chicken.idle[0]} scale={2} className="translate-y-[-2px]" />
+                EVLOGIA
+              </p>
+              <p className="font-sans text-sm leading-relaxed max-w-xs mt-3" style={{ color: "var(--ink-5)" }}>
+                A lean engineering team that builds hard things for fun. The
+                farm is closed for the night; the inbox never is.
+              </p>
+              <a
+                href="mailto:hello@evlogia.ai"
+                className="inline-block font-display text-sm mt-3 underline decoration-2 underline-offset-4"
+                style={{ color: "var(--paper)", textDecorationColor: "var(--harvest)" }}
+              >
+                hello@evlogia.ai
+              </a>
+            </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="font-sans text-ink-3 text-xs">
-            © 2026 Evlogia Labs Private Limited
-          </p>
-          <p className="font-sans text-ink-3 text-xs flex items-center gap-1.5">
-            <PixelSprite tile={T.crop.wheatItem} scale={1} />
-            World art:{" "}
-            <a
-              href="https://cupnooble.itch.io/sprout-lands-asset-pack"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline underline-offset-2 hover:text-ink"
-            >
-              Sprout Lands
-            </a>{" "}
-            by Cup Nooble
+            <div className="flex flex-col items-center md:items-end gap-3">
+              <div className="flex gap-4">
+                {LEGAL.map(({ label, href }) => (
+                  <Link
+                    key={href}
+                    href={href}
+                    className="font-sans text-sm hover:underline"
+                    style={{ color: "var(--ink-5)" }}
+                  >
+                    {label}
+                  </Link>
+                ))}
+              </div>
+              <div className="flex gap-4">
+                <a
+                  href="https://x.com/evlogia"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Evlogia on X"
+                  className="font-display text-sm hover:underline"
+                  style={{ color: "var(--ink-5)" }}
+                >
+                  X / Twitter
+                </a>
+                <a
+                  href="https://linkedin.com/company/evlogia"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Evlogia on LinkedIn"
+                  className="font-display text-sm hover:underline"
+                  style={{ color: "var(--ink-5)" }}
+                >
+                  LinkedIn
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-8 pt-5 flex flex-col sm:flex-row items-center justify-between gap-2" style={{ borderTop: "2px solid var(--ink-2)" }}>
+            <p className="font-sans text-xs" style={{ color: "var(--ink-4)" }}>
+              © 2026 Evlogia Labs Private Limited · the chickens are unionized
+            </p>
+            <p className="font-sans text-xs flex items-center gap-1.5" style={{ color: "var(--ink-4)" }}>
+              <PixelSprite tile={T.crop.wheatItem} scale={1} />
+              World art:{" "}
+              <a
+                href="https://cupnooble.itch.io/sprout-lands-asset-pack"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2"
+              >
+                Sprout Lands
+              </a>{" "}
+              by Cup Nooble
+            </p>
+          </div>
+          <p className="font-sans text-[10px] mt-3 text-center sm:text-left" style={{ color: "var(--ink-3)" }}>
+            psst — try typing &ldquo;harvest&rdquo;.
           </p>
         </div>
       </div>

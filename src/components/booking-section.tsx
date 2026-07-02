@@ -1,11 +1,14 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
-/* Inline Cal.com embed (namespace "strategy"). The bootstrap snippet is safe
-   to run alongside CalInit — `C.Cal = C.Cal || …` + cal.loaded guard make it
-   idempotent — and self-containment avoids any mount-order race. */
+/* Inline Cal.com embed (namespace "strategy") with a chicken-pecking loader —
+   the calendar takes a couple of seconds to arrive, so a hen fetches it.
+   The bootstrap snippet is idempotent alongside CalInit. */
 export function BookingSection() {
+  const hostRef = useRef<HTMLDivElement>(null);
+  const [loaded, setLoaded] = useState(false);
+
   useEffect(() => {
     const script = document.createElement("script");
     script.type = "text/javascript";
@@ -58,24 +61,60 @@ export function BookingSection() {
       });
     `;
     document.head.appendChild(script);
+
+    /* swap the loader out once the embed iframe actually arrives */
+    const host = hostRef.current;
+    let mo: MutationObserver | null = null;
+    if (host) {
+      mo = new MutationObserver(() => {
+        if (host.querySelector("iframe")) {
+          setLoaded(true);
+          mo?.disconnect();
+        }
+      });
+      mo.observe(host, { childList: true, subtree: true });
+    }
+
     return () => {
+      mo?.disconnect();
       if (document.head.contains(script)) document.head.removeChild(script);
     };
   }, []);
 
   return (
-    <section id="book" className="scroll-mt-20 px-6 pb-16 md:pb-24">
-      <div className="max-w-5xl mx-auto">
-        <div className="panel-wood pixel-corners">
-          <div className="panel-paper p-2 md:p-3">
-            <div
-              id="my-cal-inline-strategy"
-              className="min-h-[520px] md:min-h-[680px] w-full"
-              style={{ background: "#fff" }}
+    <div className="panel-wood pixel-corners">
+      <div className="panel-paper p-2 md:p-3 relative">
+        {!loaded && (
+          <div
+            className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3"
+            style={{ background: "var(--wood-paper)" }}
+          >
+            <span
+              aria-hidden
+              style={{
+                width: 48,
+                height: 48,
+                backgroundImage: "url(/farm/sprites/chicken.png)",
+                backgroundSize: `${64 * 3}px ${32 * 3}px`,
+                imageRendering: "pixelated",
+                // two-frame idle peck via discrete background-position swap
+                animation: "sprite-flip 0.5s steps(1, end) infinite",
+                ["--frame-a" as string]: "0px 0px",
+                ["--frame-b" as string]: `${-16 * 3}px 0px`,
+              }}
             />
+            <p className="font-display text-ink-2 text-sm">
+              fetching the calendar… usually takes a few seconds
+            </p>
           </div>
-        </div>
+        )}
+        <div
+          ref={hostRef}
+          id="my-cal-inline-strategy"
+          className="min-h-[520px] md:min-h-[660px] w-full"
+          style={{ background: "#fff" }}
+        />
       </div>
-    </section>
+    </div>
   );
 }

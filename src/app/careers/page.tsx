@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SiteNav } from "@/components/site-nav";
+import Link from "next/link";
 import { SiteFooter } from "@/components/site-footer";
 
 export const metadata: Metadata = {
@@ -10,7 +10,11 @@ export const metadata: Metadata = {
 export default function CareersPage() {
   return (
     <>
-      <SiteNav />
+      <header className="fixed top-0 inset-x-0 z-50" style={{ background: "var(--wood-paper)", boxShadow: "0 var(--px) 0 var(--wood-mid)" }}>
+        <div className="max-w-5xl mx-auto px-6 h-12 flex items-center">
+          <Link href="/" className="font-display text-ink text-sm">← back to the farm</Link>
+        </div>
+      </header>
 
       <main className="pt-24 md:pt-36 pb-24 px-6">
         <div className="max-w-3xl mx-auto">
