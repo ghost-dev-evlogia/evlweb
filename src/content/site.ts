@@ -345,5 +345,5 @@ export const QUIPS: string[] = [
   "moo. (this quip was human-written)",
   "shipped on a friday. no regrets yet",
   "my agent farmed 40 fields overnight. all wrong",
-  "read the docs. or don't. i'm a duck",
+  "read the docs. or don't. i'm a chick",
 ];

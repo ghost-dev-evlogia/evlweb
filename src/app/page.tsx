@@ -5,6 +5,7 @@ import { SkyCycle } from "@/components/farm/sky-cycle";
 import { Hud } from "@/components/farm/hud";
 import { Fx } from "@/components/farm/fx";
 import { Critters } from "@/components/farm/critters";
+import { Wanderers } from "@/components/farm/wanderers";
 import {
   FenceRow,
   TreeLine,
@@ -37,6 +38,7 @@ export default function Home() {
       <SkyCycle />
       <Fx />
       <Hud />
+      <Wanderers />
 
       <main id="main" className="relative z-10">
         {/* ═══ 1 · THE GATE — dawn, headline in the open sky ═══ */}
@@ -86,7 +88,7 @@ export default function Home() {
           {/* chickens work the open ground below the rows */}
           <div className="relative" style={{ minHeight: 130 }}>
             <TreeLine variant={0} />
-            <Critters kinds="chicken,chicken,chicken" />
+            <Critters kinds="chicken,chicken,bunny,chick" />
           </div>
         </section>
 
@@ -129,7 +131,7 @@ export default function Home() {
           {/* the cow pasture */}
           <div className="relative" style={{ minHeight: 150 }}>
             <TreeLine variant={1} />
-            <Critters kinds="cow,chicken" />
+            <Critters kinds="cow,pig,sheep,chicken" />
           </div>
         </section>
 

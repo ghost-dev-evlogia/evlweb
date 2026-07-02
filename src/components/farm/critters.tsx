@@ -2,20 +2,21 @@
 
 import { useEffect, useRef } from "react";
 
-/* Wandering critters — chickens and cows that live on the grass bands
-   between sections. Pure DOM sprites (background-crop), logic ticks at 10Hz,
-   positions snapped to whole pixels, all movement transform-only.
+/* Wandering critters — the animals that live on the grass between sections.
+   Pure DOM sprites (background-crop), logic ticks at 10Hz, positions snapped
+   to whole pixels, all movement transform-only.
 
    Funny business:
    - hover a critter → it emotes ("?", "♪", "!")
    - click a chicken → it panics, flees, and leaves an egg behind
    - click the egg → collected (the HUD counts; 3 eggs summon the golden one)
    - click the cow → "moo." + a tiny screen shake (she insists)
+   - the others answer in their own words
 
    Entirely decorative: aria-hidden, pointer-only, frozen under
    prefers-reduced-motion. */
 
-type Kind = "chicken" | "cow";
+export type Kind = "chicken" | "cow" | "chick" | "bunny" | "pig" | "sheep";
 
 type Actor = {
   kind: Kind;
@@ -32,7 +33,7 @@ type Actor = {
   bubbleUntil: number;
 };
 
-const SPRITES: Record<Kind, { sheet: string; w: number; h: number; sheetW: number; sheetH: number; idle: number[][]; walk: number[][] }> = {
+export const SPRITES: Record<Kind, { sheet: string; w: number; h: number; sheetW: number; sheetH: number; idle: number[][]; walk: number[][] }> = {
   chicken: {
     sheet: "/farm/sprites/chicken.png",
     w: 16, h: 16, sheetW: 64, sheetH: 32,
@@ -45,6 +46,39 @@ const SPRITES: Record<Kind, { sheet: string; w: number; h: number; sheetW: numbe
     idle: [[0, 32], [32, 32]],
     walk: [[0, 0], [32, 0], [64, 0]],
   },
+  chick: {
+    sheet: "/farm/sprites/duck.png",
+    w: 16, h: 16, sheetW: 64, sheetH: 32,
+    idle: [[0, 0], [16, 0]],
+    walk: [[0, 16], [16, 16], [32, 16], [48, 16]],
+  },
+  bunny: {
+    sheet: "/farm/sprites/wildlife.png",
+    w: 16, h: 16, sheetW: 64, sheetH: 80,
+    idle: [[0, 0], [16, 0]],
+    walk: [[32, 0], [48, 0]],
+  },
+  pig: {
+    sheet: "/farm/sprites/wildlife.png",
+    w: 16, h: 16, sheetW: 64, sheetH: 80,
+    idle: [[0, 16], [16, 16]],
+    walk: [[32, 16], [48, 16]],
+  },
+  sheep: {
+    sheet: "/farm/sprites/wildlife.png",
+    w: 16, h: 16, sheetW: 64, sheetH: 80,
+    idle: [[0, 32], [16, 32]],
+    walk: [[32, 32], [48, 32]],
+  },
+};
+
+/** what each species says when poked */
+const POKE: Partial<Record<Kind, string>> = {
+  cow: "moo.",
+  pig: "oink. five stars.",
+  sheep: "baa. no comment.",
+  bunny: "!!",
+  chick: "peep peep",
 };
 
 const SCALE = 3;
@@ -128,12 +162,21 @@ export function Critters({ kinds = "chicken,chicken" }: { kinds?: string }) {
           a.tx = rand(0, Math.max(40, w - s.w * SCALE));
           a.ty = rand(0, Math.max(10, h - s.h * SCALE));
           a.think = 2;
-        } else {
+        } else if (kind === "cow") {
           bubble(a, "moo.", 1400);
           document.body.classList.remove("cow-shake");
           void document.body.offsetWidth;
           document.body.classList.add("cow-shake");
           setTimeout(() => document.body.classList.remove("cow-shake"), 700);
+        } else if (kind === "bunny" || kind === "chick") {
+          bubble(a, POKE[kind] ?? "!", 900);
+          a.state = "flee";
+          const { w, h } = bounds();
+          a.tx = rand(0, Math.max(40, w - s.w * SCALE));
+          a.ty = rand(0, Math.max(10, h - s.h * SCALE));
+          a.think = 2;
+        } else {
+          bubble(a, POKE[kind] ?? "…", 1400);
         }
       });
 
@@ -167,7 +210,12 @@ export function Critters({ kinds = "chicken,chicken" }: { kinds?: string }) {
             a.ty = Math.max(0, Math.min(h - s.h * SCALE, a.y + (Math.random() - 0.5) * 80));
           }
         } else {
-          const speed = a.state === "flee" ? 26 : a.kind === "cow" ? 4 : 9;
+          const speed =
+            a.state === "flee" ? 26
+            : a.kind === "cow" ? 4
+            : a.kind === "pig" || a.kind === "sheep" ? 6
+            : a.kind === "bunny" ? 13
+            : 9;
           const dx = a.tx - a.x;
           const dy = a.ty - a.y;
           const d = Math.hypot(dx, dy);
