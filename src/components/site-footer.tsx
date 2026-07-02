@@ -120,7 +120,7 @@ export function SiteFooter() {
             </p>
           </div>
           <p className="font-sans text-[10px] mt-3 text-center sm:text-left" style={{ color: "var(--ink-3)" }}>
-            psst — try typing &ldquo;harvest&rdquo;.
+            psst: try typing &ldquo;harvest&rdquo;.
           </p>
         </div>
       </div>

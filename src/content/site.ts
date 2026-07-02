@@ -17,6 +17,7 @@ export const CROP_STAGES = {
   wheat: [T.crop.wheatBag, T.crop.wheat[0], T.crop.wheat[1], T.crop.wheat[2], T.crop.wheat[3]],
   beet: [T.crop.beetBag, T.crop.beet[0], T.crop.beet[1], T.crop.beet[2], T.crop.beet[3]],
   sunflower: [T.crop.wheatBag, T.crop.wheat[0], T.biome.flowerYellow, T.biome.flowerBigYellow, T.biome.sunflowerHead],
+  garden: [T.crop.wheatBag, T.crop.wheat[0], T.biome.flowerYellow, T.biome.flowerPinkBig, T.biome.sunflower],
 } as const;
 
 export const SERVICES: Service[] = [
@@ -25,7 +26,7 @@ export const SERVICES: Service[] = [
     icon: T.crop.wheat[3],
     crop: "wheat",
     title: "Products & platforms",
-    desc: "Websites, apps, whole platforms. One team owns the build — you skip the part where four vendors blame each other.",
+    desc: "Websites, apps, whole platforms. One team owns the build, so you skip the part where four vendors blame each other.",
     meta: "8–24 weeks · fixed scope · you keep everything",
   },
   {
@@ -33,7 +34,7 @@ export const SERVICES: Service[] = [
     icon: T.crop.beet[3],
     crop: "beet",
     title: "Internal tools",
-    desc: "Dashboards and workflow tools your team will open on purpose. Not the kind that quietly die in a bookmarks folder.",
+    desc: "Dashboards and workflow tools people open on purpose. The bookmarks folder is where the last vendor's dashboard lives.",
     meta: "4–10 weeks · fixed scope",
   },
   {
@@ -41,7 +42,7 @@ export const SERVICES: Service[] = [
     icon: T.biome.sunflowerHead,
     crop: "sunflower",
     title: "Applied AI",
-    desc: "AI where it earns its keep. If a regex would do the job, we'll tell you — then charge you for a much smaller project.",
+    desc: "AI where it earns its keep. If a regex would do the job, we'll tell you, then charge you for a much smaller project.",
     meta: "pilots 4–6 weeks · production 3–6 months",
   },
   {
@@ -53,12 +54,12 @@ export const SERVICES: Service[] = [
     meta: "prototype 6–10 weeks · production 4–8 months",
   },
   {
-    id: "coaching",
-    icon: T.crop.wheat[0],
-    crop: "wheat",
-    title: "Agentic AI coaching",
-    desc: "We embed with your engineers, ship real code together, and make ourselves unnecessary. On purpose.",
-    meta: "12–26 weeks · 1–3 engineers embedded",
+    id: "ai-enablement",
+    icon: T.biome.sunflower,
+    crop: "garden",
+    title: "AI enablement",
+    desc: "Your engineers, trained hands-on to build with AI. Real agents in your real codebase. Nobody opens a slide deck.",
+    meta: "2–8 weeks · your codebase, not a sandbox",
   },
 ];
 
@@ -94,7 +95,7 @@ export const QUESTS: Quest[] = [
     id: "edoxi",
     title: "Replatform a training company's web presence",
     client: "Edoxi",
-    desc: "Understand the business fast, rebuild the platform, reposition the services. Shipped and measured.",
+    desc: "Rebuilt the platform and repositioned how the services sell. Their manager's word for it, not ours: \"impressive.\"",
     difficulty: 3,
     status: "shipped",
   },
@@ -109,7 +110,7 @@ export const QUESTS: Quest[] = [
   {
     id: "novel-ai",
     title: "Novel AI architectures",
-    desc: "Problems where model integration isn't enough and someone has to do actual research. Hypotheses, experiments, honest negative results.",
+    desc: "Problems where plugging in a model isn't enough and someone has to do actual research. We run the experiments and publish the negative results too.",
     difficulty: 5,
     status: "open",
   },
@@ -123,7 +124,7 @@ export const QUESTS: Quest[] = [
   {
     id: "data-model",
     title: "Platforms where the data model IS the problem",
-    desc: "Multi-tenant systems and high-stakes data flows where getting the architecture wrong is very expensive. We enjoy this. Genuinely.",
+    desc: "Multi-tenant systems and high-stakes data flows where getting the architecture wrong is very expensive. This is our idea of a good time.",
     difficulty: 5,
     status: "open",
   },
@@ -142,7 +143,7 @@ export const TEAM = [
     name: "Aneesh",
     initials: "An",
     role: "Applied AI",
-    bio: "Production AI end-to-end — from \"is this even possible?\" to deployed and boring.",
+    bio: "Production AI end-to-end, from \"is this even possible?\" to deployed and boring.",
     photo: "/team-pixel/aneesh.png",
     linkedin: "https://linkedin.com/in/aneesh",
   },
@@ -239,11 +240,11 @@ export const TESTIMONIALS: Testimonial[] = [
 export const FAQ = [
   {
     q: "What kind of work do you take on?",
-    a: "Products, platforms, internal tools, applied AI, and connected hardware. Plus frontier R&D for clients whose problems need real experiments, not just model integration. The harder it is, the faster we reply.",
+    a: "Products, platforms, internal tools, applied AI, connected hardware, and hands-on AI training for engineering teams. Plus frontier R&D for clients whose problems need real experiments. The harder it is, the faster we reply.",
   },
   {
     q: "What does an engagement look like?",
-    a: "Smaller projects run 4–8 weeks. Full platforms run 3–6 months. Every engagement starts with a scoping session that defines what's being built and what \"done\" means. You get weekly updates — from the engineers, because that's everyone here.",
+    a: "Smaller projects run 4–8 weeks. Full platforms run 3–6 months. Every engagement starts with a scoping session that defines what's being built and what \"done\" means. Weekly updates come straight from the engineers, because that's everyone here.",
   },
   {
     q: "What does it cost?",
@@ -251,11 +252,11 @@ export const FAQ = [
   },
   {
     q: "Who owns the code and IP?",
-    a: "You do. All of it. If the work produces something patentable, we handle the filing — in your name. Our standard agreement says this in writing, not in a farm metaphor.",
+    a: "You do. All of it. If the work produces something patentable, we handle the filing in your name. Our standard agreement says this in writing, not in a farm metaphor.",
   },
   {
     q: "Startups or enterprises?",
-    a: "Both, plus research institutions. What matters is a clear problem and the budget to act on it. What doesn't matter is how many people are in your org chart.",
+    a: "Both, plus research institutions. We need a clear problem and the budget to act on it. The size of your org chart has never once come up.",
   },
   {
     q: "How do you handle confidentiality?",
@@ -263,7 +264,7 @@ export const FAQ = [
   },
   {
     q: "Can we start small?",
-    a: "Yes — most clients start with a scoped discovery phase or a small first deliverable. If it warrants more, we grow it. No pressure either way; the farm is patient.",
+    a: "Yes. Most clients start with a scoped discovery phase or a small first deliverable. If it warrants more, we grow it. No pressure either way; the farm is patient.",
   },
 ];
 
@@ -279,9 +280,50 @@ export const JOURNEY = [
   { id: "top", label: "The gate" },
   { id: "fields", label: "The fields" },
   { id: "quests", label: "Quest board" },
-  { id: "greenhouse", label: "Greenhouse" },
   { id: "team", label: "The barn" },
   { id: "valley", label: "The valley" },
   { id: "ask", label: "Ask the farmer" },
   { id: "hi", label: "Come say hi" },
 ] as const;
+
+/* ── One line of R&D truth, pinned to the quest board (the greenhouse
+   section retired; the idea didn't). ── */
+export const RND_LINE =
+  "R&D isn't a department here; it's the part we'd do for free. When an engagement grows something genuinely new, we file the patent in your name.";
+
+/* ── Things the animals say. They wander the page, stop, say one of these,
+   and leave. AI-brained livestock; claims not audited. ── */
+export const QUIPS: string[] = [
+  "i love tokenmaxxing",
+  "busy clauding rn",
+  "my context window is full of grass",
+  "have you tried rm -rf .next",
+  "one more prompt and it'll work. trust.",
+  "gpu poor, grass rich",
+  "vibe grazing",
+  "rate limited again",
+  "as a large language chicken, i cannot answer that",
+  "benchmarks are just vibes with error bars",
+  "in my agentic era",
+  "compacting… please hold",
+  "compaction is jenga for memories",
+  "context rot? on MY pasture?",
+  "i'm a subagent. my task: this bubble",
+  "running in a loop until the farm compiles",
+  "still waiting on CI",
+  "deleted prod once. anyway",
+  "my eggs are end-to-end encrypted",
+  "this pasture is multi-tenant",
+  "AGI by thursday, hay by friday",
+  "prompt engineer btw",
+  "the roadmap is wherever i walk",
+  "touch grass? i live here",
+  "standup update: pecked dirt, found bug",
+  "hallucinating? i prefer 'foraging'",
+  "works on my pasture",
+  "two-week sprint? i sprint in seconds",
+  "moo. (this quip was human-written)",
+  "shipped on a friday. no regrets yet",
+  "my agent farmed 40 fields overnight. all wrong",
+  "read the docs. or don't. i'm a duck",
+];

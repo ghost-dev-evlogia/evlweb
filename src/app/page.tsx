@@ -92,7 +92,7 @@ export default function Home() {
             <TilledHeading>What we grow around here</TilledHeading>
             <p className="font-sans text-ink text-[15px] leading-relaxed max-w-lg mx-auto mt-5">
               Five fields, one team. The person who scopes your build is the
-              person who reviews the PRs — mostly because there&apos;s nobody
+              person who reviews the PRs, mostly because there&apos;s nobody
               to hand it to.
             </p>
           </div>
@@ -208,7 +208,7 @@ export default function Home() {
             <TilledHeading>The farmhands</TilledHeading>
             <p className="font-sans text-ink text-[15px] leading-relaxed max-w-lg mx-auto mt-5">
               Four of us. Zero account managers. Email the farm and an engineer
-              answers — there is literally nobody else who could.
+              answers; there is nobody else who could.
             </p>
           </div>
 
@@ -352,7 +352,7 @@ export default function Home() {
               Bring us something difficult.
             </h2>
             <p className="font-sans text-[15px] leading-relaxed max-w-md mx-auto mt-4" style={{ color: "var(--wood-paper)" }}>
-              Thirty minutes. No pitch, no deck, no &ldquo;circling
+              Thirty minutes with an engineer. Nobody says &ldquo;circling
               back.&rdquo; If we&apos;re not the right team, we&apos;ll say so
               and point you at who is.
             </p>

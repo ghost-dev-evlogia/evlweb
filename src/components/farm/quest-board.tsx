@@ -1,4 +1,4 @@
-import { QUESTS, CAL_ATTRS } from "@/content/site";
+import { QUESTS, CAL_ATTRS, RND_LINE } from "@/content/site";
 import { PixelSprite } from "./pixel-sprite";
 import { T } from "@/farm/tiles.ts";
 
@@ -109,7 +109,10 @@ export function QuestBoard() {
           </article>
         </div>
 
-        <p className="text-center font-sans text-[11px] mt-5" style={{ color: "var(--wood-paper)" }}>
+        <p className="text-center font-sans text-[13px] leading-relaxed max-w-xl mx-auto mt-6" style={{ color: "var(--wood-paper)" }}>
+          {RND_LINE}
+        </p>
+        <p className="text-center font-sans text-[11px] mt-3" style={{ color: "var(--wood-paper)" }}>
           Quests are accepted in order of difficulty. The easy ones go to the chickens.
         </p>
       </div>
