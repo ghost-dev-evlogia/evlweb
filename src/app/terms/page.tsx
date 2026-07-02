@@ -60,16 +60,16 @@ export default function TermsPage() {
 
           {/* Header */}
           <div className="mb-14">
-            <p className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-4">
+            <p className="font-sans text-ink-3 text-[10px] tracking-[0.3em] uppercase mb-4">
               Legal
             </p>
             <h1
-              className="font-serif text-black/90 leading-[1.07] mb-5"
-              style={{ fontSize: "clamp(2rem, 4vw, 3.2rem)", letterSpacing: "-0.01em" }}
+              className="font-display text-ink leading-[1.07] mb-5"
+              style={{ fontSize: "clamp(2rem, 4vw, 3.2rem)", letterSpacing: "0" }}
             >
               Terms of Service
             </h1>
-            <p className="font-sans text-black/30 text-[11px] tracking-wide">
+            <p className="font-sans text-ink-3 text-[11px] tracking-wide">
               Last updated: March 2026
             </p>
           </div>
@@ -78,7 +78,7 @@ export default function TermsPage() {
           <div className="divider mb-14" />
 
           {/* Intro */}
-          <p className="font-sans text-black/50 text-sm leading-relaxed mb-14">
+          <p className="font-sans text-ink-3 text-sm leading-relaxed mb-14">
             These Terms of Service govern your access to and use of evlogia.ai, operated by Evlogia. Please read them carefully.
           </p>
 
@@ -86,10 +86,10 @@ export default function TermsPage() {
           <div className="space-y-10">
             {sections.map(({ title, body }) => (
               <div key={title}>
-                <h2 className="font-serif text-black/80 text-lg mb-3 leading-snug">
+                <h2 className="font-display text-ink text-lg mb-3 leading-snug">
                   {title}
                 </h2>
-                <p className="font-sans text-black/50 text-sm leading-relaxed">
+                <p className="font-sans text-ink-3 text-sm leading-relaxed">
                   {body}
                 </p>
               </div>

@@ -47,10 +47,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-farm.png",
         width: 1200,
         height: 630,
-        alt: "Evlogia: The Applied AI Team That Ships.",
+        alt: "Pixel-art farm with the message: We build systems that get used — Evlogia, evlogia.ai",
       },
     ],
   },
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     title: "Evlogia | The Applied AI Team That Ships",
     description:
       "Production AI, internal tools, IoT, and platforms — built and shipped, not pitched.",
-    images: ["/og-image.jpg"],
+    images: ["/og-farm.png"],
   },
 };
 
