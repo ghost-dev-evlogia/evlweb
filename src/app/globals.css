@@ -771,6 +771,60 @@ a, button, [role="button"], summary, .pixel-btn, .pixel-chip a {
   50%, 100% { background-position: var(--frame-b); }
 }
 
+/* ─── The booking ledger ─── */
+.pixel-input {
+  display: block;
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--paper);
+  padding: 8px 10px;
+  box-shadow: inset 0 0 0 2px var(--wood-mid);
+  border: 0;
+  outline: none;
+}
+.pixel-input:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--ink);
+}
+.day-cell {
+  position: relative;
+  aspect-ratio: 1;
+  min-height: 34px;
+  font-family: var(--font-pixel), monospace;
+  font-variant-ligatures: none;
+  font-size: 13px;
+  color: var(--ink-2);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 2px var(--wood-pale);
+  transition: transform 100ms var(--ease-out);
+}
+.day-cell:disabled {
+  background: transparent;
+  box-shadow: none;
+  color: var(--ink-4);
+  opacity: 0.55;
+}
+.day-cell:not(:disabled):hover,
+.day-cell:not(:disabled):focus-visible {
+  transform: translateY(-2px);
+  box-shadow: inset 0 0 0 2px var(--wood-mid);
+}
+.day-cell[data-selected] {
+  background: var(--harvest-pale);
+  color: var(--ink);
+  box-shadow: inset 0 0 0 2px var(--harvest-deep);
+}
+.day-dot {
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  background: var(--grass-deep);
+}
+
 /* ─── HUD signpost stack (the nav you can actually read) ─── */
 .hud-signpost {
   position: relative;

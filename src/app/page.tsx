@@ -23,7 +23,7 @@ import { BarnRoster } from "@/components/farm/barn-roster";
 import { QuestBoard } from "@/components/farm/quest-board";
 import { NpcQuotes } from "@/components/farm/npc-quotes";
 import { FarmerDialog } from "@/components/farm/farmer-dialog";
-import { BookingSection } from "@/components/booking-section";
+import { PixelBooking } from "@/components/pixel-booking";
 import { SiteFooter } from "@/components/site-footer";
 import { AnimatedCounter } from "@/components/animated-counter";
 import { T } from "@/farm/tiles.ts";
@@ -247,7 +247,7 @@ export default function Home() {
             </p>
           </div>
           <div className="max-w-4xl mx-auto px-6">
-            <BookingSection />
+            <PixelBooking />
             <p className="text-center font-sans text-[13px] mt-6" style={{ color: "var(--wood-paper)" }}>
               Calendars are a lot. Email works too:{" "}
               <a
