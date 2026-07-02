@@ -41,10 +41,10 @@ export function QuestBoard() {
                 }}
               />
               <div className="flex items-start justify-between gap-2 mb-2">
-                <p className="font-display text-ink text-[14px] leading-snug">{q.title}</p>
+                <p className="font-display text-ink text-[15px] leading-snug">{q.title}</p>
                 {q.status === "shipped" ? (
                   <span
-                    className="font-display text-[9px] tracking-[0.12em] uppercase px-1.5 py-1 shrink-0"
+                    className="font-display text-[11px] tracking-[0.12em] uppercase px-1.5 py-1 shrink-0"
                     style={{
                       color: "var(--paper)",
                       background: "var(--grass-deep)",
@@ -56,7 +56,7 @@ export function QuestBoard() {
                   </span>
                 ) : (
                   <span
-                    className="font-display text-[9px] tracking-[0.12em] uppercase px-1.5 py-1 shrink-0"
+                    className="font-display text-[11px] tracking-[0.12em] uppercase px-1.5 py-1 shrink-0"
                     style={{
                       color: "var(--ink)",
                       background: "var(--harvest-pale)",
@@ -69,16 +69,16 @@ export function QuestBoard() {
                 )}
               </div>
               {q.client && (
-                <p className="font-display text-ink-3 text-[10px] tracking-[0.14em] uppercase mb-1.5">
+                <p className="font-display text-ink-3 text-[11px] tracking-[0.14em] uppercase mb-1.5">
                   for {q.client}
                 </p>
               )}
-              <p className="font-sans text-ink-2 text-[13px] leading-relaxed mb-3">{q.desc}</p>
+              <p className="font-sans text-ink-2 text-[14px] leading-relaxed mb-3">{q.desc}</p>
               <div
                 className="flex items-center gap-1"
                 aria-label={`Difficulty ${q.difficulty} out of 5`}
               >
-                <span className="font-display text-ink-3 text-[9px] uppercase tracking-wide mr-1">
+                <span className="font-display text-ink-3 text-[11px] uppercase tracking-wide mr-1">
                   difficulty
                 </span>
                 {Array.from({ length: 5 }, (_, s) => (
@@ -100,8 +100,8 @@ export function QuestBoard() {
               outlineOffset: "-6px",
             }}
           >
-            <p className="font-display text-ink text-[14px]">Your problem here</p>
-            <p className="font-sans text-ink-2 text-[13px] leading-relaxed">
+            <p className="font-display text-ink text-[15px]">Your problem here</p>
+            <p className="font-sans text-ink-2 text-[14px] leading-relaxed">
               The board has room. Difficult submissions get reviewed first.
             </p>
             <button {...CAL_ATTRS} className="pixel-btn" style={{ fontSize: "12px" }}>
@@ -113,7 +113,7 @@ export function QuestBoard() {
         <p className="text-center font-sans text-[13px] leading-relaxed max-w-xl mx-auto mt-6" style={{ color: "var(--wood-paper)" }}>
           {RND_LINE}
         </p>
-        <p className="text-center font-sans text-[11px] mt-3" style={{ color: "var(--wood-paper)" }}>
+        <p className="text-center font-sans text-[12.5px] mt-3" style={{ color: "var(--wood-paper)" }}>
           Quests are accepted in order of difficulty. The easy ones go to the chickens.
         </p>
       </div>

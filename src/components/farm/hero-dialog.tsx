@@ -27,7 +27,7 @@ export function HeroDialog() {
             <PixelSprite tile={{ s: "character", x: 0.75, y: 0.75, w: 1.5, h: 1.75 }} scale={3} />
           </div>
           <div className="flex-1 min-w-0 flex flex-col">
-            <p className="font-display text-ink-3 text-[11px] tracking-[0.14em] uppercase mb-1.5">
+            <p className="font-display text-ink-3 text-[12px] tracking-[0.14em] uppercase mb-1.5">
               the farmer
             </p>
             <div className="min-h-[72px] md:min-h-[76px] flex flex-col">

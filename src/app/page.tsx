@@ -99,7 +99,7 @@ export default function Home() {
         <section id="quests" className="scroll-mt-10 relative pt-16 md:pt-24 pb-16 md:pb-24">
           <div className="text-center px-6 mb-10">
             <TilledHeading>The quest board</TilledHeading>
-            <p className="font-sans text-ink text-[15px] leading-relaxed max-w-lg mx-auto mt-5">
+            <p className="font-sans text-ink text-[15px] md:text-base leading-relaxed max-w-lg mx-auto mt-5">
               Some teams pick projects by billable hours. We pick by
               &ldquo;ooh, that&apos;s hard.&rdquo; A few from the log:
             </p>
@@ -193,7 +193,7 @@ export default function Home() {
                       <div className="font-display text-ink text-3xl leading-none mb-1.5">
                         <AnimatedCounter target={target} suffix={suffix} />
                       </div>
-                      <div className="font-sans text-ink-2 text-[11px] tracking-widest uppercase leading-tight">
+                      <div className="font-sans text-ink-2 text-[12px] tracking-widest uppercase leading-tight">
                         {label}
                       </div>
                     </div>
@@ -201,7 +201,7 @@ export default function Home() {
                 </RevealPanel>
               ))}
             </div>
-            <p className="text-center font-sans text-ink-2 text-[11px] mt-4">
+            <p className="text-center font-sans text-ink-2 text-[12.5px] mt-4">
               Ledger audited by the cow. She&apos;s thorough.
             </p>
           </div>
@@ -215,7 +215,7 @@ export default function Home() {
             <TilledHeading>
               <span style={{ color: "var(--paper)" }}>Ask the farmer</span>
             </TilledHeading>
-            <p className="font-sans text-[15px] leading-relaxed max-w-lg mx-auto mt-5" style={{ color: "var(--wood-paper)" }}>
+            <p className="font-sans text-[15px] md:text-base leading-relaxed max-w-lg mx-auto mt-5" style={{ color: "var(--wood-paper)" }}>
               Everything people usually want to know, answered by the one
               character here who never stops working.
             </p>
@@ -240,7 +240,7 @@ export default function Home() {
             >
               Bring us something difficult.
             </h2>
-            <p className="font-sans text-[15px] leading-relaxed max-w-md mx-auto mt-4" style={{ color: "var(--wood-paper)" }}>
+            <p className="font-sans text-[15px] md:text-base leading-relaxed max-w-md mx-auto mt-4" style={{ color: "var(--wood-paper)" }}>
               Thirty minutes with an engineer. Nobody says &ldquo;circling
               back.&rdquo; If we&apos;re not the right team, we&apos;ll say so
               and point you at who is.

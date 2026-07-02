@@ -119,7 +119,7 @@ export function SiteFooter() {
               by Cup Nooble
             </p>
           </div>
-          <p className="font-sans text-[10px] mt-3 text-center sm:text-left" style={{ color: "var(--ink-3)" }}>
+          <p className="font-sans text-[11px] mt-3 text-center sm:text-left" style={{ color: "var(--ink-3)" }}>
             psst: try typing &ldquo;harvest&rdquo;.
           </p>
         </div>

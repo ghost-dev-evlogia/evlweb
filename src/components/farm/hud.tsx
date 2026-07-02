@@ -92,12 +92,12 @@ export function Hud() {
       className="fixed z-50 flex flex-col items-end gap-3 transition-opacity duration-300 right-3 bottom-4 md:right-5 md:bottom-auto md:top-1/2 md:-translate-y-1/2"
       style={{ opacity: visible ? 1 : 0, pointerEvents: visible ? "auto" : "none" }}
     >
-      {/* sun / moon dial */}
+      {/* sun / moon dial — the day at a glance */}
       <div
         ref={dialRef}
         aria-hidden
         className="relative hidden md:block"
-        style={{ width: 46, height: 46 }}
+        style={{ width: 52, height: 52 }}
       >
         <div
           className="absolute inset-0 panel-paper pixel-corners"
@@ -110,46 +110,34 @@ export function Hud() {
             transition: "transform 0.2s linear",
           }}
         >
-          <span style={{ transform: "translateY(-11px) rotate(calc(var(--day-p, 0) * -180deg))" }}>
+          <span style={{ transform: "translateY(-13px) rotate(calc(var(--day-p, 0) * -180deg))" }}>
             <span className="dial-sun" style={{ display: "inline-block" }}>
               <PixelSprite tile={T.biome.flowerBigYellow} scale={1} />
             </span>
           </span>
         </div>
         <span
-          className="absolute inset-0 flex items-center justify-center font-display text-[9px] text-ink-3"
-          style={{ paddingTop: 18 }}
+          className="absolute inset-0 flex items-center justify-center font-display text-[10px] text-ink-2"
+          style={{ paddingTop: 22 }}
         >
-          scroll
+          the day
         </span>
       </div>
 
-      {/* mini-map: signpost jumps */}
+      {/* signpost stack: every stop named, planks point back at the page */}
       <nav
         aria-label="Jump to a part of the farm"
-        className="hidden md:flex flex-col items-end gap-1.5 panel-paper pixel-corners px-2 py-2.5"
-        style={{ boxShadow: "inset 0 0 0 2px var(--wood-mid)" }}
+        className="hud-signpost hidden md:flex flex-col items-stretch gap-1"
       >
         {JOURNEY.map((j) => (
           <a
             key={j.id}
             href={`#${j.id}`}
-            className="group flex items-center gap-1.5 font-display text-[10px] uppercase tracking-wide"
+            className="hud-sign"
             aria-current={active === j.id ? "true" : undefined}
-            style={{ color: active === j.id ? "var(--ink)" : "var(--ink-4)" }}
+            data-active={active === j.id || undefined}
           >
-            <span className="opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity">
-              {j.label}
-            </span>
-            <span
-              aria-hidden
-              style={{
-                width: 8,
-                height: 8,
-                background: active === j.id ? "var(--harvest)" : "var(--wood-soft)",
-                boxShadow: "inset 0 0 0 1px var(--wood-shadow)",
-              }}
-            />
+            {j.label}
           </a>
         ))}
       </nav>
@@ -158,7 +146,7 @@ export function Hud() {
       {eggs > 0 && (
         <div
           className="pixel-chip"
-          style={{ fontSize: "11px" }}
+          style={{ fontSize: "12px" }}
           role="status"
           aria-label={`${eggs} eggs collected`}
         >
@@ -169,7 +157,7 @@ export function Hud() {
       )}
 
       {/* the one persistent CTA */}
-      <button {...CAL_ATTRS} className="pixel-btn" style={{ fontSize: "12px" }}>
+      <button {...CAL_ATTRS} className="pixel-btn" style={{ fontSize: "13px" }}>
         Book a call
       </button>
     </div>

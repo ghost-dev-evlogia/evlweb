@@ -37,7 +37,7 @@ export function FarmerDialog() {
         <div className="md:col-span-9">
           <div className="panel-wood pixel-corners">
             <div className="panel-paper px-5 py-5 md:px-7 md:py-6 min-h-[190px] flex flex-col">
-              <p className="font-display text-ink-3 text-[11px] tracking-[0.14em] uppercase mb-2">
+              <p className="font-display text-ink-3 text-[12px] tracking-[0.14em] uppercase mb-2">
                 {FAQ[qi].q}
               </p>
               <TypeLine key={qi} text={FAQ[qi].a} hint="▼ pick another question" />
