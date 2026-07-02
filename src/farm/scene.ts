@@ -163,7 +163,7 @@ export const PLOTS: Plot[] = [
     label: "Product & Platform",
     crop: "wheat",
     href: "/services#product",
-    x: 9, y: 8, w: 4, h: 3,
+    x: 9, y: 9, w: 4, h: 3,
     blurb: "Full product builds — web, mobile, platforms. 8–24 weeks, fixed scope.",
   },
   {
@@ -171,7 +171,7 @@ export const PLOTS: Plot[] = [
     label: "Internal Tools",
     crop: "beet",
     href: "/services#internal-tools",
-    x: 14, y: 8, w: 4, h: 3,
+    x: 14, y: 9, w: 4, h: 3,
     blurb: "Dashboards, admin panels, workflow tools. 4–10 weeks, fixed scope.",
   },
   {
@@ -179,7 +179,7 @@ export const PLOTS: Plot[] = [
     label: "Applied AI",
     crop: "sunflower",
     href: "/services#applied-ai",
-    x: 19, y: 8, w: 4, h: 3,
+    x: 19, y: 9, w: 4, h: 3,
     blurb: "Production AI systems — LLMs, vision, retrieval. Pilots in 4–6 weeks.",
   },
   {
@@ -268,7 +268,7 @@ export function buildScene(variant: "homestead" | "riverside" | "orchard" | "fin
   const animals: SceneAnimal[] = [
     { kind: "chicken", x: coopAt.x, y: coopAt.y + 3, roam: { x: coopAt.x - 1, y: coopAt.y + 2, w: 4, h: 3 } },
     { kind: "chicken", x: coopAt.x + 2, y: coopAt.y + 4, roam: { x: coopAt.x - 1, y: coopAt.y + 2, w: 4, h: 3 } },
-    { kind: "cow", x: 24, y: 8, roam: { x: 23, y: 7, w: 5, h: 3 } },
+    { kind: "cow", x: 25, y: 8, roam: { x: 24.5, y: 7, w: 4, h: 3 } },
     { kind: "farmer", x: 6, y: 9, roam: { x: 5, y: 7, w: 4, h: 6 } },
   ];
   const animalLayer: Placement[] = [

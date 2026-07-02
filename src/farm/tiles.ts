@@ -182,3 +182,13 @@ export const SHEET_FILES = [
   "grass-biome-things", "plants", "character", "cow", "chicken",
   "chicken-house", "chest", "wood-bridge", "egg-nest", "furniture",
 ] as const;
+
+/** Sheet pixel dimensions (for CSS background-crop sprite display in the DOM). */
+export const SHEET_DIMS: Record<string, [number, number]> = {
+  grass: [176, 112], water: [64, 16], "tilled-dirt": [176, 112], fences: [64, 64],
+  paths: [64, 64], "house-roof": [112, 80], "house-walls": [80, 48],
+  "wooden-house": [112, 80], doors: [16, 64], "grass-biome-things": [144, 80],
+  plants: [96, 32], character: [192, 192], cow: [96, 64], chicken: [64, 32],
+  "chicken-house": [48, 48], chest: [240, 96], "wood-bridge": [80, 48],
+  "egg-nest": [64, 16], furniture: [144, 96],
+};
