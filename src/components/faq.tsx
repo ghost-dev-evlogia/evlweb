@@ -38,22 +38,21 @@ export function FAQ() {
   const [openKey, setOpenKey] = useState<string | null>(null);
 
   return (
-    <div className="flex flex-col divide-y divide-black/[0.07]">
+    <div className="flex flex-col gap-3">
       {faqs.map(({ q, a }) => {
         const isOpen = openKey === q;
         return (
-          <div key={q} className="py-5">
+          <div key={q} className="panel-paper pixel-corners px-5 py-4">
             <button
               onClick={() => setOpenKey(isOpen ? null : q)}
-              className="w-full font-serif text-black/80 text-base md:text-lg leading-snug cursor-pointer flex items-start justify-between gap-4 text-left"
-              style={{ letterSpacing: "-0.01em" }}
+              className="w-full font-display text-ink text-[15px] md:text-base leading-snug cursor-pointer flex items-start justify-between gap-4 text-left"
               aria-expanded={isOpen}
             >
               {q}
               <motion.span
                 animate={{ rotate: isOpen ? 45 : 0 }}
-                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                className="shrink-0 font-sans text-black/25 text-lg leading-none mt-1 select-none"
+                transition={{ duration: 0.15, ease: "easeOut" }}
+                className="shrink-0 font-display text-[var(--harvest-deep)] text-lg leading-none mt-0.5 select-none"
                 aria-hidden
               >
                 +
@@ -68,12 +67,12 @@ export function FAQ() {
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
                   transition={{
-                    height: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
-                    opacity: { duration: 0.25, ease: [0.32, 0.72, 0, 1] },
+                    height: { duration: 0.25, ease: [0.16, 1, 0.3, 1] },
+                    opacity: { duration: 0.2 },
                   }}
                   style={{ overflow: "hidden" }}
                 >
-                  <p className="font-sans text-black/75 text-sm md:text-[15px] leading-relaxed mt-3 pb-1 max-w-xl">
+                  <p className="font-sans text-ink-2 text-sm md:text-[15px] leading-relaxed mt-3 pb-1 max-w-xl">
                     {a}
                   </p>
                 </motion.div>

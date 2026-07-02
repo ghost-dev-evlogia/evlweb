@@ -12,9 +12,12 @@ export function TeamPortrait({ src, alt, initials }: Props) {
   const [failed, setFailed] = useState(false);
 
   return (
-    <div className="relative aspect-[4/5] w-full mb-5 overflow-hidden rounded-2xl bg-black/[0.04]">
+    <div
+      className="relative aspect-[4/5] w-full mb-4 overflow-hidden"
+      style={{ background: "var(--sky-pale)", boxShadow: "inset 0 0 0 var(--px) var(--wood-mid)" }}
+    >
       <span
-        className="absolute inset-0 flex items-center justify-center font-serif text-black/30 select-none"
+        className="absolute inset-0 flex items-center justify-center font-display text-ink-4 select-none"
         style={{ fontSize: "clamp(3rem, 7vw, 5rem)" }}
         aria-hidden="true"
       >
