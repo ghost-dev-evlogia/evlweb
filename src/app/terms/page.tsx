@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { SiteFooter } from "@/components/site-footer";
+import { FarmPageShell } from "@/components/farm-page-shell";
 
 export const metadata: Metadata = {
   title: "Terms of Service | Evlogia",
@@ -52,58 +51,19 @@ const sections = [
 
 export default function TermsPage() {
   return (
-    <>
-      <header className="fixed top-0 inset-x-0 z-50" style={{ background: "var(--wood-paper)", boxShadow: "0 var(--px) 0 var(--wood-mid)" }}>
-        <div className="max-w-5xl mx-auto px-6 h-12 flex items-center">
-          <Link href="/" className="font-display text-ink text-sm">← back to the farm</Link>
-        </div>
-      </header>
-
-      <main className="pt-24 md:pt-36 pb-24 px-6">
-        <div className="max-w-3xl mx-auto">
-
-          {/* Header */}
-          <div className="mb-14">
-            <p className="font-sans text-ink-3 text-[10px] tracking-[0.3em] uppercase mb-4">
-              Legal
-            </p>
-            <h1
-              className="font-display text-ink leading-[1.07] mb-5"
-              style={{ fontSize: "clamp(2rem, 4vw, 3.2rem)", letterSpacing: "0" }}
-            >
-              Terms of Service
-            </h1>
-            <p className="font-sans text-ink-3 text-[11px] tracking-wide">
-              Last updated: March 2026
-            </p>
+    <FarmPageShell eyebrow="Legal" title="Terms of Service" updated="Last updated: March 2026">
+      <p className="font-sans text-ink-2 text-[15px] leading-relaxed mb-10">
+        These Terms of Service govern your access to and use of evlogia.ai, operated by Evlogia.
+        Please read them carefully.
+      </p>
+      <div className="space-y-9">
+        {sections.map(({ title, body }) => (
+          <div key={title}>
+            <h2 className="font-display text-ink text-lg mb-2.5 leading-snug">{title}</h2>
+            <p className="font-sans text-ink-2 text-[15px] leading-relaxed">{body}</p>
           </div>
-
-          {/* Divider */}
-          <div className="divider mb-14" />
-
-          {/* Intro */}
-          <p className="font-sans text-ink-3 text-sm leading-relaxed mb-14">
-            These Terms of Service govern your access to and use of evlogia.ai, operated by Evlogia. Please read them carefully.
-          </p>
-
-          {/* Sections */}
-          <div className="space-y-10">
-            {sections.map(({ title, body }) => (
-              <div key={title}>
-                <h2 className="font-display text-ink text-lg mb-3 leading-snug">
-                  {title}
-                </h2>
-                <p className="font-sans text-ink-3 text-sm leading-relaxed">
-                  {body}
-                </p>
-              </div>
-            ))}
-          </div>
-
-        </div>
-      </main>
-
-      <SiteFooter />
-    </>
+        ))}
+      </div>
+    </FarmPageShell>
   );
 }

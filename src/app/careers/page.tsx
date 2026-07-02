@@ -1,92 +1,64 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { SiteFooter } from "@/components/site-footer";
+import { FarmPageShell } from "@/components/farm-page-shell";
 
 export const metadata: Metadata = {
   title: "Careers | Evlogia",
-  description: "Join Evlogia. Applied AI Research. We're looking for researchers and engineers who want to do work worth publishing.",
+  description:
+    "Join Evlogia. A lean engineering team that takes on hard problems in AI, hardware, and platforms.",
 };
 
 export default function CareersPage() {
   return (
-    <>
-      <header className="fixed top-0 inset-x-0 z-50" style={{ background: "var(--wood-paper)", boxShadow: "0 var(--px) 0 var(--wood-mid)" }}>
-        <div className="max-w-5xl mx-auto px-6 h-12 flex items-center">
-          <Link href="/" className="font-display text-ink text-sm">← back to the farm</Link>
+    <FarmPageShell eyebrow="Careers" title="Work worth doing.">
+      <p className="font-sans text-ink-2 text-[15px] md:text-base leading-relaxed mb-10">
+        Four of us so far. We take on hard problems, ship what we promise, and keep the team
+        small enough that everyone&apos;s work matters. The bar is high. That&apos;s the point.
+      </p>
+
+      <div className="space-y-10">
+        <div>
+          <h2 className="font-display text-ink text-lg mb-2.5">Who we are</h2>
+          <p className="font-sans text-ink-2 text-[15px] leading-relaxed">
+            Small on purpose. The work is production AI systems, connected hardware, and
+            platforms that carry real load. We&apos;d rather do fewer things properly than many
+            things adequately, and we measure success by whether the work still holds up a year
+            later.
+          </p>
         </div>
-      </header>
 
-      <main className="pt-24 md:pt-36 pb-24 px-6">
-        <div className="max-w-3xl mx-auto">
-
-          {/* Header */}
-          <div className="mb-16">
-            <p className="font-sans text-ink-3 text-[10px] tracking-[0.3em] uppercase mb-4">
-              Careers
-            </p>
-            <h1
-              className="font-display text-ink leading-[1.07] mb-6"
-              style={{ fontSize: "clamp(2.2rem, 5vw, 4rem)", letterSpacing: "0" }}
-            >
-              Work worth
-              <br />
-              <em>doing.</em>
-            </h1>
-            <p className="font-sans text-ink-3 text-base leading-relaxed max-w-xl">
-              Evlogia is a small, intentional team. We take on technically hard problems, build the systems that solve them, and ship work that holds up. The bar is high. That&apos;s the point.
-            </p>
-          </div>
-
-          {/* Divider */}
-          <div className="divider mb-16" />
-
-          {/* Body */}
-          <div className="space-y-12">
-
-            <div>
-              <h2 className="font-display text-ink text-xl mb-4">Who we are</h2>
-              <p className="font-sans text-ink-3 text-sm leading-relaxed">
-                We&apos;re not a large company and we don&apos;t want to be. What we are is exacting: about the problems we take on, the solutions we build, and the people we work with. Our output is production AI systems, IoT devices, and platforms that do something real. We measure success by whether the work holds up under scrutiny, not by whether it ships fast.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="font-display text-ink text-xl mb-5">What we look for</h2>
-              <ul className="space-y-3">
-                {[
-                  "Deep technical ability in ML research, AI systems engineering, or both",
-                  "Comfort operating at the frontier, where the problem isn't fully defined",
-                  "The discipline to be rigorous without being slow",
-                  "A genuine interest in seeing hard problems through to working systems",
-                  "The kind of curiosity that makes you read the spec, not just the summary",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 font-sans text-ink-3 text-sm leading-relaxed">
-                    <span className="text-ink/20 mt-0.5 shrink-0">·</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h2 className="font-display text-ink text-xl mb-4">How to apply</h2>
-              <p className="font-sans text-ink-3 text-sm leading-relaxed mb-6">
-                We don&apos;t post job listings. When we&apos;re looking, we&apos;re looking for a specific kind of person. If you think that&apos;s you, send us your CV and any relevant work: papers, code, patents, projects. Include a short note on what you&apos;re working on and what you want to build.
-              </p>
-              <a
-                href="mailto:careers@evlogia.ai"
-                className="inline-flex items-center gap-3 glass rounded-full px-8 py-3.5 text-ink-2 font-sans font-medium text-sm border border-black/10 hover:bg-black/5 hover:scale-[1.02] transition-all duration-300"
+        <div>
+          <h2 className="font-display text-ink text-lg mb-3">What we look for</h2>
+          <ul className="space-y-2.5">
+            {[
+              "Deep ability in ML research, systems engineering, or both",
+              "Comfort when the problem isn't fully defined yet",
+              "Rigor at a working pace",
+              "The urge to see a hard problem through to a running system",
+              "You read the spec",
+            ].map((item) => (
+              <li
+                key={item}
+                className="flex items-start gap-3 font-sans text-ink-2 text-[15px] leading-relaxed"
               >
-                careers@evlogia.ai
-                <span className="text-ink/35 text-xs">→</span>
-              </a>
-            </div>
-
-          </div>
+                <span className="text-ink-4 mt-0.5 shrink-0">·</span>
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
-      </main>
 
-      <SiteFooter />
-    </>
+        <div>
+          <h2 className="font-display text-ink text-lg mb-2.5">How to apply</h2>
+          <p className="font-sans text-ink-2 text-[15px] leading-relaxed mb-5">
+            No job listings. When we&apos;re looking, we&apos;re looking for a specific person.
+            If you think that&apos;s you, email your CV plus anything real: papers, code,
+            patents, projects. Add a short note about what you&apos;re building.
+          </p>
+          <a href="mailto:careers@evlogia.ai" className="pixel-btn" style={{ fontSize: "14px" }}>
+            careers@evlogia.ai
+          </a>
+        </div>
+      </div>
+    </FarmPageShell>
   );
 }
