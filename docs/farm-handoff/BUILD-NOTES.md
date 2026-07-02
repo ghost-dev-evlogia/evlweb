@@ -22,3 +22,20 @@ One lesson per entry. Newest at the bottom. Written by the executing agent as it
 - **Scene = single source of truth:** `src/farm/scene.ts` (tilemap + plots + objects) is consumed
   by BOTH the build-time PNG compositor (`scripts/render-farm.mjs`, pngjs) that makes the static
   no-JS fallback AND the PixiJS runtime. Fallback and live hero can never drift apart.
+- **Style-frames self-checkpoint (committed):** three scene variants rendered from the same
+  scene.ts engine → `docs/farm-handoff/style-frames/{homestead,riverside,orchard}.png`.
+  **Selected: HOMESTEAD** — balanced diagonal (house TL → trail → plots C → pond BR), zero
+  collisions, quiet top band for the DOM headline. Riverside has a coop/sunflower collision;
+  orchard drops mushrooms into the pond. `buildScene("final")` ≡ homestead layout.
+- **Farmhouse assembly (from Cup Nooble's own promo art):** wide house = roof-slab columns
+  L/M/R (wooden-house.png cols 4/5/6, 1×5 each, tileable) drawn OVER a plank wall strip
+  (tower base row L/M/R) at roof-y+4, door + window in the wall row, scallop tips overhang.
+  Trying to pair roof.wide + wall.wood 3×2 reads as a burnt cabin — don't.
+- **Pond trick:** rectangular water fill + the grass ISLAND tiles mirrored inward as the ring
+  (pond-TL ← island-BR etc.) — grass rounds into the water exactly like the pack's promo.
+- **Turbopack panic "Next.js package not found → Failed to write app endpoint":** caused by
+  running `npm i` while `next dev` runs. Fix: kill server, `rm -rf .next`, restart. Also:
+  `pkill -f "next dev"` killed an unrelated stale process that held :3000 — dev server now
+  lives at **localhost:3000**.
+- **Node 25 runs .ts scripts natively** (type stripping) — `node scripts/render-farm.ts` works
+  with explicit `.ts` import specifiers; pngjs is CJS → `import pkg from "pngjs"`.
