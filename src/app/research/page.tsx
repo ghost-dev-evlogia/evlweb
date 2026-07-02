@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     "Frontier R&D for clients with novel problems: applied AI research, hard hardware, complex platforms. Real experiments, filed IP, publishable results.",
 };
 
-const depthIcons = [T.biome.sunflower, T.biome.mushroomBig, T.biome.treeApple];
+const depthIcons = [T.biome.sunflowerHead, T.biome.mushroomBig, T.biome.treeApple];
 
 export default function ResearchPage() {
   return (
@@ -104,7 +104,7 @@ export default function ResearchPage() {
                       <p className="font-sans text-ink-2 text-sm leading-relaxed flex-1">{desc}</p>
                       <div className="flex flex-wrap gap-1.5">
                         {tags.map((v) => (
-                          <span key={v} className="pixel-chip" style={{ fontSize: "10px" }}>
+                          <span key={v} className="pixel-chip" style={{ fontSize: "11px" }}>
                             {v}
                           </span>
                         ))}

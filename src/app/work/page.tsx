@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     "50+ systems shipped for 20+ clients across 8 industries since 2021. Client logos, testimonials, and the track record behind them.",
 };
 
-const statIcons = [T.crop.wheatItem, T.biome.apple, T.biome.flowerBigYellow, T.biome.acorn];
+const statIcons = [T.crop.wheat[3], T.biome.apple, T.biome.flowerBigYellow, T.biome.acorn];
 
 export default function WorkPage() {
   return (

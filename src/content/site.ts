@@ -40,7 +40,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: "applied-ai",
-    icon: T.biome.sunflower,
+    icon: T.biome.sunflowerHead,
     title: "Applied AI",
     desc: "AI where it actually solves something. We integrate models into real products and build custom solutions when off-the-shelf doesn't cut it.",
     meta: "Pilots 4–6 weeks · production builds 3–6 months",
@@ -103,7 +103,7 @@ export const TEAM = [
     initials: "A",
     role: "Engineering",
     bio: "Distributed systems, platform architecture. Owns the heaviest infrastructure work.",
-    photo: "/arjun.jpg",
+    photo: "/team-pixel/arjun.png",
     linkedin: "https://linkedin.com/in/arjun",
   },
   {
@@ -111,7 +111,7 @@ export const TEAM = [
     initials: "An",
     role: "Applied AI",
     bio: "Production AI, end-to-end. LLM, vision, and retrieval systems from problem framing through deployment.",
-    photo: "/aneesh.jpg",
+    photo: "/team-pixel/aneesh.png",
     linkedin: "https://linkedin.com/in/aneesh",
   },
   {
@@ -119,7 +119,7 @@ export const TEAM = [
     initials: "E",
     role: "Product & Delivery",
     bio: "Web, mobile, IoT. Turns ambiguous problems into shipped systems on a clear timeline.",
-    photo: "/founder.JPG",
+    photo: "/team-pixel/ethan.png",
     linkedin: "https://linkedin.com/in/ethankd",
   },
   {
@@ -127,7 +127,7 @@ export const TEAM = [
     initials: "K",
     role: "Hardware & Systems",
     bio: "Embedded firmware, IoT. Connected devices and sensor pipelines, prototype to production.",
-    photo: "/karthik.jpg",
+    photo: "/team-pixel/karthik.png",
     linkedin: "https://linkedin.com/in/karthik",
   },
 ];

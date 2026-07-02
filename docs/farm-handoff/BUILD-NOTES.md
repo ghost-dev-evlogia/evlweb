@@ -60,3 +60,19 @@ One lesson per entry. Newest at the bottom. Written by the executing agent as it
 - **Verification pass:** two fresh-context subagents dispatched per the plan — design critique
   (hero + /services, screenshots at both breakpoints) and adversarial code review of the hero
   stack (StrictMode/destroy paths, texture lifecycle, DPR math, a11y, Cal double-init).
+- **Pixelify Sans ships a broken lowercase "fi" ligature** — "fields" rendered as "Aelds" in the
+  /services H1 (uppercase text never ligates, which hid it elsewhere). Fix: `font-variant-ligatures:
+  none` + `font-feature-settings: "liga" 0, "calt" 0` on every pixel-font class. Note: after editing
+  globals.css via scripts, Turbopack served STALE CSS — rule was absent from document.styleSheets
+  until `rm -rf .next` + restart. Verify CSS fixes against the built stylesheet, not just the source.
+- **Unlayered custom CSS beats Tailwind's layered utilities**: `.pixel-btn { display:inline-flex }`
+  (unlayered, globals.css) overrides `md:hidden` (inside @layer utilities) regardless of order —
+  responsive hiding of chrome-classed elements must live on a wrapper element.
+- **Team = pixel farmhands** (critique P0): four palette-swapped recolors of the Sprout farmer
+  (overalls ramp #5c4e92/#766daa remapped per member: berry/grass/harvest/sky) with role props
+  (chest/sunflower/egg/tools), composed at public/team-pixel/*.png (160×200, 4:5). Generator logic
+  lives in this repo's history (scratchpad script); consistent > one real photo + three initials.
+- **Verifier findings triaged:** code review P0 (texture-cache destruction on nav) + P1s fixed and
+  regression-tested; design critique P0s (ligature, team placeholders) + P1s (blurb tooltip, tap
+  copy, sunflower chip height, avatar frames, CTA deserts, mobile nav Book) all fixed. Deferred:
+  logo source-asset normalization (Edoxi gray plate, Vanora contrast) — needs owner-supplied marks.

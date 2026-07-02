@@ -111,14 +111,17 @@ export function Testimonials() {
               )}
               style={isActive ? { boxShadow: "inset 0 0 0 2px var(--wood-mid)" } : undefined}
             >
-              <span className="relative flex-shrink-0 w-8 h-8 overflow-hidden" style={{ imageRendering: "auto" }}>
+              <span
+                className="relative flex-shrink-0 w-8 h-8 overflow-hidden"
+                style={{ boxShadow: "inset 0 0 0 2px var(--wood-mid)", padding: "2px", background: "var(--wood-paper)" }}
+              >
                 <Image
                   src={testimonial.avatar}
                   alt=""
                   width={64}
                   height={64}
                   sizes="32px"
-                  className="w-8 h-8 object-cover"
+                  className="w-full h-full object-cover"
                   style={{ objectPosition: testimonial.avatarPosition ?? "center" }}
                 />
               </span>

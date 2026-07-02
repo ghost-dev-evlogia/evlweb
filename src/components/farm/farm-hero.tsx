@@ -21,7 +21,7 @@ const SCENE_PX = { w: 512, h: 288 };
 const CROP_ICON: Record<string, TileRef> = {
   product: T.crop.wheat[3],
   "internal-tools": T.crop.beet[3],
-  "applied-ai": T.biome.sunflower,
+  "applied-ai": T.biome.sunflowerHead,
   iot: T.crop.wheat[2],
   coaching: T.crop.wheat[0],
 };
@@ -164,6 +164,14 @@ export function FarmHero({ children }: { children?: ReactNode }) {
                   <PixelSprite tile={CROP_ICON[plot.id]} scale={1} />
                   {plot.label}
                 </span>
+                {/* what-it-grows dialog — appears over the plot on hover/focus */}
+                <span
+                  aria-hidden
+                  className="panel-paper pixel-corners absolute left-1/2 top-0 -translate-x-1/2 -translate-y-[calc(100%+6px)] w-56 px-3 py-2.5 text-center font-sans text-ink-2 text-[12px] leading-snug opacity-0 scale-95 pointer-events-none transition-all duration-150 group-hover:opacity-100 group-hover:scale-100 group-focus-visible:opacity-100 group-focus-visible:scale-100"
+                  style={{ boxShadow: "inset 0 0 0 2px var(--wood-mid), 0 3px 0 var(--wood-shadow)" }}
+                >
+                  {plot.blurb}
+                </span>
                 <span className="sr-only"> — {plot.blurb}</span>
               </Link>
             ))}
@@ -174,7 +182,7 @@ export function FarmHero({ children }: { children?: ReactNode }) {
 
       {/* mobile plot links — tappable chip row under the world */}
       <nav
-        aria-label="Our services, as farm plots"
+        aria-label="Our services"
         className="md:hidden flex flex-wrap justify-center gap-2 px-4 pt-3 pb-6"
       >
         {PLOTS.map((plot) => (

@@ -121,6 +121,7 @@ export const T = {
     flowerYellow: t("grass-biome-things", 6, 2),
     flowerBigYellow: t("grass-biome-things", 7, 2),
     sunflower: t("grass-biome-things", 8, 2, 1, 2),
+    sunflowerHead: t("grass-biome-things", 8, 2),
     bushBerry: t("grass-biome-things", 0, 3),
     bush: t("grass-biome-things", 1, 3),
     grapes: t("grass-biome-things", 4, 3),

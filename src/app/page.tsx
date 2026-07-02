@@ -13,7 +13,7 @@ import { ScrollReveal } from "@/components/scroll-reveal";
 import { T } from "@/farm/tiles.ts";
 import { SERVICES, DEPTH, TEAM, CLIENT_LOGOS, STATS } from "@/content/site";
 
-const statIcons = [T.crop.wheatItem, T.biome.apple, T.biome.flowerBigYellow, T.biome.acorn];
+const statIcons = [T.crop.wheat[3], T.biome.apple, T.biome.flowerBigYellow, T.biome.acorn];
 
 export default function Home() {
   return (
@@ -64,7 +64,8 @@ export default function Home() {
                     </a>
                   </div>
                   <p className="font-sans text-ink-3 text-[11px] mt-3">
-                    Hover a field plot to see what it grows ↓
+                    <span className="hidden md:inline">Hover a field plot to see what it grows ↓</span>
+                    <span className="md:hidden">Tap a field below to see what it grows ↓</span>
                   </p>
                 </div>
               </div>
@@ -180,6 +181,23 @@ export default function Home() {
           <div className="max-w-5xl mx-auto">
             <HowWeWork />
           </div>
+          {/* slim mid-page CTA band */}
+          <div className="max-w-3xl mx-auto mt-12">
+            <div className="panel-sky pixel-corners px-5 py-5 flex flex-col sm:flex-row items-center justify-center gap-4 text-center sm:text-left">
+              <p className="font-sans text-ink-2 text-[14px]">
+                Have a build in mind? Thirty minutes gets you a real scope.
+              </p>
+              <button
+                data-cal-link="ethankd/strategy"
+                data-cal-namespace="strategy"
+                data-cal-config='{"layout":"month_view","theme":"light","useSlotsViewOnSmallScreen":"true"}'
+                className="pixel-btn shrink-0"
+                style={{ fontSize: "0.85rem" }}
+              >
+                Book a call
+              </button>
+            </div>
+          </div>
         </section>
 
         <div className="max-w-5xl mx-auto px-6"><div className="pixel-divider" /></div>
@@ -209,7 +227,7 @@ export default function Home() {
                       <p className="font-sans text-ink-2 text-sm leading-relaxed flex-1">{desc}</p>
                       <div className="flex flex-wrap gap-1.5">
                         {tags.map((v) => (
-                          <span key={v} className="pixel-chip" style={{ fontSize: "10px" }}>
+                          <span key={v} className="pixel-chip" style={{ fontSize: "11px" }}>
                             {v}
                           </span>
                         ))}
@@ -344,7 +362,7 @@ export default function Home() {
               <div className="panel-paper px-6 py-10 md:px-12 md:py-12 text-center">
                 <div className="flex justify-center gap-2 mb-5" aria-hidden>
                   <PixelSprite tile={T.crop.wheat[3]} scale={3} />
-                  <PixelSprite tile={T.crop.wheatItem} scale={3} />
+                  <PixelSprite tile={T.biome.apple} scale={3} />
                 </div>
                 <h2 className="font-display text-ink leading-[1.05] mb-4" style={{ fontSize: "clamp(1.9rem, 5vw, 3.2rem)" }}>
                   Let&apos;s build something worth using.

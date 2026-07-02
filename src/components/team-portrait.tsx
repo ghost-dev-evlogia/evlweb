@@ -29,7 +29,8 @@ export function TeamPortrait({ src, alt, initials }: Props) {
           src={src}
           alt={alt}
           loading="lazy"
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ imageRendering: "pixelated" }}
           onError={() => setFailed(true)}
         />
       )}

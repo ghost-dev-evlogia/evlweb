@@ -71,6 +71,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${geist.variable} ${pixelify.variable} h-full antialiased no-js`}
       suppressHydrationWarning
     >

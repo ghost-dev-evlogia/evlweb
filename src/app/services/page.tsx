@@ -75,6 +75,13 @@ export default function ServicesPage() {
                               </li>
                             ))}
                           </ul>
+                          <button
+                            {...CAL_ATTRS}
+                            className="pixel-btn pixel-btn--wood mt-5"
+                            style={{ fontSize: "0.85rem" }}
+                          >
+                            Scope this →
+                          </button>
                         </div>
                       </div>
                     </div>

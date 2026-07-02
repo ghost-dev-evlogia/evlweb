@@ -138,6 +138,17 @@ body {
   image-rendering: pixelated;
 }
 
+/* Pixelify Sans ships a broken "fi" ligature (renders as a garbled glyph —
+   "fields" became "Aelds"). Kill ligatures everywhere the pixel font shows. */
+.font-display,
+.pixel-btn,
+.pixel-chip,
+.skip-link,
+.nav-link {
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "calt" 0;
+}
+
 /* ─── Focus ring — chunky pixel ring, 3:1+ everywhere ─── */
 :focus-visible {
   outline: var(--px) solid var(--ink);

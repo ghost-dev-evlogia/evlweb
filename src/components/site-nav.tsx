@@ -58,10 +58,26 @@ export function SiteNav() {
           </button>
         </div>
 
-        {/* mobile toggle */}
+        {/* mobile: persistent booking CTA + menu toggle. The pixel-btn class
+            sets display via an unlayered rule that would beat md:hidden, so
+            the responsive hiding lives on a wrapper span. */}
+        <span className="md:hidden ml-auto">
+          <button
+            {...{
+              "data-cal-link": "ethankd/strategy",
+              "data-cal-namespace": "strategy",
+              "data-cal-config":
+                '{"layout":"month_view","theme":"light","useSlotsViewOnSmallScreen":"true"}',
+            }}
+            className="pixel-btn"
+            style={{ fontSize: "11px", padding: "calc(var(--px)*2) calc(var(--px)*3) calc(var(--px)*2.5)" }}
+          >
+            Book
+          </button>
+        </span>
         <button
           type="button"
-          className="md:hidden ml-auto font-display text-ink text-sm px-2 py-1"
+          className="md:hidden font-display text-ink text-sm px-2 py-1"
           aria-expanded={open}
           aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen((o) => !o)}
