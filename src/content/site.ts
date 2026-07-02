@@ -275,6 +275,26 @@ export const CAL_ATTRS = {
     '{"layout":"month_view","theme":"light","useSlotsViewOnSmallScreen":"true"}',
 } as const;
 
+/* ── The gate — hero headline + the opening cutscene. ── */
+export const HERO = {
+  chip: "Evlogia · a lean engineering team",
+  h1a: "We build hard things",
+  h1b: "for fun.",
+  sub: "Web, AI, hardware, firmware. The difficult ones are the fun ones. That's the whole business model.",
+} as const;
+
+export const CUTSCENE = {
+  greeting:
+    "Oh! A visitor. Welcome to Evlogia. We grow software here, mostly the difficult kind. Want the tour?",
+  aside:
+    "A farm. Also an engineering company. The crops are a metaphor; the shipping record isn't. Take the tour when you're ready.",
+  choices: [
+    { label: "show me around", kind: "tour" },
+    { label: "skip to the work", kind: "work" },
+    { label: "what IS this place?", kind: "aside" },
+  ],
+} as const;
+
 /* Journey sections — powers the HUD mini-map signposts. */
 export const JOURNEY = [
   { id: "top", label: "The gate" },

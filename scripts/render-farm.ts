@@ -141,7 +141,7 @@ function testcard() {
 /* ═══ SCENE RENDER ═══ */
 const VARIANTS = ["homestead", "riverside", "orchard", "final"] as const;
 
-async function renderScene(variant: string, outPath: string, scale: number) {
+async function composeScene(variant: string): Promise<Img> {
   const { buildScene } = await import("../src/farm/scene.ts");
   const v = VARIANTS.find((k) => k === variant);
   if (!v) throw new Error(`unknown scene variant "${variant}"`);
@@ -150,7 +150,32 @@ async function renderScene(variant: string, outPath: string, scale: number) {
   for (const layer of scene.layers) {
     for (const p of layer) blit(img, p.t, p.x, p.y);
   }
+  return img;
+}
+
+async function renderScene(variant: string, outPath: string, scale: number) {
+  const img = await composeScene(variant);
+  // the sky rows MUST stay transparent — the page gradient shows through.
+  // A flattened PNG here means someone re-exported it wrong; refuse to ship it.
+  if (img.data[3] !== 0) throw new Error("sky rows are not transparent — refusing to write static PNG");
   save(scale > 1 ? upscale(img, scale) : img, outPath);
+}
+
+/** OG card: dawn sky gradient flattened behind the scene, cropped to 1200×630. */
+async function renderOg(outPath: string) {
+  const { SKY_STOPS } = await import("../src/farm/sky-stops.ts");
+  const scene = await composeScene("final");
+  const s3 = upscale(scene, 3); // 1536×864
+  const out = makeCanvas(1200, 630);
+  const dawn = SKY_STOPS[0];
+  for (let y = 0; y < out.height; y++) {
+    const t = y / out.height;
+    const rgb = dawn.top.map((c, i) => Math.round(c + (dawn.bottom[i] - c) * t)) as [number, number, number];
+    fillRect(out, 0, y, out.width, 1, [...rgb, 255]);
+  }
+  // center-crop the 1536×864 scene into the 1200×630 card, biased to the farm
+  blitPx(out, s3, Math.round((s3.width - out.width) / 2), 140, out.width, out.height, 0, 0);
+  save(out, outPath);
 }
 
 const mode = process.argv[2] ?? "testcard";
@@ -163,6 +188,8 @@ if (mode === "testcard") {
 } else if (mode === "static") {
   await renderScene("final", join(ROOT, "public/farm/farm-static.png"), 1);
   await renderScene("final", join(ROOT, "public/farm/farm-static@3x.png"), 3);
+} else if (mode === "og") {
+  await renderOg(join(ROOT, "public/og-farm.png"));
 } else {
   throw new Error(`unknown mode ${mode}`);
 }

@@ -1,30 +1,22 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import Link from "next/link";
-import { PLOTS } from "@/farm/scene.ts";
-import { T, type TileRef } from "@/farm/tiles.ts";
 import type { PixiFarm } from "@/farm/pixi-farm.ts";
-import { PixelSprite } from "./pixel-sprite";
+import { SKY_ROWS } from "@/farm/scene.ts";
+import { HeroDialog } from "./hero-dialog";
 
-/* The explorable farm hero.
-   - SSR/no-JS baseline: static farm PNG + real keyboard-focusable <Link>
-     hotspots for every plot (DOM is the source of truth).
+/* The hero — headline over open sky, the living farm pinned to the bottom,
+   the farmer's opening cutscene docked over the world.
+   - The scene's top rows are TRANSPARENT: the page's SkyCycle gradient shows
+     through both the static PNG and the live canvas, so the headline sits in
+     the same sky the farm lives under. Nothing floats in a box.
+   - SSR/no-JS baseline: static farm PNG + the dialog's real anchor links.
    - Enhancement: PixiJS world mounts on top after hydration ('use client' +
      useEffect — NOT next/dynamic ssr:false, which breaks Turbopack HMR).
-   - prefers-reduced-motion: Pixi renders a single still frame; focus
-     highlights still work; nothing ambient moves.
+   - prefers-reduced-motion: Pixi renders a single still frame.
    Scene is 512×288 (32×18 tiles) — scaled to device-pixel integers only. */
 
 const SCENE_PX = { w: 512, h: 288 };
-
-const CROP_ICON: Record<string, TileRef> = {
-  product: T.crop.wheat[3],
-  "internal-tools": T.crop.beet[3],
-  "applied-ai": T.biome.sunflowerHead,
-  iot: T.crop.wheat[2],
-  coaching: T.crop.wheat[0],
-};
 
 export function FarmHero({ children }: { children?: ReactNode }) {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -33,6 +25,7 @@ export function FarmHero({ children }: { children?: ReactNode }) {
   const farmRef = useRef<PixiFarm | null>(null);
   const [live, setLive] = useState(false);
   const [cssWidth, setCssWidth] = useState<number | null>(null);
+  const [sink, setSink] = useState(0);
 
   /* integer-scale sizing: canvas CSS width is chosen so the device-pixel
      scale factor is a whole number → no shimmer at any DPR. Observe the
@@ -42,13 +35,26 @@ export function FarmHero({ children }: { children?: ReactNode }) {
     const el = rootRef.current;
     if (!el) return;
     const compute = () => {
-      const w = el.getBoundingClientRect().width;
+      const rect = el.getBoundingClientRect();
+      const w = rect.width;
       const dpr = window.devicePixelRatio || 1;
       const fit = w >= 1024;
-      const dev = fit
-        ? Math.max(2, Math.ceil((w * dpr) / SCENE_PX.w)) // cover: crop edges
-        : Math.max(2, Math.floor((w * dpr) / SCENE_PX.w)); // fit: letterbox
-      setCssWidth((SCENE_PX.w * dev) / dpr);
+      let cw: number;
+      if (fit) {
+        cw = (SCENE_PX.w * Math.max(2, Math.ceil((w * dpr) / SCENE_PX.w))) / dpr; // cover: crop edges
+      } else {
+        const dev = Math.floor((w * dpr) / SCENE_PX.w); // fit: letterbox
+        // narrow low-DPR windows can't reach a 2× integer — fill the width
+        cw = dev >= 2 ? (SCENE_PX.w * dev) / dpr : w;
+      }
+      setCssWidth(cw);
+      // keep the horizon below the headline: if the tree line rides too high
+      // on short viewports, sink the world (the cropped bottom hides behind
+      // the docked cutscene dialog anyway)
+      const canvasH = (cw * SCENE_PX.h) / SCENE_PX.w;
+      const horizonY = rect.height - canvasH + (canvasH * SKY_ROWS) / 18;
+      const target = Math.min(Math.max(330, rect.height * 0.42), 480);
+      setSink(fit ? Math.max(0, Math.round(target - horizonY)) : 0);
     };
     compute();
     const ro = new ResizeObserver(compute);
@@ -97,101 +103,53 @@ export function FarmHero({ children }: { children?: ReactNode }) {
     };
   }, []);
 
-  const hover = (id: string | null) => farmRef.current?.setHover(id);
-
   return (
     <div
       ref={rootRef}
-      className="relative h-full w-full overflow-hidden flex flex-col items-center md:justify-center"
+      className="relative flex-1 h-full w-full overflow-hidden flex flex-col"
       data-live={live || undefined}
     >
-      {/* headline panel: flows above the world on mobile, floats over it on md+.
-          No base position utility here — base `relative` would override
-          `md:absolute` in Tailwind v4's output order. */}
-      <div className="w-full flex justify-center px-4 pt-4 md:px-0 md:pt-0 md:absolute md:z-20 md:inset-x-0 md:top-[3%] md:pointer-events-none [&>*]:md:pointer-events-auto">
+      {/* headline — in normal flow, over open sky. It physically precedes the
+          world, so it can never overlap the farm at any viewport. */}
+      <div className="relative z-10 w-full flex justify-center px-5 pt-[clamp(2rem,7vh,4.5rem)]">
         {children}
       </div>
 
-      <div className="relative flex-none max-w-full">
-        <div
-          ref={stageRef}
-          className="relative"
-          style={{
-            width: cssWidth ? `${cssWidth}px` : "min(100vw, 1536px)",
-            aspectRatio: `${SCENE_PX.w} / ${SCENE_PX.h}`,
-          }}
-        >
-          {/* static baseline — replaced (not removed) once Pixi is live */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/farm/farm-static@3x.png"
-            alt="Pixel-art farm — Evlogia's services drawn as field plots: wheat for product engineering, beets for internal tools, sunflowers for applied AI, young wheat for IoT, and fresh sprouts for agentic AI coaching."
-            className="absolute inset-0 h-full w-full pixelated select-none"
-            style={{ opacity: live ? 0 : 1, transition: "opacity 300ms" }}
-            draggable={false}
-          />
-
-          {/* live layer host */}
-          <div ref={hostRef} className="absolute inset-0" aria-hidden="true" />
-
-          {/* plot hotspots — real links sized to each plot, chip on the
-              plot's bottom edge. DOM is the source of truth; canvas enhances.
-              Hidden on small screens (the chip row below serves there). */}
-          <nav aria-label="Our services, as farm plots" className="absolute inset-0 hidden md:block">
-            {PLOTS.map((plot) => (
-              <Link
-                key={plot.id}
-                href={plot.href}
-                className="group absolute focus:outline-none"
-                style={{
-                  left: `${((plot.x - 0.5) / 32) * 100}%`,
-                  top: `${((plot.y - 1) / 18) * 100}%`,
-                  width: `${((plot.w + 1) / 32) * 100}%`,
-                  height: `${((plot.h + 1.6) / 18) * 100}%`,
-                }}
-                onMouseEnter={() => hover(plot.id)}
-                onMouseLeave={() => hover(null)}
-                onFocus={() => hover(plot.id)}
-                onBlur={() => hover(null)}
-              >
-                <span
-                  className="pixel-chip absolute left-1/2 bottom-0 -translate-x-1/2 whitespace-nowrap transition-transform duration-150 group-hover:-translate-y-[2px] group-focus-visible:-translate-y-[2px] group-focus-visible:outline-2 group-focus-visible:outline-ink"
-                  style={{
-                    fontSize: "12px",
-                    boxShadow: "inset 0 0 0 2px var(--wood-mid), 0 2px 0 var(--wood-shadow)",
-                  }}
-                >
-                  <PixelSprite tile={CROP_ICON[plot.id]} scale={1} />
-                  {plot.label}
-                </span>
-                {/* what-it-grows dialog — appears over the plot on hover/focus */}
-                <span
-                  aria-hidden
-                  className="panel-paper pixel-corners absolute left-1/2 top-0 -translate-x-1/2 -translate-y-[calc(100%+6px)] w-56 px-3 py-2.5 text-center font-sans text-ink-2 text-[12px] leading-snug opacity-0 scale-95 pointer-events-none transition-all duration-150 group-hover:opacity-100 group-hover:scale-100 group-focus-visible:opacity-100 group-focus-visible:scale-100"
-                  style={{ boxShadow: "inset 0 0 0 2px var(--wood-mid), 0 3px 0 var(--wood-shadow)" }}
-                >
-                  {plot.blurb}
-                </span>
-                <span className="sr-only"> — {plot.blurb}</span>
-              </Link>
-            ))}
-          </nav>
-
+      {/* the world, pinned to the bottom edge; transparent sky rows crop
+          first if the viewport runs short */}
+      {/* in flow at the bottom of the column on mobile; absolute (with the
+          horizon sink) on md+ — no base position utility (Tailwind v4) */}
+      <div className="relative flex-1 md:min-h-0 mt-4 flex items-end justify-center">
+        <div className="w-full flex justify-center md:absolute md:inset-x-0" style={{ bottom: -sink }}>
+          <div
+            ref={stageRef}
+            className="relative flex-none max-w-none"
+            style={{
+              width: cssWidth ? `${cssWidth}px` : "min(100vw, 1536px)",
+              aspectRatio: `${SCENE_PX.w} / ${SCENE_PX.h}`,
+            }}
+          >
+            {/* static baseline — replaced (not removed) once Pixi is live */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/farm/farm-static@3x.png"
+              alt="Pixel-art farm at dawn: a farmhouse breaking the horizon, fields of wheat, beets and sunflowers, chickens by the coop, a cow in her paddock, and a pond in the corner."
+              className="absolute inset-0 h-full w-full pixelated select-none"
+              style={{ opacity: live ? 0 : 1, transition: "opacity 300ms" }}
+              draggable={false}
+            />
+            {/* live layer host */}
+            <div ref={hostRef} className="absolute inset-0" aria-hidden="true" />
+          </div>
         </div>
       </div>
 
-      {/* mobile plot links — tappable chip row under the world */}
-      <nav
-        aria-label="Our services"
-        className="md:hidden flex flex-wrap justify-center gap-2 px-4 pt-3 pb-6"
-      >
-        {PLOTS.map((plot) => (
-          <Link key={plot.id} href={plot.href} className="pixel-chip" style={{ fontSize: "11px" }}>
-            <PixelSprite tile={CROP_ICON[plot.id]} scale={1} />
-            {plot.label}
-          </Link>
-        ))}
-      </nav>
+      {/* the opening cutscene — in flow on grass on mobile (grows to meet the
+          terrain), docked over the world on md+ (no base position utility
+          next to md:absolute — Tailwind v4) */}
+      <div className="z-20 w-full flex-1 hero-ground px-3 pb-3 pt-3 md:flex-none md:px-0 md:pb-0 md:pt-0 md:absolute md:inset-x-0 md:bottom-7 flex justify-center items-start">
+        <HeroDialog />
+      </div>
     </div>
   );
 }

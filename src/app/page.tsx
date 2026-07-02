@@ -5,7 +5,18 @@ import { SkyCycle } from "@/components/farm/sky-cycle";
 import { Hud } from "@/components/farm/hud";
 import { Fx } from "@/components/farm/fx";
 import { Critters } from "@/components/farm/critters";
-import { GrassBand, PondBand, FenceRow, TreeLine, Signpost } from "@/components/farm/props";
+import {
+  GrassBand,
+  PondBand,
+  FenceRow,
+  TreeLine,
+  Signpost,
+  DirtPath,
+  HedgeRow,
+  StreamBand,
+  CropRowsBand,
+  FlowerMeadow,
+} from "@/components/farm/props";
 import { TilledHeading, RevealPanel } from "@/components/farm/reveal";
 import { CropGrowth } from "@/components/farm/crop-growth";
 import { QuestBoard } from "@/components/farm/quest-board";
@@ -22,7 +33,7 @@ import {
   TEAM,
   CLIENT_LOGOS,
   STATS,
-  CAL_ATTRS,
+  HERO,
 } from "@/content/site";
 
 const statIcons = [T.crop.wheat[3], T.biome.apple, T.biome.flowerBigYellow, T.biome.acorn];
@@ -36,55 +47,35 @@ export default function Home() {
       <Hud />
 
       <main id="main" className="relative z-10">
-        {/* ═══ 1 · THE GATE — dawn ═══ */}
+        {/* ═══ 1 · THE GATE — dawn, headline in the open sky ═══ */}
         <section
           id="top"
-          className="relative overflow-hidden"
-          style={{ height: "clamp(600px, 94vh, 920px)" }}
+          className="relative overflow-hidden flex flex-col min-h-[100svh] md:min-h-0 md:h-[clamp(680px,100svh,1000px)]"
         >
-          <div className="absolute inset-0">
-            <FarmHero>
-              <div
-                className="text-center panel-wood pixel-corners"
-                style={{ width: "min(92vw, 600px)" }}
+          <FarmHero>
+            <div className="text-center max-w-2xl">
+              <p className="pixel-chip mb-4">{HERO.chip}</p>
+              <h1
+                className="font-display text-ink leading-[1.06] hero-title"
+                style={{ fontSize: "clamp(2.1rem, 4.8vw, 3.4rem)", textWrap: "balance" }}
               >
-                <div className="panel-paper px-5 py-5 md:px-8 md:py-6">
-                  <p className="pixel-chip mb-3">Evlogia · a lean engineering team</p>
-                  <h1
-                    className="font-display text-ink leading-[1.08]"
-                    style={{ fontSize: "clamp(1.7rem, 3.6vw, 2.6rem)" }}
-                  >
-                    We build hard things
-                    <br />
-                    for fun.
-                  </h1>
-                  <p className="font-sans text-ink-2 text-[14px] md:text-[15px] leading-relaxed max-w-md mx-auto mt-2.5">
-                    Web, AI, hardware, firmware — whatever the problem needs.
-                    The difficult ones are the fun ones. That&apos;s the whole
-                    business model.
-                  </p>
-                  <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-4">
-                    <button {...CAL_ATTRS} className="pixel-btn" style={{ fontSize: "0.9rem" }}>
-                      Book a call
-                    </button>
-                    <a href="#fields" className="pixel-btn pixel-btn--wood" style={{ fontSize: "0.9rem" }}>
-                      Take the tour
-                    </a>
-                  </div>
-                  <p className="font-sans text-ink-3 text-[11px] mt-3">
-                    <span className="hidden md:inline">
-                      The farm is interactive. Hover a field. The chickens are not ready.
-                    </span>
-                    <span className="md:hidden">Tap a field below to see what grows there ↓</span>
-                  </p>
-                  <p className="press-start font-display text-ink-2 text-[12px] mt-2" aria-hidden>
-                    ▶ scroll to begin the day
-                  </p>
-                </div>
-              </div>
-            </FarmHero>
-          </div>
+                {HERO.h1a}
+                <br />
+                {HERO.h1b}
+              </h1>
+              <p className="font-sans text-ink-2 text-[15px] md:text-base leading-relaxed max-w-lg mx-auto mt-3">
+                {HERO.sub}
+              </p>
+              <p className="press-start font-display text-ink-2 text-[12px] mt-3" aria-hidden>
+                ▶ scroll to begin the day
+              </p>
+            </div>
+          </FarmHero>
         </section>
+
+        {/* ═══ from here to the footer, everything stands on the same land ═══ */}
+        <div className="terrain">
+        <DirtPath />
 
         {/* ═══ 2 · THE FIELDS — morning ═══ */}
         <section id="fields" className="scroll-mt-10 relative pt-16 md:pt-24 pb-0">
@@ -371,6 +362,7 @@ export default function Home() {
             </p>
           </div>
         </section>
+        </div>
       </main>
 
       <SiteFooter />

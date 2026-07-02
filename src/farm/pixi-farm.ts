@@ -1,14 +1,14 @@
 /* ─────────────────────────────────────────────────────────────────────────────
    PixiJS farm controller — the live layer of the hero.
    Renders the same scene.ts the static fallback is rendered from, then adds:
-   water frame animation, wandering animals, an ambling farmer, plot
-   highlight/juice on hover or keyboard focus.
+   water frame animation, wandering animals, an ambling farmer, and chimney
+   smoke. The scene is pure living scenery (v3): no plots, no hover states.
 
    Client-only: constructed inside useEffect. destroy() is StrictMode-safe.
    ──────────────────────────────────────────────────────────────────────────── */
-import type { Application, Container, Sprite, Texture, Ticker } from "pixi.js";
+import type { Application, Graphics, Sprite, Texture, Ticker } from "pixi.js";
 import { TILE, T, SHEET_FILES, type TileRef } from "./tiles.ts";
-import { buildScene, type Scene, type SceneAnimal } from "./scene.ts";
+import { buildScene, CHIMNEY, type Scene, type SceneAnimal } from "./scene.ts";
 
 const SPRITE_BASE = "/farm/sprites";
 
@@ -32,6 +32,8 @@ type AnimalRig = {
   target: { x: number; y: number } | null;
 };
 
+type SmokePuff = { g: Graphics; t: number; offset: number };
+
 export class PixiFarm {
   private app: Application | null = null;
   private destroyed = false;
@@ -40,11 +42,7 @@ export class PixiFarm {
   private waterFrame = 0;
   private waterClock = 0;
   private animals: AnimalRig[] = [];
-  private cropSprites = new Map<string, Sprite[]>();
-  private highlight: Container | null = null;
-  private hl: import("pixi.js").Graphics | null = null;
-  private hovered: string | null = null;
-  private juiceClock = 0;
+  private smoke: SmokePuff[] = [];
   private scene: Scene;
   private reduced: boolean;
 
@@ -112,36 +110,20 @@ export class PixiFarm {
     const root = new Container();
     app.stage.addChild(root);
 
-    const layerNames = ["ground", "water", "ring", "plots", "path", "crops", "house", "coop", "decor", "animals"];
+    const layerNames = ["ground", "water", "ring", "patches", "path", "crops", "house", "coop", "decor", "animals"];
     this.scene.layers.forEach((layer, li) => {
       const c = new Container();
       root.addChild(c);
       const isWater = layerNames[li] === "water";
       const isAnimals = layerNames[li] === "animals";
-      const isCrops = layerNames[li] === "crops";
       if (isAnimals) return; // animals get live rigs instead
       for (const pl of layer) {
         const sp = new Sprite(texFor(pl.t));
         sp.position.set(pl.x * TILE, pl.y * TILE);
         c.addChild(sp);
         if (isWater) this.waterSprites.push(sp);
-        if (isCrops && pl.pid) {
-          // crops carry their owning plot id from scene.ts — exact grouping
-          const arr = this.cropSprites.get(pl.pid) ?? [];
-          arr.push(sp);
-          this.cropSprites.set(pl.pid, arr);
-          // anchor at foot so bounce scales from the ground
-          sp.anchor.set(0, 1);
-          sp.y += sp.height;
-        }
       }
     });
-
-    /* ── plot highlight overlay (under animals) — one persistent Graphics ── */
-    this.highlight = new Container();
-    root.addChild(this.highlight);
-    this.hl = new Graphics();
-    this.highlight.addChild(this.hl);
 
     /* ── animal rigs ── */
     const animalLayer = new Container();
@@ -162,6 +144,20 @@ export class PixiFarm {
         dir: "down", frame: 0, frameClock: 0,
         thinkClock: 1 + Math.random() * 3, target: null,
       });
+    }
+
+    /* ── chimney smoke — three recycled puffs, live layer only ── */
+    if (!this.reduced) {
+      const smokeLayer = new Container();
+      root.addChild(smokeLayer);
+      for (let i = 0; i < 3; i++) {
+        const g = new Graphics();
+        g.rect(-2, -2, 4, 4).fill({ color: 0xf3f4e7 });
+        g.rect(-1, -3, 2, 6).fill({ color: 0xf3f4e7 });
+        g.alpha = 0;
+        smokeLayer.addChild(g);
+        this.smoke.push({ g, t: (i / 3) * 2.8, offset: i });
+      }
     }
 
     this.opts.host.appendChild(app.canvas);
@@ -200,17 +196,20 @@ export class PixiFarm {
 
     for (const a of this.animals) this.tickAnimal(a, dt);
 
-    // juice: crop bounce on the hovered plot
-    if (this.hovered) {
-      this.juiceClock += dt;
-      const crops = this.cropSprites.get(this.hovered);
-      if (crops) {
-        crops.forEach((s, i) => {
-          const phase = this.juiceClock * 7 - i * 0.35;
-          const sy = phase > 0 ? 1 + Math.max(0, Math.sin(phase)) * 0.08 : 1;
-          s.scale.y = sy;
-        });
-      }
+    // chimney smoke: rise, wobble, fade, recycle
+    const cx = (CHIMNEY.x + 0.5) * TILE;
+    const cy = (CHIMNEY.y + 0.2) * TILE;
+    for (const puff of this.smoke) {
+      puff.t += dt;
+      const cycle = 2.8;
+      const t = (puff.t % cycle) / cycle;
+      puff.g.position.set(
+        Math.round(cx + Math.sin(t * 5 + puff.offset * 2.1) * 3),
+        Math.round(cy - t * 22)
+      );
+      puff.g.alpha = t < 0.12 ? t / 0.12 * 0.55 : 0.55 * (1 - (t - 0.12) / 0.88);
+      const s = 0.7 + t * 0.9;
+      puff.g.scale.set(s);
     }
   };
 
@@ -260,7 +259,7 @@ export class PixiFarm {
       if (a.target) this.walkToward(a, dt, 0.5);
       a.sprite.position.set(Math.round(a.tx * TILE), Math.round(a.ty * TILE));
     } else {
-      // farmer: ambles up and down the trail, pauses to "inspect"
+      // farmer: ambles around the yard, pauses to "inspect"
       if (a.state === "idle") {
         if (a.frameClock > 0.6) {
           a.frameClock = 0;
@@ -313,27 +312,6 @@ export class PixiFarm {
     }
   }
 
-  /** Highlight a plot (hover/focus from the DOM chips). Pass null to clear.
-      Synchronous — draws into one persistent Graphics created at init. */
-  setHover(plotId: string | null) {
-    if (this.destroyed || !this.app || !this.hl) return;
-    if (this.hovered === plotId) return;
-    this.hovered = plotId;
-    this.juiceClock = 0;
-    this.hl.clear();
-    if (plotId) {
-      const plot = this.scene.plots.find((p2) => p2.id === plotId);
-      if (plot) {
-        // pixel-chunky highlight: outer ink frame + soft paper glow
-        const x = plot.x * TILE, y = plot.y * TILE, w = plot.w * TILE, h = plot.h * TILE;
-        this.hl.rect(x - 2, y - 2, w + 4, h + 4).stroke({ width: 2, color: 0x353738, alpha: 0.9 });
-        this.hl.rect(x, y, w, h).stroke({ width: 2, color: 0xf3f4e7, alpha: 0.9 });
-        this.hl.rect(x, y, w, h).fill({ color: 0xf7ebaa, alpha: 0.14 });
-      }
-    }
-    if (this.reduced) this.app.render(); // static mode still shows focus state
-  }
-
   private teardown() {
     if (!this.app) return;
     // destroy only the frame textures WE created — never the sheet sources,
@@ -342,7 +320,6 @@ export class PixiFarm {
     this.textures.clear();
     this.app.destroy({ removeView: true }, { children: true });
     this.app = null;
-    this.hl = null;
   }
 
   destroy() {
@@ -350,6 +327,6 @@ export class PixiFarm {
     this.teardown();
     this.waterSprites = [];
     this.animals = [];
-    this.cropSprites.clear();
+    this.smoke = [];
   }
 }

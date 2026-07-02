@@ -543,6 +543,75 @@ a, button, [role="button"], summary, .pixel-btn, .pixel-chip a {
   image-rendering: pixelated;
 }
 
+/* ─── The continuous world: one ground plane under every section ───
+   .terrain wraps everything between the hero and the footer. Grass tiles
+   behind all content (z -3), the dirt road above it (z -2, the DirtPath
+   component), and a document-space day tint (z -1, multiply) that darkens
+   the land toward dusk exactly where the dusk sections sit. Content stacks
+   above all three inside the isolated context. Zero scroll JS. */
+.terrain {
+  position: relative;
+  isolation: isolate;
+}
+.terrain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  background-image: url("/farm/tiles/grass-a.png");
+  background-size: calc(var(--px) * 16) calc(var(--px) * 16);
+  image-rendering: pixelated;
+}
+.terrain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(243, 216, 197, 0.20) 0%,
+    rgba(255, 255, 255, 0) 10%,
+    rgba(255, 255, 255, 0) 42%,
+    rgba(215, 158, 97, 0.16) 58%,
+    rgba(118, 109, 170, 0.28) 76%,
+    rgba(80, 64, 134, 0.42) 90%,
+    rgba(53, 55, 56, 0.5) 100%
+  );
+  mix-blend-mode: multiply;
+}
+/* the dirt road down the whole journey (rendered by <DirtPath/>) */
+.dirt-road {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: -2;
+  width: calc(var(--px) * 16);
+  background-image: url("/farm/tiles/dirt.png");
+  background-size: calc(var(--px) * 16) calc(var(--px) * 16);
+  background-repeat: repeat-y;
+  image-rendering: pixelated;
+}
+
+/* mobile: the ground continues under the cutscene dialog into the terrain */
+.hero-ground {
+  background-image: url("/farm/tiles/grass-a.png");
+  background-size: calc(var(--px) * 16) calc(var(--px) * 16);
+  image-rendering: pixelated;
+}
+@media (min-width: 768px) {
+  .hero-ground {
+    background-image: none;
+  }
+}
+
+/* ─── Hero headline sits directly in the sky ─── */
+.hero-title {
+  text-shadow:
+    0 var(--px) 0 rgba(243, 244, 231, 0.85),
+    0 calc(var(--px) * -1) 0 rgba(243, 244, 231, 0.35);
+}
+
 /* ─── Cloud shadows drifting across grass ─── */
 @keyframes cloud-shadow-drift {
   from { transform: translateX(-20%); }

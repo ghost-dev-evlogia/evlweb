@@ -112,6 +112,90 @@ export function TreeLine({ variant = 0 }: { variant?: number }) {
   );
 }
 
+/** The dirt road that runs the whole journey (lives inside .terrain). */
+export function DirtPath() {
+  return (
+    <div
+      aria-hidden
+      className="dirt-road hidden md:block"
+      style={{ left: "clamp(24px, 6vw, 110px)" }}
+    />
+  );
+}
+
+/** Divider: a hedge of bushes across the land. */
+export function HedgeRow() {
+  const bushes = [
+    T.biome.bush, T.biome.bushBerry, T.biome.bush, T.biome.bush, T.biome.bushBerry,
+    T.biome.bush, T.biome.bushBerry, T.biome.bush, T.biome.bush, T.biome.bushBerry,
+    T.biome.bush, T.biome.bush, T.biome.bushBerry, T.biome.bush,
+  ];
+  return (
+    <div aria-hidden className="flex justify-center gap-4 overflow-hidden py-2" style={{ maxHeight: 16 * 3 + 16 }}>
+      {bushes.map((tile, i) => (
+        <span key={i} style={{ transform: i % 2 ? "translateY(4px)" : undefined }}>
+          <PixelSprite tile={tile} scale={3} />
+        </span>
+      ))}
+    </div>
+  );
+}
+
+/** Divider: a stream crossing the land; the road crosses it on a bridge. */
+export function StreamBand() {
+  return (
+    <div aria-hidden className="relative">
+      <div className="band-grass-edge-b rotate-180" style={{ height: "calc(var(--px) * 16)" }} />
+      <div className="band-water" style={{ height: "calc(var(--px) * 24)" }} />
+      <div className="band-grass-edge-t rotate-180" style={{ height: "calc(var(--px) * 16)" }} />
+      {/* the bridge carries the dirt road over the water */}
+      <span
+        className="hidden md:block absolute top-1/2 -translate-y-1/2"
+        style={{ left: "clamp(0px, calc(6vw - 40px), 86px)" }}
+      >
+        <PixelSprite tile={T.bridge} scale={3} />
+      </span>
+    </div>
+  );
+}
+
+/** Divider: a band of ripe crop rows. */
+export function CropRowsBand({ crop = "wheat" }: { crop?: "wheat" | "beet" }) {
+  const tile = crop === "wheat" ? T.crop.wheat[3] : T.crop.beet[3];
+  return (
+    <div aria-hidden className="band-dirt overflow-hidden" style={{ boxShadow: "inset 0 0 0 var(--px) var(--wood-shadow)" }}>
+      <div className="flex justify-center gap-3 py-1">
+        {Array.from({ length: 24 }, (_, i) => (
+          <span key={i} className="shrink-0" style={{ transform: i % 3 === 1 ? "translateY(2px)" : undefined }}>
+            <PixelSprite tile={tile} scale={3} />
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/** Divider: scattered wildflowers on the open grass. */
+export function FlowerMeadow() {
+  const flowers = [
+    { tile: T.biome.flowerPinkBig, left: "6%" }, { tile: T.biome.flowerYellow, left: "14%" },
+    { tile: T.biome.flowerPink, left: "23%" }, { tile: T.biome.flowerBigYellow, left: "31%" },
+    { tile: T.biome.flowerYellow, left: "42%" }, { tile: T.biome.flowerPinkBig, left: "52%" },
+    { tile: T.biome.flowerPink, left: "61%" }, { tile: T.biome.flowerYellow, left: "70%" },
+    { tile: T.biome.flowerBigYellow, left: "79%" }, { tile: T.biome.flowerPink, left: "88%" },
+    { tile: T.biome.flowerPinkBig, left: "95%" },
+  ];
+  return (
+    <div aria-hidden className="relative overflow-hidden" style={{ height: 16 * 3 + 20 }}>
+      {flowers.map(({ tile, left }, i) => (
+        <span key={i} className="absolute" style={{ left, top: i % 2 ? 8 : 24 }}>
+          <PixelSprite tile={tile} scale={3} />
+        </span>
+      ))}
+    </div>
+  );
+}
+
 /** Wooden signpost with a label plate. */
 export function Signpost({ label }: { label: string }) {
   return (

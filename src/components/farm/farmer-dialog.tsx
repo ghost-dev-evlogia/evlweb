@@ -1,67 +1,15 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { FAQ } from "@/content/site";
 import { PixelSprite } from "./pixel-sprite";
 import { T } from "@/farm/tiles.ts";
+import { TypeLine } from "./type-line";
 
 /* Ask the farmer — the FAQ as a game dialog. Pick a question chip, the
    farmer answers with a typewriter effect (click the text to skip; instant
    under reduced-motion). SSR renders the full answer, so no-JS readers and
    crawlers always get the words. */
-
-function TypeLine({ text }: { text: string }) {
-  // SSR/first paint: full text (crawlers + no-JS read everything)
-  const [n, setN] = useState(text.length);
-  const timer = useRef<number | null>(null);
-  const done = n >= text.length;
-
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    // restart from zero on mount, asynchronously (no sync setState in effect)
-    timer.current = window.setTimeout(() => {
-      setN(0);
-      timer.current = window.setInterval(() => {
-        setN((v) => {
-          if (v + 2 >= text.length && timer.current) window.clearInterval(timer.current);
-          return Math.min(text.length, v + 2);
-        });
-      }, 18) as unknown as number;
-    }, 10) as unknown as number;
-    return () => {
-      if (timer.current) {
-        window.clearTimeout(timer.current);
-        window.clearInterval(timer.current);
-      }
-    };
-  }, [text]);
-
-  const skip = () => {
-    if (timer.current) window.clearInterval(timer.current);
-    setN(text.length);
-  };
-
-  return (
-    <>
-      <p
-        aria-live="polite"
-        aria-atomic="true"
-        onClick={skip}
-        className="font-sans text-ink text-[15px] leading-relaxed flex-1"
-      >
-        {text.slice(0, n)}
-        {!done && <span className="dialog-caret">▌</span>}
-      </p>
-      <p
-        className="font-display text-ink-4 text-[10px] self-end mt-3"
-        style={{ visibility: done ? "visible" : "hidden" }}
-        aria-hidden
-      >
-        ▼ pick another question
-      </p>
-    </>
-  );
-}
 
 export function FarmerDialog() {
   const [qi, setQi] = useState(0);
@@ -92,7 +40,7 @@ export function FarmerDialog() {
               <p className="font-display text-ink-3 text-[11px] tracking-[0.14em] uppercase mb-2">
                 {FAQ[qi].q}
               </p>
-              <TypeLine key={qi} text={FAQ[qi].a} />
+              <TypeLine key={qi} text={FAQ[qi].a} hint="▼ pick another question" />
             </div>
           </div>
 

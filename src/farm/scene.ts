@@ -1,30 +1,26 @@
 /* ─────────────────────────────────────────────────────────────────────────────
    THE FARM — scene definition (single source of truth)
-   Consumed by scripts/render-farm.ts (static fallback PNG) and the PixiJS
+   Consumed by scripts/render-farm.ts (static fallback PNG + OG) and the PixiJS
    hero (live layer). Map coordinates are in 16px tiles.
+
+   v3: the top SKY_ROWS rows are TRANSPARENT — the page's scroll-driven sky
+   gradient shows through in both the static PNG and the live canvas, so the
+   headline sits over real sky and the seam can't drift. The farm is pure
+   living scenery now: no service plots, no hotspots — the copy moved into
+   the page and the opening cutscene.
    ──────────────────────────────────────────────────────────────────────────── */
 import { T, type TileRef } from "./tiles.ts";
+
+/** Rows 0..SKY_ROWS-1 are open sky (alpha 0). Ground starts at SKY_ROWS. */
+export const SKY_ROWS = 5;
+
+/** Chimney tile position (smoke puffs spawn here in the live layer). */
+export const CHIMNEY = { x: 6, y: 4 };
 
 export type Placement = {
   t: TileRef;
   x: number;
   y: number;
-  /** owning plot id (crop placements only) — used for hover juice grouping */
-  pid?: string;
-};
-
-export type Plot = {
-  id: string;
-  label: string;
-  crop: string;
-  href: string;
-  /** plot rect in tile coords */
-  x: number;
-  y: number;
-  w: number;
-  h: number;
-  /** one-line description shown in the dialog panel on hover/focus */
-  blurb: string;
 };
 
 export type SceneAnimal = {
@@ -42,7 +38,6 @@ export type Scene = {
   layers: Placement[][];
   /** water tiles (for frame animation at runtime) */
   water: { x: number; y: number }[];
-  plots: Plot[];
   animals: SceneAnimal[];
   /** where the farmhouse door is (walk target, tiles) */
   door: { x: number; y: number };
@@ -62,7 +57,7 @@ function mulberry32(seed: number) {
 
 const p = (t: TileRef, x: number, y: number): Placement => ({ t, x, y });
 
-/** 4-wide × 3-tall rounded dirt plot from the 3×3 autotile. */
+/** Rounded dirt patch from the 3×3 autotile. */
 function dirtPatch(x: number, y: number, w: number, h: number): Placement[] {
   const d = T.dirt;
   const out: Placement[] = [];
@@ -145,6 +140,7 @@ function farmhouse(x: number, y: number, w = 6): Placement[] {
   out.push(p(f.roofL, x, y));
   for (let i = 1; i < w - 1; i++) out.push(p(f.roofM, x + i, y));
   out.push(p(f.roofR, x + w - 1, y));
+  out.push(p(T.roof.chimney, CHIMNEY.x, CHIMNEY.y)); // smoke spawns here (live)
   out.push(p(T.biome.flowerPinkBig, x - 1, y + 4)); // flowers by the wall
   return out;
 }
@@ -154,68 +150,17 @@ function t2(ref: TileRef, ox: number, oy: number): TileRef {
   return { s: ref.s, x: ref.x + ox, y: ref.y + oy, w: 1, h: 1 };
 }
 
-export const CROPS: Record<string, TileRef[]> = {
-  wheat: [T.crop.wheat[3]],
-  wheatYoung: [T.crop.wheat[1], T.crop.wheat[2]],
-  beet: [T.crop.beet[2], T.crop.beet[3]],
-  sunflower: [T.biome.sunflower],
-  sprout: [T.crop.wheat[0], T.crop.beet[0]],
-};
-
-/* The five services, as farm plots. Copy stays engineer-first. */
-export const PLOTS: Plot[] = [
-  {
-    id: "product",
-    label: "Product & Platform",
-    crop: "wheat",
-    href: "#product",
-    x: 9, y: 9, w: 4, h: 3,
-    blurb: "Full product builds — web, mobile, platforms. 8–24 weeks, fixed scope.",
-  },
-  {
-    id: "internal-tools",
-    label: "Internal Tools",
-    crop: "beet",
-    href: "#internal-tools",
-    x: 14, y: 9, w: 4, h: 3,
-    blurb: "Dashboards, admin panels, workflow tools. 4–10 weeks, fixed scope.",
-  },
-  {
-    id: "applied-ai",
-    label: "Applied AI",
-    crop: "sunflower",
-    href: "#applied-ai",
-    x: 19, y: 9, w: 4, h: 3,
-    blurb: "Production AI systems — LLMs, vision, retrieval. Pilots in 4–6 weeks.",
-  },
-  {
-    id: "iot",
-    label: "IoT & Devices",
-    crop: "wheatYoung",
-    href: "#iot",
-    x: 11, y: 12, w: 4, h: 3,
-    blurb: "Firmware, sensors, connected hardware. Prototype to production.",
-  },
-  {
-    id: "coaching",
-    label: "Agentic AI Coaching",
-    crop: "sprout",
-    href: "#coaching",
-    x: 16, y: 12, w: 4, h: 3,
-    blurb: "We embed with your engineers and ship alongside them. 12–26 weeks.",
-  },
-];
-
 export function buildScene(variant: "homestead" | "riverside" | "orchard" | "final" = "final"): Scene {
   const W = 32, H = 18;
   const rnd = mulberry32(variant.length * 1000 + 7);
 
-  /* ── layer 0: grass base with seeded variation ── */
+  /* ── layer 0: grass ground starting at the horizon (rows above stay sky) ── */
   const ground: Placement[] = [];
-  for (let y = 0; y < H; y++) {
+  const g = T.grass;
+  for (let x = 0; x < W; x++) ground.push(p(g.tp, x, SKY_ROWS)); // horizon edge
+  for (let y = SKY_ROWS + 1; y < H; y++) {
     for (let x = 0; x < W; x++) {
       const r = rnd();
-      const g = T.grass;
       let tile = g.fill[0];
       if (r > 0.92) tile = g.tuft[Math.floor(rnd() * 3)];
       else if (r > 0.82) tile = g.fill2[Math.floor(rnd() * 3)];
@@ -224,114 +169,105 @@ export function buildScene(variant: "homestead" | "riverside" | "orchard" | "fin
     }
   }
 
-  /* ── water + pond ring ── */
-  const pondRect =
-    variant === "riverside"
-      ? { x: 26, y: 0, w: 6, h: 18 }
-      : variant === "orchard"
-        ? { x: 0, y: 13, w: 8, h: 5 }
-        : { x: 25, y: 13, w: 7, h: 5 };
+  /* ── pond, bottom-right ── */
+  const pondRect = { x: 25, y: 14, w: 7, h: 4 };
   const { water, ring } = pond(pondRect.x, pondRect.y, pondRect.w, pondRect.h, W, H);
   const waterLayer: Placement[] = water.map((w2) => p(T.water[0], w2.x, w2.y));
 
-  /* ── plots + crops ── */
-  const plotLayer: Placement[] = [];
+  /* ── decorative crop patches (scenery, not services) ── */
+  const patchLayer: Placement[] = [];
   const cropLayer: Placement[] = [];
-  for (const plot of PLOTS) {
-    plotLayer.push(...dirtPatch(plot.x, plot.y, plot.w, plot.h));
-    const crops = CROPS[plot.crop];
-    if (plot.crop === "sunflower") {
-      // sunflowers are 1×2 — plant a row along the plot's back edge
-      for (let xx = 0; xx < plot.w; xx++) {
-        cropLayer.push({ ...p(T.biome.sunflower, plot.x + xx, plot.y - 1), pid: plot.id });
-      }
-      for (let xx = 0; xx < plot.w - 1; xx++) {
-        cropLayer.push({
-          ...p(T.crop.wheat[1], plot.x + xx + Math.round(rnd()), plot.y + 1 + Math.floor(rnd() * 2)),
-          pid: plot.id,
-        });
-      }
-    } else {
-      for (let yy = 0; yy < plot.h; yy++) {
-        for (let xx = 0; xx < plot.w; xx++) {
-          const c = crops[Math.floor(rnd() * crops.length)];
-          cropLayer.push({ ...p(c, plot.x + xx, plot.y + yy), pid: plot.id });
-        }
+  const plant = (patch: { x: number; y: number; w: number; h: number }, crops: TileRef[]) => {
+    patchLayer.push(...dirtPatch(patch.x, patch.y, patch.w, patch.h));
+    for (let yy = 0; yy < patch.h; yy++) {
+      for (let xx = 0; xx < patch.w; xx++) {
+        cropLayer.push(p(crops[Math.floor(rnd() * crops.length)], patch.x + xx, patch.y + yy));
       }
     }
-  }
+  };
+  plant({ x: 10, y: 7, w: 4, h: 3 }, [T.crop.wheat[3], T.crop.wheat[2]]);
+  plant({ x: 16, y: 8, w: 3, h: 3 }, [T.crop.beet[2], T.crop.beet[3]]);
+  // sunflower stand: 1×2 sunflowers along the back edge of a shallow patch
+  patchLayer.push(...dirtPatch(20, 8, 3, 2));
+  for (let xx = 0; xx < 3; xx++) cropLayer.push(p(T.biome.sunflower, 20 + xx, 7));
 
-  /* ── farmhouse + coop + fences ── */
-  const houseAt = variant === "orchard" ? { x: 25, y: 1 } : { x: 4, y: 1 };
+  /* ── farmhouse on the hill, breaking the horizon ── */
+  const houseAt = { x: 3, y: 4 };
   const house = farmhouse(houseAt.x, houseAt.y);
   const door = { x: houseAt.x + 2, y: houseAt.y + 4 };
 
-  const coopAt = variant === "riverside" ? { x: 20, y: 2 } : variant === "orchard" ? { x: 3, y: 2 } : { x: 26, y: 2 };
+  /* ── coop + pen (right), cow paddock (left) ── */
+  const coopAt = { x: 26, y: 6 };
   const coop: Placement[] = [
     p(T.coop, coopAt.x, coopAt.y),
-    ...fenceRect(coopAt.x - 2, coopAt.y + 2, 7, 4, { x: coopAt.x + 1, w: 1 }),
-    p(T.eggNest, coopAt.x - 1, coopAt.y + 4),
+    ...fenceRect(24, 9, 7, 4, { x: 26, w: 1 }),
+    p(T.eggNest, 25, 10),
+    ...fenceRect(1, 13, 5, 4, { x: 3, w: 1 }),
   ];
 
   /* ── animals ── */
   const animals: SceneAnimal[] = [
-    { kind: "chicken", x: coopAt.x, y: coopAt.y + 3, roam: { x: coopAt.x - 1, y: coopAt.y + 2, w: 4, h: 3 } },
-    { kind: "chicken", x: coopAt.x + 2, y: coopAt.y + 4, roam: { x: coopAt.x - 1, y: coopAt.y + 2, w: 4, h: 3 } },
-    { kind: "cow", x: 25, y: 8, roam: { x: 24.5, y: 7, w: 4, h: 3 } },
-    { kind: "farmer", x: 6, y: 9, roam: { x: 5, y: 7, w: 4, h: 6 } },
+    { kind: "chicken", x: 25, y: 10, roam: { x: 24.5, y: 9.5, w: 5.5, h: 2.5 } },
+    { kind: "chicken", x: 27, y: 11, roam: { x: 24.5, y: 9.5, w: 5.5, h: 2.5 } },
+    { kind: "chicken", x: 28, y: 10, roam: { x: 24.5, y: 9.5, w: 5.5, h: 2.5 } },
+    { kind: "cow", x: 2.5, y: 14, roam: { x: 1.5, y: 13.5, w: 2.5, h: 2 } },
+    { kind: "farmer", x: 9, y: 12, roam: { x: 7, y: 10, w: 7, h: 4 } },
   ];
   const animalLayer: Placement[] = [
-    // both chickens use idle[0] so the live layer's first frame matches exactly
+    // chickens use idle[0] so the live layer's first frame matches exactly
     p(T.chicken.idle[0], animals[0].x, animals[0].y),
     p(T.chicken.idle[0], animals[1].x, animals[1].y),
-    p(T.cow.graze[0], animals[2].x, animals[2].y),
+    p(T.chicken.idle[0], animals[2].x, animals[2].y),
+    p(T.cow.graze[0], animals[3].x, animals[3].y),
     // farmer frame is 3×3 with the sprite centered — offset so feet land on tile
-    p(T.farmer.down[0], animals[3].x - 1, animals[3].y - 1),
+    p(T.farmer.down[0], animals[4].x - 1, animals[4].y - 1),
   ];
 
-  /* ── worn dirt trail from the door toward the fields ── */
+  /* ── worn dirt trail: door → winds south-east → exits the bottom edge
+        (the page's dirt path picks it up below the hero) ── */
   const path: Placement[] = [];
-  for (let yy = door.y + 1; yy <= 11; yy++) {
-    path.push(p(T.dirt.fill[yy % 3], door.x, yy));
-  }
+  const trail: Array<[number, number]> = [
+    [5, 9], [5, 10], [5, 11], [6, 11], [6, 12], [6, 13], [7, 13], [7, 14], [7, 15], [7, 16], [7, 17],
+  ];
+  trail.forEach(([x, y], i) => path.push(p(T.dirt.fill[i % 3], x, y)));
+  // gate posts where the trail leaves the farm
+  path.push(p(T.fence.post, 6, 16), p(T.fence.post, 8, 16));
 
-  /* ── trees, bushes, decor around the edges ── */
+  /* ── trees on the horizon + decor everywhere ── */
   const decor: Placement[] = [
-    p(T.biome.treeBig, 0, 0),
-    p(T.biome.treeApple, 12, 0),
-    p(T.biome.treeBig, 17, 0),
-    p(T.biome.treeSmall, 20, 1),
-    p(T.biome.treeBig, 29, 9),
-    p(T.biome.treeSmall, 0, 8),
-    p(T.biome.bushBerry, 1, 12),
-    p(T.biome.bush, 2, 6),
-    p(T.biome.bushBerry, 15, 5),
-    p(T.biome.mushroom, 1, 15),
-    p(T.biome.mushroomBig, 3, 14),
-    p(T.biome.rockBig, 5, 16),
-    p(T.biome.rockSmall, 8, 15),
-    p(T.biome.flowerPinkBig, 4, 7),
-    p(T.biome.flowerBigYellow, 13, 6),
-    p(T.biome.flowerPink, 21, 5),
-    p(T.biome.flowerYellow, 24, 11),
-    p(T.biome.logSmall, 27, 11),
-    p(T.biome.sunflower, 0, 5),
-    p(T.biome.lilypadBig, pondRect.x + 2, pondRect.y + 2),
-    p(T.biome.lilypad, pondRect.x + 4, pondRect.y + 3),
-    p(T.chest, 29, 14),
-    p(T.biome.grapes, 10, 16),
-    p(T.biome.flowerBox, 6, 16),
-    p(T.biome.flowerPink, 12, 16),
-    p(T.biome.flowerYellow, 18, 16),
-    p(T.biome.bush, 22, 16),
+    p(T.biome.treeBig, 0, 4),
+    p(T.biome.treeSmall, 2, 5),
+    p(T.biome.treeApple, 13, 4),
+    p(T.biome.treeBig, 17, 4),
+    p(T.biome.treeSmall, 22, 5),
+    p(T.biome.treeBig, 29, 4),
+    p(T.biome.bush, 9, 6),
+    p(T.biome.bushBerry, 15, 6),
+    p(T.biome.flowerBigYellow, 14, 7),
+    p(T.biome.flowerPink, 19, 6),
+    p(T.biome.sunflower, 0, 9),
+    p(T.biome.flowerYellow, 23, 11),
+    p(T.biome.mushroom, 1, 10),
+    p(T.biome.mushroomBig, 3, 11),
+    p(T.biome.rockSmall, 12, 11),
+    p(T.biome.rockBig, 21, 13),
+    p(T.biome.logSmall, 17, 12),
+    p(T.biome.bushBerry, 10, 15),
+    p(T.biome.flowerPinkBig, 12, 16),
+    p(T.biome.flowerYellow, 15, 15),
+    p(T.biome.grapes, 18, 16),
+    p(T.biome.bush, 21, 16),
+    p(T.biome.flowerBox, 2, 17),
+    p(T.chest, 22, 12),
+    p(T.biome.lilypadBig, pondRect.x + 2, pondRect.y + 1),
+    p(T.biome.lilypad, pondRect.x + 4, pondRect.y + 2),
   ];
 
   return {
     w: W,
     h: H,
-    layers: [ground, waterLayer, ring, plotLayer, path, cropLayer, house, coop, decor, animalLayer],
+    layers: [ground, waterLayer, ring, patchLayer, path, cropLayer, house, coop, decor, animalLayer],
     water,
-    plots: PLOTS,
     animals,
     door,
   };
