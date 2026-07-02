@@ -51,3 +51,12 @@ One lesson per entry. Newest at the bottom. Written by the executing agent as it
 - **fullPage Playwright screenshots lie about ScrollReveal content** — IO reveals don't fire
   during the stitched capture, sections look blank. Scroll the page first, or shoot per-section
   viewports. The live DOM was always fine.
+- **OG card pipeline:** crop 1200×630 from `farm-static@3x.png` (bias toward the plots), then
+  composite the wooden headline panel in a throwaway HTML page screenshotted with Playwright.
+  Pixelify Sans must load via the Google Fonts CSS URL — guessing gstatic woff2 URLs fails
+  silently to a serif fallback.
+- **Perf snapshot (1440×900, dev build):** hero animates at display refresh (120fps measured via
+  rAF), 36 MB JS heap after idle. Pixi ticker capped at maxFPS 60; rAF measures the browser loop.
+- **Verification pass:** two fresh-context subagents dispatched per the plan — design critique
+  (hero + /services, screenshots at both breakpoints) and adversarial code review of the hero
+  stack (StrictMode/destroy paths, texture lifecycle, DPR math, a11y, Cal double-init).
