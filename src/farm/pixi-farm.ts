@@ -42,6 +42,7 @@ export class PixiFarm {
   private animals: AnimalRig[] = [];
   private cropSprites = new Map<string, Sprite[]>();
   private highlight: Container | null = null;
+  private hl: import("pixi.js").Graphics | null = null;
   private hovered: string | null = null;
   private juiceClock = 0;
   private scene: Scene;
@@ -55,7 +56,7 @@ export class PixiFarm {
   }
 
   async init() {
-    const { Application, Assets, Sprite, Container, Texture, Rectangle, TextureStyle } =
+    const { Application, Assets, Sprite, Container, Texture, Rectangle, TextureStyle, Graphics } =
       await import("pixi.js");
     if (this.destroyed) return;
 
@@ -74,7 +75,9 @@ export class PixiFarm {
       antialias: false,
     });
     if (this.destroyed) {
-      app.destroy({ removeView: true }, { children: true, texture: true, textureSource: true, context: true });
+      // never destroy texture sources — the sheet textures live in the global
+      // Assets cache and must survive for the next mount (client-side nav)
+      app.destroy({ removeView: true }, { children: true });
       return;
     }
     this.app = app;
@@ -122,29 +125,23 @@ export class PixiFarm {
         sp.position.set(pl.x * TILE, pl.y * TILE);
         c.addChild(sp);
         if (isWater) this.waterSprites.push(sp);
-        if (isCrops) {
-          // group crop sprites by the plot that contains them (for juice)
-          for (const plot of this.scene.plots) {
-            if (
-              pl.x >= plot.x - 1 && pl.x < plot.x + plot.w + 1 &&
-              pl.y >= plot.y - 2 && pl.y < plot.y + plot.h + 1
-            ) {
-              const arr = this.cropSprites.get(plot.id) ?? [];
-              arr.push(sp);
-              this.cropSprites.set(plot.id, arr);
-              // anchor at foot so bounce scales from the ground
-              sp.anchor.set(0, 1);
-              sp.y += sp.height;
-              break;
-            }
-          }
+        if (isCrops && pl.pid) {
+          // crops carry their owning plot id from scene.ts — exact grouping
+          const arr = this.cropSprites.get(pl.pid) ?? [];
+          arr.push(sp);
+          this.cropSprites.set(pl.pid, arr);
+          // anchor at foot so bounce scales from the ground
+          sp.anchor.set(0, 1);
+          sp.y += sp.height;
         }
       }
     });
 
-    /* ── plot highlight overlay (under animals) ── */
+    /* ── plot highlight overlay (under animals) — one persistent Graphics ── */
     this.highlight = new Container();
     root.addChild(this.highlight);
+    this.hl = new Graphics();
+    this.highlight.addChild(this.hl);
 
     /* ── animal rigs ── */
     const animalLayer = new Container();
@@ -316,41 +313,41 @@ export class PixiFarm {
     }
   }
 
-  /** Highlight a plot (hover/focus from the DOM chips). Pass null to clear. */
-  async setHover(plotId: string | null) {
-    if (this.destroyed || !this.app || !this.highlight) return;
+  /** Highlight a plot (hover/focus from the DOM chips). Pass null to clear.
+      Synchronous — draws into one persistent Graphics created at init. */
+  setHover(plotId: string | null) {
+    if (this.destroyed || !this.app || !this.hl) return;
     if (this.hovered === plotId) return;
     this.hovered = plotId;
     this.juiceClock = 0;
-    this.highlight.removeChildren();
-    if (!plotId) return;
-    const plot = this.scene.plots.find((p2) => p2.id === plotId);
-    if (!plot) return;
-    const { Graphics } = await import("pixi.js");
-    if (this.destroyed || this.hovered !== plotId || !this.highlight) return;
-    const g = new Graphics();
-    // pixel-chunky highlight: outer ink frame + soft paper glow, tile-quantized
-    const x = plot.x * TILE, y = plot.y * TILE, w = plot.w * TILE, h = plot.h * TILE;
-    g.rect(x - 2, y - 2, w + 4, h + 4).stroke({ width: 2, color: 0x353738, alpha: 0.9 });
-    g.rect(x, y, w, h).stroke({ width: 2, color: 0xf3f4e7, alpha: 0.9 });
-    g.rect(x, y, w, h).fill({ color: 0xf7ebaa, alpha: 0.14 });
-    this.highlight.addChild(g);
+    this.hl.clear();
+    if (plotId) {
+      const plot = this.scene.plots.find((p2) => p2.id === plotId);
+      if (plot) {
+        // pixel-chunky highlight: outer ink frame + soft paper glow
+        const x = plot.x * TILE, y = plot.y * TILE, w = plot.w * TILE, h = plot.h * TILE;
+        this.hl.rect(x - 2, y - 2, w + 4, h + 4).stroke({ width: 2, color: 0x353738, alpha: 0.9 });
+        this.hl.rect(x, y, w, h).stroke({ width: 2, color: 0xf3f4e7, alpha: 0.9 });
+        this.hl.rect(x, y, w, h).fill({ color: 0xf7ebaa, alpha: 0.14 });
+      }
+    }
     if (this.reduced) this.app.render(); // static mode still shows focus state
   }
 
   private teardown() {
     if (!this.app) return;
-    this.app.destroy(
-      { removeView: true },
-      { children: true, texture: true, textureSource: true, context: true }
-    );
+    // destroy only the frame textures WE created — never the sheet sources,
+    // which live in the global Assets cache and serve the next mount
+    for (const t of this.textures.values()) t.destroy(false);
+    this.textures.clear();
+    this.app.destroy({ removeView: true }, { children: true });
     this.app = null;
+    this.hl = null;
   }
 
   destroy() {
     this.destroyed = true;
     this.teardown();
-    this.textures.clear();
     this.waterSprites = [];
     this.animals = [];
     this.cropSprites.clear();

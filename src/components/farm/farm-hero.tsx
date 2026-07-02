@@ -27,6 +27,7 @@ const CROP_ICON: Record<string, TileRef> = {
 };
 
 export function FarmHero({ children }: { children?: ReactNode }) {
+  const rootRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const hostRef = useRef<HTMLDivElement>(null);
   const farmRef = useRef<PixiFarm | null>(null);
@@ -34,12 +35,14 @@ export function FarmHero({ children }: { children?: ReactNode }) {
   const [cssWidth, setCssWidth] = useState<number | null>(null);
 
   /* integer-scale sizing: canvas CSS width is chosen so the device-pixel
-     scale factor is a whole number → no shimmer at any DPR */
+     scale factor is a whole number → no shimmer at any DPR. Observe the
+     full-width root (NOT the shrink-wrapped stage parent, which can never
+     grow past the canvas it wraps). */
   useEffect(() => {
-    const el = stageRef.current?.parentElement;
+    const el = rootRef.current;
     if (!el) return;
     const compute = () => {
-      const w = el.clientWidth;
+      const w = el.getBoundingClientRect().width;
       const dpr = window.devicePixelRatio || 1;
       const fit = w >= 1024;
       const dev = fit
@@ -50,7 +53,22 @@ export function FarmHero({ children }: { children?: ReactNode }) {
     compute();
     const ro = new ResizeObserver(compute);
     ro.observe(el);
-    return () => ro.disconnect();
+    // DPR changes (monitor drag, zoom) don't fire the ResizeObserver — re-arm
+    // a one-shot resolution media query each time it trips
+    let mql: MediaQueryList | null = null;
+    const armDpr = () => {
+      mql = window.matchMedia(`(resolution: ${window.devicePixelRatio}dppx)`);
+      mql.addEventListener("change", onDprChange, { once: true });
+    };
+    const onDprChange = () => {
+      compute();
+      armDpr();
+    };
+    armDpr();
+    return () => {
+      ro.disconnect();
+      mql?.removeEventListener("change", onDprChange);
+    };
   }, []);
 
   /* mount the live Pixi layer */
@@ -67,7 +85,10 @@ export function FarmHero({ children }: { children?: ReactNode }) {
       });
       farmRef.current = farm;
       await farm.init();
-    })();
+    })().catch((err) => {
+      // degrade gracefully: the static PNG stays visible, live never flips
+      console.warn("farm hero: live layer failed to start", err);
+    });
     return () => {
       cancelled = true;
       farm?.destroy();
@@ -80,6 +101,7 @@ export function FarmHero({ children }: { children?: ReactNode }) {
 
   return (
     <div
+      ref={rootRef}
       className="relative h-full w-full overflow-hidden flex flex-col items-center md:justify-center"
       data-live={live || undefined}
     >

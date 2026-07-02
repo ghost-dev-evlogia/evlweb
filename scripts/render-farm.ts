@@ -139,9 +139,13 @@ function testcard() {
 }
 
 /* ═══ SCENE RENDER ═══ */
+const VARIANTS = ["homestead", "riverside", "orchard", "final"] as const;
+
 async function renderScene(variant: string, outPath: string, scale: number) {
   const { buildScene } = await import("../src/farm/scene.ts");
-  const scene = buildScene(variant as never);
+  const v = VARIANTS.find((k) => k === variant);
+  if (!v) throw new Error(`unknown scene variant "${variant}"`);
+  const scene = buildScene(v);
   const img = makeCanvas(scene.w * TILE, scene.h * TILE);
   for (const layer of scene.layers) {
     for (const p of layer) blit(img, p.t, p.x, p.y);

@@ -5,7 +5,13 @@
    ──────────────────────────────────────────────────────────────────────────── */
 import { T, type TileRef } from "./tiles.ts";
 
-export type Placement = { t: TileRef; x: number; y: number };
+export type Placement = {
+  t: TileRef;
+  x: number;
+  y: number;
+  /** owning plot id (crop placements only) — used for hover juice grouping */
+  pid?: string;
+};
 
 export type Plot = {
   id: string;
@@ -237,16 +243,19 @@ export function buildScene(variant: "homestead" | "riverside" | "orchard" | "fin
     if (plot.crop === "sunflower") {
       // sunflowers are 1×2 — plant a row along the plot's back edge
       for (let xx = 0; xx < plot.w; xx++) {
-        cropLayer.push(p(T.biome.sunflower, plot.x + xx, plot.y - 1));
+        cropLayer.push({ ...p(T.biome.sunflower, plot.x + xx, plot.y - 1), pid: plot.id });
       }
       for (let xx = 0; xx < plot.w - 1; xx++) {
-        cropLayer.push(p(T.crop.wheat[1], plot.x + xx + Math.round(rnd()), plot.y + 1 + Math.floor(rnd() * 2)));
+        cropLayer.push({
+          ...p(T.crop.wheat[1], plot.x + xx + Math.round(rnd()), plot.y + 1 + Math.floor(rnd() * 2)),
+          pid: plot.id,
+        });
       }
     } else {
       for (let yy = 0; yy < plot.h; yy++) {
         for (let xx = 0; xx < plot.w; xx++) {
           const c = crops[Math.floor(rnd() * crops.length)];
-          cropLayer.push(p(c, plot.x + xx, plot.y + yy));
+          cropLayer.push({ ...p(c, plot.x + xx, plot.y + yy), pid: plot.id });
         }
       }
     }
@@ -272,8 +281,9 @@ export function buildScene(variant: "homestead" | "riverside" | "orchard" | "fin
     { kind: "farmer", x: 6, y: 9, roam: { x: 5, y: 7, w: 4, h: 6 } },
   ];
   const animalLayer: Placement[] = [
+    // both chickens use idle[0] so the live layer's first frame matches exactly
     p(T.chicken.idle[0], animals[0].x, animals[0].y),
-    p(T.chicken.walk[0], animals[1].x, animals[1].y),
+    p(T.chicken.idle[0], animals[1].x, animals[1].y),
     p(T.cow.graze[0], animals[2].x, animals[2].y),
     // farmer frame is 3×3 with the sprite centered — offset so feet land on tile
     p(T.farmer.down[0], animals[3].x - 1, animals[3].y - 1),
