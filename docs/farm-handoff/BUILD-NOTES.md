@@ -39,3 +39,15 @@ One lesson per entry. Newest at the bottom. Written by the executing agent as it
   lives at **localhost:3000**.
 - **Node 25 runs .ts scripts natively** (type stripping) — `node scripts/render-farm.ts` works
   with explicit `.ts` import specifiers; pngjs is CJS → `import pkg from "pngjs"`.
+- **Tailwind v4 footgun — responsive position swap:** `relative md:absolute` does NOT work:
+  base `.relative` sorts after `.md\:absolute` in v4's output (same specificity, later wins),
+  so the element stays relative at md+. Same class of bug for `md:-translate-x-1/2` overriding.
+  Fix: never mix base + variant position utilities on one element — hoist positioning into a
+  dedicated wrapper that has ONLY the `md:` utilities (base = static flow).
+- **Hero responsive model:** desktop = HUD panel absolutely overlaid at top-3% + in-plot chip
+  links; mobile = panel in flow above the canvas, chip-link ROW below the canvas (in-canvas
+  chips unusable at ~390px). Letterboxed device-integer scale everywhere; reduced-motion =
+  still frame (verified identical screenshots 1.2s apart); no-JS = static PNG + real links.
+- **fullPage Playwright screenshots lie about ScrollReveal content** — IO reveals don't fire
+  during the stitched capture, sections look blank. Scroll the page first, or shoot per-section
+  viewports. The live DOM was always fine.

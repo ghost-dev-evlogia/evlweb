@@ -80,10 +80,17 @@ export function FarmHero({ children }: { children?: ReactNode }) {
 
   return (
     <div
-      className="relative h-full w-full overflow-hidden flex justify-center"
+      className="relative h-full w-full overflow-hidden flex flex-col items-center md:justify-center"
       data-live={live || undefined}
     >
-      <div className="relative flex-none">
+      {/* headline panel: flows above the world on mobile, floats over it on md+.
+          No base position utility here — base `relative` would override
+          `md:absolute` in Tailwind v4's output order. */}
+      <div className="w-full flex justify-center px-4 pt-4 md:px-0 md:pt-0 md:absolute md:z-20 md:inset-x-0 md:top-[3%] md:pointer-events-none [&>*]:md:pointer-events-auto">
+        {children}
+      </div>
+
+      <div className="relative flex-none max-w-full">
         <div
           ref={stageRef}
           className="relative"
@@ -106,8 +113,9 @@ export function FarmHero({ children }: { children?: ReactNode }) {
           <div ref={hostRef} className="absolute inset-0" aria-hidden="true" />
 
           {/* plot hotspots — real links sized to each plot, chip on the
-              plot's bottom edge. DOM is the source of truth; canvas enhances. */}
-          <nav aria-label="Our services, as farm plots" className="absolute inset-0">
+              plot's bottom edge. DOM is the source of truth; canvas enhances.
+              Hidden on small screens (the chip row below serves there). */}
+          <nav aria-label="Our services, as farm plots" className="absolute inset-0 hidden md:block">
             {PLOTS.map((plot) => (
               <Link
                 key={plot.id}
@@ -139,10 +147,21 @@ export function FarmHero({ children }: { children?: ReactNode }) {
             ))}
           </nav>
 
-          {/* overlay content (headline panel etc.) */}
-          {children}
         </div>
       </div>
+
+      {/* mobile plot links — tappable chip row under the world */}
+      <nav
+        aria-label="Our services, as farm plots"
+        className="md:hidden flex flex-wrap justify-center gap-2 px-4 pt-3 pb-6"
+      >
+        {PLOTS.map((plot) => (
+          <Link key={plot.id} href={plot.href} className="pixel-chip" style={{ fontSize: "11px" }}>
+            <PixelSprite tile={CROP_ICON[plot.id]} scale={1} />
+            {plot.label}
+          </Link>
+        ))}
+      </nav>
     </div>
   );
 }

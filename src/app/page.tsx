@@ -23,14 +23,13 @@ export default function Home() {
       <main id="main">
         {/* ─── Hero: the explorable farm, headline floating HUD-style ─── */}
         <section
-          className="sky-dawn relative overflow-hidden"
-          style={{ height: "clamp(600px, 94vh, 920px)", paddingTop: "3.5rem" }}
+          className="sky-dawn relative overflow-hidden pt-14 md:h-[clamp(600px,94vh,920px)]"
         >
-          <div className="absolute inset-0 top-14">
+          <div className="md:absolute md:inset-0 md:top-14">
             <FarmHero>
               <div
-                className="absolute z-20 left-1/2 -translate-x-1/2 text-center panel-wood pixel-corners"
-                style={{ top: "3%", width: "min(92vw, 600px)" }}
+                className="text-center panel-wood pixel-corners"
+                style={{ width: "min(92vw, 600px)" }}
               >
                 <div className="panel-paper px-5 py-5 md:px-8 md:py-6">
                   <p className="pixel-chip mb-3">Evlogia · Applied AI Engineering</p>
