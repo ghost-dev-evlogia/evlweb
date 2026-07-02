@@ -771,6 +771,23 @@ a, button, [role="button"], summary, .pixel-btn, .pixel-chip a {
   50%, 100% { background-position: var(--frame-b); }
 }
 
+/* ─── The barn (team roster) ─── */
+.barn-wall {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--wood-soft) 0 calc(var(--px) * 22),
+    var(--wood-mid) calc(var(--px) * 22) calc(var(--px) * 23)
+  );
+}
+@keyframes stand-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(calc(var(--px) * -1)); }
+}
+.stand-bob {
+  display: inline-block;
+  animation: stand-bob 2.6s steps(2, end) infinite;
+}
+
 /* ─── Harvest rain (easter egg) ─── */
 .harvest-drop {
   position: fixed;
@@ -815,6 +832,7 @@ a, button, [role="button"], summary, .pixel-btn, .pixel-chip a {
   .press-start,
   .critter-bubble,
   .btn-star,
+  .stand-bob,
   .harvest-drop {
     animation: none !important;
   }

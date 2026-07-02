@@ -10,6 +10,7 @@ const TILT = ["-1.2deg", "0.8deg", "-0.6deg", "1.4deg", "-1deg", "0.7deg", "-1.5
 
 export function QuestBoard() {
   return (
+    <div className="relative">
     <div className="panel-wood pixel-corners">
       <div
         className="px-4 py-6 md:px-8 md:py-8"
@@ -116,6 +117,12 @@ export function QuestBoard() {
           Quests are accepted in order of difficulty. The easy ones go to the chickens.
         </p>
       </div>
+    </div>
+    {/* the board stands on real posts */}
+    <div className="flex justify-between px-10 md:px-20 -mt-0.5" aria-hidden>
+      <PixelSprite tile={T.fence.post} scale={4} />
+      <PixelSprite tile={T.fence.post} scale={4} />
+    </div>
     </div>
   );
 }

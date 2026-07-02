@@ -6,8 +6,6 @@ import { Hud } from "@/components/farm/hud";
 import { Fx } from "@/components/farm/fx";
 import { Critters } from "@/components/farm/critters";
 import {
-  GrassBand,
-  PondBand,
   FenceRow,
   TreeLine,
   Signpost,
@@ -18,23 +16,17 @@ import {
   FlowerMeadow,
 } from "@/components/farm/props";
 import { TilledHeading, RevealPanel } from "@/components/farm/reveal";
-import { CropGrowth } from "@/components/farm/crop-growth";
+import { FieldRows } from "@/components/farm/field-rows";
+import { FieldWalker } from "@/components/farm/field-walker";
+import { BarnRoster } from "@/components/farm/barn-roster";
 import { QuestBoard } from "@/components/farm/quest-board";
 import { NpcQuotes } from "@/components/farm/npc-quotes";
 import { FarmerDialog } from "@/components/farm/farmer-dialog";
 import { BookingSection } from "@/components/booking-section";
 import { SiteFooter } from "@/components/site-footer";
 import { AnimatedCounter } from "@/components/animated-counter";
-import { TeamPortrait } from "@/components/team-portrait";
 import { T } from "@/farm/tiles.ts";
-import {
-  SERVICES,
-  CROP_STAGES,
-  TEAM,
-  CLIENT_LOGOS,
-  STATS,
-  HERO,
-} from "@/content/site";
+import { CLIENT_LOGOS, STATS, HERO } from "@/content/site";
 
 const statIcons = [T.crop.wheat[3], T.biome.apple, T.biome.flowerBigYellow, T.biome.acorn];
 
@@ -79,67 +71,27 @@ export default function Home() {
 
         {/* ═══ 2 · THE FIELDS — morning ═══ */}
         <section id="fields" className="scroll-mt-10 relative pt-16 md:pt-24 pb-0">
+          <FieldWalker />
           <div className="text-center px-6">
             <TilledHeading>What we grow around here</TilledHeading>
-            <p className="font-sans text-ink text-[15px] leading-relaxed max-w-lg mx-auto mt-5">
+            <p className="font-sans text-ink text-[15px] md:text-base leading-relaxed max-w-lg mx-auto mt-5">
               Five fields, one team. The person who scopes your build is the
               person who reviews the PRs, mostly because there&apos;s nobody
               to hand it to.
             </p>
           </div>
 
-          <div className="max-w-5xl mx-auto px-6 mt-10 md:mt-14 flex flex-col gap-6 md:gap-8 pb-16 md:pb-24">
-            {SERVICES.map((s, i) => (
-              <RevealPanel key={s.id} delay={i * 60}>
-                <article
-                  id={s.id}
-                  className={`scroll-mt-24 grid md:grid-cols-12 gap-5 md:gap-8 items-center ${
-                    i % 2 ? "md:[direction:rtl]" : ""
-                  }`}
-                >
-                  {/* the plot */}
-                  <div className="md:col-span-4 [direction:ltr]">
-                    <div
-                      className="band-dirt pixel-corners flex items-end justify-center gap-3 px-4 pt-6 pb-3"
-                      style={{ boxShadow: "inset 0 0 0 var(--px) var(--wood-shadow)" }}
-                    >
-                      <CropGrowth stages={CROP_STAGES[s.crop]} scale={3} />
-                      <CropGrowth stages={CROP_STAGES[s.crop]} scale={4} />
-                      <CropGrowth stages={CROP_STAGES[s.crop]} scale={3} />
-                    </div>
-                  </div>
-                  {/* the words */}
-                  <div className="md:col-span-8 [direction:ltr]">
-                    <div className="panel-wood pixel-corners">
-                      <div className="panel-paper px-5 py-5 md:px-7 md:py-6">
-                        <h3 className="font-display text-ink text-lg md:text-xl leading-snug mb-2">
-                          {s.title}
-                        </h3>
-                        <p className="font-sans text-ink-2 text-sm md:text-[15px] leading-relaxed">
-                          {s.desc}
-                        </p>
-                        <p
-                          className="font-display text-ink-3 text-[11px] tracking-wide mt-3 pt-2.5"
-                          style={{ borderTop: "2px solid var(--wood-pale)" }}
-                        >
-                          {s.meta}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              </RevealPanel>
-            ))}
-          </div>
+          <FieldRows />
 
-          {/* the fields sit on grass; chickens live here */}
-          <GrassBand edges="top" shadows={2}>
+          {/* chickens work the open ground below the rows */}
+          <div className="relative" style={{ minHeight: 130 }}>
             <TreeLine variant={0} />
-            <div className="relative" style={{ minHeight: 150 }}>
-              <Critters kinds="chicken,chicken,chicken" />
-            </div>
-          </GrassBand>
+            <Critters kinds="chicken,chicken,chicken" />
+          </div>
         </section>
+
+        {/* fields → quest board: through the crop rows */}
+        <CropRowsBand />
 
         {/* ═══ 3 · THE QUEST BOARD — noon ═══ */}
         <section id="quests" className="scroll-mt-10 relative pt-16 md:pt-24 pb-16 md:pb-24">
@@ -155,93 +107,34 @@ export default function Home() {
           </div>
         </section>
 
-        <PondBand />
+        {/* quests → barn: over the stream, across the bridge */}
+        <StreamBand />
 
-        {/* ═══ 4 · THE GREENHOUSE — afternoon ═══ */}
-        <section id="greenhouse" className="scroll-mt-10 relative pt-16 md:pt-24 pb-16 md:pb-24">
-          <div className="text-center px-6 mb-10">
-            <TilledHeading>The greenhouse</TilledHeading>
-          </div>
-          <div className="max-w-4xl mx-auto px-6">
-            <RevealPanel>
-              <div className="panel-wood pixel-corners">
-                <div className="panel-paper px-6 py-7 md:px-10 md:py-9 grid md:grid-cols-12 gap-6 items-center">
-                  <div className="md:col-span-4 flex justify-center gap-4" aria-hidden>
-                    <PixelSprite tile={T.crop.wheatBag} scale={4} />
-                    <PixelSprite tile={T.biome.sunflower} scale={4} />
-                  </div>
-                  <div className="md:col-span-8">
-                    <h3 className="font-display text-ink text-lg md:text-xl leading-snug mb-3">
-                      R&amp;D isn&apos;t a department here. It&apos;s the point.
-                    </h3>
-                    <p className="font-sans text-ink-2 text-[15px] leading-relaxed">
-                      It&apos;s the part we&apos;d do for free — the patents
-                      just make it defensible. We run real experiments with
-                      honest negative results, and when an engagement grows
-                      something genuinely new, we file the IP in your name.
-                      Yours, in writing. Not in a farm metaphor.
-                    </p>
-                    <p className="font-sans text-ink-3 text-[12px] mt-4">
-                      Domains so far: LLM systems · computer vision · retrieval
-                      · embedded &amp; sensors · multi-tenant platforms · and
-                      whatever you&apos;re about to bring us.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </RevealPanel>
-          </div>
-        </section>
-
-        {/* ═══ 5 · THE BARN — the farmhands ═══ */}
+        {/* ═══ 4 · THE BARN — the farmhands ═══ */}
         <section id="team" className="scroll-mt-10 relative pt-16 md:pt-24">
           <div className="text-center px-6 mb-10">
             <TilledHeading>The farmhands</TilledHeading>
-            <p className="font-sans text-ink text-[15px] leading-relaxed max-w-lg mx-auto mt-5">
+            <p className="font-sans text-ink text-[15px] md:text-base leading-relaxed max-w-lg mx-auto mt-5">
               Four of us. Zero account managers. Email the farm and an engineer
-              answers; there is nobody else who could.
+              answers; there is nobody else who could. Click one of us.
             </p>
           </div>
 
-          <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pb-16 md:pb-20">
-            {TEAM.map(({ name, initials, role, bio, photo, linkedin }, i) => (
-              <RevealPanel key={name} delay={i * 70}>
-                <a
-                  href={linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group block h-full"
-                  aria-label={`${name}, ${role} — open LinkedIn`}
-                >
-                  <div className="panel-wood pixel-corners h-full transition-transform duration-150 group-hover:-translate-y-1">
-                    <div className="panel-paper px-4 py-5 h-full flex flex-col">
-                      <TeamPortrait src={photo} alt={`${name}, ${role}`} initials={initials} />
-                      <h3 className="font-display text-ink text-lg leading-tight">{name}</h3>
-                      <p className="font-sans text-ink-3 text-[11px] tracking-[0.16em] uppercase mt-1 mb-2.5">
-                        {role}
-                      </p>
-                      <p className="font-sans text-ink-2 text-[13px] leading-relaxed flex-1">{bio}</p>
-                      <span
-                        className="font-display text-ink-3 text-[11px] inline-flex items-center gap-1.5 mt-4 pt-3 self-start group-hover:text-ink transition-colors"
-                        style={{ borderTop: "2px solid var(--wood-pale)" }}
-                      >
-                        LinkedIn ↗
-                      </span>
-                    </div>
-                  </div>
-                </a>
-              </RevealPanel>
-            ))}
+          <div className="px-6 pb-16 md:pb-20">
+            <RevealPanel>
+              <BarnRoster />
+            </RevealPanel>
           </div>
 
           {/* the cow pasture */}
-          <GrassBand edges="top" shadows={1}>
+          <div className="relative" style={{ minHeight: 150 }}>
             <TreeLine variant={1} />
-            <div className="relative" style={{ minHeight: 170 }}>
-              <Critters kinds="cow,chicken" />
-            </div>
-          </GrassBand>
+            <Critters kinds="cow,chicken" />
+          </div>
         </section>
+
+        {/* barn → valley: through the hedge */}
+        <HedgeRow />
 
         {/* ═══ 6 · WORD AROUND THE VALLEY — golden hour ═══ */}
         <section id="valley" className="scroll-mt-10 relative pt-16 md:pt-24 pb-16 md:pb-24">
@@ -314,7 +207,7 @@ export default function Home() {
 
         <FenceRow />
 
-        {/* ═══ 7 · ASK THE FARMER — dusk ═══ */}
+        {/* ═══ 6 · ASK THE FARMER — dusk ═══ */}
         <section id="ask" className="scroll-mt-10 relative pt-16 md:pt-24 pb-16 md:pb-24">
           <div className="text-center px-6 mb-10">
             <TilledHeading>
@@ -330,7 +223,10 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ═══ 8 · COME SAY HI — night falls ═══ */}
+        {/* ask → hi: the meadow thins into the night */}
+        <FlowerMeadow />
+
+        {/* ═══ 7 · COME SAY HI — night falls ═══ */}
         <section id="hi" className="scroll-mt-10 relative pt-10 md:pt-14 pb-20 md:pb-28">
           <div className="max-w-3xl mx-auto px-6 text-center mb-8">
             <div className="flex justify-center mb-4" aria-hidden>

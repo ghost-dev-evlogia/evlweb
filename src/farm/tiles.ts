@@ -170,6 +170,13 @@ export const T = {
   bridge: t("wood-bridge", 0, 0, 5, 3),
   eggNest: t("egg-nest", 0, 0),
 
+  /* ── tools-materials.png — 3×2 hand tools ── */
+  tools: {
+    hammer: t("tools-materials", 0, 0),
+    axe: t("tools-materials", 2, 0),
+    plank: t("tools-materials", 0, 1),
+  },
+
   /* ── furniture.png — 9×6 (indoor bits; signpost-ish pieces) ── */
   furniture: {
     all: t("furniture", 0, 0, 9, 6),
@@ -182,6 +189,7 @@ export const SHEET_FILES = [
   "house-roof", "house-walls", "wooden-house", "doors",
   "grass-biome-things", "plants", "character", "cow", "chicken",
   "chicken-house", "chest", "wood-bridge", "egg-nest", "furniture",
+  "tools-materials",
 ] as const;
 
 /** Sheet pixel dimensions (for CSS background-crop sprite display in the DOM). */
@@ -191,5 +199,5 @@ export const SHEET_DIMS: Record<string, [number, number]> = {
   "wooden-house": [112, 80], doors: [16, 64], "grass-biome-things": [144, 80],
   plants: [96, 32], character: [192, 192], cow: [96, 64], chicken: [64, 32],
   "chicken-house": [48, 48], chest: [240, 96], "wood-bridge": [80, 48],
-  "egg-nest": [64, 16], furniture: [144, 96],
+  "egg-nest": [64, 16], furniture: [144, 96], "tools-materials": [48, 32],
 };
