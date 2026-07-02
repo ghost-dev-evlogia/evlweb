@@ -11,117 +11,9 @@ import { FAQ } from "@/components/faq";
 import { HowWeWork } from "@/components/how-we-work";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { T } from "@/farm/tiles.ts";
+import { SERVICES, DEPTH, TEAM, CLIENT_LOGOS, STATS } from "@/content/site";
 
-// t = filter treatment for logo marks on the light paper background
-const clientLogos = [
-  { src: "/10seconds.jpeg", name: "10 Seconds", t: "white-bg" },
-  { src: "/Edoxi.jpeg", name: "Edoxi", t: "dark-bg" },
-  { src: "/Inspire.avif", name: "Inspire", t: "normal" },
-  { src: "/Nitte.svg", name: "Nitte", t: "normal" },
-  { src: "/aambianz.webp", name: "Aambianz", t: "normal" },
-  { src: "/magniz.avif", name: "Magniz", t: "normal" },
-  { src: "/oceancharge.webp", name: "Ocean Charge", t: "invert" },
-  { src: "/sellmyplot.webp", name: "Sell My Plot", t: "invert" },
-  { src: "/vanora.png", name: "Vanora", t: "invert" },
-];
-
-const services = [
-  {
-    id: "product",
-    icon: T.crop.wheat[3],
-    title: "Product & Platform Engineering",
-    desc: "Websites, apps, platforms. We own the full build. You don't end up managing four vendors who don't talk to each other.",
-    meta: "Typical engagement · 8–24 weeks · fixed scope · shipped product + handoff",
-  },
-  {
-    id: "internal-tools",
-    icon: T.crop.beet[3],
-    title: "Internal Tools & Systems",
-    desc: "Dashboards, admin panels, booking systems, workflow tools. The software your team actually depends on.",
-    meta: "4–10 weeks · fixed scope",
-  },
-  {
-    id: "applied-ai",
-    icon: T.biome.sunflower,
-    title: "Applied AI",
-    desc: "AI where it actually solves something. We integrate models into real products and build custom solutions when off-the-shelf doesn't cut it.",
-    meta: "Pilots 4–6 weeks · production builds 3–6 months",
-  },
-  {
-    id: "iot",
-    icon: T.crop.wheat[2],
-    title: "IoT & Connected Devices",
-    desc: "Sensor pipelines, embedded firmware, connected hardware. From prototype through production.",
-    meta: "Prototype 6–10 weeks · production 4–8 months",
-  },
-  {
-    id: "coaching",
-    icon: T.crop.wheat[0],
-    title: "Agentic AI Coaching",
-    desc: "We sit inside your team, write real code, and ship alongside your engineers. Six months in, they just work differently. That's the point.",
-    meta: "Embed 12–26 weeks · 1–3 engineers",
-  },
-];
-
-const depth = [
-  {
-    label: "Applied AI",
-    icon: T.biome.sunflower,
-    desc: "Production AI systems, not prototypes. LLMs, computer vision, multimodal pipelines, and retrieval infrastructure. Built to run in the real world.",
-    tags: ["LLMs", "Vision", "Multimodal", "Agents", "RAG"],
-  },
-  {
-    label: "IoT & Hardware",
-    icon: T.chest,
-    desc: "Connected hardware that does what it's supposed to. Sensor pipelines, embedded firmware, cloud-connected devices. We've built things worth building properly.",
-    tags: ["Firmware", "Sensors", "Edge", "Protocols", "Cloud"],
-  },
-  {
-    label: "Complex Platforms",
-    icon: T.coop,
-    desc: "Multi-tenant systems, high-stakes data flows, and platforms where getting the architecture wrong is expensive. We've built them and handed them off clean.",
-    tags: ["Multi-tenant", "APIs", "Data pipelines", "Infrastructure"],
-  },
-];
-
-const team = [
-  {
-    name: "Arjun",
-    initials: "A",
-    role: "Engineering",
-    bio: "Distributed systems, platform architecture. Owns the heaviest infrastructure work.",
-    photo: "/arjun.jpg",
-    linkedin: "https://linkedin.com/in/arjun",
-    sprite: T.cow.idle[0],
-  },
-  {
-    name: "Aneesh",
-    initials: "An",
-    role: "Applied AI",
-    bio: "Production AI, end-to-end. LLM, vision, and retrieval systems from problem framing through deployment.",
-    photo: "/aneesh.jpg",
-    linkedin: "https://linkedin.com/in/aneesh",
-    sprite: T.biome.sunflower,
-  },
-  {
-    name: "Ethan",
-    initials: "E",
-    role: "Product & Delivery",
-    bio: "Web, mobile, IoT. Turns ambiguous problems into shipped systems on a clear timeline.",
-    photo: "/founder.JPG",
-    linkedin: "https://linkedin.com/in/ethankd",
-    sprite: T.chicken.idle[0],
-  },
-  {
-    name: "Karthik",
-    initials: "K",
-    role: "Hardware & Systems",
-    bio: "Embedded firmware, IoT. Connected devices and sensor pipelines, prototype to production.",
-    photo: "/karthik.jpg",
-    linkedin: "https://linkedin.com/in/karthik",
-    sprite: T.chest,
-  },
-];
+const statIcons = [T.crop.wheatItem, T.biome.apple, T.biome.flowerBigYellow, T.biome.acorn];
 
 export default function Home() {
   return (
@@ -192,7 +84,7 @@ export default function Home() {
             role="presentation"
           >
             <div className="marquee-track" style={{ animationDuration: "44s", gap: "3.5rem" }}>
-              {[...clientLogos, ...clientLogos].map((logo, i) => (
+              {[...CLIENT_LOGOS, ...CLIENT_LOGOS].map((logo, i) => (
                 <div
                   key={i}
                   className="relative h-7 w-24 shrink-0"
@@ -212,7 +104,7 @@ export default function Home() {
             </div>
           </div>
           <ul className="sr-only">
-            {clientLogos.map((logo) => (
+            {CLIENT_LOGOS.map((logo) => (
               <li key={logo.name}>{logo.name}</li>
             ))}
           </ul>
@@ -224,16 +116,11 @@ export default function Home() {
             Track record · across 8 industries since 2021
           </p>
           <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-            {[
-              { target: 50, suffix: "+", label: "Systems Shipped", icon: T.crop.wheatItem },
-              { target: 20, suffix: "+", label: "Clients Served", icon: T.biome.apple },
-              { target: 10, suffix: "+", label: "Production AI Builds", icon: T.biome.flowerBigYellow },
-              { target: 8, suffix: "", label: "Industries Served", icon: T.biome.acorn },
-            ].map(({ target, suffix, label, icon }) => (
+            {STATS.map(({ target, suffix, label }, i) => (
               <ScrollReveal key={label}>
                 <div className="panel-wood pixel-corners h-full">
                   <div className="panel-paper px-4 py-5 text-center h-full flex flex-col items-center justify-center min-h-[120px]">
-                    <PixelSprite tile={icon} scale={2} className="mb-2" />
+                    <PixelSprite tile={statIcons[i]} scale={2} className="mb-2" />
                     <div className="font-display text-ink text-3xl md:text-4xl leading-none mb-1.5">
                       <AnimatedCounter target={target} suffix={suffix} />
                     </div>
@@ -264,7 +151,7 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {services.map(({ id, icon, title, desc, meta }, i) => (
+              {SERVICES.map(({ id, icon, title, desc, meta }, i) => (
                 <ScrollReveal key={id} className={i === 0 ? "md:col-span-2" : ""}>
                   <Link href={`/services#${id}`} className="group block h-full">
                     <div className="panel-wood pixel-corners h-full transition-transform duration-150 group-hover:-translate-y-1">
@@ -315,7 +202,7 @@ export default function Home() {
             </div>
 
             <div className="grid md:grid-cols-3 gap-4">
-              {depth.map(({ label, desc, tags }) => (
+              {DEPTH.map(({ label, desc, tags }) => (
                 <ScrollReveal key={label}>
                   <div className="panel-wood pixel-corners h-full">
                     <div className="panel-paper px-6 py-6 h-full flex flex-col gap-4">
@@ -397,7 +284,7 @@ export default function Home() {
             </div>
 
             <div id="team" className="scroll-mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {team.map(({ name, initials, role, bio, photo, linkedin }) => (
+              {TEAM.map(({ name, initials, role, bio, photo, linkedin }) => (
                 <ScrollReveal key={name}>
                   <a
                     href={linkedin}

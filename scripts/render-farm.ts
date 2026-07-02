@@ -83,7 +83,7 @@ function upscale(src: Img, s: number): Img {
       const sx = Math.floor(x / s);
       const so = (sy * src.width + sx) * 4;
       const o = (y * out.width + x) * 4;
-      out.data[so + 3] !== undefined && src.data.copy(out.data, o, so, so + 4);
+      src.data.copy(out.data, o, so, so + 4);
     }
   }
   return out;

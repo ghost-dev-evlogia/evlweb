@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect } from "react";
-import { RevealLabel } from "@/components/reveal-label";
 
+/* Inline Cal.com embed (namespace "strategy"). The bootstrap snippet is safe
+   to run alongside CalInit — `C.Cal = C.Cal || …` + cal.loaded guard make it
+   idempotent — and self-containment avoids any mount-order race. */
 export function BookingSection() {
   useEffect(() => {
     const script = document.createElement("script");
@@ -62,35 +64,16 @@ export function BookingSection() {
   }, []);
 
   return (
-    <section id="book" className="scroll-mt-20 px-6 py-14 md:py-28">
+    <section id="book" className="scroll-mt-20 px-6 pb-16 md:pb-24">
       <div className="max-w-5xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8 md:mb-14">
-          <RevealLabel className="font-sans text-black/30 text-[10px] tracking-[0.3em] uppercase mb-4">
-            Schedule a Call
-          </RevealLabel>
-          <h2
-            className="font-serif text-black/90 leading-[1.07] mb-5"
-            style={{
-              fontSize: "clamp(1.9rem, 5vw, 4rem)",
-              letterSpacing: "-0.01em",
-            }}
-          >
-            Let&apos;s talk about
-            <br />
-            <em className="text-gradient">your problem.</em>
-          </h2>
-          <p className="font-sans text-black/40 text-sm max-w-sm mx-auto leading-relaxed">
-            Bring us your hardest AI problem. Thirty minutes. No pitch. Just a
-            focused conversation about whether we&apos;re the right fit.
-          </p>
-        </div>
-
-        <div className="w-full rounded-3xl overflow-hidden border border-black/[0.07] bg-white/40">
-          <div
-            id="my-cal-inline-strategy"
-            className="min-h-[520px] md:min-h-[700px] w-full"
-          />
+        <div className="panel-wood pixel-corners">
+          <div className="panel-paper p-2 md:p-3">
+            <div
+              id="my-cal-inline-strategy"
+              className="min-h-[520px] md:min-h-[680px] w-full"
+              style={{ background: "#fff" }}
+            />
+          </div>
         </div>
       </div>
     </section>
