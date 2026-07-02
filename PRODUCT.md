@@ -12,6 +12,15 @@ skeptical, risk-aware. They are the audience the whimsy must survive.
 `CalInit`). The craft of the site itself is the conversion mechanism — the site *is* the proof
 we can ship.
 
+## Positioning (v2, owner-simplified)
+
+We build stuff that's fun — if it's challenging, it's more fun. A lean engineering team that
+likes doing R&D and has expertise across domains (web, AI, hardware, firmware). That's all.
+
+**Voice:** PostHog-warm base (engineer-to-engineer, plain, self-aware) + dbrand nerve (deadpan
+confidence) — study refs in `/Users/Ethan/Downloads/{posthog,dbrand}.md`. Claims stay literal;
+jokes live in the margins (chips, fine print, tooltips), never in the claims.
+
 ## The strategic bet (made consciously)
 
 A flawlessly-executed pixel farm reads *"look what these people ship."* A slightly-janky one
@@ -24,18 +33,24 @@ reads *"this studio ships toys"* and actively damages the rigor claim. Therefore
   wooden panels, farm metaphors as *labels*), never in the claims. Numbers, timelines, and
   prices stay literal.
 
-## Information architecture (6 routes)
+## Information architecture (v2 — ONE page)
 
-| Route | World name | Job |
+A single scroll journey, dawn → night (`SkyCycle` scrubs the sky with scroll). No nav bar —
+a game HUD (sun dial + signpost mini-map + Book button) carries wayfinding. Old route URLs
+308-redirect to journey anchors.
+
+| Stop | Anchor | Job |
 |---|---|---|
-| `/` | The Farm | explorable hero, all key sections, primary CTA |
-| `/services` | The Fields | 5 services = 5 plots; engagement shapes + pricing bands |
-| `/work` | Harvests | client logos, testimonials, case-study evidence |
-| `/research` | The Greenhouse | R&D posture, patents/IP promise, hard-problem credibility |
-| `/about` | The Farmhands | team, principles, how we work |
-| `/contact` | Come by | inline Cal.com booking + email |
+| The gate (hero) | `#top` | who we are, explorable farm |
+| The fields | `#fields` | five practice areas, scroll-grown crops |
+| Quest board | `#quests` | real shipped work + open hard-problem quests |
+| Greenhouse | `#greenhouse` | R&D posture, IP filed in client's name |
+| The barn | `#team` | four farmhands |
+| The valley | `#valley` | logos, NPC-delivered testimonials, harvest ledger |
+| Ask the farmer | `#ask` | FAQ as game dialog |
+| Come say hi | `#hi` | Cal.com inline + email |
 
-Kept & re-skinned: `/careers`, `/privacy`, `/terms`.
+Kept as standalone pages: `/careers`, `/privacy`, `/terms` (footer links only).
 
 ## Non-negotiable content (carried from the previous site)
 

@@ -96,6 +96,16 @@ export function FarmerDialog() {
             </div>
           </div>
 
+          {/* every Q&A, always in the DOM — screen readers and no-JS get the
+              whole conversation even though the dialog shows one at a time */}
+          <div className="sr-only">
+            {FAQ.map((f) => (
+              <p key={f.q}>
+                {f.q} {f.a}
+              </p>
+            ))}
+          </div>
+
           {/* question chips */}
           <div className="flex flex-wrap gap-2 mt-4" role="group" aria-label="Questions for the farmer">
             {FAQ.map((f, i) => (

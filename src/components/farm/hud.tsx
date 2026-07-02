@@ -89,7 +89,7 @@ export function Hud() {
 
   return (
     <div
-      className="fixed right-3 md:right-5 top-1/2 -translate-y-1/2 z-50 flex flex-col items-end gap-3 transition-opacity duration-300"
+      className="fixed z-50 flex flex-col items-end gap-3 transition-opacity duration-300 right-3 bottom-4 md:right-5 md:bottom-auto md:top-1/2 md:-translate-y-1/2"
       style={{ opacity: visible ? 1 : 0, pointerEvents: visible ? "auto" : "none" }}
     >
       {/* sun / moon dial */}

@@ -84,3 +84,20 @@ One lesson per entry. Newest at the bottom. Written by the executing agent as it
   URLs (arjun/aneesh/karthik are placeholders from the old site), logo source-asset cleanup
   (Edoxi plate, Vanora contrast), and the decision whether to keep pixel farmhands or swap in
   photos once all four exist.
+- **V2 "A Day on the Farm" (2026-07-03):** single-page journey rebuild on owner direction —
+  new voice (PostHog-warm + dbrand-nerve; refs in ~/Downloads/{posthog,dbrand}.md), day-cycle
+  sky, living critters, game HUD instead of a nav bar. 15 UI upgrades shipped (cat-paw cursors,
+  scroll-grown crops, tilled headings, quest board, NPC testimonials, golden-chicken easter egg,
+  'harvest' konami, chicken Cal loader, pond band, cloud shadows, star-pop buttons…).
+- **Reveal-animation rule proven again:** clip-hidden panels + IO missed in the first sweep —
+  entrances must ENHANCE a visible default (animate ON class-add, no hidden initial state,
+  no `forwards` fill needed).
+- **SkyCycle architecture:** fixed z-0 layer + content z-10 (a -z layer hides behind the body
+  background). One rAF-throttled scroll handler mutates background + two CSS vars
+  (--cloud-alpha/--star-alpha); clouds drift on pure-CSS clocks. Reduced-motion keeps the
+  SSR-inlined static day sky.
+- **Critters are DOM sprites** (background-crop + 10Hz interval + transform snapped to whole
+  px) — no canvas needed for a handful of actors; eggs/golden-chicken coordinate through
+  window CustomEvents ('egg-collected' / 'golden-chicken') between Critters, Hud, and Fx.
+- **Old routes → 308 redirects to anchors** via next.config.ts redirects(); deleted pages'
+  stale `.next/types` validator errors clear with `rm -rf .next`.
