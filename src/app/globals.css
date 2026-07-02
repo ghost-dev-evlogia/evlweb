@@ -1,56 +1,115 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: "Pixelta";
-  src: url("/fonts/Pixelta.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "NeueMontreal";
-  src: url("/fonts/NeueMontreal-Light.otf") format("opentype");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "NeueMontreal";
-  src: url("/fonts/NeueMontreal-Regular.otf") format("opentype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "NeueMontreal";
-  src: url("/fonts/NeueMontreal-Medium.otf") format("opentype");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "NeueMontreal";
-  src: url("/fonts/NeueMontreal-Bold.otf") format("opentype");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
+/* ═══════════════════════════════════════════════════════════════════════════
+   EVLOGIA · "THE FARM" — pixel-farm design system
+   One visual language: Sprout Lands (Cup Nooble), 16px grid, official palette.
+   Canvas leans sky/dawn — warmth lives in the world (wood, crops, sprites),
+   never in a default warm-neutral page background.
+   ═══════════════════════════════════════════════════════════════════════════ */
 
 :root {
-  --background: #f5f4f0;
-  --foreground: #0a0a0a;
+  /* ── Sprout Lands official palette (decoded from the pack's palette.png) ── */
+  /* ink ramp (outlines, text) */
+  --ink: #353738;
+  --ink-2: #474a4b;
+  --ink-3: #545959;
+  --ink-4: #6b7470;
+  --ink-5: #818b83;
+
+  /* paper (the palette's near-white — green-leaning, NOT cream) */
+  --paper: #f3f4e7;
+
+  /* sky / water ramp */
+  --sky-deep: #7ba6b4;
+  --sky: #8cbfc2;
+  --sky-soft: #9bd4c3;
+  --sky-pale: #cbe0de;
+  --sky-mist: #d6f1cd;
+
+  /* dawn horizon (warm glow lives only at the horizon, never the canvas) */
+  --dawn: #f3d8c5;
+  --dawn-deep: #e8b5ac;
+
+  /* grass ramp */
+  --grass-deep: #67835c;
+  --grass: #78a158;
+  --grass-mid: #8db15d;
+  --grass-soft: #a4c263;
+  --grass-pale: #c0d470;
+
+  /* wood ramp (panels, chrome) */
+  --wood-shadow: #754c60;
+  --wood-dark: #90625d;
+  --wood: #aa7959;
+  --wood-mid: #c49a6c;
+  --wood-soft: #dcb98a;
+  --wood-pale: #e8cfa6;
+  --wood-paper: #f3e5c2;
+
+  /* harvest gold (primary action) */
+  --harvest-deep: #ba7c54;
+  --harvest: #d79e61;
+  --harvest-soft: #eeba77;
+  --harvest-pale: #f2cf8c;
+
+  /* berry (secondary accent) */
+  --berry-deep: #a35b70;
+  --berry: #bd757e;
+  --berry-soft: #d99a9a;
+
+  /* semantic */
+  --background: var(--paper);
+  --foreground: var(--ink);
+
+  /* pixel unit — the DOM-side "pixel". 3px mobile, 4px from md up. */
+  --px: 3px;
+
+  /* motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snap: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-micro: 150ms;
+  --dur-scene: 350ms;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --px: 4px;
+  }
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: "NeueMontreal", var(--font-geist), system-ui, sans-serif;
-  --font-serif: "NeueMontreal", var(--font-geist), system-ui, sans-serif;
-  --font-display: "Pixelta", ui-monospace, monospace;
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-ink-4: var(--ink-4);
+  --color-paper: var(--paper);
+  --color-sky: var(--sky);
+  --color-sky-deep: var(--sky-deep);
+  --color-sky-soft: var(--sky-soft);
+  --color-sky-pale: var(--sky-pale);
+  --color-sky-mist: var(--sky-mist);
+  --color-dawn: var(--dawn);
+  --color-grass: var(--grass);
+  --color-grass-deep: var(--grass-deep);
+  --color-grass-soft: var(--grass-soft);
+  --color-grass-pale: var(--grass-pale);
+  --color-wood: var(--wood);
+  --color-wood-shadow: var(--wood-shadow);
+  --color-wood-dark: var(--wood-dark);
+  --color-wood-mid: var(--wood-mid);
+  --color-wood-soft: var(--wood-soft);
+  --color-wood-pale: var(--wood-pale);
+  --color-wood-paper: var(--wood-paper);
+  --color-harvest: var(--harvest);
+  --color-harvest-deep: var(--harvest-deep);
+  --color-harvest-soft: var(--harvest-soft);
+  --color-harvest-pale: var(--harvest-pale);
+  --color-berry: var(--berry);
+  --color-berry-deep: var(--berry-deep);
+  --font-sans: var(--font-geist), system-ui, sans-serif;
+  --font-display: var(--font-pixel), ui-monospace, monospace;
   --font-mono: ui-monospace, "SF Mono", monospace;
 }
 
@@ -65,19 +124,31 @@ html {
   scroll-padding-top: 5rem;
 }
 
-/* ─── Focus ring (accessibility) ───
-   3:1+ on light surface; white variant on photographic/dark surfaces via
-   [data-on-image] scope. WCAG 2.2 AA 1.4.11 + 2.4.7. */
-:focus-visible {
-  outline: 2px solid #0a0a0a;
-  outline-offset: 3px;
-  border-radius: 4px;
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist), system-ui, sans-serif;
+  overflow-x: hidden;
 }
 
-[data-on-image] :focus-visible,
-.on-image:focus-visible {
-  outline: 2px solid #ffffff;
-  outline-offset: 3px;
+/* Pixel art must never be smoothed. */
+.pixelated,
+.pixelated img,
+.pixelated canvas {
+  image-rendering: pixelated;
+}
+
+/* ─── Focus ring — chunky pixel ring, 3:1+ everywhere ─── */
+:focus-visible {
+  outline: var(--px) solid var(--ink);
+  outline-offset: calc(var(--px) / 2);
+  border-radius: 0;
+}
+
+[data-on-canvas] :focus-visible,
+.on-canvas:focus-visible {
+  outline: var(--px) solid var(--paper);
+  outline-offset: calc(var(--px) / 2);
 }
 
 /* ─── Skip link ─── */
@@ -87,57 +158,191 @@ html {
   left: 1rem;
   z-index: 100;
   padding: 0.625rem 1rem;
-  background: #0a0a0a;
-  color: #ffffff;
-  font-family: "NeueMontreal", var(--font-geist), system-ui, sans-serif;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-pixel), monospace;
   font-size: 0.875rem;
-  border-radius: 999px;
   transition: top 0.2s ease;
 }
 .skip-link:focus {
   top: 1rem;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: "NeueMontreal", var(--font-geist), system-ui, sans-serif;
-  overflow-x: hidden;
+/* ═══════════════════════════════════════════════════════════════════════════
+   WOODEN-PANEL UI CHROME (pure CSS, palette-exact, crisp at any size)
+   Language copied from the Sprout Lands UI pack: tan panel, dark wood outline,
+   stepped pixel corners, cream inner surface, hard bottom shadow.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Stepped pixel corners: cut a 2-unit staircase out of each corner. */
+.pixel-corners {
+  clip-path: polygon(
+    0 calc(var(--px) * 2),
+    var(--px) calc(var(--px) * 2),
+    var(--px) var(--px),
+    calc(var(--px) * 2) var(--px),
+    calc(var(--px) * 2) 0,
+    calc(100% - var(--px) * 2) 0,
+    calc(100% - var(--px) * 2) var(--px),
+    calc(100% - var(--px)) var(--px),
+    calc(100% - var(--px)) calc(var(--px) * 2),
+    100% calc(var(--px) * 2),
+    100% calc(100% - var(--px) * 2),
+    calc(100% - var(--px)) calc(100% - var(--px) * 2),
+    calc(100% - var(--px)) calc(100% - var(--px)),
+    calc(100% - var(--px) * 2) calc(100% - var(--px)),
+    calc(100% - var(--px) * 2) 100%,
+    calc(var(--px) * 2) 100%,
+    calc(var(--px) * 2) calc(100% - var(--px)),
+    var(--px) calc(100% - var(--px)),
+    var(--px) calc(100% - var(--px) * 2),
+    0 calc(100% - var(--px) * 2)
+  );
 }
 
-/* ─── Grain overlay ─── */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity: 0.03;
-  pointer-events: none;
-  z-index: 60;
+/* Outer wooden panel — tan board with dark outline + bottom lip. */
+.panel-wood {
+  position: relative;
+  background: var(--wood-pale);
+  box-shadow:
+    inset 0 0 0 var(--px) var(--wood-shadow),
+    inset 0 calc(var(--px) * 2) 0 var(--wood-paper),
+    inset 0 calc(var(--px) * -3) 0 var(--wood-mid);
+  padding: calc(var(--px) * 5);
 }
 
-/* ─── Glass utilities ─── */
-.glass {
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+/* Cream inner surface (content well) for use inside .panel-wood. */
+.panel-paper {
+  background: var(--wood-paper);
+  box-shadow:
+    inset 0 0 0 var(--px) var(--wood-mid),
+    inset 0 var(--px) 0 calc(var(--px) * 2) rgba(117, 76, 96, 0.08);
 }
 
-.glass-card {
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  border: 1px solid rgba(0, 0, 0, 0.07);
+/* Sky panel — for stats / info chips sitting on the world. */
+.panel-sky {
+  background: var(--sky-pale);
+  box-shadow:
+    inset 0 0 0 var(--px) var(--ink-3),
+    inset 0 calc(var(--px) * 2) 0 var(--paper);
 }
 
-/* ─── Scroll reveal ─── */
+/* ─── Pixel buttons ─── */
+.pixel-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  font-family: var(--font-pixel), monospace;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: var(--ink);
+  cursor: pointer;
+  border: none;
+  padding: calc(var(--px) * 4) calc(var(--px) * 6) calc(var(--px) * 5);
+  background: var(--harvest-soft);
+  box-shadow:
+    inset 0 0 0 var(--px) var(--wood-shadow),
+    inset 0 calc(var(--px) * 2) 0 var(--harvest-pale),
+    inset 0 calc(var(--px) * -3) 0 var(--harvest);
+  transition: transform var(--dur-micro) steps(2, end);
+}
+
+.pixel-btn:hover {
+  background: var(--harvest-pale);
+  box-shadow:
+    inset 0 0 0 var(--px) var(--wood-shadow),
+    inset 0 calc(var(--px) * 2) 0 #f7ebaa,
+    inset 0 calc(var(--px) * -3) 0 var(--harvest-soft);
+}
+
+.pixel-btn:active {
+  transform: translateY(var(--px));
+  box-shadow:
+    inset 0 0 0 var(--px) var(--wood-shadow),
+    inset 0 calc(var(--px) * -1) 0 var(--harvest);
+}
+
+.pixel-btn--wood {
+  background: var(--wood-pale);
+  box-shadow:
+    inset 0 0 0 var(--px) var(--wood-shadow),
+    inset 0 calc(var(--px) * 2) 0 var(--wood-paper),
+    inset 0 calc(var(--px) * -3) 0 var(--wood-mid);
+}
+
+.pixel-btn--wood:hover {
+  background: var(--wood-paper);
+  box-shadow:
+    inset 0 0 0 var(--px) var(--wood-shadow),
+    inset 0 calc(var(--px) * 2) 0 var(--paper),
+    inset 0 calc(var(--px) * -3) 0 var(--wood-soft);
+}
+
+.pixel-btn--wood:active {
+  transform: translateY(var(--px));
+  box-shadow:
+    inset 0 0 0 var(--px) var(--wood-shadow),
+    inset 0 calc(var(--px) * -1) 0 var(--wood-mid);
+}
+
+/* ─── Pixel chip — small label plate (eyebrows, badges) ─── */
+.pixel-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--font-pixel), monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  background: var(--wood-paper);
+  box-shadow: inset 0 0 0 calc(var(--px) - 1px) var(--wood-mid);
+  padding: calc(var(--px) * 2) calc(var(--px) * 3);
+}
+
+/* ─── Dawn-sky section wash (hero + closers) ─── */
+.sky-dawn {
+  background: linear-gradient(
+    180deg,
+    var(--sky-pale) 0%,
+    var(--sky-mist) 52%,
+    var(--dawn) 100%
+  );
+}
+
+.sky-day {
+  background: linear-gradient(180deg, var(--sky-pale) 0%, var(--sky-mist) 100%);
+}
+
+/* ─── Pixel divider — a row of "soil" blocks ─── */
+.pixel-divider {
+  height: var(--px);
+  background-image: linear-gradient(
+    90deg,
+    var(--wood-mid) 0,
+    var(--wood-mid) calc(var(--px) * 4),
+    transparent calc(var(--px) * 4),
+    transparent calc(var(--px) * 7)
+  );
+  background-size: calc(var(--px) * 7) var(--px);
+  background-repeat: repeat-x;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOTION
+   Micro 150–200ms · scene 300–400ms · sprites move on steps(), UI on ease.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Scroll reveal (kept from the old system — same class contract) ─── */
 .reveal {
   opacity: 0;
-  transform: translateY(40px);
+  transform: translateY(24px);
   transition:
-    opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 0.7s var(--ease-out),
+    transform 0.7s var(--ease-out);
   will-change: opacity, transform;
 }
 
@@ -148,10 +353,10 @@ body::after {
 
 .reveal-scale {
   opacity: 0;
-  transform: scale(0.96) translateY(24px);
+  transform: scale(0.97) translateY(16px);
   transition:
-    opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 0.7s var(--ease-out),
+    transform 0.7s var(--ease-out);
   will-change: opacity, transform;
 }
 
@@ -160,7 +365,7 @@ body::after {
   transform: scale(1) translateY(0);
 }
 
-/* ─── Marquee ─── */
+/* ─── Marquee (client logos) ─── */
 @keyframes marquee {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
@@ -182,20 +387,8 @@ body::after {
 
 .marquee-wrapper {
   overflow: hidden;
-  mask-image: linear-gradient(
-    90deg,
-    transparent 0%,
-    black 12%,
-    black 88%,
-    transparent 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    90deg,
-    transparent 0%,
-    black 12%,
-    black 88%,
-    transparent 100%
-  );
+  mask-image: linear-gradient(90deg, transparent 0%, black 12%, black 88%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 12%, black 88%, transparent 100%);
 }
 
 .marquee-wrapper:hover .marquee-track,
@@ -203,9 +396,32 @@ body::after {
   animation-play-state: paused;
 }
 
-/* ─── Animations ─── */
+/* ─── Sprite bob — gentle idle float for pixel decorations ─── */
+@keyframes sprite-bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(calc(var(--px) * -1)); }
+}
+
+.sprite-bob {
+  animation: sprite-bob 1.6s steps(2, end) infinite;
+}
+
+/* ─── Sprite hop — juice on hover (pop-scale, pixel-quantized) ─── */
+@keyframes sprite-hop {
+  0%   { transform: translateY(0); }
+  30%  { transform: translateY(calc(var(--px) * -2)); }
+  60%  { transform: translateY(0); }
+  80%  { transform: translateY(calc(var(--px) * -1)); }
+  100% { transform: translateY(0); }
+}
+
+.group:hover .sprite-hop,
+.sprite-hop-now {
+  animation: sprite-hop 0.4s steps(4, end);
+}
+
 @keyframes fade-up {
-  from { opacity: 0; transform: translateY(28px); }
+  from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
@@ -214,208 +430,45 @@ body::after {
   to   { opacity: 1; }
 }
 
-@keyframes scroll-bounce {
-  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.3; }
-  50%       { transform: translateX(-50%) translateY(7px); opacity: 0.65; }
-}
-
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); }
-  50%       { box-shadow: 0 0 24px 4px rgba(0, 0, 0, 0.06); }
-}
-
-@keyframes line-grow {
-  from { transform: scaleX(0); }
-  to   { transform: scaleX(1); }
-}
-
 .anim-fade-up {
   opacity: 0;
-  animation: fade-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fade-up 0.8s var(--ease-out) forwards;
 }
 
 .anim-fade-in {
   opacity: 0;
-  animation: fade-in 0.8s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+  animation: fade-in 0.6s var(--ease-out) forwards;
 }
 
-.scroll-bounce {
-  animation: scroll-bounce 2.6s cubic-bezier(0.32, 0.72, 0, 1) infinite;
-}
-
-/* ─── Editorial: drop cap ─── */
-.dropcap::first-letter {
-  font-family: "Pixelta", monospace;
-  font-weight: 400;
-  float: left;
-  font-size: 5.5rem;
-  line-height: 0.85;
-  margin: 0.18em 0.12em 0 0;
-  color: rgba(10, 10, 10, 0.95);
-}
-
-/* ─── Editorial: small caps ─── */
-.smallcaps {
-  font-feature-settings: "smcp", "c2sc";
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-/* ─── Editorial: folio rule ─── */
-.folio-rule {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-.folio-rule::before,
-.folio-rule::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: rgba(0, 0, 0, 0.18);
-}
-
-/* ─── Section divider ─── */
-.divider {
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(0, 0, 0, 0.1) 30%,
-    rgba(0, 0, 0, 0.1) 70%,
-    transparent 100%
-  );
-}
-
-/* ─── Doppelrand (Double-Bezel) ─── */
-.doppelrand {
-  background: rgba(0, 0, 0, 0.025);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  padding: 6px;
-  border-radius: 2rem;
-}
-
-.doppelrand > .doppelrand-inner {
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  border-radius: calc(2rem - 6px);
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15);
-}
-
-/* ─── Card hover ─── */
-.card-hover {
-  transition:
-    background 0.5s cubic-bezier(0.32, 0.72, 0, 1),
-    border-color 0.5s cubic-bezier(0.32, 0.72, 0, 1),
-    transform 0.5s cubic-bezier(0.32, 0.72, 0, 1),
-    box-shadow 0.5s cubic-bezier(0.32, 0.72, 0, 1);
-}
-
-.card-hover:hover {
-  background: rgba(255, 255, 255, 0.9);
-  border-color: rgba(0, 0, 0, 0.1);
-  transform: translateY(-4px);
-  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.04);
-}
-
-/* ─── Glow line ─── */
-.glow-line {
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(0, 0, 0, 0.2) 50%,
-    transparent
-  );
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.glow-line.revealed {
-  transform: scaleX(1);
-}
-
-/* ─── Liquid glass (Apple-style) ─── */
-.liquid-glass {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.14) 0%,
-    rgba(255, 255, 255, 0.07) 100%
-  );
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: none;
-  box-shadow:
-    /* top edge highlight — light hitting the surface */
-    inset 0 2px 1px rgba(255, 255, 255, 0.35),
-    /* secondary top glow — softer, wider */
-    inset 0 4px 6px rgba(255, 255, 255, 0.08),
-    /* bottom edge shadow — underside of glass */
-    inset 0 -1.5px 1px rgba(0, 0, 0, 0.06),
-    /* bottom inner shadow — depth/thickness */
-    inset 0 -3px 6px rgba(0, 0, 0, 0.04),
-    /* close drop shadow — contact shadow */
-    0 1px 2px rgba(0, 0, 0, 0.12),
-    /* mid drop shadow — thickness shadow */
-    0 4px 8px rgba(0, 0, 0, 0.08),
-    /* far drop shadow — ambient depth */
-    0 12px 36px rgba(0, 0, 0, 0.18);
-  position: relative;
-  overflow: hidden;
-}
-.liquid-glass::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(180deg,
-    rgba(255,255,255,0.6) 0%,
-    rgba(255,255,255,0.2) 20%,
-    rgba(255,255,255,0.03) 50%,
-    rgba(255,255,255,0.01) 80%,
-    rgba(255,255,255,0.1) 100%);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-}
-
-
-/* ─── Nav link underline hover ─── */
+/* ─── Nav link underline — pixel bar, snaps in ─── */
 .nav-link {
   position: relative;
 }
 .nav-link::after {
   content: '';
   position: absolute;
-  bottom: -2px;
+  bottom: calc(var(--px) * -1);
   left: 0;
   right: 0;
-  height: 1px;
-  background: rgba(0, 0, 0, 0.55);
+  height: calc(var(--px) - 1px);
+  background: var(--ink);
   transform: scaleX(0);
-  transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+  transform-origin: left;
+  transition: transform var(--dur-micro) steps(3, end);
 }
-.nav-link:hover::after {
+.nav-link:hover::after,
+.nav-link[aria-current="page"]::after {
   transform: scaleX(1);
 }
 
-/* ─── Crawler / no-JS fallback ───
-   When JS is disabled, IntersectionObserver-driven reveals never fire.
-   Force-show all reveal targets so SSR + no-JS + share-card crawlers
-   render the page complete. */
+/* ─── Crawler / no-JS fallback ─── */
 .no-js .reveal,
 .no-js .reveal-scale {
   opacity: 1 !important;
   transform: none !important;
 }
 
-/* ─── Reduced motion ───
-   WCAG 2.3.3. Honor OS-level motion preference. */
+/* ─── Reduced motion — WCAG 2.3.3 ─── */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -436,7 +489,8 @@ body::after {
     transform: none !important;
   }
 
-  .scroll-bounce,
+  .sprite-bob,
+  .sprite-hop,
   .marquee-track {
     animation: none !important;
   }

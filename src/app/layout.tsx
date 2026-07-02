@@ -1,16 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { Geist } from "next/font/google";
+import { Geist, Pixelify_Sans } from "next/font/google";
 import "./globals.css";
 import { PageTransition } from "@/components/page-transition";
-import { AuthLoader } from "@/components/auth-loader";
-import Animals from "@/components/ui/background";
 import { PostHogProvider } from "@/components/posthog-provider";
-
-const SHOW_AUTH_LOADER = false;
+import { CalInit } from "@/components/cal-init";
 
 const geist = Geist({
   variable: "--font-geist",
   subsets: ["latin"],
+});
+
+const pixelify = Pixelify_Sans({
+  variable: "--font-pixel",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const viewport: Viewport = {
@@ -54,7 +57,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Evlogia | The Applied AI Team That Ships",
-    description: "Production AI, internal tools, IoT, and platforms — built and shipped, not pitched.",
+    description:
+      "Production AI, internal tools, IoT, and platforms — built and shipped, not pitched.",
     images: ["/og-image.jpg"],
   },
 };
@@ -67,7 +71,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geist.variable} h-full antialiased no-js`}
+      className={`${geist.variable} ${pixelify.variable} h-full antialiased no-js`}
       suppressHydrationWarning
     >
       <head>
@@ -82,10 +86,11 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        <a href="#main" className="skip-link">Skip to content</a>
+        <a href="#main" className="skip-link">
+          Skip to content
+        </a>
         <PostHogProvider>
-          {SHOW_AUTH_LOADER && <AuthLoader />}
-          <Animals animal="sheep" speed={3} scale={4} transparent={true} />
+          <CalInit />
           <PageTransition>{children}</PageTransition>
         </PostHogProvider>
       </body>
