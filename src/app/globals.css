@@ -771,6 +771,28 @@ a, button, [role="button"], summary, .pixel-btn, .pixel-chip a {
   50%, 100% { background-position: var(--frame-b); }
 }
 
+/* ─── Koi in the stream ─── */
+@keyframes koi-swim {
+  from { transform: translateX(-55vw); }
+  to { transform: translateX(55vw); }
+}
+@keyframes koi-frames {
+  0%, 49% { background-position: 0 calc(var(--px) * -80); }
+  50%, 100% { background-position: calc(var(--px) * -16) calc(var(--px) * -80); }
+}
+.koi-track {
+  animation: koi-swim linear infinite;
+}
+.koi {
+  width: calc(var(--px) * 16);
+  height: calc(var(--px) * 16);
+  background-image: url("/farm/sprites/wildlife.png");
+  background-size: calc(var(--px) * 64) calc(var(--px) * 96);
+  background-position: 0 calc(var(--px) * -80);
+  image-rendering: pixelated;
+  animation: koi-frames 0.6s steps(1, end) infinite;
+}
+
 /* ─── The farmer wants a word ─── */
 @keyframes alert-bounce {
   0%, 100% { transform: translateY(0); }
@@ -916,6 +938,19 @@ a, button, [role="button"], summary, .pixel-btn, .pixel-chip a {
   border: 4px solid transparent;
   border-top-color: var(--ink-3);
 }
+/* hero-scene variant: positioned by left/top instead of a parent sprite.
+   Its pop keyframes carry the translate so the bubble never jumps. */
+@keyframes hero-quip-pop {
+  0% { transform: translate(-50%, calc(-100% - 6px)) scale(0); }
+  70% { transform: translate(-50%, calc(-100% - 6px)) scale(1.15); }
+  100% { transform: translate(-50%, calc(-100% - 6px)) scale(1); }
+}
+.quip-bubble.hero-quip {
+  bottom: auto;
+  transform: translate(-50%, calc(-100% - 6px));
+  z-index: 5;
+  animation: hero-quip-pop 0.25s var(--ease-snap);
+}
 
 /* ─── The barn (team roster) ─── */
 .barn-wall {
@@ -980,6 +1015,8 @@ a, button, [role="button"], summary, .pixel-btn, .pixel-chip a {
   .btn-star,
   .stand-bob,
   .farmer-alert,
+  .koi-track,
+  .koi,
   .harvest-drop {
     animation: none !important;
   }

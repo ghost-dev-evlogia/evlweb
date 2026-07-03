@@ -9,6 +9,13 @@
 import type { Application, Graphics, Sprite, Texture, Ticker } from "pixi.js";
 import { TILE, T, SHEET_FILES, type TileRef } from "./tiles.ts";
 import { buildScene, CHIMNEY, type Scene, type SceneAnimal } from "./scene.ts";
+import { QUIPS } from "@/content/site";
+
+/** what the hero animals mutter between quips */
+const SOUNDS: Record<string, string[]> = {
+  chicken: ["bok.", "bok bok", "…deployed.", "bok?"],
+  cow: ["moo.", "mooo…", "moo?"],
+};
 
 const SPRITE_BASE = "/farm/sprites";
 
@@ -45,6 +52,9 @@ export class PixiFarm {
   private smoke: SmokePuff[] = [];
   private scene: Scene;
   private reduced: boolean;
+  /* one hero animal speaks at a time */
+  private quipCooldown = 6 + Math.random() * 6;
+  private speech: { el: HTMLDivElement; until: number } | null = null;
 
   constructor(private opts: FarmOpts) {
     this.scene = buildScene("final");
@@ -196,6 +206,42 @@ export class PixiFarm {
 
     for (const a of this.animals) this.tickAnimal(a, dt);
 
+    // one of the animals has something to say
+    this.quipCooldown -= dt;
+    const now = performance.now();
+    if (this.speech && now > this.speech.until) {
+      this.speech.el.remove();
+      this.speech = null;
+      this.quipCooldown = 14 + Math.random() * 20;
+    }
+    if (!this.speech && this.quipCooldown <= 0) {
+      const idle = this.animals.filter(
+        (a) => a.data.kind !== "farmer" && (a.state === "idle" || a.state === "graze")
+      );
+      const a = idle[Math.floor(Math.random() * idle.length)];
+      if (a) {
+        const pool =
+          Math.random() < 0.55 ? QUIPS : SOUNDS[a.data.kind] ?? QUIPS;
+        const text = pool[Math.floor(Math.random() * pool.length)];
+        const host = this.opts.host;
+        const scale = host.clientWidth / (this.scene.w * TILE);
+        const cx = (a.tx + (a.data.kind === "cow" ? 1 : 0.5)) * TILE * scale;
+        const cy = a.ty * TILE * scale;
+        const el = document.createElement("div");
+        el.className = "quip-bubble hero-quip";
+        el.textContent = text;
+        el.style.left = `${Math.round(cx)}px`;
+        el.style.top = `${Math.round(cy)}px`;
+        host.appendChild(el);
+        const dur = 2400 + Math.min(1800, text.length * 40);
+        this.speech = { el, until: now + dur };
+        // hold still while talking (it's polite)
+        a.thinkClock = Math.max(a.thinkClock, dur / 1000 + 0.5);
+      } else {
+        this.quipCooldown = 3;
+      }
+    }
+
     // chimney smoke: rise, wobble, fade, recycle
     const cx = (CHIMNEY.x + 0.5) * TILE;
     const cy = (CHIMNEY.y + 0.2) * TILE;
@@ -325,6 +371,8 @@ export class PixiFarm {
   destroy() {
     this.destroyed = true;
     this.teardown();
+    this.speech?.el.remove();
+    this.speech = null;
     this.waterSprites = [];
     this.animals = [];
     this.smoke = [];

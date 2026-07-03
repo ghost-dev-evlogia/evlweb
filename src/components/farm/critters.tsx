@@ -54,19 +54,19 @@ export const SPRITES: Record<Kind, { sheet: string; w: number; h: number; sheetW
   },
   bunny: {
     sheet: "/farm/sprites/wildlife.png",
-    w: 16, h: 16, sheetW: 64, sheetH: 80,
+    w: 16, h: 16, sheetW: 64, sheetH: 96,
     idle: [[0, 0], [16, 0]],
     walk: [[32, 0], [48, 0]],
   },
   pig: {
     sheet: "/farm/sprites/wildlife.png",
-    w: 16, h: 16, sheetW: 64, sheetH: 80,
+    w: 16, h: 16, sheetW: 64, sheetH: 96,
     idle: [[0, 16], [16, 16]],
     walk: [[32, 16], [48, 16]],
   },
   sheep: {
     sheet: "/farm/sprites/wildlife.png",
-    w: 16, h: 16, sheetW: 64, sheetH: 80,
+    w: 16, h: 16, sheetW: 64, sheetH: 96,
     idle: [[0, 32], [16, 32]],
     walk: [[32, 32], [48, 32]],
   },

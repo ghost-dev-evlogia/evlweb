@@ -122,7 +122,7 @@ function draw(img: Img, map: string[], pal: Pal, ox: number, oy: number) {
   });
 }
 
-const sheet: Img = { width: 64, height: 80, data: Buffer.alloc(64 * 80 * 4) };
+const sheet: Img = { width: 64, height: 96, data: Buffer.alloc(64 * 96 * 4) };
 
 /* bunny — cream, tall ears, facing right */
 const bunnyPal: Pal = { ".": null, o: OUTLINE, b: WHITE, s: WHITE_SHADE, e: OUTLINE, x: PINK };
@@ -334,6 +334,45 @@ const flutterClosed = [
   "................",
 ];
 
+/* koi — comb-red body, beak-tan fins, swims right */
+const koiPal: Pal = { ".": null, o: OUTLINE, x: COMB, b: BEAK, w: WHITE, e: OUTLINE };
+const koiSwim0 = [
+  "................",
+  "................",
+  "................",
+  "................",
+  "................",
+  "...oo...oooo....",
+  "..obbo.oxxxxoo..",
+  "...obooxwxxxxeo.",
+  "..obbo.oxxxxoo..",
+  "...oo...oooo....",
+  "................",
+  "................",
+  "................",
+  "................",
+  "................",
+  "................",
+];
+const koiSwim1 = [
+  "................",
+  "................",
+  "................",
+  "................",
+  "...oo...........",
+  "..obbo..oooo....",
+  "...obo.oxxxxoo..",
+  "...obooxwxxxxeo.",
+  "...obo.oxxxxoo..",
+  "..obbo..oooo....",
+  "...oo...........",
+  "................",
+  "................",
+  "................",
+  "................",
+  "................",
+];
+
 /* frog — bush greens */
 const frogPal: Pal = { ".": null, o: OUTLINE, b: GREEN, s: GREEN_DEEP, e: OUTLINE, w: WHITE };
 const frogSit = [
@@ -356,16 +395,17 @@ const frogSit = [
 ];
 const frogBlink = frogSit.map((r) => r.replaceAll("wwe", "bbb").replaceAll("ww", "bb"));
 
-/* layout — 4 cols × 5 rows of 16px:
+/* layout — 4 cols × 6 rows of 16px:
    row0 bunny idle,blink,hop0,hop1 · row1 pig idle,blink,walk0,walk1
    row2 sheep idle,blink,walk0,walk1 · row3 bird fly0,fly1,fly2
-   row4 butterfly open,closed, frog sit,blink */
+   row4 butterfly open,closed, frog sit,blink · row5 koi swim0,swim1 */
 const cells: Array<[string[], Pal]> = [
   [bunnyIdle, bunnyPal], [bunnyBlink, bunnyPal], [bunnyHop0, bunnyPal], [bunnyHop1, bunnyPal],
   [pigIdle, pigPal], [pigBlink, pigPal], [pigWalk0, pigPal], [pigWalk1, pigPal],
   [sheepIdle, sheepPal], [sheepBlink, sheepPal], [sheepWalk0, sheepPal], [sheepWalk1, sheepPal],
   [birdFly0, birdPal], [birdFly1, birdPal], [birdFly2, birdPal], [birdFly0, birdPal],
   [flutterOpen, flutterPal], [flutterClosed, flutterPal], [frogSit, frogPal], [frogBlink, frogPal],
+  [koiSwim0, koiPal], [koiSwim1, koiPal],
 ];
 cells.forEach(([map, pal], i) => {
   const col = i % 4, row = Math.floor(i / 4);

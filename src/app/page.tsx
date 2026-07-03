@@ -15,6 +15,7 @@ import {
   StreamBand,
   CropRowsBand,
   FlowerMeadow,
+  HeroBoundary,
 } from "@/components/farm/props";
 import { TilledHeading, RevealPanel } from "@/components/farm/reveal";
 import { FieldRows } from "@/components/farm/field-rows";
@@ -60,9 +61,6 @@ export default function Home() {
               <p className="font-sans text-ink-2 text-[15px] md:text-base leading-relaxed max-w-lg mx-auto mt-3">
                 {HERO.sub}
               </p>
-              <p className="press-start font-display text-ink-2 text-[12px] mt-3" aria-hidden>
-                ▶ scroll to begin the day
-              </p>
             </div>
           </FarmHero>
         </section>
@@ -70,6 +68,8 @@ export default function Home() {
         {/* ═══ from here to the footer, everything stands on the same land ═══ */}
         <div className="terrain">
         <DirtPath />
+        {/* the hero's farm ends at a hedge; the road passes the gate posts */}
+        <HeroBoundary />
 
         {/* ═══ 2 · THE FIELDS — morning ═══ */}
         <section id="fields" className="scroll-mt-10 relative pt-16 md:pt-24 pb-0">

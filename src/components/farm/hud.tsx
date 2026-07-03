@@ -92,33 +92,38 @@ export function Hud() {
       className="fixed z-50 flex flex-col items-end gap-3 transition-opacity duration-300 right-3 bottom-4 md:right-5 md:bottom-auto md:top-1/2 md:-translate-y-1/2"
       style={{ opacity: visible ? 1 : 0, pointerEvents: visible ? "auto" : "none" }}
     >
-      {/* sun / moon dial — the day at a glance */}
+      {/* sun dial — the day at a glance. The sun rises on the left, peaks at
+          the top, sets on the right; it never crosses the caption. */}
       <div
         ref={dialRef}
         aria-hidden
-        className="relative hidden md:block"
-        style={{ width: 52, height: 52 }}
+        className="relative hidden md:block panel-paper"
+        style={{ width: 56, height: 46, boxShadow: "inset 0 0 0 2px var(--wood-mid)" }}
       >
-        <div
-          className="absolute inset-0 panel-paper pixel-corners"
-          style={{ boxShadow: "inset 0 0 0 2px var(--wood-mid)" }}
+        {/* horizon line the sun arcs over */}
+        <span
+          className="absolute inset-x-2"
+          style={{ bottom: 15, height: 2, background: "var(--wood-mid)" }}
         />
         <div
-          className="absolute inset-0 flex items-center justify-center"
+          className="absolute flex items-center justify-center"
           style={{
-            transform: "rotate(calc(var(--day-p, 0) * 180deg))",
+            left: "50%",
+            bottom: 16,
+            width: 0,
+            height: 0,
+            transform: "rotate(calc((var(--day-p, 0) - 0.5) * 160deg))",
             transition: "transform 0.2s linear",
           }}
         >
-          <span style={{ transform: "translateY(-13px) rotate(calc(var(--day-p, 0) * -180deg))" }}>
+          <span style={{ transform: "translateY(-14px) rotate(calc((var(--day-p, 0) - 0.5) * -160deg))" }}>
             <span className="dial-sun" style={{ display: "inline-block" }}>
               <PixelSprite tile={T.biome.flowerBigYellow} scale={1} />
             </span>
           </span>
         </div>
         <span
-          className="absolute inset-0 flex items-center justify-center font-display text-[10px] text-ink-2"
-          style={{ paddingTop: 22 }}
+          className="absolute inset-x-0 bottom-0.5 text-center font-display text-[10px] text-ink-2"
         >
           the day
         </span>

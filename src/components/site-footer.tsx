@@ -23,16 +23,34 @@ const FIREFLIES = [
 export function SiteFooter() {
   return (
     <footer className="relative z-10">
-      {/* darkened grass edge — the field at night */}
+      {/* the farm asleep — the land simply darkens into night; animals are
+          bedded down, fireflies out. No transition strips. */}
       <div className="relative" aria-hidden>
-        <div className="band-grass-edge-t" style={{ height: "calc(var(--px) * 16)", filter: "brightness(0.55) saturate(0.8)" }} />
-      </div>
-      <div
-        className="relative band-grass"
-        style={{ filter: "brightness(0.55) saturate(0.8)" }}
-        aria-hidden
-      >
-        <div style={{ height: "calc(var(--px) * 10)" }} />
+        <div className="band-grass" style={{ filter: "brightness(0.5) saturate(0.8)" }}>
+          <div style={{ height: "calc(var(--px) * 30)" }} />
+        </div>
+        {/* sleepers (dimmed to match the hour) */}
+        <div className="absolute inset-0 overflow-hidden" style={{ filter: "brightness(0.62) saturate(0.85)" }}>
+          <span className="absolute" style={{ left: "16%", bottom: 8 }}>
+            <PixelSprite tile={T.cow.idle[0]} scale={3} />
+          </span>
+          <span className="absolute" style={{ left: "30%", bottom: 12 }}>
+            <PixelSprite tile={T.chicken.idle[0]} scale={3} />
+          </span>
+          <span className="absolute hidden md:block" style={{ left: "72%", bottom: 10 }}>
+            <PixelSprite tile={T.chicken.idle[0]} scale={3} />
+          </span>
+          <span className="absolute hidden md:block" style={{ right: "8%", bottom: 6 }}>
+            <PixelSprite tile={T.biome.treeBig} scale={3} />
+          </span>
+        </div>
+        {/* the zzz's read at full brightness */}
+        <span className="absolute font-display text-[13px]" style={{ left: "19%", bottom: 64, color: "var(--wood-paper)", opacity: 0.75 }}>
+          z z z
+        </span>
+        <span className="absolute font-display text-[11px]" style={{ left: "32%", bottom: 56, color: "var(--wood-paper)", opacity: 0.6 }}>
+          z z
+        </span>
       </div>
 
       <div className="relative" style={{ background: "var(--night)" }}>

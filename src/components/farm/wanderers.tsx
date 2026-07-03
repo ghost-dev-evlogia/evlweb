@@ -18,18 +18,18 @@ type WKind = Kind | AirKind | "frog";
 const AIR_SPRITES: Record<AirKind, { sheet: string; w: number; h: number; sheetW: number; sheetH: number; fly: number[][] }> = {
   bird: {
     sheet: "/farm/sprites/wildlife.png",
-    w: 16, h: 16, sheetW: 64, sheetH: 80,
+    w: 16, h: 16, sheetW: 64, sheetH: 96,
     fly: [[0, 48], [16, 48], [32, 48], [16, 48]],
   },
   butterfly: {
     sheet: "/farm/sprites/wildlife.png",
-    w: 16, h: 16, sheetW: 64, sheetH: 80,
+    w: 16, h: 16, sheetW: 64, sheetH: 96,
     fly: [[0, 64], [16, 64]],
   },
 };
 const FROG = {
   sheet: "/farm/sprites/wildlife.png",
-  w: 16, h: 16, sheetW: 64, sheetH: 80,
+  w: 16, h: 16, sheetW: 64, sheetH: 96,
   sit: [[32, 64], [48, 64]] as number[][],
 };
 

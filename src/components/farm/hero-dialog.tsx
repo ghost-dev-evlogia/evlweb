@@ -131,12 +131,13 @@ export function HeroDialog() {
         >
           !
         </span>
+        {/* the farmer himself, standing on the grass — no frame, no box */}
         <span
-          className="panel-paper pixel-corners p-1.5 transition-transform duration-150 group-hover:-translate-y-1 group-focus-visible:-translate-y-1"
-          style={{ boxShadow: "inset 0 0 0 2px var(--wood-mid), 0 3px 0 var(--wood-shadow)" }}
+          className="transition-transform duration-150 group-hover:-translate-y-1 group-focus-visible:-translate-y-1"
+          style={{ filter: "drop-shadow(0 3px 0 rgba(53,55,56,0.25))" }}
           aria-hidden
         >
-          <PixelSprite tile={{ s: "character", x: 0.75, y: 0.75, w: 1.5, h: 1.75 }} scale={3} />
+          <PixelSprite tile={{ s: "character", x: 0.8, y: 0.55, w: 1.4, h: 2.15 }} scale={3} />
         </span>
         <span
           className="pixel-chip mt-1.5 group-focus-visible:outline-2 group-focus-visible:outline-ink"
