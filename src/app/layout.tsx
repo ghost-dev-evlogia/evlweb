@@ -1,19 +1,23 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Pixelify_Sans } from "next/font/google";
+import { Pixelify_Sans, VT323 } from "next/font/google";
 import "./globals.css";
 import { PageTransition } from "@/components/page-transition";
 import { PostHogProvider } from "@/components/posthog-provider";
 import { CalInit } from "@/components/cal-init";
 
-const geist = Geist({
-  variable: "--font-geist",
-  subsets: ["latin"],
-});
-
+// Display / UI chrome: chunky pixel font.
 const pixelify = Pixelify_Sans({
   variable: "--font-pixel",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+});
+
+// Body: VT323 — a crisp bitmap/terminal font that stays in the pixel world of
+// the display font while remaining legible for the site's short-form copy.
+const vt323 = VT323({
+  variable: "--font-body",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 export const viewport: Viewport = {
@@ -72,7 +76,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${geist.variable} ${pixelify.variable} h-full antialiased no-js`}
+      className={`${pixelify.variable} ${vt323.variable} h-full antialiased no-js`}
       suppressHydrationWarning
     >
       <head>

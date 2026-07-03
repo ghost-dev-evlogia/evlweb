@@ -112,7 +112,7 @@
   --color-harvest-pale: var(--harvest-pale);
   --color-berry: var(--berry);
   --color-berry-deep: var(--berry-deep);
-  --font-sans: var(--font-geist), system-ui, sans-serif;
+  --font-sans: var(--font-body), ui-monospace, monospace;
   --font-display: var(--font-pixel), ui-monospace, monospace;
   --font-mono: ui-monospace, "SF Mono", monospace;
 }
@@ -131,7 +131,7 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist), system-ui, sans-serif;
+  font-family: var(--font-body), ui-monospace, monospace;
   overflow-x: hidden;
 }
 
