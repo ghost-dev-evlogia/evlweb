@@ -122,11 +122,15 @@ export function HeroDialog() {
         aria-controls="visitor-card"
         className="group flex flex-col items-center focus:outline-none"
       >
-        {!open && (
-          <span className="farmer-alert font-display" aria-hidden>
-            !
-          </span>
-        )}
+        {/* visibility (not unmount): the badge must keep its layout space or
+            the whole column shifts every time the card opens */}
+        <span
+          className="farmer-alert font-display"
+          style={{ visibility: open ? "hidden" : "visible" }}
+          aria-hidden
+        >
+          !
+        </span>
         <span
           className="panel-paper pixel-corners p-1.5 transition-transform duration-150 group-hover:-translate-y-1 group-focus-visible:-translate-y-1"
           style={{ boxShadow: "inset 0 0 0 2px var(--wood-mid), 0 3px 0 var(--wood-shadow)" }}
