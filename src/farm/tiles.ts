@@ -167,7 +167,12 @@ export const T = {
 
   coop: t("chicken-house", 0, 0, 3, 3),
   chest: t("chest", 0, 0, 3, 3),
-  bridge: t("wood-bridge", 0, 0, 5, 3),
+  bridge: t("wood-bridge", 0, 0, 1, 3), // ONE vertical bridge (col 0); sheet also holds a 2nd variant at col 1 and a horizontal bridge at cols 2-4
+  /* wildlife.png — row 4 cols 2,3 = frog sit / blink */
+  wild: {
+    frog: t("wildlife", 2, 4),
+    frogBlink: t("wildlife", 3, 4),
+  },
   eggNest: t("egg-nest", 0, 0),
 
   /* ── tools-materials.png — 3×2 hand tools ── */
@@ -189,7 +194,7 @@ export const SHEET_FILES = [
   "house-roof", "house-walls", "wooden-house", "doors",
   "grass-biome-things", "plants", "character", "cow", "chicken",
   "chicken-house", "chest", "wood-bridge", "egg-nest", "furniture",
-  "tools-materials",
+  "tools-materials", "wildlife",
 ] as const;
 
 /** Sheet pixel dimensions (for CSS background-crop sprite display in the DOM). */
@@ -200,4 +205,5 @@ export const SHEET_DIMS: Record<string, [number, number]> = {
   plants: [96, 32], character: [192, 192], cow: [96, 64], chicken: [64, 32],
   "chicken-house": [48, 48], chest: [240, 96], "wood-bridge": [80, 48],
   "egg-nest": [64, 16], furniture: [144, 96], "tools-materials": [48, 32],
+  wildlife: [64, 96],
 };

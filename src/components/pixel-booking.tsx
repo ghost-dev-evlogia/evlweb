@@ -363,7 +363,7 @@ export function PixelBooking() {
                 <button
                   type="button"
                   className="pixel-chip disabled:opacity-40"
-                  style={{ fontSize: "12px" }}
+                  style={{ fontSize: "12px", minWidth: 44, justifyContent: "center" }}
                   onClick={() => setMonthOff((m) => Math.max(0, m - 1))}
                   disabled={monthOff === 0}
                   aria-label="Previous month"
@@ -376,7 +376,7 @@ export function PixelBooking() {
                 <button
                   type="button"
                   className="pixel-chip disabled:opacity-40"
-                  style={{ fontSize: "12px" }}
+                  style={{ fontSize: "12px", minWidth: 44, justifyContent: "center" }}
                   onClick={() => setMonthOff((m) => Math.min(2, m + 1))}
                   disabled={monthOff === 2}
                   aria-label="Next month"

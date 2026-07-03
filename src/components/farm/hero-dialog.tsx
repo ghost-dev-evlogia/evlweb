@@ -137,7 +137,10 @@ export function HeroDialog() {
           style={{ filter: "drop-shadow(0 3px 0 rgba(53,55,56,0.25))" }}
           aria-hidden
         >
-          <PixelSprite tile={{ s: "character", x: 0.8, y: 0.55, w: 1.4, h: 2.15 }} scale={3} />
+          {/* idle hop draws the eye to the one thing worth clicking */}
+          <span className="farmer-idle">
+            <PixelSprite tile={{ s: "character", x: 0.8, y: 0.55, w: 1.4, h: 2.15 }} scale={3} />
+          </span>
         </span>
       </button>
 

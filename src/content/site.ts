@@ -229,7 +229,7 @@ export const TESTIMONIALS: Testimonial[] = [
     id: "fasil",
     quote:
       "The team demonstrated exceptional technical expertise in evaluating and enhancing our website strategy. Their ability to quickly understand our business needs and translate them into practical, scalable solutions was impressive. Thanks to their guidance, we significantly refined our online platform and better positioned our services in the market.",
-    author: "Muhammed Fasil",
+    author: "Fasil Muhammed",
     role: "Center Manager, Edoxi Training",
     avatar: "/fasil.jpeg",
     npc: "/farm/npc/npc-dusk.png",

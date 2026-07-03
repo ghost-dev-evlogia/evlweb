@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import type { PixiFarm } from "@/farm/pixi-farm.ts";
 import { SKY_ROWS } from "@/farm/scene.ts";
 import { HeroDialog } from "./hero-dialog";
+import { SkyBirds } from "./sky-birds";
 
 /* The hero — headline over open sky, the WHOLE farm always visible below it,
    the farmer waiting at the gate (click → visitor card).
@@ -54,9 +55,11 @@ export function FarmHero({ children }: { children?: ReactNode }) {
         const dev = Math.max(2, Math.min(devH, devW));
         cw = (SCENE_PX.w * dev) / dpr;
       } else {
-        const dev = Math.floor((w * dpr) / SCENE_PX.w); // fit: letterbox
-        // narrow low-DPR windows can't reach a 2× integer — fill the width
-        cw = dev >= 2 ? (SCENE_PX.w * dev) / dpr : w;
+        // Mobile: fill the full width so the whole farm is as large as possible.
+        // Integer-scale letterboxing left the farm shrunken with side margins on
+        // high-DPR phones (e.g. 430px@3× fit to only 341px). Whole-farm-visible +
+        // fill-width beats a clean integer scale here; `pixelated` keeps it crisp.
+        cw = w;
       }
       setCssWidth(cw);
       setTile(cw / 32);
@@ -120,6 +123,9 @@ export function FarmHero({ children }: { children?: ReactNode }) {
       className="relative flex-1 h-full w-full overflow-hidden flex flex-col"
       data-live={live || undefined}
     >
+      {/* far-off birds drifting across the sky, behind the headline */}
+      <SkyBirds />
+
       {/* headline — in normal flow, over open sky. Only the scene's
           TRANSPARENT sky rows may reach up behind it. */}
       <div className="relative z-10 w-full flex justify-center px-5 pt-[clamp(1.25rem,4.5vh,3rem)]">

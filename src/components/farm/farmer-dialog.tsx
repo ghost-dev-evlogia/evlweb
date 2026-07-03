@@ -17,19 +17,22 @@ export function FarmerDialog() {
   return (
     <div>
       <div className="grid md:grid-cols-12 gap-4 items-start">
-        {/* the farmer */}
+        {/* the farmer — no box, just him, dancing */}
         <div className="md:col-span-3 flex md:flex-col items-center gap-3">
-          <div
-            className="panel-paper pixel-corners p-3"
-            style={{ boxShadow: "inset 0 0 0 2px var(--wood-mid)" }}
+          <span
+            className="farmer-dance"
+            style={{ filter: "drop-shadow(0 3px 0 rgba(53,55,56,0.22))" }}
             aria-hidden
           >
             <PixelSprite tile={{ s: "character", x: 0.75, y: 0.75, w: 1.5, h: 1.75 }} scale={4} />
-          </div>
-          <p className="font-display text-xs text-center" style={{ color: "var(--wood-paper)" }}>
+          </span>
+          <p
+            className="font-display text-xs text-center"
+            style={{ color: "var(--wood-paper)", textShadow: "0 1px 2px rgba(53,55,56,0.6)" }}
+          >
             the farmer
             <br />
-            <span style={{ color: "var(--wood-soft)" }}>(knows things)</span>
+            <span style={{ opacity: 0.82 }}>(knows things)</span>
           </p>
         </div>
 

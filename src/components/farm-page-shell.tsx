@@ -42,7 +42,7 @@ export function FarmPageShell({
         </div>
       </header>
 
-      <main className="relative z-10">
+      <main className="relative z-10 overflow-x-clip">
         {/* the title lives in the sky */}
         <div className="pt-28 md:pt-32 pb-10 md:pb-12 text-center px-6">
           <p className="pixel-chip mb-4">{eyebrow}</p>

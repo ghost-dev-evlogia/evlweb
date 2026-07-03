@@ -17,6 +17,9 @@ const SOUNDS: Record<string, string[]> = {
   cow: ["moo.", "mooo…", "moo?"],
 };
 
+/** what a frog says on the rare occasion it surfaces to talk */
+const FROG_QUIPS = ["ribbit.", "ribbit?", "…still no PR.", "blub.", "i saw everything.", "5 stars, would pond again.", "standup's in the pond."];
+
 const SPRITE_BASE = "/farm/sprites";
 
 type FarmOpts = {
@@ -41,6 +44,16 @@ type AnimalRig = {
 
 type SmokePuff = { g: Graphics; t: number; offset: number };
 
+type FrogRig = {
+  sprite: Sprite;
+  homeX: number; // sit tile x
+  homeY: number; // sit tile y (top of pond ring); water is ~0.7 tile below
+  state: "in" | "out";
+  clock: number; // countdown to the next jump
+  jump: { t: number; dur: number; fromY: number; toY: number; hideAtEnd: boolean } | null;
+  speakOnLand: boolean;
+};
+
 export class PixiFarm {
   private app: Application | null = null;
   private destroyed = false;
@@ -50,6 +63,7 @@ export class PixiFarm {
   private waterClock = 0;
   private animals: AnimalRig[] = [];
   private smoke: SmokePuff[] = [];
+  private frogs: FrogRig[] = [];
   private scene: Scene;
   private reduced: boolean;
   /* one hero animal speaks at a time */
@@ -168,6 +182,24 @@ export class PixiFarm {
         smokeLayer.addChild(g);
         this.smoke.push({ g, t: (i / 3) * 2.8, offset: i });
       }
+
+      /* ── pond frogs — surface, sit, sometimes talk, dive back in ── */
+      const frogLayer = new Container();
+      root.addChild(frogLayer);
+      const homes = [
+        { x: 27, y: 15 },
+        { x: 29.5, y: 16.3 },
+      ];
+      for (const h of homes) {
+        const sp = new Sprite(texFor(T.wild.frog));
+        sp.position.set(Math.round(h.x * TILE), Math.round((h.y + 0.7) * TILE));
+        sp.alpha = 0; // starts submerged
+        frogLayer.addChild(sp);
+        this.frogs.push({
+          sprite: sp, homeX: h.x, homeY: h.y, state: "in",
+          clock: 1.5 + Math.random() * 5, jump: null, speakOnLand: false,
+        });
+      }
     }
 
     this.opts.host.appendChild(app.canvas);
@@ -242,6 +274,9 @@ export class PixiFarm {
       }
     }
 
+    // pond frogs: surface, sit, dive
+    for (const f of this.frogs) this.tickFrog(f, dt, now);
+
     // chimney smoke: rise, wobble, fade, recycle
     const cx = (CHIMNEY.x + 0.5) * TILE;
     const cy = (CHIMNEY.y + 0.2) * TILE;
@@ -258,6 +293,55 @@ export class PixiFarm {
       puff.g.scale.set(s);
     }
   };
+
+  /* a frog rests underwater, then hops up onto the surface, sits a beat
+     (sometimes with a word), and dives back in — all in place. */
+  private tickFrog(f: FrogRig, _dt: number, _now: number) {
+    const dt = _dt;
+    const sp = f.sprite;
+    if (f.jump) {
+      f.jump.t += dt;
+      const p = Math.min(1, f.jump.t / f.jump.dur);
+      const arc = -Math.sin(p * Math.PI) * 9; // hop height, px
+      sp.y = Math.round(f.jump.fromY + (f.jump.toY - f.jump.fromY) * p + arc);
+      sp.alpha = f.jump.hideAtEnd ? 1 - Math.max(0, (p - 0.4) / 0.6) : Math.min(1, p / 0.4);
+      if (p >= 1) {
+        f.jump = null;
+        if (f.jump === null && sp.alpha < 0.5) {
+          sp.alpha = 0; f.state = "in"; f.clock = 3 + Math.random() * 7;
+        } else {
+          sp.alpha = 1; f.state = "out"; f.clock = 2.5 + Math.random() * 4;
+          if (f.speakOnLand) { f.speakOnLand = false; this.frogSpeak(f); }
+        }
+      }
+      return;
+    }
+    f.clock -= dt;
+    if (f.clock > 0) return;
+    if (f.state === "out") {
+      f.jump = { t: 0, dur: 0.42, fromY: f.homeY * TILE, toY: (f.homeY + 0.7) * TILE, hideAtEnd: true };
+    } else {
+      sp.x = Math.round(f.homeX * TILE);
+      f.jump = { t: 0, dur: 0.42, fromY: (f.homeY + 0.7) * TILE, toY: f.homeY * TILE, hideAtEnd: false };
+      if (!this.speech && Math.random() < 0.4) f.speakOnLand = true;
+    }
+  }
+
+  private frogSpeak(f: FrogRig) {
+    if (this.speech) return;
+    const host = this.opts.host;
+    const scale = host.clientWidth / (this.scene.w * TILE);
+    const cx = (f.homeX + 0.5) * TILE * scale;
+    const cy = f.homeY * TILE * scale;
+    const el = document.createElement("div");
+    el.className = "quip-bubble hero-quip";
+    el.textContent = FROG_QUIPS[Math.floor(Math.random() * FROG_QUIPS.length)];
+    el.style.left = `${Math.round(cx)}px`;
+    el.style.top = `${Math.round(cy)}px`;
+    host.appendChild(el);
+    this.speech = { el, until: performance.now() + 2200 };
+    f.clock = Math.max(f.clock, 2.6); // stay up long enough to finish talking
+  }
 
   private tickAnimal(a: AnimalRig, dt: number) {
     a.frameClock += dt;

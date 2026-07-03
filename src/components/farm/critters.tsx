@@ -246,5 +246,8 @@ export function Critters({ kinds = "chicken,chicken" }: { kinds?: string }) {
     };
   }, [kinds]);
 
-  return <div ref={hostRef} aria-hidden className="absolute inset-0 overflow-hidden" />;
+  // overflow-x clip keeps a wanderer from ever causing horizontal scroll, but
+  // overflow-y stays visible so a speech bubble above an animal near the top
+  // is never clipped (it layers up over the section, not inside a box).
+  return <div ref={hostRef} aria-hidden className="absolute inset-0 overflow-x-clip overflow-y-visible" />;
 }

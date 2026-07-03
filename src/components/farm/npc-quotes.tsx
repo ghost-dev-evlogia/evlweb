@@ -91,7 +91,7 @@ export function NpcQuotes() {
             <span
               className="pixel-chip group-focus-visible:outline-2 group-focus-visible:outline-ink"
               style={{
-                fontSize: "10px",
+                fontSize: "12px",
                 ...(i === active
                   ? { background: "var(--harvest-pale)", boxShadow: "inset 0 0 0 2px var(--harvest-deep)" }
                   : {}),
@@ -103,7 +103,7 @@ export function NpcQuotes() {
         ))}
       </div>
 
-      <p className="text-center font-sans text-ink-3 text-[11px] mt-5">
+      <p className="text-center font-sans text-ink-3 text-[12px] mt-5">
         Real quotes from real humans. The animals declined to comment.
       </p>
     </div>

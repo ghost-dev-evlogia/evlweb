@@ -92,40 +92,37 @@ export function Hud() {
       className="fixed z-50 flex flex-col items-end gap-3 transition-opacity duration-300 right-3 bottom-4 md:right-5 md:bottom-auto md:top-1/2 md:-translate-y-1/2"
       style={{ opacity: visible ? 1 : 0, pointerEvents: visible ? "auto" : "none" }}
     >
-      {/* sun dial — the day at a glance. The sun rises on the left, peaks at
-          the top, sets on the right; it never crosses the caption. */}
-      <div
-        ref={dialRef}
-        aria-hidden
-        className="relative hidden md:block panel-paper"
-        style={{ width: 56, height: 46, boxShadow: "inset 0 0 0 2px var(--wood-mid)" }}
-      >
-        {/* horizon line the sun arcs over */}
-        <span
-          className="absolute inset-x-2"
-          style={{ bottom: 15, height: 2, background: "var(--wood-mid)" }}
-        />
+      {/* time of day — no box. A pixel sun arcs across by day and sets; the
+          moon fades in for the night. Driven by scroll progress (--day-p). */}
+      <div ref={dialRef} aria-hidden className="day-dial hidden md:block">
         <div
-          className="absolute flex items-center justify-center"
-          style={{
-            left: "50%",
-            bottom: 16,
-            width: 0,
-            height: 0,
-            transform: "rotate(calc((var(--day-p, 0) - 0.5) * 160deg))",
-            transition: "transform 0.2s linear",
-          }}
+          className="day-dial-arc"
+          style={{ transform: "rotate(calc((var(--day-p, 0) - 0.5) * 150deg))" }}
         >
-          <span style={{ transform: "translateY(-14px) rotate(calc((var(--day-p, 0) - 0.5) * -160deg))" }}>
-            <span className="dial-sun" style={{ display: "inline-block" }}>
-              <PixelSprite tile={T.biome.flowerBigYellow} scale={1} />
-            </span>
+          <span
+            className="day-sun"
+            style={{ transform: "translateY(-15px) rotate(calc((var(--day-p, 0) - 0.5) * -150deg))" }}
+          >
+            <svg viewBox="0 0 16 16" width="15" height="15" shapeRendering="crispEdges">
+              <g fill="#e6a92c">
+                <rect x="7" y="0" width="2" height="2" /><rect x="7" y="14" width="2" height="2" />
+                <rect x="0" y="7" width="2" height="2" /><rect x="14" y="7" width="2" height="2" />
+                <rect x="2" y="2" width="2" height="2" /><rect x="12" y="2" width="2" height="2" />
+                <rect x="2" y="12" width="2" height="2" /><rect x="12" y="12" width="2" height="2" />
+              </g>
+              <g fill="#f5c542">
+                <rect x="5" y="4" width="6" height="8" /><rect x="4" y="5" width="8" height="6" />
+              </g>
+            </svg>
           </span>
         </div>
-        <span
-          className="absolute inset-x-0 bottom-0.5 text-center font-display text-[10px] text-ink-2"
-        >
-          the day
+        <span className="day-moon">
+          <svg viewBox="0 0 16 16" width="14" height="14" shapeRendering="crispEdges">
+            <g fill="#eef1f5">
+              <rect x="4" y="4" width="3" height="8" /><rect x="5" y="3" width="3" height="10" />
+              <rect x="6" y="2" width="2" height="2" /><rect x="6" y="12" width="2" height="2" />
+            </g>
+          </svg>
         </span>
       </div>
 

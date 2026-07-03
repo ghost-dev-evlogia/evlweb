@@ -23,34 +23,63 @@ const FIREFLIES = [
 export function SiteFooter() {
   return (
     <footer className="relative z-10">
-      {/* the farm asleep — the land simply darkens into night; animals are
-          bedded down, fireflies out. No transition strips. */}
-      <div className="relative" aria-hidden>
-        <div className="band-grass" style={{ filter: "brightness(0.5) saturate(0.8)" }}>
-          <div style={{ height: "calc(var(--wpx) * 30)" }} />
-        </div>
-        {/* sleepers (dimmed to match the hour) */}
-        <div className="absolute inset-0 overflow-hidden" style={{ filter: "brightness(0.62) saturate(0.85)" }}>
-          {/* the road walks all the way to the night's edge */}
-          <div className="dirt-road hidden md:block" style={{ left: "clamp(24px, 6vw, 110px)" }} />
-          <span className="absolute" style={{ left: "16%", bottom: 8 }}>
-            <PixelSprite tile={T.cow.idle[0]} scale={3} />
-          </span>
-          <span className="absolute" style={{ left: "30%", bottom: 12 }}>
-            <PixelSprite tile={T.chicken.idle[0]} scale={3} />
-          </span>
-          <span className="absolute hidden md:block" style={{ left: "72%", bottom: 10 }}>
-            <PixelSprite tile={T.chicken.idle[0]} scale={3} />
-          </span>
-          <span className="absolute hidden md:block" style={{ right: "8%", bottom: 6 }}>
-            <PixelSprite tile={T.biome.treeBig} scale={3} />
-          </span>
-        </div>
-        {/* the zzz's read at full brightness */}
-        <span className="absolute font-display text-[13px]" style={{ left: "19%", bottom: 64, color: "var(--wood-paper)", opacity: 0.75 }}>
+      {/* the farm asleep — a seamless continuation of the terrain: the SAME
+          grass tile and road, picking the dusk tint up exactly where the
+          terrain's day-tint leaves off (rgba(45,42,60,.38)) and deepening to
+          night. The tint sits BELOW the sleepers, so — like the terrain's own
+          props — the animals keep their colour and just rest. */}
+      <div
+        className="relative overflow-hidden"
+        aria-hidden
+        style={{ height: "calc(var(--wpx) * 36)" }}
+      >
+        {/* grass — identical tile & size to .terrain::before, so no seam */}
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: "url(/farm/tiles/grass-a.png)",
+            backgroundSize: "calc(var(--wpx) * 16) calc(var(--wpx) * 16)",
+            imageRendering: "pixelated",
+          }}
+        />
+        {/* the road runs on, unbroken — same tile & left as the terrain road */}
+        <div
+          className="hidden md:block absolute top-0 bottom-0"
+          style={{
+            left: "clamp(24px, 6vw, 110px)",
+            width: "calc(var(--wpx) * 16)",
+            backgroundImage: "url(/farm/tiles/dirt.png)",
+            backgroundSize: "calc(var(--wpx) * 16) calc(var(--wpx) * 16)",
+            backgroundRepeat: "repeat-y",
+            imageRendering: "pixelated",
+          }}
+        />
+        {/* dusk → night, continuing the terrain's own tint. Below the sleepers. */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(45,42,60,0.38) 0%, rgba(53,55,56,0.80) 60%, var(--night) 100%)",
+          }}
+        />
+        {/* sleepers — full colour, bedded down; a slow breathing bob keeps them alive */}
+        <span className="sleep-breathe absolute" style={{ left: "16%", bottom: 6 }}>
+          <PixelSprite tile={T.cow.idle[0]} scale={3} />
+        </span>
+        <span className="sleep-breathe sleep-breathe--slow absolute" style={{ left: "30%", bottom: 10 }}>
+          <PixelSprite tile={T.chicken.idle[0]} scale={3} />
+        </span>
+        <span className="sleep-breathe absolute hidden md:block" style={{ left: "72%", bottom: 8 }}>
+          <PixelSprite tile={T.chicken.idle[0]} scale={3} />
+        </span>
+        <span className="absolute hidden md:block" style={{ right: "8%", bottom: 2 }}>
+          <PixelSprite tile={T.biome.treeBig} scale={3} />
+        </span>
+        {/* the zzz's drift up and fade */}
+        <span className="zzz-float absolute font-display text-[13px]" style={{ left: "19%", bottom: 70, color: "var(--wood-paper)" }}>
           z z z
         </span>
-        <span className="absolute font-display text-[11px]" style={{ left: "32%", bottom: 56, color: "var(--wood-paper)", opacity: 0.6 }}>
+        <span className="zzz-float absolute font-display text-[11px]" style={{ left: "32%", bottom: 62, color: "var(--wood-paper)", animationDelay: "1.4s" }}>
           z z
         </span>
       </div>
@@ -139,7 +168,7 @@ export function SiteFooter() {
               by Cup Nooble
             </p>
           </div>
-          <p className="font-sans text-[11px] mt-3 text-center sm:text-left" style={{ color: "var(--ink-3)" }}>
+          <p className="font-sans text-[12px] mt-3 text-center sm:text-left" style={{ color: "var(--ink-3)" }}>
             psst: try typing &ldquo;harvest&rdquo;.
           </p>
         </div>

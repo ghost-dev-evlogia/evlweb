@@ -170,10 +170,12 @@ export function StreamBand() {
         ))}
       </div>
       <div className="band-grass-edge-t rotate-180" style={{ height: "calc(var(--wpx) * 16)" }} />
-      {/* the bridge carries the dirt road over the water */}
+      {/* one bridge, on the dirt road so the path visibly crosses the water.
+          Bridge is 1 tile (48px) — the same width as the road — so it sits at
+          the road's exact left with no offset. */}
       <span
         className="hidden md:block absolute top-1/2 -translate-y-1/2"
-        style={{ left: "clamp(0px, calc(6vw - 40px), 86px)" }}
+        style={{ left: "clamp(24px, 6vw, 110px)" }}
       >
         <PixelSprite tile={T.bridge} scale={3} />
       </span>
@@ -184,11 +186,42 @@ export function StreamBand() {
 /** The hero's land meets the journey's land at a country lane — a plain
     packed-dirt road running the full width. Simple, unmistakable, and the
     vertical road T-joins it below. */
+/* pebbles, rocks and tufts strewn along a dirt band so it reads as trodden
+   ground, not a flat stripe. Positions are hand-scattered (no two alike). */
+const DIRT_DEBRIS = [
+  { tile: T.biome.rockSmall, left: "4%", bottom: 3, scale: 2 },
+  { tile: T.biome.sprigs, left: "12%", bottom: 8, scale: 2 },
+  { tile: T.biome.rockGray, left: "19%", bottom: 2, scale: 2 },
+  { tile: T.biome.rockSmall, left: "27%", bottom: 10, scale: 1 },
+  { tile: T.biome.rockMossy, left: "36%", bottom: 5, scale: 2 },
+  { tile: T.biome.sprigs, left: "45%", bottom: 3, scale: 1 },
+  { tile: T.biome.rockSmall, left: "53%", bottom: 9, scale: 2 },
+  { tile: T.biome.rockGray, left: "62%", bottom: 4, scale: 1 },
+  { tile: T.biome.sprigs, left: "70%", bottom: 7, scale: 2 },
+  { tile: T.biome.rockMossy, left: "79%", bottom: 2, scale: 2 },
+  { tile: T.biome.rockSmall, left: "88%", bottom: 8, scale: 1 },
+  { tile: T.biome.rockGray, left: "95%", bottom: 4, scale: 2 },
+] as const;
+
+function DirtDebris() {
+  return (
+    <>
+      {DIRT_DEBRIS.map(({ tile, left, bottom, scale }, i) => (
+        <span key={i} className="absolute" style={{ left, bottom, opacity: 0.9 }}>
+          <PixelSprite tile={tile} scale={scale} />
+        </span>
+      ))}
+    </>
+  );
+}
+
 export function HeroBoundary() {
   return (
     <div aria-hidden className="relative">
       <div className="band-grass-edge-b rotate-180" style={{ height: "calc(var(--wpx) * 16)" }} />
-      <div className="band-dirt" style={{ height: "calc(var(--wpx) * 20)" }} />
+      <div className="band-dirt relative overflow-hidden" style={{ height: "calc(var(--wpx) * 20)" }}>
+        <DirtDebris />
+      </div>
       <div className="band-grass-edge-t rotate-180" style={{ height: "calc(var(--wpx) * 16)" }} />
     </div>
   );

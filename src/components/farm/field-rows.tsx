@@ -71,10 +71,10 @@ export function FieldRows() {
         {SERVICES.map((s, i) => (
           <RevealPanel key={s.id} delay={i * 40}>
             <article id={s.id} className="scroll-mt-28 grid md:grid-cols-12 gap-4 md:gap-6 items-end">
-              <div className={`md:col-span-5 ${i % 2 ? "md:order-2" : ""}`}>
+              <div className={`min-w-0 md:col-span-5 ${i % 2 ? "md:order-2" : ""}`}>
                 <FieldSign title={s.title} desc={s.desc} meta={s.meta} />
               </div>
-              <div className={`md:col-span-7 ${i % 2 ? "md:order-1" : ""}`}>
+              <div className={`min-w-0 md:col-span-7 ${i % 2 ? "md:order-1" : ""}`}>
                 <CropRow crop={s.crop} seed={i} />
               </div>
             </article>

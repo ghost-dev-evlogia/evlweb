@@ -45,7 +45,7 @@ export default function Home() {
         {/* ═══ 1 · THE GATE — dawn, headline in the open sky ═══ */}
         <section
           id="top"
-          className="relative overflow-hidden flex flex-col min-h-[100svh] md:min-h-0 md:h-[clamp(680px,100svh,1000px)]"
+          className="relative overflow-hidden flex flex-col md:h-[clamp(680px,100svh,1000px)]"
         >
           <FarmHero>
             <div className="text-center max-w-2xl">
