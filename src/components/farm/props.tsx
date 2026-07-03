@@ -67,34 +67,59 @@ export function PondBand() {
   );
 }
 
-/** A horizontal fence rail with posts, for section framing. */
+/** The dirt road punching through a divider band so the path stays continuous
+    (and the walker has a route). Same texture + X as the road; drawn above the
+    band's own decor. Drop it into any `relative` crossing band. */
+export function PathThrough() {
+  return <div aria-hidden className="path-through" />;
+}
+
+/** A horizontal fence rail, split by a gate opening where the dirt path crosses
+    — two rail segments flanking a 48px gap with posts, keyed off --path-x so
+    the opening lines up with the road (matches the hero gate's language). */
 export function FenceRow({ className = "" }: { className?: string }) {
   return (
-    <div
-      aria-hidden
-      className={`band-fence ${className}`}
-      style={{ height: "calc(var(--wpx) * 16)" }}
-    />
+    <div aria-hidden className={`relative ${className}`} style={{ height: "calc(var(--wpx) * 16)" }}>
+      {/* rail from the left edge to the gate's left post */}
+      <div
+        className="band-fence absolute inset-y-0 left-0"
+        style={{ width: "calc(var(--path-x) - var(--wpx) * 16)" }}
+      />
+      {/* rail from the gate's right post to the right edge */}
+      <div
+        className="band-fence absolute inset-y-0 right-0"
+        style={{ left: "calc(var(--path-x) + var(--wpx) * 32)" }}
+      />
+      {/* the two gate posts flanking the road opening */}
+      <span className="absolute bottom-0" style={{ left: "calc(var(--path-x) - var(--wpx) * 16)" }}>
+        <PixelSprite tile={T.fence.post} scale={3} />
+      </span>
+      <span className="absolute bottom-0" style={{ left: "calc(var(--path-x) + var(--wpx) * 16)" }}>
+        <PixelSprite tile={T.fence.post} scale={3} />
+      </span>
+    </div>
   );
 }
 
 /** Scattered trees/bushes along a band edge. */
 export function TreeLine({ variant = 0 }: { variant?: number }) {
+  // leftmost props start at ≥16% so nothing sits in the dirt-path corridor on
+  // the left (~6–13% across desktop widths) where the walker cat travels.
   const sets = [
     [
-      { tile: T.biome.treeBig, left: "4%", scale: 3 },
-      { tile: T.biome.bush, left: "22%", scale: 3 },
+      { tile: T.biome.treeBig, left: "16%", scale: 3 },
+      { tile: T.biome.bush, left: "34%", scale: 3 },
       { tile: T.biome.treeApple, left: "68%", scale: 3 },
       { tile: T.biome.treeSmall, left: "90%", scale: 3 },
     ],
     [
-      { tile: T.biome.treeSmall, left: "8%", scale: 3 },
+      { tile: T.biome.treeSmall, left: "18%", scale: 3 },
       { tile: T.biome.treeBig, left: "80%", scale: 3 },
       { tile: T.biome.mushroomBig, left: "31%", scale: 3 },
       { tile: T.biome.bushBerry, left: "58%", scale: 3 },
     ],
     [
-      { tile: T.biome.treeApple, left: "12%", scale: 3 },
+      { tile: T.biome.treeApple, left: "17%", scale: 3 },
       { tile: T.biome.sunflower, left: "45%", scale: 3 },
       { tile: T.biome.treeBig, left: "62%", scale: 2 },
       { tile: T.biome.rockBig, left: "88%", scale: 3 },
@@ -117,9 +142,35 @@ export function DirtPath() {
   return (
     <div
       aria-hidden
-      className="dirt-road hidden md:block"
-      style={{ left: "clamp(24px, 6vw, 110px)" }}
+      className="dirt-road"
+      style={{ left: "var(--path-x)" }}
     />
+  );
+}
+
+/** Joins the two open dirt ends: the hero trail exits at --trail-x (centre-ish)
+    while the DOM road sits at --path-x (left). This horizontal dirt band spans
+    from the road to the trail so the path reads as continuous across the
+    hero → fields seam. Keeps the road on the left — nothing is repositioned. */
+export function DirtConnector() {
+  return (
+    <div aria-hidden className="relative" style={{ height: "calc(var(--wpx) * 16)" }}>
+      <div
+        className="absolute inset-y-0"
+        style={{
+          left: "var(--path-x)",
+          // road-left → trail-right; +1 tile covers the trail band's own width.
+          width:
+            "calc(var(--trail-x, var(--path-x)) - var(--path-x) + var(--wpx) * 16)",
+          backgroundImage: "url(/farm/tiles/dirt-path.png)",
+          // match the road's texture scale (16×48 sheet at 3×) — a smaller
+          // height here squished the patches and made them look stretched
+          backgroundSize: "calc(var(--wpx) * 16) calc(var(--wpx) * 48)",
+          backgroundRepeat: "repeat",
+          imageRendering: "pixelated",
+        }}
+      />
+    </div>
   );
 }
 
@@ -131,12 +182,15 @@ export function HedgeRow() {
     T.biome.bush, T.biome.bush, T.biome.bushBerry, T.biome.bush,
   ];
   return (
-    <div aria-hidden className="flex justify-center gap-4 overflow-hidden py-2" style={{ maxHeight: 16 * 3 + 16 }}>
+    <div aria-hidden className="relative flex justify-center gap-4 overflow-hidden py-2" style={{ maxHeight: 16 * 3 + 16 }}>
       {bushes.map((tile, i) => (
         <span key={i} style={{ transform: i % 2 ? "translateY(4px)" : undefined }}>
           <PixelSprite tile={tile} scale={3} />
         </span>
       ))}
+      {/* the hedge is centred and doesn't reach the left path — the continuous
+          road shows through this transparent band on its own (no overlay, which
+          would sit out of phase with the road and read as a pale patch) */}
     </div>
   );
 }
@@ -171,11 +225,11 @@ export function StreamBand() {
       </div>
       <div className="band-grass-edge-t rotate-180" style={{ height: "calc(var(--wpx) * 16)" }} />
       {/* one bridge, on the dirt road so the path visibly crosses the water.
-          Bridge is 1 tile (48px) — the same width as the road — so it sits at
-          the road's exact left with no offset. */}
+          Bridge is 1 tile (48px) = road width; reads the shared --path-x so it
+          lines up with the road on every breakpoint. */}
       <span
-        className="hidden md:block absolute top-1/2 -translate-y-1/2"
-        style={{ left: "clamp(24px, 6vw, 110px)" }}
+        className="absolute top-1/2 -translate-y-1/2"
+        style={{ left: "var(--path-x)" }}
       >
         <PixelSprite tile={T.bridge} scale={3} />
       </span>
@@ -183,46 +237,32 @@ export function StreamBand() {
   );
 }
 
-/** The hero's land meets the journey's land at a country lane — a plain
-    packed-dirt road running the full width. Simple, unmistakable, and the
-    vertical road T-joins it below. */
-/* pebbles, rocks and tufts strewn along a dirt band so it reads as trodden
-   ground, not a flat stripe. Positions are hand-scattered (no two alike). */
-const DIRT_DEBRIS = [
-  { tile: T.biome.rockSmall, left: "4%", bottom: 3, scale: 2 },
-  { tile: T.biome.sprigs, left: "12%", bottom: 8, scale: 2 },
-  { tile: T.biome.rockGray, left: "19%", bottom: 2, scale: 2 },
-  { tile: T.biome.rockSmall, left: "27%", bottom: 10, scale: 1 },
-  { tile: T.biome.rockMossy, left: "36%", bottom: 5, scale: 2 },
-  { tile: T.biome.sprigs, left: "45%", bottom: 3, scale: 1 },
-  { tile: T.biome.rockSmall, left: "53%", bottom: 9, scale: 2 },
-  { tile: T.biome.rockGray, left: "62%", bottom: 4, scale: 1 },
-  { tile: T.biome.sprigs, left: "70%", bottom: 7, scale: 2 },
-  { tile: T.biome.rockMossy, left: "79%", bottom: 2, scale: 2 },
-  { tile: T.biome.rockSmall, left: "88%", bottom: 8, scale: 1 },
-  { tile: T.biome.rockGray, left: "95%", bottom: 4, scale: 2 },
-] as const;
-
-function DirtDebris() {
-  return (
-    <>
-      {DIRT_DEBRIS.map(({ tile, left, bottom, scale }, i) => (
-        <span key={i} className="absolute" style={{ left, bottom, opacity: 0.9 }}>
-          <PixelSprite tile={tile} scale={scale} />
-        </span>
-      ))}
-    </>
-  );
-}
-
+/** The hero's yard meets the journey through a GATE. The grass flows straight
+    through (no dirt band — same grass-a.png above and below), and a fence line
+    marks the boundary with an opening on the left, exactly where the dirt path
+    descends — so it reads as "the farmer came through the gate and headed down
+    the path." Rails + gap all key off the shared --path-x, so the opening lines
+    up with the road at every width. */
 export function HeroBoundary() {
   return (
-    <div aria-hidden className="relative">
-      <div className="band-grass-edge-b rotate-180" style={{ height: "calc(var(--wpx) * 16)" }} />
-      <div className="band-dirt relative overflow-hidden" style={{ height: "calc(var(--wpx) * 20)" }}>
-        <DirtDebris />
-      </div>
-      <div className="band-grass-edge-t rotate-180" style={{ height: "calc(var(--wpx) * 16)" }} />
+    <div aria-hidden className="relative" style={{ height: "calc(var(--wpx) * 16)" }}>
+      {/* rail from the left edge up to the gate's left post */}
+      <div
+        className="band-fence absolute inset-y-0 left-0"
+        style={{ width: "calc(var(--path-x) - var(--wpx) * 16)" }}
+      />
+      {/* rail from the gate's right post to the right edge */}
+      <div
+        className="band-fence absolute inset-y-0 right-0"
+        style={{ left: "calc(var(--path-x) + var(--wpx) * 32)" }}
+      />
+      {/* the two gate posts flanking the 48px road opening */}
+      <span className="absolute bottom-0" style={{ left: "calc(var(--path-x) - var(--wpx) * 16)" }}>
+        <PixelSprite tile={T.fence.post} scale={3} />
+      </span>
+      <span className="absolute bottom-0" style={{ left: "calc(var(--path-x) + var(--wpx) * 16)" }}>
+        <PixelSprite tile={T.fence.post} scale={3} />
+      </span>
     </div>
   );
 }
@@ -231,7 +271,13 @@ export function HeroBoundary() {
 export function CropRowsBand({ crop = "wheat" }: { crop?: "wheat" | "beet" }) {
   const tile = crop === "wheat" ? T.crop.wheat[3] : T.crop.beet[3];
   return (
-    <div aria-hidden className="band-dirt overflow-hidden" style={{ boxShadow: "inset 0 0 0 var(--px) var(--wood-shadow)" }}>
+    <div
+      aria-hidden
+      className="band-dirt relative"
+      // clip the wheat's horizontal overflow, but let the corner stubs poke out
+      // vertically so they sit ON the top/bottom border lines
+      style={{ boxShadow: "inset 0 0 0 var(--px) var(--wood-shadow)", overflowX: "clip", overflowY: "visible" }}
+    >
       <div className="flex justify-center gap-3 py-1">
         {Array.from({ length: 24 }, (_, i) => (
           <span key={i} className="shrink-0" style={{ transform: i % 3 === 1 ? "translateY(2px)" : undefined }}>
@@ -239,15 +285,39 @@ export function CropRowsBand({ crop = "wheat" }: { crop?: "wheat" | "beet" }) {
           </span>
         ))}
       </div>
+      {/* the path runs through the crop rows */}
+      <PathThrough />
+      {/* a wooden stub superimposed on each of the 4 corners of the opening —
+          centred on the path's vertical edge AND straddling the top/bottom
+          border line (−16px = half the 32px post on each axis), so it sits ON
+          the end of the line, overlapping it, rather than tucked inside. */}
+      {(["top", "bottom"] as const).map((edge) =>
+        (
+          [
+            { key: "l", left: "calc(var(--path-x) - 16px)" },
+            { key: "r", left: "calc(var(--path-x) + var(--wpx) * 16 - 16px)" },
+          ] as const
+        ).map(({ key, left }) => (
+          <span
+            key={`${edge}-${key}`}
+            className="absolute"
+            style={{ left, [edge]: "-16px", zIndex: 2 }}
+          >
+            <PixelSprite tile={T.fence.post} scale={2} />
+          </span>
+        ))
+      )}
     </div>
   );
 }
 
 /** Divider: scattered wildflowers on the open grass. */
 export function FlowerMeadow() {
+  // no flower sits on the path corridor (left ~6% desktop / ~31% mobile) — the
+  // continuous road shows through this transparent band cleanly, no flower blocks it
   const flowers = [
-    { tile: T.biome.flowerPinkBig, left: "6%" }, { tile: T.biome.flowerYellow, left: "14%" },
-    { tile: T.biome.flowerPink, left: "23%" }, { tile: T.biome.flowerBigYellow, left: "31%" },
+    { tile: T.biome.flowerYellow, left: "14%" },
+    { tile: T.biome.flowerPink, left: "23%" },
     { tile: T.biome.flowerYellow, left: "42%" }, { tile: T.biome.flowerPinkBig, left: "52%" },
     { tile: T.biome.flowerPink, left: "61%" }, { tile: T.biome.flowerYellow, left: "70%" },
     { tile: T.biome.flowerBigYellow, left: "79%" }, { tile: T.biome.flowerPink, left: "88%" },
@@ -260,6 +330,8 @@ export function FlowerMeadow() {
           <PixelSprite tile={tile} scale={3} />
         </span>
       ))}
+      {/* transparent band: the continuous road shows through on its own — no
+          overlay (which would sit out of phase with the road as a pale patch) */}
     </div>
   );
 }

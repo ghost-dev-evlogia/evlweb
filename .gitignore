@@ -57,3 +57,6 @@ next-env.d.ts
 
 # Bundled skills (vendored locally)
 .agents/
+
+# local visual-audit scratch (screenshots + probe scripts)
+.audit/

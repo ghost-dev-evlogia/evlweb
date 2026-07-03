@@ -11,6 +11,7 @@ import {
   TreeLine,
   Signpost,
   DirtPath,
+  DirtConnector,
   HedgeRow,
   StreamBand,
   CropRowsBand,
@@ -19,7 +20,7 @@ import {
 } from "@/components/farm/props";
 import { TilledHeading, RevealPanel } from "@/components/farm/reveal";
 import { FieldRows } from "@/components/farm/field-rows";
-import { FieldWalker } from "@/components/farm/field-walker";
+import { HeroWalker } from "@/components/farm/hero-walker";
 import { BarnRoster } from "@/components/farm/barn-roster";
 import { QuestBoard } from "@/components/farm/quest-board";
 import { NpcQuotes } from "@/components/farm/npc-quotes";
@@ -42,23 +43,35 @@ export default function Home() {
       <Wanderers />
 
       <main id="main" className="relative z-10">
+        {/* the brown cat: one page-level sprite that walks out of the house,
+            over the trail, and down the road into the fields */}
+        <HeroWalker />
         {/* ═══ 1 · THE GATE — dawn, headline in the open sky ═══ */}
         <section
           id="top"
-          className="relative overflow-hidden flex flex-col md:h-[clamp(680px,100svh,1000px)]"
+          className="relative overflow-hidden flex flex-col h-[88svh] md:h-[clamp(680px,100svh,1000px)]"
         >
           <FarmHero>
             <div className="text-center max-w-2xl">
               <p className="pixel-chip mb-4">{HERO.chip}</p>
               <h1
                 className="font-display text-ink leading-[1.06] hero-title"
-                style={{ fontSize: "clamp(2.1rem, 4.8vw, 3.4rem)", textWrap: "balance" }}
+                style={{
+                  fontSize: "clamp(2.1rem, 4.8vw, 3.4rem)",
+                  textWrap: "balance",
+                  textShadow: "0 2px 6px rgba(243,244,231,0.7)",
+                }}
               >
                 {HERO.h1a}
                 <br />
                 {HERO.h1b}
               </h1>
-              <p className="font-sans text-ink-2 text-[15px] md:text-base leading-relaxed max-w-lg mx-auto mt-3">
+              {/* light halo so the sub-headline stays legible where the farm
+                  (roof, trees) rises behind it on the mobile slice */}
+              <p
+                className="font-sans text-ink-2 text-[15px] md:text-base leading-relaxed max-w-lg mx-auto mt-3"
+                style={{ textShadow: "0 1px 2px rgba(243,244,231,0.95), 0 0 10px rgba(243,244,231,0.85)" }}
+              >
                 {HERO.sub}
               </p>
             </div>
@@ -68,12 +81,14 @@ export default function Home() {
         {/* ═══ from here to the footer, everything stands on the same land ═══ */}
         <div className="terrain">
         <DirtPath />
+        {/* bridge the hero trail (centre) to the left road so the dirt reads
+            as one continuous path across the seam */}
+        <DirtConnector />
         {/* the hero's farm ends at a hedge; the road passes the gate posts */}
         <HeroBoundary />
 
         {/* ═══ 2 · THE FIELDS — morning ═══ */}
         <section id="fields" className="scroll-mt-10 relative pt-16 md:pt-24 pb-0">
-          <FieldWalker />
           <div className="text-center px-6">
             <TilledHeading>What we grow around here</TilledHeading>
             <p className="font-sans text-ink text-[15px] md:text-base leading-relaxed max-w-lg mx-auto mt-5">

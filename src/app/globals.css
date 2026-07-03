@@ -566,6 +566,15 @@ a, button, [role="button"], summary, .pixel-btn, .pixel-chip a {
   /* Decorative sprites are scattered by % and bleed past narrow viewports;
      clip horizontal spill only (no scroll container, no vertical effect). */
   overflow-x: clip;
+  /* the single source of the dirt-path X — the road, the hero-boundary gate
+     gap, the stream bridge, and the field-walker all read this. Left-aligned,
+     as it originally was. */
+  --path-x: clamp(24px, 6vw, 110px);
+}
+@media (max-width: 767px) {
+  .terrain {
+    --path-x: calc(30% - var(--wpx) * 8);
+  }
 }
 .terrain::before {
   content: "";
@@ -604,6 +613,46 @@ a, button, [role="button"], summary, .pixel-btn, .pixel-chip a {
   width: calc(var(--wpx) * 16);
   /* the pack's own mottled path fill (3 variants stacked) — the same tiles the
      hero's Pixi trail uses, so the soft cream patches read on-brand */
+  background-image: url("/farm/tiles/dirt-path.png");
+  background-size: calc(var(--wpx) * 16) calc(var(--wpx) * 48);
+  background-repeat: repeat-y;
+  image-rendering: pixelated;
+}
+
+/* Hero farm first-paint size, in pure CSS, = exactly what compute() sets — so
+   the farm never snaps size on load. 100cqh = the world-area height (the
+   stage's wrapper is a `container-type: size`). Below 1024px it's the uncapped
+   vertical slice (overflows the viewport on purpose); at ≥1024px it's capped at
+   cover width so we never over-crop horizontally. Once JS measures, an inline
+   width overrides this. 512 = scene width, 208 = ground height. */
+.hero-stage-fit {
+  width: calc(100cqh * 512 / 208);
+}
+@media (max-width: 1023px) {
+  /* Mobile slice: frame the farmhouse/trail on the left third BEFORE JS runs,
+     matching compute()'s focalDX, so the slice doesn't jump sideways on load.
+     focalDX = width × 8.5/32 − 0.2×w, where width = 100cqh×512/208 and w ≈ 100vw
+     (8.5 = scene columns from the focal column 7.5 to the stage centre 16). */
+  .hero-stage-fit {
+    transform: translateX(calc(100cqh * 512 / 208 * 8.5 / 32 - 20vw));
+  }
+}
+@media (min-width: 1024px) {
+  .hero-stage-fit {
+    width: min(100%, calc(100cqh * 512 / 208));
+  }
+}
+
+/* the road punching THROUGH a divider band (crops, hedge, flowers): same
+   texture + X as .dirt-road, drawn above the band's own decor so the path
+   reads as continuous and nothing blocks the walker's route */
+.path-through {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--path-x);
+  width: calc(var(--wpx) * 16);
+  z-index: 1;
   background-image: url("/farm/tiles/dirt-path.png");
   background-size: calc(var(--wpx) * 16) calc(var(--wpx) * 48);
   background-repeat: repeat-y;

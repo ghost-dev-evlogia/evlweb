@@ -64,6 +64,10 @@ export class PixiFarm {
   private animals: AnimalRig[] = [];
   private smoke: SmokePuff[] = [];
   private frogs: FrogRig[] = [];
+  /* load intro: the farmer walks out of the house, down the trail, to the gate */
+  private introFarmer: AnimalRig | null = null;
+  private introWaypoints: { x: number; y: number }[] = [];
+  private introIdx = 0;
   private scene: Scene;
   private reduced: boolean;
   /* one hero animal speaks at a time */
@@ -170,6 +174,14 @@ export class PixiFarm {
       });
     }
 
+    /* ── load intro: the farmer emerges from the house door and walks the trail
+          down to the gate, then waits there. Reuses the scene's own farmer rig
+          (no extra sprite). Under reduced-motion he's simply placed at the gate. */
+    // the brown walker is now a single DOM sprite that walks OVER the canvas
+    // (the trail) and continues onto the DOM path — so hide the canvas farmer.
+    const farmer = this.animals.find((a) => a.data.kind === "farmer");
+    if (farmer) farmer.sprite.visible = false;
+
     /* ── chimney smoke — three recycled puffs, live layer only ── */
     if (!this.reduced) {
       const smokeLayer = new Container();
@@ -236,7 +248,10 @@ export class PixiFarm {
       if (tex) for (const s of this.waterSprites) s.texture = tex;
     }
 
-    for (const a of this.animals) this.tickAnimal(a, dt);
+    for (const a of this.animals) {
+      if (a === this.introFarmer) this.tickIntro(a, dt);
+      else this.tickAnimal(a, dt);
+    }
 
     // one of the animals has something to say
     this.quipCooldown -= dt;
@@ -341,6 +356,35 @@ export class PixiFarm {
     host.appendChild(el);
     this.speech = { el, until: performance.now() + 2200 };
     f.clock = Math.max(f.clock, 2.6); // stay up long enough to finish talking
+  }
+
+  /* the one-shot load intro: walk the farmer through the trail waypoints to the
+     gate, animating the walk cycle + facing, then leave him idling there. */
+  private tickIntro(a: AnimalRig, dt: number) {
+    const wp = this.introWaypoints[this.introIdx];
+    if (!wp) {
+      // walked off the bottom — the DOM field-walker carries him on
+      this.introFarmer = null;
+      a.sprite.visible = false;
+      a.data.roam = undefined;
+      return;
+    }
+    const dx = wp.x - a.tx;
+    const dy = wp.y - a.ty;
+    const d = Math.hypot(dx, dy);
+    if (d < 0.08) { this.introIdx++; return; }
+    a.dir = Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? "right" : "left") : dy > 0 ? "down" : "up";
+    a.frameClock += dt;
+    if (a.frameClock > 0.18) {
+      a.frameClock = 0;
+      a.frame = (a.frame + 1) % 4;
+      const tex = this.texFor?.(T.farmer[a.dir][a.frame]);
+      if (tex) a.sprite.texture = tex;
+    }
+    const step = Math.min(d, 1.6 * dt); // tiles/sec
+    a.tx += (dx / d) * step;
+    a.ty += (dy / d) * step;
+    a.sprite.position.set(Math.round((a.tx - 1) * TILE), Math.round((a.ty - 1) * TILE));
   }
 
   private tickAnimal(a: AnimalRig, dt: number) {

@@ -17,8 +17,9 @@ export function FarmerDialog() {
   return (
     <div>
       <div className="grid md:grid-cols-12 gap-4 items-start">
-        {/* the farmer — no box, just him, dancing */}
-        <div className="md:col-span-3 flex md:flex-col items-center gap-3">
+        {/* the farmer — no box, just him, dancing. Stacked + centered at every
+            width so the sprite sits neatly above its label. */}
+        <div className="md:col-span-3 flex flex-col items-center justify-center gap-2">
           <span
             className="farmer-dance"
             style={{ filter: "drop-shadow(0 3px 0 rgba(53,55,56,0.22))" }}

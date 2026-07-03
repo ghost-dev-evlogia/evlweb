@@ -68,13 +68,15 @@ export function FieldWalker() {
   const tile = FRAMES[frame];
   const [sw, sh] = SHEET_DIMS[tile.s];
 
-  // left: centered on the dirt road (road left + half road - half frame box)
+  // left: centred on the shared dirt path (--path-x is the 48px road's left;
+  // the 96px frame box centres on it). This IS the cat that walked out of the
+  // hero — the caramel sheet matches the hero walker's tint exactly.
   return (
     <div
       ref={ref}
       aria-hidden
       className="hidden md:block absolute top-0 bottom-0 pointer-events-none"
-      style={{ left: "calc(clamp(24px, 6vw, 110px) + var(--px) * 8 - 48px)" }}
+      style={{ left: "calc(var(--path-x) - 24px)" }}
     >
       <span
         ref={spriteRef}
@@ -82,7 +84,7 @@ export function FieldWalker() {
         style={{
           width: BOX,
           height: BOX,
-          backgroundImage: `url(/farm/sprites/${tile.s}.png)`,
+          backgroundImage: "url(/farm/sprites/character-caramel.png)",
           backgroundPosition: `${-tile.x * TILE * SCALE}px ${-tile.y * TILE * SCALE}px`,
           backgroundSize: `${sw * SCALE}px ${sh * SCALE}px`,
           backgroundRepeat: "no-repeat",
