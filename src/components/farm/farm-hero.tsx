@@ -20,6 +20,7 @@ const SCENE_PX = { w: 512, h: 288 };
 
 export function FarmHero({ children }: { children?: ReactNode }) {
   const rootRef = useRef<HTMLDivElement>(null);
+  const worldRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const hostRef = useRef<HTMLDivElement>(null);
   const farmRef = useRef<PixiFarm | null>(null);
@@ -50,9 +51,13 @@ export function FarmHero({ children }: { children?: ReactNode }) {
       setCssWidth(cw);
       // keep the horizon below the headline: if the tree line rides too high
       // on short viewports, sink the world (the cropped bottom hides behind
-      // the docked cutscene dialog anyway)
+      // the fence-topped grass strip). Measure against the WORLD area — the
+      // strip below it consumes root height the canvas never gets.
+      const worldBottom = worldRef.current
+        ? worldRef.current.getBoundingClientRect().bottom - rect.top
+        : rect.height;
       const canvasH = (cw * SCENE_PX.h) / SCENE_PX.w;
-      const horizonY = rect.height - canvasH + (canvasH * SKY_ROWS) / 18;
+      const horizonY = worldBottom - canvasH + (canvasH * SKY_ROWS) / 18;
       const target = Math.min(Math.max(330, rect.height * 0.42), 480);
       setSink(fit ? Math.max(0, Math.round(target - horizonY)) : 0);
     };
@@ -119,7 +124,7 @@ export function FarmHero({ children }: { children?: ReactNode }) {
           first if the viewport runs short */}
       {/* in flow at the bottom of the column on mobile; absolute (with the
           horizon sink) on md+ — no base position utility (Tailwind v4) */}
-      <div className="relative flex-1 md:min-h-0 mt-4 flex items-end justify-center">
+      <div ref={worldRef} className="relative flex-1 md:min-h-0 mt-4 flex items-end justify-center">
         <div className="w-full flex justify-center md:absolute md:inset-x-0" style={{ bottom: -sink }}>
           <div
             ref={stageRef}
@@ -144,11 +149,19 @@ export function FarmHero({ children }: { children?: ReactNode }) {
         </div>
       </div>
 
-      {/* the opening cutscene — in flow on grass on mobile (grows to meet the
-          terrain), docked over the world on md+ (no base position utility
-          next to md:absolute — Tailwind v4) */}
-      <div className="z-20 w-full flex-1 hero-ground px-3 pb-3 pt-3 md:flex-none md:px-0 md:pb-0 md:pt-0 md:absolute md:inset-x-0 md:bottom-7 flex justify-center items-start">
-        <HeroDialog />
+      {/* the farm ends at a fence, like farms do. The grass strip hides the
+          world's crop line, carries the farmer (click → visitor card), and
+          flows straight into the terrain below; the fence stands on its top
+          edge, overlapping up into the scene. */}
+      <div className="relative z-20 band-grass">
+        <div
+          className="band-fence absolute inset-x-0"
+          style={{ height: "calc(var(--px) * 16)", top: "calc(var(--px) * -12)" }}
+          aria-hidden
+        />
+        <div className="relative flex justify-center pt-4 pb-4 px-3">
+          <HeroDialog />
+        </div>
       </div>
     </div>
   );

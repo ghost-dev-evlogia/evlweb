@@ -101,3 +101,29 @@ One lesson per entry. Newest at the bottom. Written by the executing agent as it
   window CustomEvents ('egg-collected' / 'golden-chicken') between Critters, Hud, and Fx.
 - **Old routes → 308 redirects to anchors** via next.config.ts redirects(); deleted pages'
   stale `.next/types` validator errors clear with `rm -rf .next`.
+
+## v3 lessons (2026-07-03, second owner pass)
+
+- **Unlayered chrome classes own `position`.** `.panel-wood` (unlayered) beats the layered
+  `absolute` utility — the visitor card silently became `position: relative`, took layout
+  space, and blew the hero strip up 400px. Positioning lives on a PLAIN wrapper div;
+  panel chrome goes on an inner node. (Same footgun family as `.pixel-btn` vs `md:hidden`.)
+- **Swapping a button's props in place re-targets the in-flight click.** The cutscene chip
+  became the `data-cal-link` button on the SAME DOM node mid-click, so Cal's document-level
+  listener opened the modal over the answer. Branches that change a button's identity need
+  distinct `key`s so React remounts instead of mutating.
+- **A cropped canvas needs a diegetic boundary.** Sinking the hero canvas sliced fences and
+  the trail mid-tile at the section seam. The fix wasn't better math — it was a fence-topped
+  grass strip: the farm now *ends at a fence*, the slice hides behind it, and the strip grass
+  flows into the terrain. When you must crop a world, crop it behind scenery.
+- **Measure the box the canvas actually lives in.** The horizon-sink formula used the hero
+  root's height; adding the in-flow strip shifted the canvas's true bottom and the headline
+  overlapped the trees again. Anchor layout math to the immediate container's rect.
+- **Cal.com v2 bookings enforce every required bookingField — including hidden ones.** Fetch
+  the event type and mirror its fields exactly (`splitName`, custom textarea/radio slugs,
+  even a hidden-but-required `no-show`); `start` must be UTC. A "slot taken" 400 can really
+  be "missing field".
+- **In-palette species by sampling.** New animals (duckling recolor + drawn bunny/pig/sheep/
+  bird/butterfly/frog) take every color from the pack's own sheets at build time — the
+  palette can't drift. But heuristics lie: the Sprout cow's dominant "pink" is tan; eyeball
+  a ×4 proof sheet before shipping.

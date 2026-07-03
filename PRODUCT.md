@@ -33,24 +33,28 @@ reads *"this studio ships toys"* and actively damages the rigor claim. Therefore
   wooden panels, farm metaphors as *labels*), never in the claims. Numbers, timelines, and
   prices stay literal.
 
-## Information architecture (v2 — ONE page)
+## Information architecture (v3 — ONE page, one continuous world)
 
-A single scroll journey, dawn → night (`SkyCycle` scrubs the sky with scroll). No nav bar —
-a game HUD (sun dial + signpost mini-map + Book button) carries wayfinding. Old route URLs
-308-redirect to journey anchors.
+A single scroll journey, dawn → night (`SkyCycle` scrubs the sky; a `.terrain` ground plane
+with a dirt road + day tint runs beneath every section — nothing floats on sky). No nav bar —
+a game HUD (sun dial + labeled signpost stack + Book button) carries wayfinding. Old route
+URLs 308-redirect to journey anchors (`/research` → `/#quests`).
 
 | Stop | Anchor | Job |
 |---|---|---|
-| The gate (hero) | `#top` | who we are, explorable farm |
-| The fields | `#fields` | five practice areas, scroll-grown crops |
-| Quest board | `#quests` | real shipped work + open hard-problem quests |
-| Greenhouse | `#greenhouse` | R&D posture, IP filed in client's name |
-| The barn | `#team` | four farmhands |
+| The gate (hero) | `#top` | headline in the open sky, living farm ending at a fence; the farmer stands below with a bouncing "!" — click → visitor card (greeting + tour/work/booking choices) |
+| The fields | `#fields` | five service crop rows with sign planks; farmer walks the road |
+| Quest board | `#quests` | real shipped work + open hard-problem quests + R&D/IP line |
+| The barn | `#team` | four farmhands as a game roster (click → social menu) |
 | The valley | `#valley` | logos, NPC-delivered testimonials, harvest ledger |
 | Ask the farmer | `#ask` | FAQ as game dialog |
-| Come say hi | `#hi` | Cal.com inline + email |
+| Come say hi | `#hi` | custom pixel booking ledger on Cal API v2 (embed + email fallback) |
 
-Kept as standalone pages: `/careers`, `/privacy`, `/terms` (footer links only).
+Services (v3): Products & platforms · Internal tools · Applied AI · IoT & devices ·
+**AI enablement** (hands-on team training; replaced "Agentic AI coaching").
+
+Standalone pages `/careers`, `/privacy`, `/terms` share `FarmPageShell` (title in the sky,
+panel on posts on grass). Wandering animals cross the whole site quoting `QUIPS`.
 
 ## Non-negotiable content (carried from the previous site)
 
