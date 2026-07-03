@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Pixelify_Sans, VT323 } from "next/font/google";
+import { Pixelify_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { PageTransition } from "@/components/page-transition";
 import { PostHogProvider } from "@/components/posthog-provider";
@@ -13,11 +14,14 @@ const pixelify = Pixelify_Sans({
 });
 
 // Body: VT323 — a crisp bitmap/terminal font that stays in the pixel world of
-// the display font while remaining legible for the site's short-form copy.
-const vt323 = VT323({
+// the display font. Self-hosted so we can apply `size-adjust`: VT323's glyphs
+// sit small in the em, so we scale them up ~18% for comfortable body reading
+// without touching a single font-size across the site.
+const vt323 = localFont({
+  src: "./fonts/vt323.woff2",
   variable: "--font-body",
-  subsets: ["latin"],
-  weight: "400",
+  display: "swap",
+  declarations: [{ prop: "size-adjust", value: "118%" }],
 });
 
 export const viewport: Viewport = {
