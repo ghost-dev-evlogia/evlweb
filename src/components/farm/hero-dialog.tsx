@@ -113,14 +113,15 @@ export function HeroDialog() {
         </div>
       )}
 
-      {/* the farmer at the gate */}
+      {/* the farmer at the gate — just him and his "!", no badge */}
       <button
         ref={toggleRef}
         type="button"
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
         aria-controls="visitor-card"
-        className="group flex flex-col items-center focus:outline-none"
+        aria-label="Talk to the farmer"
+        className="group flex flex-col items-center focus:outline-none focus-visible:outline-2 focus-visible:outline-ink"
       >
         {/* visibility (not unmount): the badge must keep its layout space or
             the whole column shifts every time the card opens */}
@@ -131,19 +132,12 @@ export function HeroDialog() {
         >
           !
         </span>
-        {/* the farmer himself, standing on the grass — no frame, no box */}
         <span
           className="transition-transform duration-150 group-hover:-translate-y-1 group-focus-visible:-translate-y-1"
           style={{ filter: "drop-shadow(0 3px 0 rgba(53,55,56,0.25))" }}
           aria-hidden
         >
           <PixelSprite tile={{ s: "character", x: 0.8, y: 0.55, w: 1.4, h: 2.15 }} scale={3} />
-        </span>
-        <span
-          className="pixel-chip mt-1.5 group-focus-visible:outline-2 group-focus-visible:outline-ink"
-          style={{ fontSize: "12px" }}
-        >
-          talk to the farmer
         </span>
       </button>
 

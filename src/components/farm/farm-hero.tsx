@@ -122,12 +122,12 @@ export function FarmHero({ children }: { children?: ReactNode }) {
     >
       {/* headline — in normal flow, over open sky. Only the scene's
           TRANSPARENT sky rows may reach up behind it. */}
-      <div className="relative z-10 w-full flex justify-center px-5 pt-[clamp(2rem,7vh,4.5rem)]">
+      <div className="relative z-10 w-full flex justify-center px-5 pt-[clamp(1.25rem,4.5vh,3rem)]">
         {children}
       </div>
 
       {/* the world — the full farm, bottom-anchored, never cropped */}
-      <div ref={worldRef} className="relative flex-1 md:min-h-0 mt-4 flex items-end justify-center">
+      <div ref={worldRef} className="relative flex-1 md:min-h-0 mt-2 flex items-end justify-center">
         {/* on wide viewports the scene is narrower than the screen: the same
             ground continues to both edges (same tiles, same pixel size) */}
         {tile !== null && (
@@ -183,7 +183,7 @@ export function FarmHero({ children }: { children?: ReactNode }) {
       {/* the farmer waits at the bottom of the world; the visitor card pops
           above him. In flow on mobile grass, floating over the farm on md+
           (no base position utility next to md:absolute — Tailwind v4). */}
-      <div className="z-20 w-full flex-1 hero-ground px-3 pt-2 pb-3 flex justify-center items-start md:flex-none md:px-0 md:pt-0 md:pb-0 md:absolute md:inset-x-0 md:bottom-3">
+      <div className="z-20 w-full flex-1 hero-ground px-3 pt-1 pb-2 flex justify-center items-start md:flex-none md:px-0 md:pt-0 md:pb-0 md:absolute md:inset-x-0 md:bottom-2">
         <HeroDialog />
       </div>
     </div>

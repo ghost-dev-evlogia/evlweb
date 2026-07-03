@@ -25,7 +25,7 @@ export function GrassBand({
   return (
     <div className={`relative ${className}`} style={style}>
       {(edges === "top" || edges === "both") && (
-        <div className="band-grass-edge-t" style={{ height: "calc(var(--px) * 16)" }} aria-hidden />
+        <div className="band-grass-edge-t" style={{ height: "calc(var(--wpx) * 16)" }} aria-hidden />
       )}
       <div className="band-grass relative overflow-hidden">
         {Array.from({ length: shadows }, (_, i) => (
@@ -43,7 +43,7 @@ export function GrassBand({
         <div className="relative">{children}</div>
       </div>
       {(edges === "bottom" || edges === "both") && (
-        <div className="band-grass-edge-b" style={{ height: "calc(var(--px) * 16)" }} aria-hidden />
+        <div className="band-grass-edge-b" style={{ height: "calc(var(--wpx) * 16)" }} aria-hidden />
       )}
     </div>
   );
@@ -53,16 +53,16 @@ export function GrassBand({
 export function PondBand() {
   return (
     <div aria-hidden className="relative">
-      <div className="band-grass" style={{ height: "calc(var(--px) * 10)" }} />
-      <div className="band-grass-edge-b rotate-180" style={{ height: "calc(var(--px) * 16)" }} />
-      <div className="band-water relative" style={{ height: "calc(var(--px) * 40)" }}>
+      <div className="band-grass" style={{ height: "calc(var(--wpx) * 10)" }} />
+      <div className="band-grass-edge-b rotate-180" style={{ height: "calc(var(--wpx) * 16)" }} />
+      <div className="band-water relative" style={{ height: "calc(var(--wpx) * 40)" }}>
         <span className="absolute left-[18%] top-[30%]"><PixelSprite tile={T.biome.lilypadBig} scale={3} /></span>
         <span className="absolute left-[43%] top-[55%]"><PixelSprite tile={T.biome.lilypad} scale={3} /></span>
         <span className="absolute left-[71%] top-[28%]"><PixelSprite tile={T.biome.lilypad} scale={3} /></span>
         <span className="absolute left-[86%] top-[60%]"><PixelSprite tile={T.biome.lilypadBig} scale={2} /></span>
       </div>
-      <div className="band-grass-edge-t rotate-180" style={{ height: "calc(var(--px) * 16)" }} />
-      <div className="band-grass" style={{ height: "calc(var(--px) * 10)" }} />
+      <div className="band-grass-edge-t rotate-180" style={{ height: "calc(var(--wpx) * 16)" }} />
+      <div className="band-grass" style={{ height: "calc(var(--wpx) * 10)" }} />
     </div>
   );
 }
@@ -73,7 +73,7 @@ export function FenceRow({ className = "" }: { className?: string }) {
     <div
       aria-hidden
       className={`band-fence ${className}`}
-      style={{ height: "calc(var(--px) * 16)" }}
+      style={{ height: "calc(var(--wpx) * 16)" }}
     />
   );
 }
@@ -151,8 +151,8 @@ export function StreamBand() {
   ];
   return (
     <div aria-hidden className="relative">
-      <div className="band-grass-edge-b rotate-180" style={{ height: "calc(var(--px) * 16)" }} />
-      <div className="band-water relative overflow-hidden" style={{ height: "calc(var(--px) * 24)" }}>
+      <div className="band-grass-edge-b rotate-180" style={{ height: "calc(var(--wpx) * 16)" }} />
+      <div className="band-water relative overflow-hidden" style={{ height: "calc(var(--wpx) * 24)" }}>
         {fish.map(({ left, top, dur, delay, rtl }, i) => (
           <span
             key={i}
@@ -169,7 +169,7 @@ export function StreamBand() {
           </span>
         ))}
       </div>
-      <div className="band-grass-edge-t rotate-180" style={{ height: "calc(var(--px) * 16)" }} />
+      <div className="band-grass-edge-t rotate-180" style={{ height: "calc(var(--wpx) * 16)" }} />
       {/* the bridge carries the dirt road over the water */}
       <span
         className="hidden md:block absolute top-1/2 -translate-y-1/2"
@@ -187,9 +187,9 @@ export function StreamBand() {
 export function HeroBoundary() {
   return (
     <div aria-hidden className="relative">
-      <div className="band-grass-edge-b rotate-180" style={{ height: "calc(var(--px) * 16)" }} />
-      <div className="band-dirt" style={{ height: "calc(var(--px) * 20)" }} />
-      <div className="band-grass-edge-t rotate-180" style={{ height: "calc(var(--px) * 16)" }} />
+      <div className="band-grass-edge-b rotate-180" style={{ height: "calc(var(--wpx) * 16)" }} />
+      <div className="band-dirt" style={{ height: "calc(var(--wpx) * 20)" }} />
+      <div className="band-grass-edge-t rotate-180" style={{ height: "calc(var(--wpx) * 16)" }} />
     </div>
   );
 }

@@ -63,6 +63,10 @@
 
   /* pixel unit — the DOM-side "pixel". 3px mobile, 4px from md up. */
   --px: 3px;
+  /* world-texture pixel — terrain/band/road tiles stay at the hero scene's
+     typical density (48px tiles) at every breakpoint, so the whole world
+     reads as ONE pixel scale. UI chrome keeps using --px. */
+  --wpx: 3px;
 
   /* motion */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -502,17 +506,17 @@ a, button, [role="button"], summary, .pixel-btn, .pixel-chip a {
 /* ─── World bands (CSS-tiled, pixelated) ─── */
 .band-grass {
   background-image: url("/farm/tiles/grass-a.png");
-  background-size: calc(var(--px) * 16) calc(var(--px) * 16);
+  background-size: calc(var(--wpx) * 16) calc(var(--wpx) * 16);
   image-rendering: pixelated;
 }
 .band-dirt {
   background-image: url("/farm/tiles/dirt.png");
-  background-size: calc(var(--px) * 16) calc(var(--px) * 16);
+  background-size: calc(var(--wpx) * 16) calc(var(--wpx) * 16);
   image-rendering: pixelated;
 }
 .band-water {
   background-image: url("/farm/tiles/water-0.png");
-  background-size: calc(var(--px) * 16) calc(var(--px) * 16);
+  background-size: calc(var(--wpx) * 16) calc(var(--wpx) * 16);
   image-rendering: pixelated;
   animation: water-cycle 1.8s steps(1, end) infinite;
 }
@@ -525,20 +529,20 @@ a, button, [role="button"], summary, .pixel-btn, .pixel-chip a {
 }
 .band-fence {
   background-image: url("/farm/tiles/fence-h.png");
-  background-size: calc(var(--px) * 16) calc(var(--px) * 16);
+  background-size: calc(var(--wpx) * 16) calc(var(--wpx) * 16);
   background-repeat: repeat-x;
   image-rendering: pixelated;
 }
 /* grass rounding into water (island edge tiles, flipped as needed) */
 .band-grass-edge-b {
   background-image: url("/farm/tiles/grass-edge-b.png");
-  background-size: calc(var(--px) * 16) calc(var(--px) * 16);
+  background-size: calc(var(--wpx) * 16) calc(var(--wpx) * 16);
   background-repeat: repeat-x;
   image-rendering: pixelated;
 }
 .band-grass-edge-t {
   background-image: url("/farm/tiles/grass-edge-t.png");
-  background-size: calc(var(--px) * 16) calc(var(--px) * 16);
+  background-size: calc(var(--wpx) * 16) calc(var(--wpx) * 16);
   background-repeat: repeat-x;
   image-rendering: pixelated;
 }
@@ -559,10 +563,12 @@ a, button, [role="button"], summary, .pixel-btn, .pixel-chip a {
   inset: 0;
   z-index: -3;
   background-image: url("/farm/tiles/grass-a.png");
-  background-size: calc(var(--px) * 16) calc(var(--px) * 16);
+  background-size: calc(var(--wpx) * 16) calc(var(--wpx) * 16);
   image-rendering: pixelated;
 }
 .terrain::after {
+  /* plain alpha overlay — NOT mix-blend-mode: multiply, which shows
+     raster-tile seams ("vignette strips") on some GPUs over a layer this tall */
   content: "";
   position: absolute;
   inset: 0;
@@ -570,15 +576,14 @@ a, button, [role="button"], summary, .pixel-btn, .pixel-chip a {
   pointer-events: none;
   background: linear-gradient(
     180deg,
-    rgba(243, 216, 197, 0.20) 0%,
+    rgba(243, 216, 197, 0.10) 0%,
     rgba(255, 255, 255, 0) 10%,
     rgba(255, 255, 255, 0) 42%,
-    rgba(215, 158, 97, 0.16) 58%,
-    rgba(118, 109, 170, 0.28) 76%,
-    rgba(80, 64, 134, 0.42) 90%,
-    rgba(53, 55, 56, 0.5) 100%
+    rgba(215, 158, 97, 0.10) 58%,
+    rgba(118, 109, 170, 0.18) 76%,
+    rgba(80, 64, 134, 0.28) 90%,
+    rgba(45, 42, 60, 0.38) 100%
   );
-  mix-blend-mode: multiply;
 }
 /* the dirt road down the whole journey (rendered by <DirtPath/>) */
 .dirt-road {
@@ -586,9 +591,9 @@ a, button, [role="button"], summary, .pixel-btn, .pixel-chip a {
   top: 0;
   bottom: 0;
   z-index: -2;
-  width: calc(var(--px) * 16);
+  width: calc(var(--wpx) * 16);
   background-image: url("/farm/tiles/dirt.png");
-  background-size: calc(var(--px) * 16) calc(var(--px) * 16);
+  background-size: calc(var(--wpx) * 16) calc(var(--wpx) * 16);
   background-repeat: repeat-y;
   image-rendering: pixelated;
 }
@@ -596,7 +601,7 @@ a, button, [role="button"], summary, .pixel-btn, .pixel-chip a {
 /* mobile: the ground continues under the cutscene dialog into the terrain */
 .hero-ground {
   background-image: url("/farm/tiles/grass-a.png");
-  background-size: calc(var(--px) * 16) calc(var(--px) * 16);
+  background-size: calc(var(--wpx) * 16) calc(var(--wpx) * 16);
   image-rendering: pixelated;
 }
 @media (min-width: 768px) {
@@ -784,11 +789,11 @@ a, button, [role="button"], summary, .pixel-btn, .pixel-chip a {
   animation: koi-swim linear infinite;
 }
 .koi {
-  width: calc(var(--px) * 16);
-  height: calc(var(--px) * 16);
+  width: calc(var(--wpx) * 16);
+  height: calc(var(--wpx) * 16);
   background-image: url("/farm/sprites/wildlife.png");
-  background-size: calc(var(--px) * 64) calc(var(--px) * 96);
-  background-position: 0 calc(var(--px) * -80);
+  background-size: calc(var(--wpx) * 64) calc(var(--wpx) * 96);
+  background-position: 0 calc(var(--wpx) * -80);
   image-rendering: pixelated;
   animation: koi-frames 0.6s steps(1, end) infinite;
 }

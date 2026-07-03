@@ -27,10 +27,12 @@ export function SiteFooter() {
           bedded down, fireflies out. No transition strips. */}
       <div className="relative" aria-hidden>
         <div className="band-grass" style={{ filter: "brightness(0.5) saturate(0.8)" }}>
-          <div style={{ height: "calc(var(--px) * 30)" }} />
+          <div style={{ height: "calc(var(--wpx) * 30)" }} />
         </div>
         {/* sleepers (dimmed to match the hour) */}
         <div className="absolute inset-0 overflow-hidden" style={{ filter: "brightness(0.62) saturate(0.85)" }}>
+          {/* the road walks all the way to the night's edge */}
+          <div className="dirt-road hidden md:block" style={{ left: "clamp(24px, 6vw, 110px)" }} />
           <span className="absolute" style={{ left: "16%", bottom: 8 }}>
             <PixelSprite tile={T.cow.idle[0]} scale={3} />
           </span>
